@@ -1,8 +1,8 @@
 import React from 'react'
-import BlogHero from '../components/BlogArchive/BlogHero'
-import BlogSearch from '../components/BlogArchive/BlogSearch'
-import BlogCategories from '../components/BlogArchive/BlogCategories'
-import BlogCTA from '../components/BlogArchive/BlogCTA'
+import BlogHero from '@/components/BlogArchive/BlogHero'
+import BlogSearch from '@/components/BlogArchive/BlogSearch'
+import BlogCategories from '@/components/BlogArchive/BlogCategories'
+import BlogCTA from '@/components/Blog/BlogCTA'
 
 export default function Page(){
     return (

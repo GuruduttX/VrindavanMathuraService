@@ -1,11 +1,11 @@
-import BlogAuthor from "@/app/components/Blog/BlogAuthor";
-import BlogContent from "@/app/components/Blog/BlogContent";
-import BlogHero from "@/app/components/Blog/BlogHero";
-import BlogShare from "@/app/components/Blog/BlogShare";
-import BlogCTA from "@/app/components/Blog/BlogCTA";
-import FAQSection from "@/app/components/Blog/FAQSection";
-import BlogCategories from "@/app/components/BlogArchive/BlogCategories";
-import BlogStickyCTA from "@/app/components/Blog/BlogStickyCTA";
+import BlogAuthor from "@/components/Blog/BlogAuthor";
+import BlogContent from "@/components/Blog/BlogContent";
+import BlogHero from "@/components/Blog/BlogHero";
+import BlogShare from "@/components/Blog/BlogShare";
+import BlogCTA from "@/components/Blog/BlogCTA";
+import FAQSection from "@/components/Blog/FAQSection";
+import BlogCategories from "@/components/BlogArchive/BlogCategories";
+import BlogStickyCTA from "@/components/Blog/BlogStickyCTA";
 
 const faqs = [
   {
