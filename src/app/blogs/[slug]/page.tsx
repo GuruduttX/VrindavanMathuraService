@@ -6,6 +6,8 @@ import BlogCTA from "@/components/Blog/BlogCTA";
 import FAQSection from "@/components/Blog/FAQSection";
 import BlogCategories from "@/components/BlogArchive/BlogCategories";
 import BlogStickyCTA from "@/components/Blog/BlogStickyCTA";
+import Navbar from "@/utils/Navbar";
+import LuxuryFooter from "@/utils/Footer";
 
 const faqs = [
   {
@@ -26,6 +28,7 @@ const faqs = [
 ];
 export default function page(){
    return <div className="">
+           <Navbar/>
 
            <BlogHero
             title="Complete Guide to Mathura Vrindavan Temple Tour"
@@ -174,7 +177,7 @@ export default function page(){
            <BlogCTA/>
            <FAQSection faqs={faqs} />
 
-            
+           <LuxuryFooter/>
                            
 
          </div>

@@ -4,7 +4,7 @@ import { motion } from "framer-motion";
 
 export default function CTASection() {
   return (
-    <section className="relative overflow-hidden bg-gradient-to-br from-pink-600 to-rose-500 py-24 px-6 lg:px-20 text-white">
+    <section className="relative overflow-hidden bg-gradient-to-br from-pink-900 to-rose-500 py-24 px-6 lg:px-20 text-white -mb-40">
 
       {/* Decorative Background Blur */}
       <div className="absolute -top-20 -left-20 h-72 w-72 rounded-full bg-pink-400/30 blur-3xl"></div>
@@ -43,7 +43,7 @@ export default function CTASection() {
           viewport={{ once: true }}
           className="mt-10"
         >
-          <button className="group relative inline-flex items-center justify-center rounded-full bg-white px-8 py-4 text-lg font-semibold text-pink-600 shadow-lg transition-all duration-300 hover:shadow-2xl hover:scale-105">
+          <button className="group relative inline-flex items-center justify-center rounded-full bg-white px-8 py-4 text-lg font-semibold text-pink-600 shadow-lg transition-all duration-300 hover:shadow-2xl hover:scale-105 ">
             
             <span className="relative z-10">
               Book Your Journey

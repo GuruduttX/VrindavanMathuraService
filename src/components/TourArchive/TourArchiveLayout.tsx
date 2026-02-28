@@ -16,7 +16,7 @@ export default function TourArchiveLayout({
         <div className="grid grid-cols-1 lg:grid-cols-[320px_1fr] gap-16">
 
           {/* Sidebar (Filters) */}
-          <aside className="lg:sticky lg:top-16 self-start">
+          <aside className="lg:sticky lg:top-16 self-start ">
             <div className="bg-white rounded-3xl shadow-lg border border-gray-100 p-6">
               {sidebar}
             </div>

@@ -2,7 +2,7 @@
 
 export default function TourFilters() {
   return (
-    <div className="space-y-10">
+    <div className="space-y-10 bg-linear-to-br ">
 
       {/* Title */}
       <h3 className="text-xl font-semibold text-gray-900">

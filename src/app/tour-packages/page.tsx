@@ -5,6 +5,8 @@ import TourFilters from "@/components/TourArchive/TourFilters"
 import TourGrid from "@/components/TourArchive/TourGrid"
 import TourHero from "@/components/TourArchive/TourHero"
 import TourTrustStrip from "@/components/TourArchive/TourTrustStrip"
+import LuxuryFooter from "@/utils/Footer"
+import Navbar from "@/utils/Navbar"
 
 export const tours = [
   {
@@ -103,6 +105,7 @@ export const tours = [
 
 export default function page(){
     return  (   <>
+                    <Navbar/>
                     <TourHero/>
                     <TourTrustStrip/>
                     <TourArchiveLayout sidebar={<TourFilters />}>
@@ -112,7 +115,7 @@ export default function page(){
                     <TourArchiveCTA/>
                     
                     <TourFAQSection/>
-                    
+                    <LuxuryFooter/>
                 </>
     )
 }
