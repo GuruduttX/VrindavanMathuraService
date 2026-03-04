@@ -1,6 +1,6 @@
 "use client";
 
-import TourCard from "@/utills/TourCard";
+import TourCard from "@/utils/TourCard";
 
 
 interface Tour {

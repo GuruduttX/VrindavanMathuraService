@@ -1,3 +1,4 @@
+import TourArchiveCTA from "@/components/TourArchive/TourArchiveCTA";
 import DestinationRoute from "@/components/TourPackage/DestinationRoute";
 import InclusionExclusion from "@/components/TourPackage/InclusionExclusion";
 import ItineraryAccordion from "@/components/TourPackage/ItineraryAccordion";
@@ -10,6 +11,7 @@ import PackageInclusionsStrip from "@/components/TourPackage/PackageInclusionsSt
 import PackageTestimonials from "@/components/TourPackage/PackageTestimonials";
 import Policies from "@/components/TourPackage/Policies";
 import ProductRatings from "@/components/TourPackage/ProductRatings";
+import SideForm from "@/components/TourPackage/SideForm";
 import LuxuryFooter from "@/utils/Footer";
 import Navbar from "@/utils/Navbar";
 import TrustBuildingSection from "@/utils/TrustBuildingSection";
@@ -278,23 +280,51 @@ export default function PackagePage() {
     <>
       <Navbar/>
       <PackageHero PackageData={dummyPackage} />
-      <PackageDurationStrip
-        duration={dummyDuration}
-        breakdown={dummyBreakdown}
-      />
-      <PackageInclusionsStrip packageData={dumyPackage} />
-     
-      <DestinationRoute routeData={dummyRoute} />
+      <section className="w-full min-h-screen bg-white  ">
+        <div className="max-w-7xl mx-auto  py-12 ">
+
+          {/* GRID */}
+          <div className=" grid grid-cols-1 lg:grid-cols-[1fr_360px] gap-10  ">
+
+            {/* LEFT CONTENT */}
+            <main className="space-y-12">
+              <PackageDurationStrip
+              duration={dummyDuration}
+              breakdown={dummyBreakdown}
+            />
+            <PackageInclusionsStrip packageData={dumyPackage} />
+          
+            <DestinationRoute routeData={dummyRoute} />
+
+            <PackageHighlights PackageData={dummyHighlights} />
+
+            <ItineraryAccordion PackageData = {dummyItenary}/>
+            <InclusionExclusion PackageData={dummyIncExc}/>
+              
+            </main>
+
+             <aside className="hidden lg:block ">
+              <div className="sticky top-28">
+                <SideForm />
+              </div>
+            </aside>
+
+            
+          </div>
+        </div>
+      </section>
+
+      
+
       
 
 
 
+  
 
-    <PackageHighlights PackageData={dummyHighlights} />
-
-    <ItineraryAccordion PackageData = {dummyItenary}/>
-    <InclusionExclusion PackageData={dummyIncExc}/>
+    <TourArchiveCTA/>
     <KnowBeforeYouGo PackageData={knowBefore}/>
+
     <ProductRatings/>
     <PackageTestimonials PackageData={testimonials}/>
     

@@ -41,11 +41,7 @@ const trustCards = [
     desc: "Real people before, during and after your yatra.",
     icon: PhoneCall,
   },
-  {
-    title: "Seva Bhav",
-    desc: "This is not business — it is service to devotees.",
-    icon: HeartHandshake,
-  },
+  
 ];
 
 export default function TrustBuildingSection() {

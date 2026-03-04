@@ -1,9 +1,10 @@
 "use client";
 
 import Image from "next/image";
-import { Star, IndianRupee, Clock } from "lucide-react";
+import { Star, IndianRupee, Clock, Check } from "lucide-react";
 import Link from "next/link";
 import { useState } from "react";
+
 
 export default function PackageHero({ PackageData }: any) {
   const [isOpen, setIsOpen] = useState(false);
@@ -11,10 +12,10 @@ export default function PackageHero({ PackageData }: any) {
   return (
     <>
 
-      <section className="relative w-full px-6 py-14 lg:px-16 bg-gradient-to-br from-pink-50 via-rose-50 to-white">
+      <section className="relative w-full px-6 py-14 lg:px-16 bg-gradient-to-br from-pink-50 via-rose-50 to-white ">
 
         {/* Breadcrumb */}
-        <nav className="text-sm text-pink-600 mb-6">
+        <nav className="text-sm text-pink-600 mb-6 mt-20 px-12">
           <Link href="/">Home</Link>
           <span className="mx-2">/</span>
           <Link href="/tour-packages">Packages</Link>
@@ -61,55 +62,69 @@ export default function PackageHero({ PackageData }: any) {
           </div>
         </div>
 
-        {/* BOTTOM CONTENT */}
-        <div className="mx-auto max-w-7xl mt-10 flex flex-col lg:flex-row justify-between items-start gap-10">
-
-          {/* LEFT TITLE */}
-          <div className="flex-1">
-            <h1 className="text-3xl lg:text-4xl font-bold text-gray-900 leading-tight">
-              {PackageData.title}
-            </h1>
-
-            <p className="mt-3 text-gray-600 max-w-xl">
-              Experience the divine charm of Mathura & Vrindavan with a perfectly curated spiritual journey.
-            </p>
-
-            <div className="flex items-center gap-2 mt-4 text-sm">
-              <Star className="w-4 h-4 text-pink-500 fill-pink-500" />
-              <span className="font-semibold">{PackageData.rating || "4.8"}</span>
-              <span className="text-gray-600">
-                ({PackageData.reviews || "120"}) reviews
-              </span>
-            </div>
-          </div>
-
-          {/* PRICE CARD */}
-          <div className="bg-white/80 backdrop-blur-xl border border-pink-100 shadow-2xl rounded-2xl px-8 py-6 flex flex-col items-center text-center">
-
-            <p className="text-xs uppercase tracking-wide text-gray-500">
-              Starting from
-            </p>
-
-            <div className="flex items-end gap-1 mt-2">
-              <span className="text-4xl font-extrabold text-pink-600 flex items-center">
-                <IndianRupee size={30} />
-                {PackageData.price}
-              </span>
-              <span className="text-sm text-gray-500 mb-1">/person</span>
-            </div>
-
-            <button
-              onClick={() => setIsOpen(true)}
-              className="mt-6 px-8 py-4 rounded-xl bg-gradient-to-r from-pink-600 to-rose-500 text-white font-semibold shadow-lg hover:scale-105 transition duration-300"
-            >
-              Book Now →
-            </button>
-
-            <span className="mt-3 text-xs text-gray-500">
-              No hidden charges • Best price guarantee
-            </span>
-          </div>
+       {/* BOTTOM CONTENT - STACKED CARD DESIGN */}
+{/* BOTTOM CONTENT - MODERN SPLIT VIEW */}
+<div className="mx-auto max-w-7xl mt-10 px-4">
+  <div className="bg-white rounded-3xl shadow-2xl overflow-hidden border border-gray-100">
+    
+    {/* TOP SECTION - Title & Description */}
+    <div className="p-6 lg:p-8 bg-gradient-to-br from-pink-50/50 to-rose-50/50">
+      <h1 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-gray-900 leading-tight text-center lg:text-left">
+        {PackageData.title}
+      </h1>
+      
+      <p className="mt-3 text-gray-600 text-center lg:text-left max-w-2xl mx-auto lg:mx-0 text-sm sm:text-base">
+        Experience the divine charm of Mathura & Vrindavan with a perfectly curated spiritual journey.
+      </p>
+      
+      {/* RATING BADGES */}
+      <div className="flex flex-wrap items-center justify-center lg:justify-start gap-3 mt-4">
+        <div className="bg-white px-3 py-1.5 rounded-full shadow-sm flex items-center gap-1.5">
+          <Star className="w-4 h-4 text-pink-500 fill-pink-500" />
+          <span className="font-semibold text-sm">{PackageData.rating || "4.8"}</span>
         </div>
+        <div className="bg-white px-3 py-1.5 rounded-full shadow-sm">
+          <span className="text-sm text-gray-600">{PackageData.reviews || "120"} reviews</span>
+        </div>
+        <div className="bg-green-50 px-3 py-1.5 rounded-full hidden sm:block">
+          <span className="text-sm text-green-700 font-medium">Bestseller</span>
+        </div>
+      </div>
+    </div>
+
+    {/* BOTTOM SECTION - Price & CTA */}
+    <div className="p-6 lg:p-8 bg-gradient-to-r from-pink-600 to-rose-500 text-white">
+      <div className="flex flex-col sm:flex-row items-center justify-between gap-4">
+        
+        <div className="text-center sm:text-left">
+          <p className="text-pink-100 text-xs uppercase tracking-wide">
+            Special Offer
+          </p>
+          <div className="flex items-center justify-center sm:justify-start gap-2 mt-1">
+            <span className="text-3xl lg:text-4xl font-bold flex items-center">
+              <IndianRupee className="w-7 h-7" />
+              {PackageData.price}
+            </span>
+            <span className="text-pink-100">/person</span>
+          </div>
+          <p className="text-xs text-pink-100 mt-1">
+            Limited time offer • No hidden charges
+          </p>
+        </div>
+
+        <button
+          onClick={() => setIsOpen(true)}
+          className="w-full sm:w-auto px-8 py-3.5 rounded-xl bg-white text-pink-600 font-bold shadow-lg hover:scale-105 transition-all duration-300 hover:shadow-xl"
+        >
+          Book Now →
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
 
       </section>
     </>
