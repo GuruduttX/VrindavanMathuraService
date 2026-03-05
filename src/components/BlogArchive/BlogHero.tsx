@@ -4,7 +4,7 @@ import { motion } from "framer-motion";
 
 export default function BlogHero() {
   return (
-    <section className="relative overflow-hidden bg-gradient-to-br from-pink-600 to-rose-500 py-24 px-6 lg:px-20 text-white">
+    <section className="relative overflow-hidden bg-gradient-to-br from-pink-600 to-rose-500 py-24 px-6 lg:px-20 text-white mt-23">
       
       {/* Decorative Blur Circles */}
       <div className="absolute -top-20 -left-20 h-72 w-72 rounded-full bg-pink-400/30 blur-3xl"></div>

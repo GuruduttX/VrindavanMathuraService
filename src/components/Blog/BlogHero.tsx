@@ -21,10 +21,8 @@ export default function BlogHero({
       {/* Featured Image */}
       <div className="relative h-[60vh] w-full">
         <img
-          src={"\images\blog (2).webp"}
+          src={"https://wallpaperaccess.com/full/1534864.jpg"}
           alt={title}
-          
-          
           className="object-cover w-full h-full"
         />
 

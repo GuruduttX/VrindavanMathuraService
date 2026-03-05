@@ -1,3 +1,19 @@
 @import "tailwindcss";
 
 
+@keyframes scrollX {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+.infinite-scroll {
+  animation: scrollX 35s linear infinite;
+}
+
+.infinite-scroll:hover {
+  animation-play-state: paused;
+}
