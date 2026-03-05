@@ -1,5 +1,6 @@
 "use client";
 
+import { label } from "framer-motion/client";
 import Image from "next/image";
 import Link from "next/link";
 import { useState, useEffect, useRef } from "react";
@@ -8,7 +9,9 @@ export default function Navbar() {
     const [scrolled, setScrolled] = useState(false);
     const [active, setActive] = useState("Home");
 
-    const navItems = ["Home", "Tours", "Taxi", "Hotels", "Puja", "About"];
+    // const navItems = ["Home", "Tours", "Taxi", "Hotels", "Puja", "About"];
+    const navItems = [{label : "Home", url : "/"}, {label : "Tours" ,url : "/tour-packages"}, {label : "Taxi" , url : '/taxi'}, {label : "Hotels", url : '/hotels'}, {label :"Puja" , url : "/pooja"}, {label : "About" , url : '/about'}];
+
 
     const containerRef = useRef(null);
     const indicatorRef = useRef(null);
@@ -92,24 +95,25 @@ export default function Navbar() {
 
                         <div className="relative flex items-center gap-2 px-2 cursor-pointer">
 
-                            {navItems.map((item) => (
-                                <button
-                                    key={item}
-                                    data-nav={item}
-                                    onClick={() => setActive(item)}
+                            {navItems.map((item : any, idx) => (
+                                <Link
+                                    href={item.url}
+                                    key={idx}
+                                    data-nav={item.label}
+                                    onClick={() => setActive(item.label)}
                                     className={`
                   relative z-10
                   px-5 py-2 rounded-full
                   font-medium
                   transition cursor-pointer
-                  ${active === item
+                  ${active === item.label
                                             ? "text-pink-700"
                                             : "text-gray-700 hover:text-pink-600"
                                         }
                   `}
                                 >
-                                    {item}
-                                </button>
+                                    {item.label}
+                                </Link>
                             ))}
 
                         </div>

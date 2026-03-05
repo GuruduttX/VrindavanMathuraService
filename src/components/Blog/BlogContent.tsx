@@ -4,50 +4,51 @@ interface BlogContentProps {
 
 export default function BlogContent({ content }: BlogContentProps) {
   return (
-    <section className="px-6 lg:px-20 py-16 bg-white">
+    <section className="py-20 bg-white">
       <article
         className="
-          mx-auto 
-          max-w-3xl 
-          text-gray-700 
-          leading-relaxed 
-          text-[17px] 
-          
-          [&>h2]:mt-14
+          mx-auto
+          max-w-4xl
+          text-gray-700
+          text-[18px]
+          leading-8
+
+          [&>h2]:mt-16
           [&>h2]:mb-6
           [&>h2]:text-3xl
           [&>h2]:font-bold
           [&>h2]:text-gray-900
+          [&>h2]:leading-tight
 
-          [&>h3]:mt-10
+          [&>h3]:mt-12
           [&>h3]:mb-4
-          [&>h3]:text-xl
+          [&>h3]:text-2xl
           [&>h3]:font-semibold
           [&>h3]:text-gray-800
 
-          [&>p]:mb-6
+          [&>p]:mb-7
 
-          [&>ul]:my-6
+          [&>ul]:my-8
           [&>ul]:pl-6
           [&>ul]:space-y-3
           [&>ul>li]:list-disc
           [&>ul>li]:marker:text-pink-500
 
-          [&>ol]:my-6
+          [&>ol]:my-8
           [&>ol]:pl-6
           [&>ol]:space-y-3
           [&>ol>li]:list-decimal
           [&>ol>li]:marker:text-pink-500
 
-          [&>blockquote]:my-10
+          [&>blockquote]:my-12
           [&>blockquote]:border-l-4
           [&>blockquote]:border-pink-500
           [&>blockquote]:pl-6
           [&>blockquote]:italic
-          [&>blockquote]:text-lg
+          [&>blockquote]:text-xl
           [&>blockquote]:text-gray-800
           [&>blockquote]:bg-pink-50
-          [&>blockquote]:py-4
+          [&>blockquote]:py-6
           [&>blockquote]:rounded-r-lg
 
           [&>a]:text-pink-600
