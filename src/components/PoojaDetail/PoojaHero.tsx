@@ -20,12 +20,11 @@ export default function PoojaHero({ pooja }: PoojaHeroProps) {
 
       {/* Background Image */}
       <div className="absolute inset-0">
-        <Image
+        <img
           src={pooja.heroImage}
           alt={pooja.title}
-          fill
-          priority
-          className="object-cover"
+          
+          className="object-cover w-full h-full"
         />
       </div>
 
