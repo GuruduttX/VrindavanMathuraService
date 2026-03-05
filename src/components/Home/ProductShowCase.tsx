@@ -2,6 +2,7 @@
 
 import Image from "next/image";
 import { useState, useEffect, useRef } from "react";
+import { MapPin, Clock, CheckCircle, Star, Car, Hotel } from "lucide-react";
 
 type FilterId = "tours" | "taxi" | "hotels";
 
@@ -14,6 +15,7 @@ interface Product {
   title: string;
   price: string;
   image: string;
+  location: string;
 }
 
 type ProductData = Record<FilterId, Product[]>;
@@ -27,14 +29,22 @@ const filters: Filter[] = [
 const data: ProductData = {
   tours: [
     {
-      title: "Mathura Vrindavan 2 Days",
-      price: "₹4,999",
+      title: "Same Day Govardhan Barsana Tour",
+      price: "₹1,999",
       image: "/images/Home/prem-mandir.jpg",
+      location: "Govardhan",
     },
-    {
-      title: "Vrindavan Spiritual Tour",
-      price: "₹3,499",
-      image: "/images/Home/Mandir.jpg",
+     {
+      title: "Same Day Govardhan Barsana Tour",
+      price: "₹1,999",
+      image: "/images/Home/prem-mandir.jpg",
+      location: "Govardhan",
+    },
+     {
+      title: "Same Day Govardhan Barsana Tour",
+      price: "₹1,999",
+      image: "/images/Home/prem-mandir.jpg",
+      location: "Govardhan",
     },
   ],
 
@@ -43,11 +53,19 @@ const data: ProductData = {
       title: "Delhi to Vrindavan Taxi",
       price: "₹2,999",
       image: "/images/Home/taxi.jpg",
+      location: "Delhi",
     },
     {
-      title: "Mathura Local Taxi",
-      price: "₹1,499",
-      image: "/images/Home/taxi2.jpg",
+      title: "Delhi to Vrindavan Taxi",
+      price: "₹2,999",
+      image: "/images/Home/taxi.jpg",
+      location: "Delhi",
+    },
+    {
+      title: "Delhi to Vrindavan Taxi",
+      price: "₹2,999",
+      image: "/images/Home/taxi.jpg",
+      location: "Delhi",
     },
   ],
 
@@ -55,17 +73,25 @@ const data: ProductData = {
     {
       title: "Luxury Hotel Vrindavan",
       price: "₹2,200 / night",
-      image: "/images/Home/hotel.jpg",
+      image: "/images/Home/hotel.webp",
+      location: "Vrindavan",
     },
     {
-      title: "Budget Stay",
-      price: "₹999 / night",
-      image: "/images/Home/hotel2.jpg",
+      title: "Luxury Hotel Vrindavan",
+      price: "₹2,200 / night",
+      image: "/images/Home/hotel.webp",
+      location: "Vrindavan",
+    },
+    {
+      title: "Luxury Hotel Vrindavan",
+      price: "₹2,200 / night",
+      image: "/images/Home/hotel.webp",
+      location: "Vrindavan",
     },
   ],
 };
 
-export default function ProductShowCase() {
+export default function ProductsShowcase() {
   const [active, setActive] = useState<FilterId>("tours");
 
   const indicatorRef = useRef<HTMLDivElement | null>(null);
@@ -82,26 +108,22 @@ export default function ProductShowCase() {
   }, [active]);
 
   return (
-    <section className="py-24 relative">
+    <section className="py-24 relative bg-gradient-to-b from-white via-pink-50 to-white">
 
-      {/* glow background */}
-      <div className="absolute inset-0 bg-gradient-to-b from-transparent via-pink-50 to-transparent" />
-
-      <div className="relative max-w-7xl mx-auto px-6">
+      <div className="max-w-7xl mx-auto px-6">
 
         {/* heading */}
         <div className="text-center mb-12">
 
-          <h2 className="text-4xl font-bold">
+          <h2 className="text-4xl font-bold text-gray-800">
             Explore Our Services
           </h2>
 
           <p className="text-gray-600 mt-3">
-            Tours, taxis, and hotels — all in one place
+            Tours, taxis and hotels — all in one place
           </p>
 
         </div>
-
 
 
         {/* FILTER */}
@@ -109,15 +131,14 @@ export default function ProductShowCase() {
 
           <div className="relative flex gap-2 bg-white shadow-lg p-2 rounded-full border">
 
-            {/* animated indicator */}
             <div
               ref={indicatorRef}
               className="
-                absolute top-2 bottom-2
-                bg-gradient-to-r from-pink-500 to-fuchsia-500
-                rounded-full
-                transition-all duration-300
-                opacity-20
+              absolute top-2 bottom-2
+              bg-gradient-to-r from-pink-500 via-fuchsia-500 to-purple-500
+              rounded-full
+              transition-all duration-300
+              opacity-20
               "
             />
 
@@ -126,14 +147,11 @@ export default function ProductShowCase() {
                 key={filter.id}
                 data-filter={filter.id}
                 onClick={() => setActive(filter.id)}
-                className={`
-                  relative z-10 px-6 py-2 rounded-full font-medium transition
-                  ${
-                    active === filter.id
-                      ? "text-pink-700"
-                      : "text-gray-600 hover:text-pink-600"
-                  }
-                `}
+                className={`relative z-10 px-6 py-2 rounded-full font-medium transition ${
+                  active === filter.id
+                    ? "text-pink-600"
+                    : "text-gray-600 hover:text-pink-600"
+                }`}
               >
                 {filter.label}
               </button>
@@ -146,74 +164,182 @@ export default function ProductShowCase() {
 
 
         {/* GRID */}
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-10">
 
           {data[active].map((product, index) => (
             <div
               key={index}
-              className="
-                group bg-white rounded-2xl overflow-hidden
-                shadow-lg hover:shadow-2xl transition duration-500
-              "
+              className="bg-white rounded-3xl shadow-xl overflow-hidden hover:shadow-2xl transition duration-300 h-[420px] flex flex-col"
             >
 
-              {/* image */}
-              <div className="relative h-64 overflow-hidden">
+              {/* ================= TOURS CARD ================= */}
+              {active === "tours" && (
+                <>
+                  <div className="relative h-[220px]">
 
-                <Image
-                  src={product.image}
-                  alt={product.title}
-                  fill
-                  sizes="(max-width:768px) 100vw, 33vw"
-                  className="
-                    object-cover
-                    group-hover:scale-110
-                    transition duration-700
-                  "
-                />
+                    <Image
+                      src={product.image}
+                      alt={product.title}
+                      fill
+                      className="object-cover"
+                    />
 
-                <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent" />
+                    <div className="absolute inset-0 bg-gradient-to-r from-pink-600/80 via-fuchsia-600/70 to-purple-600/70"></div>
 
-                <div className="absolute bottom-4 left-4 text-white font-semibold">
-                  {product.price}
-                </div>
+                    <div className="absolute bottom-4 left-4 text-white">
 
-              </div>
+                      <h3 className="font-semibold text-lg">
+                        {product.title}
+                      </h3>
+
+                      <div className="mt-2 bg-white text-pink-600 px-3 py-1 rounded-full text-sm font-semibold inline-block">
+                        {product.price}
+                      </div>
+
+                    </div>
+
+                  </div>
+
+                  <div className="p-6 flex flex-col flex-1 justify-between">
+
+                    <div className="flex items-center gap-2 text-gray-500">
+                      <MapPin size={16} />
+                      {product.location}
+                    </div>
+
+                    <div className="grid grid-cols-2 gap-3 mt-4 text-sm">
+
+                      <div className="flex items-center gap-2">
+                        <CheckCircle size={16} className="text-green-500" />
+                        AC Cab
+                      </div>
+
+                      <div className="flex items-center gap-2">
+                        <CheckCircle size={16} className="text-green-500" />
+                        Guide
+                      </div>
+
+                      <div className="flex items-center gap-2">
+                        <CheckCircle size={16} className="text-green-500" />
+                        Temple Darshan
+                      </div>
+
+                      <div className="flex items-center gap-2">
+                        <CheckCircle size={16} className="text-green-500" />
+                        Pickup & Drop
+                      </div>
+
+                    </div>
+
+                    <button className="mt-6 bg-gradient-to-r from-pink-500 to-fuchsia-600 text-white py-3 rounded-xl">
+                      View Details
+                    </button>
+
+                  </div>
+                </>
+              )}
 
 
-              {/* content */}
-              <div className="p-5">
 
-                <h3 className="font-semibold text-lg">
-                  {product.title}
-                </h3>
+              {/* ================= TAXI CARD ================= */}
+              {active === "taxi" && (
+                <>
+                  <div className="flex items-center justify-center h-[220px] bg-gradient-to-br from-pink-100 to-fuchsia-100">
 
-                <button className="mt-3 text-pink-600 font-medium hover:underline">
-                  View Details →
-                </button>
+                    <Car size={60} className="text-pink-600" />
 
-              </div>
+                  </div>
+
+                  <div className="p-6 flex flex-col flex-1 justify-between">
+
+                    <div>
+
+                      <h3 className="text-xl font-semibold">
+                        {product.title}
+                      </h3>
+
+                      <p className="text-gray-500 mt-2">
+                        Comfortable AC taxi with professional driver service.
+                      </p>
+
+                    </div>
+
+                    <div>
+
+                      <div className="text-pink-600 font-semibold mb-4">
+                        {product.price}
+                      </div>
+
+                      <button className="w-full bg-gradient-to-r from-pink-500 to-fuchsia-600 text-white py-3 rounded-xl">
+                        Book Taxi
+                      </button>
+
+                    </div>
+
+                  </div>
+                </>
+              )}
+
+
+
+              {/* ================= HOTELS CARD ================= */}
+              {active === "hotels" && (
+                <>
+                  <div className="relative h-[220px]">
+
+                    <Image
+                      src={product.image}
+                      alt={product.title}
+                      fill
+                      className="object-cover"
+                    />
+
+                    <div className="absolute top-3 right-3 bg-white px-3 py-1 rounded-lg flex items-center gap-1 shadow text-sm">
+                      <Star size={14} className="text-yellow-500" />
+                      4.6
+                    </div>
+
+                  </div>
+
+                  <div className="p-6 flex flex-col flex-1 justify-between">
+
+                    <div>
+
+                      <div className="flex items-center gap-2 mb-2">
+                        <Hotel size={18} className="text-pink-600" />
+                        <span className="text-sm text-gray-500">
+                          Premium Stay
+                        </span>
+                      </div>
+
+                      <h3 className="text-xl font-semibold">
+                        {product.title}
+                      </h3>
+
+                      <p className="text-gray-500 mt-2">
+                        Comfortable stay with modern amenities in Vrindavan.
+                      </p>
+
+                    </div>
+
+                    <div>
+
+                      <div className="text-pink-600 font-semibold mb-4">
+                        {product.price}
+                      </div>
+
+                      <button className="w-full border border-pink-500 text-pink-600 py-3 rounded-xl hover:bg-pink-50">
+                        View Hotel
+                      </button>
+
+                    </div>
+
+                  </div>
+                </>
+              )}
 
             </div>
           ))}
-
-        </div>
-
-
-
-        {/* CTA */}
-        <div className="text-center mt-12">
-
-          <button className="
-            px-8 py-3
-            bg-gradient-to-r from-pink-500 to-fuchsia-600
-            text-white
-            rounded-full
-            shadow-lg
-            hover:scale-105 transition
-          ">
-            View All {filters.find(f => f.id === active)?.label}
-          </button>
 
         </div>
 
