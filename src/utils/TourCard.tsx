@@ -26,11 +26,7 @@ export default function TourCard({ tour }: any) {
       {/* Image Section */}
       <div className="relative h-60 w-full overflow-hidden">
 
-        <img
-          src={tour.image}
-          alt={tour.title}
-          className="object-cover transition-transform duration-500 hover:scale-105 w-full h-full"
-        />
+        <Image src={"/images/Home/holy-image.webp"} alt={"The name is something called"} fill className="object-cover transition-transform duration-500 hover:scale-105 w-full h-full" />
 
         {/* Festival Badge */}
         <div className="absolute top-4 left-4 flex gap-2">
@@ -113,7 +109,7 @@ export default function TourCard({ tour }: any) {
 
           {/* Button */}
           <Link href={`/tour-packages/${tour.id}`}>
-            <button className="px-6 py-3 rounded-full bg-gradient-to-r from-pink-600 to-rose-500 text-white font-medium shadow-md hover:scale-105 transition duration-300">
+            <button className="px-6 py-3 cursor-pointer rounded-full bg-gradient-to-r from-pink-600 to-rose-500 text-white font-medium shadow-md hover:scale-105 transition duration-300">
               Book Now
             </button>
           </Link>

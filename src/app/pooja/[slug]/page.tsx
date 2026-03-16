@@ -11,6 +11,8 @@ import PoojaGallery from "@/components/PoojaDetail/PoojaGallery";
 import DevoteeTestimonials from "@/components/PoojaDetail/DevoteeTestimonials";
 import PoojaFAQ from "@/components/PoojaDetail/PoojaFAQ";
 import PoojaCTA from "@/components/PoojaDetail/PoojaCTA";
+import Navbar from "@/utils/Navbar";
+import LuxuryFooter from "@/utils/Footer";
 export default function PoojaPage() {
 
   const dummyPooja = {
@@ -24,11 +26,12 @@ export default function PoojaPage() {
 
   return (
     <>
+      <Navbar/>
       <PoojaHero pooja={dummyPooja}/>
-      <div className="max-w-7xl mx-auto px-6 grid lg:grid-cols-3 gap-12 py-20">
+      <div className="max-w-7xl mx-auto px-6 gap-12 py-20">
 
         {/* LEFT MAIN CONTENT */}
-        <div className="lg:col-span-2 space-y-16">
+        <div className=" space-y-16">
           <PoojaOverview />
           <PoojaBenefits />
           <PoojaIncludesStrip />
@@ -39,15 +42,12 @@ export default function PoojaPage() {
         </div>
 
         {/* RIGHT SIDEBAR */}
-        <div className="hidden lg:block">
-          <div className="sticky top-24">
-            <PoojaPricingCard  />
-          </div>
-        </div>
+       
 
       </div>
 
       <PoojaCTA />
+      <LuxuryFooter/>
     </>
   );
 }
