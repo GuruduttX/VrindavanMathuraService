@@ -4,7 +4,7 @@ import Image from "next/image";
 import { useState, useEffect, useRef } from "react";
 import { MapPin, Clock, CheckCircle, Star, Car, Hotel } from "lucide-react";
 
-type FilterId = "tours" | "taxi" | "hotels";
+type FilterId = "tours" | "taxi" | "hotels" | "puja";
 
 interface Filter {
   id: FilterId;
@@ -24,6 +24,7 @@ const filters: Filter[] = [
   { id: "tours", label: "Tour Packages" },
   { id: "taxi", label: "Taxi Service" },
   { id: "hotels", label: "Hotels" },
+  { id: "puja", label: "Puja" },
 ];
 
 const data: ProductData = {
@@ -34,13 +35,13 @@ const data: ProductData = {
       image: "/images/Home/prem-mandir.jpg",
       location: "Govardhan",
     },
-     {
+    {
       title: "Same Day Govardhan Barsana Tour",
       price: "₹1,999",
       image: "/images/Home/prem-mandir.jpg",
       location: "Govardhan",
     },
-     {
+    {
       title: "Same Day Govardhan Barsana Tour",
       price: "₹1,999",
       image: "/images/Home/prem-mandir.jpg",
@@ -89,6 +90,27 @@ const data: ProductData = {
       location: "Vrindavan",
     },
   ],
+
+  puja: [
+    {
+      title: "Luxury Hotel Vrindavan",
+      price: "₹2,200 / night",
+      image: "/images/Home/hotel.webp",
+      location: "Vrindavan",
+    },
+    {
+      title: "Luxury Hotel Vrindavan",
+      price: "₹2,200 / night",
+      image: "/images/Home/hotel.webp",
+      location: "Vrindavan",
+    },
+    {
+      title: "Luxury Hotel Vrindavan",
+      price: "₹2,200 / night",
+      image: "/images/Home/hotel.webp",
+      location: "Vrindavan",
+    },
+  ],
 };
 
 export default function ProductsShowcase() {
@@ -108,18 +130,18 @@ export default function ProductsShowcase() {
   }, [active]);
 
   return (
-    <section className="py-24 relative bg-gradient-to-b from-white via-pink-50 to-white">
+    <section className="py-10 md:py-24 relative bg-gradient-to-b from-white via-pink-50 to-white">
 
       <div className="max-w-7xl mx-auto px-6">
 
         {/* heading */}
         <div className="text-center mb-12">
 
-          <h2 className="text-4xl font-bold text-gray-800">
+          <h2 className="text-3xl md:text-5xl font-bold bg-gradient-to-r from-pink-600 via-fuchsia-600 to-purple-600 bg-clip-text text-transparent">
             Explore Our Services
           </h2>
 
-          <p className="text-gray-600 mt-3">
+          <p className="text-gray-600 mt-5">
             Tours, taxis and hotels — all in one place
           </p>
 
@@ -129,7 +151,7 @@ export default function ProductsShowcase() {
         {/* FILTER */}
         <div className="flex justify-center mb-10">
 
-          <div className="relative flex gap-2 bg-white shadow-lg p-2 rounded-full border">
+          <div className="relative flex gap-0 md:gap-2 bg-white shadow-lg p-2 rounded-full border-2 border-purple-500 cursor-pointer">
 
             <div
               ref={indicatorRef}
@@ -147,11 +169,10 @@ export default function ProductsShowcase() {
                 key={filter.id}
                 data-filter={filter.id}
                 onClick={() => setActive(filter.id)}
-                className={`relative z-10 px-6 py-2 rounded-full font-medium transition ${
-                  active === filter.id
-                    ? "text-pink-600"
-                    : "text-gray-600 hover:text-pink-600"
-                }`}
+                className={`relative z-10 text-xs md:text-lg px-3 whitespace-nowrap md:px-10 py-2 md:py-4 rounded-full font-medium transition cursor-pointer ${active === filter.id
+                  ? "text-pink-600"
+                  : "text-gray-600 hover:text-pink-600"
+                  }`}
               >
                 {filter.label}
               </button>
@@ -169,7 +190,7 @@ export default function ProductsShowcase() {
           {data[active].map((product, index) => (
             <div
               key={index}
-              className="bg-white rounded-3xl shadow-xl overflow-hidden hover:shadow-2xl transition duration-300 h-[420px] flex flex-col"
+              className="bg-white rounded-3xl shadow-xl overflow-hidden hover:shadow-2xl transition duration-300 h-[480px] flex flex-col hover:scale-105 cursor-pointer"
             >
 
               {/* ================= TOURS CARD ================= */}
@@ -184,13 +205,11 @@ export default function ProductsShowcase() {
                       className="object-cover"
                     />
 
-                    <div className="absolute inset-0 bg-gradient-to-r from-pink-600/80 via-fuchsia-600/70 to-purple-600/70"></div>
+                    <div className="absolute inset-0 bg-gradient-to-t from-pink-500/40 via-pink-500/20 to-transparent"></div>
 
                     <div className="absolute bottom-4 left-4 text-white">
 
-                      <h3 className="font-semibold text-lg">
-                        {product.title}
-                      </h3>
+
 
                       <div className="mt-2 bg-white text-pink-600 px-3 py-1 rounded-full text-sm font-semibold inline-block">
                         {product.price}
@@ -201,7 +220,9 @@ export default function ProductsShowcase() {
                   </div>
 
                   <div className="p-6 flex flex-col flex-1 justify-between">
-
+                    <h3 className="font-semibold text-lg">
+                      {product.title}
+                    </h3>
                     <div className="flex items-center gap-2 text-gray-500">
                       <MapPin size={16} />
                       {product.location}
@@ -231,7 +252,7 @@ export default function ProductsShowcase() {
 
                     </div>
 
-                    <button className="mt-6 bg-gradient-to-r from-pink-500 to-fuchsia-600 text-white py-3 rounded-xl">
+                    <button className="mt-6 bg-gradient-to-r from-pink-500 to-fuchsia-600 text-white py-3 rounded-xl cursor-pointer">
                       View Details
                     </button>
 
@@ -338,8 +359,67 @@ export default function ProductsShowcase() {
                 </>
               )}
 
+
+              {active === "puja" && (
+                <>
+                  <div className="relative h-[220px]">
+
+                    <Image
+                      src={product.image}
+                      alt={product.title}
+                      fill
+                      className="object-cover"
+                    />
+
+                    <div className="absolute top-3 right-3 bg-white px-3 py-1 rounded-lg flex items-center gap-1 shadow text-sm">
+                      <Star size={14} className="text-yellow-500" />
+                      4.6
+                    </div>
+
+                  </div>
+
+                  <div className="p-6 flex flex-col flex-1 justify-between">
+
+                    <div>
+
+                      <div className="flex items-center gap-2 mb-2">
+                        <Hotel size={18} className="text-pink-600" />
+                        <span className="text-sm text-gray-500">
+                          Premium Stay
+                        </span>
+                      </div>
+
+                      <h3 className="text-xl font-semibold">
+                        {product.title}
+                      </h3>
+
+                      <p className="text-gray-500 mt-2">
+                        Comfortable stay with modern amenities in Vrindavan.
+                      </p>
+
+                    </div>
+
+                    <div>
+
+                      <div className="text-pink-600 font-semibold mb-4">
+                        {product.price}
+                      </div>
+
+                      <button className="w-full border border-pink-500 text-pink-600 py-3 rounded-xl hover:bg-pink-50">
+                        View Hotel
+                      </button>
+
+                    </div>
+
+                  </div>
+                </>
+              )}
+
             </div>
           ))}
+
+
+
 
         </div>
 
