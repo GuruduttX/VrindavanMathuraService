@@ -4,59 +4,142 @@ export default function PoojaBenefits() {
       title: "Spiritual Peace",
       desc: "Performing pooja in the holy land of Mathura and Vrindavan brings inner peace and spiritual harmony.",
       icon: "🕉️",
+      accent: "from-pink-500 to-rose-400",
+      soft: "bg-pink-50",
+      border: "border-pink-100",
+      text: "text-pink-600",
     },
     {
       title: "Divine Blessings",
       desc: "Seek blessings from Lord Krishna and other deities through sacred rituals performed by experienced priests.",
       icon: "🙏",
+      accent: "from-rose-500 to-pink-400",
+      soft: "bg-rose-50",
+      border: "border-rose-100",
+      text: "text-rose-600",
     },
     {
       title: "Positive Energy",
       desc: "Poojas help remove negative energies and invite positivity, prosperity, and happiness into life.",
       icon: "✨",
+      accent: "from-fuchsia-500 to-pink-400",
+      soft: "bg-fuchsia-50",
+      border: "border-fuchsia-100",
+      text: "text-fuchsia-600",
     },
     {
       title: "Family Wellbeing",
       desc: "Special poojas are performed for health, success, prosperity, and overall wellbeing of your family.",
       icon: "🏵️",
+      accent: "from-pink-600 to-rose-500",
+      soft: "bg-pink-50",
+      border: "border-pink-100",
+      text: "text-pink-700",
     },
   ];
 
   return (
-    <section className="py-20 bg-gray-50 px-6">
-      <div className="max-w-6xl mx-auto text-center">
+    <section className="py-24 px-6 bg-white relative overflow-hidden">
 
-        {/* Heading */}
-        <h2 className="text-3xl md:text-4xl font-bold mb-4">
-          Benefits of Performing Pooja
-        </h2>
+      {/* Background decoration */}
+      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,_#fdf2f8_0%,_transparent_60%)] pointer-events-none" />
+      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_bottom_left,_#fff1f2_0%,_transparent_60%)] pointer-events-none" />
 
-        <p className="text-gray-600 mb-12 max-w-2xl mx-auto">
-          Performing sacred poojas in Mathura and Vrindavan helps devotees
-          connect spiritually and receive divine blessings from Lord Krishna.
-        </p>
+      <div className="relative max-w-6xl mx-auto">
+
+        {/* Section header */}
+        <div className="text-center mb-16">
+
+          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-pink-50 border border-pink-200 mb-5">
+            <span className="w-1.5 h-1.5 rounded-full bg-pink-500 inline-block" />
+            <span className="text-pink-600 text-xs font-semibold uppercase tracking-widest">Why Perform Pooja</span>
+          </div>
+
+          <h2 className="text-3xl md:text-4xl font-extrabold text-gray-900 leading-tight">
+            Benefits of{" "}
+            <span className="text-transparent bg-clip-text bg-gradient-to-r from-pink-600 to-rose-500">
+              Performing Pooja
+            </span>
+          </h2>
+
+          {/* Divider */}
+          <div className="flex items-center justify-center gap-2 mt-4 mb-5">
+            <div className="h-px w-10 bg-pink-200 rounded-full" />
+            <div className="h-0.5 w-16 bg-gradient-to-r from-pink-500 to-rose-400 rounded-full" />
+            <div className="h-px w-10 bg-pink-200 rounded-full" />
+          </div>
+
+          <p className="text-gray-500 max-w-xl mx-auto text-[15px] leading-relaxed">
+            Performing sacred poojas in Mathura and Vrindavan helps devotees
+            connect spiritually and receive divine blessings from Lord Krishna.
+          </p>
+        </div>
 
         {/* Benefits Grid */}
-        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
-
+        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
           {benefits.map((item, index) => (
             <div
               key={index}
-              className="bg-white p-8 rounded-xl shadow-md hover:shadow-xl transition"
+              className={`relative group bg-white rounded-2xl border ${item.border} p-7
+                shadow-sm hover:shadow-xl hover:shadow-pink-100
+                hover:-translate-y-1.5 transition-all duration-300 cursor-default overflow-hidden`}
             >
-              <div className="text-4xl mb-4">{item.icon}</div>
 
-              <h3 className="text-xl font-semibold mb-3">
-                {item.title}
-              </h3>
+              {/* Top gradient bar */}
+              <div className={`absolute top-0 inset-x-0 h-1 rounded-t-2xl bg-gradient-to-r ${item.accent}`} />
 
-              <p className="text-gray-600 text-sm">
-                {item.desc}
-              </p>
+              {/* Soft background on hover */}
+              <div className={`absolute inset-0 ${item.soft} opacity-0 group-hover:opacity-40 transition-opacity duration-300 rounded-2xl`} />
+
+              <div className="relative z-10 flex flex-col gap-4">
+
+                {/* Icon tile */}
+                <div className={`w-14 h-14 rounded-2xl ${item.soft} border ${item.border} flex items-center justify-center text-2xl
+                  group-hover:scale-110 transition-transform duration-300`}>
+                  {item.icon}
+                </div>
+
+                {/* Index number */}
+                <span className={`text-xs font-bold ${item.text} uppercase tracking-widest`}>
+                  0{index + 1}
+                </span>
+
+                {/* Title */}
+                <h3 className="text-lg font-bold text-gray-900 leading-snug">
+                  {item.title}
+                </h3>
+
+                {/* Divider */}
+                <div className={`h-px w-10 bg-gradient-to-r ${item.accent} rounded-full`} />
+
+                {/* Description */}
+                <p className="text-gray-500 text-sm leading-relaxed">
+                  {item.desc}
+                </p>
+
+              </div>
             </div>
           ))}
-
         </div>
+
+        {/* Bottom CTA strip */}
+        <div className="mt-14 flex flex-col sm:flex-row items-center justify-center gap-4
+          bg-gradient-to-r from-pink-50 to-rose-50 border border-pink-100
+          rounded-2xl px-8 py-7">
+          <div className="text-center sm:text-left">
+            <p className="text-gray-900 font-bold text-lg">Ready to begin your spiritual journey?</p>
+            <p className="text-gray-500 text-sm mt-0.5">Book a pooja today with our certified pandits.</p>
+          </div>
+          <button className="shrink-0 inline-flex items-center gap-2.5 px-8 py-3.5 rounded-full
+            bg-gradient-to-r from-pink-600 to-rose-500 text-white font-semibold text-sm
+            shadow-[0_4px_20px_rgba(236,72,153,0.35)]
+            hover:shadow-[0_6px_28px_rgba(236,72,153,0.5)] hover:scale-[1.03]
+            active:scale-95 transition-all duration-200 cursor-pointer">
+            Book a Pooja Now
+            <span className="w-6 h-6 rounded-full bg-white/20 flex items-center justify-center text-xs">→</span>
+          </button>
+        </div>
+
       </div>
     </section>
   );

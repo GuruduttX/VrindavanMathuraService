@@ -14,7 +14,7 @@ export default function TourHero() {
       to-[#ff6a88]" />
       {/* Premium Gradient Background */}
       <div className="absolute inset-0 
-        bg-[radial-gradient(circle_at_20%_20%,#ff4db2,transparent_45%),
+             bg-[radial-gradient(circle_at_20%_20%,#ff4db2,transparent_45%),
              radial-gradient(circle_at_80%_30%,#ff2e93,transparent_45%),
              linear-gradient(135deg,#b91372,#e52e71,#ff6a88)]" />
 
@@ -126,13 +126,13 @@ export default function TourHero() {
           className="mt-10 flex justify-center gap-6 flex-wrap"
         >
           <Link href="#tours">
-            <button className="px-10 py-4 rounded-full bg-gradient-to-r from-pink-600 to-rose-500 text-white font-semibold shadow-xl hover:scale-105 transition duration-300">
+            <button className="px-10 py-4 rounded-full bg-gradient-to-r from-pink-600 to-rose-500 text-white cursor-pointer font-semibold shadow-xl hover:scale-105 transition duration-300">
               Explore Packages
             </button>
           </Link>
 
           <Link href="/tour-packages">
-            <button className="px-10 py-4 rounded-full border border-white/70 text-white font-semibold hover:bg-white hover:text-black transition duration-300">
+            <button className="px-10 py-4 rounded-full border border-white/70 cursor-pointer text-white font-semibold hover:bg-white hover:text-black transition duration-300">
               View All Tours
             </button>
           </Link>
