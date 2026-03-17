@@ -1,190 +1,244 @@
 "use client";
 
+import { useState } from "react";
 import Image from "next/image";
 import { motion } from "framer-motion";
-import { Star, Wifi, MapPin, Hotel, Sparkles } from "lucide-react";
 
 export default function HotelsHero() {
+
+  const [location, setLocation] = useState("");
+  const [checkin, setCheckin] = useState("");
+  const [checkout, setCheckout] = useState("");
+  const [guests, setGuests] = useState("");
+
   return (
-    <section className="relative pt-35 pb-5 overflow-hidden bg-gradient-to-br from-pink-50 via-rose-50 to-purple-50">
+    <section className="relative overflow-hidden bg-gradient-to-br from-pink-50 via-rose-50 to-fuchsia-100 pt-12">
 
-      <div className="max-w-7xl mx-auto px-6">
+      {/* Background blobs */}
+      <div className="absolute -top-40 -left-40 w-[500px] h-[500px] bg-pink-200/40 rounded-full blur-[90px]" />
+      <div className="absolute bottom-0 right-0 w-[500px] h-[500px] bg-fuchsia-200/40 rounded-full blur-[100px]" />
 
-        {/* Heading */}
+      <div className="max-w-[1300px] mx-auto px-6 lg:px-20 py-20 grid lg:grid-cols-2 gap-16 items-center">
 
-        <div className="text-center mb-20">
+        {/* LEFT CONTENT */}
+        <motion.div
+          initial={{ opacity: 0, y: 40 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6 }}
+        >
 
-          <motion.h1
-            initial={{opacity:0,y:40}}
-            animate={{opacity:1,y:0}}
-            transition={{duration:0.6}}
-            className="text-5xl font-bold"
+          {/* Badge */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.2 }}
+            className="inline-flex items-center gap-2 bg-pink-100 text-pink-600 font-semibold text-sm px-4 py-2 rounded-full mb-6"
           >
+            🏨 Explore Luxury Stays
+          </motion.div>
 
-            Stay Close to
-
-            <span className="
-            block
-            bg-gradient-to-r
-            from-pink-600
-            via-fuchsia-600
-            to-purple-600
-            bg-clip-text
-            text-transparent
-            ">
-              Vrindavan Temples
-            </span>
-
+          {/* Heading */}
+          <motion.h1
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.3 }}
+            className="text-[42px] lg:text-[50px] font-bold leading-tight text-gray-900"
+          >
+            Find the Perfect Hotel
+            <br />
+            in <span className="text-pink-600">Vrindavan</span>
           </motion.h1>
 
-          <p className="text-gray-600 mt-5 max-w-xl mx-auto">
-            Find peaceful hotels near sacred temples with modern
-            comforts and a spiritual atmosphere.
-          </p>
+          {/* Description */}
+          <motion.p
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ delay: 0.45 }}
+            className="mt-5 text-gray-500 max-w-[500px] text-lg"
+          >
+            Discover luxury hotels, spiritual stays, and budget friendly
+            accommodations near the sacred temples of Vrindavan and Mathura.
+          </motion.p>
 
-        </div>
-
-
-        {/* Featured Hotel Showcase */}
-
-        <div className="relative rounded-3xl overflow-hidden shadow-2xl">
-
-          {/* background image */}
-
-          <div className="relative h-[480px]">
-
-            <Image
-              src="/images/Home/hotel.webp"
-              alt="Vrindavan Hotel"
-              fill
-              className="object-cover"
-            />
-
-            {/* overlay gradient */}
-
-            <div className="absolute inset-0 bg-gradient-to-r from-black/60 via-black/30 to-transparent"></div>
-
-          </div>
-
-
-          {/* Featured Hotel Card */}
-
+          {/* Category Pills */}
           <motion.div
-            initial={{opacity:0,x:-60}}
-            animate={{opacity:1,x:0}}
-            transition={{duration:0.6}}
-            className="
-            absolute
-            left-10
-            top-1/2
-            -translate-y-1/2
-            bg-white/95
-            backdrop-blur-xl
-            rounded-3xl
-            shadow-xl
-            p-8
-            max-w-md
-            "
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ delay: 0.55 }}
+            className="flex flex-wrap gap-3 mt-6"
+          >
+            {[
+              "Luxury Hotels",
+              "Budget Hotels",
+              "Ashrams",
+              "Family Stays",
+              "Riverside Hotels"
+            ].map((item) => (
+              <motion.button
+                key={item}
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.96 }}
+                className="px-4 py-2 rounded-full bg-white border border-pink-100 text-gray-600 text-sm font-medium hover:bg-pink-50 hover:text-pink-600 transition"
+              >
+                {item}
+              </motion.button>
+            ))}
+          </motion.div>
+
+          {/* SEARCH BAR */}
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.7 }}
+            className="mt-8 bg-white rounded-2xl shadow-xl border border-pink-100 p-4 grid md:grid-cols-5 gap-3"
           >
 
-            {/* badge */}
+            <input
+              type="text"
+              placeholder="Location"
+              value={location}
+              onChange={(e) => setLocation(e.target.value)}
+              className="px-4 py-3 rounded-xl border border-gray-200 focus:outline-none focus:ring-2 focus:ring-pink-300"
+            />
 
-            <div className="inline-flex items-center gap-2 text-xs bg-pink-50 text-pink-600 px-3 py-1 rounded-full">
+            <input
+              type="date"
+              value={checkin}
+              onChange={(e) => setCheckin(e.target.value)}
+              className="px-4 py-3 rounded-xl border border-gray-200"
+            />
 
-              <Sparkles size={14}/>
-              Featured Stay
+            <input
+              type="date"
+              value={checkout}
+              onChange={(e) => setCheckout(e.target.value)}
+              className="px-4 py-3 rounded-xl border border-gray-200"
+            />
 
-            </div>
+            <input
+              type="text"
+              placeholder="Guests"
+              value={guests}
+              onChange={(e) => setGuests(e.target.value)}
+              className="px-4 py-3 rounded-xl border border-gray-200"
+            />
 
-
-            <h3 className="text-2xl font-semibold mt-4">
-              Radha Palace Hotel
-            </h3>
-
-            <div className="flex items-center text-gray-500 text-sm mt-2">
-
-              <MapPin size={14} className="mr-1"/>
-              Near Prem Mandir
-
-            </div>
-
-
-            {/* rating */}
-
-            <div className="flex items-center gap-2 mt-4">
-
-              <Star className="text-yellow-500" size={18}/>
-              <span className="font-medium">4.6 Rating</span>
-
-            </div>
-
-
-            {/* amenities */}
-
-            <div className="flex flex-wrap gap-2 mt-5 text-xs">
-
-              <span className="bg-pink-50 text-pink-600 px-3 py-1 rounded-full flex items-center gap-1">
-                <Hotel size={12}/> Temple View
-              </span>
-
-              <span className="bg-pink-50 text-pink-600 px-3 py-1 rounded-full flex items-center gap-1">
-                <Wifi size={12}/> Free WiFi
-              </span>
-
-              <span className="bg-pink-50 text-pink-600 px-3 py-1 rounded-full">
-                AC Rooms
-              </span>
-
-            </div>
-
-
-            {/* CTA */}
-
-            <div className="flex items-center justify-between mt-7">
-
-              <span className="text-pink-600 font-semibold text-lg">
-                ₹1,299 / night
-              </span>
-
-              <button className="
-              px-5
-              py-2
-              rounded-full
-              text-white
-              text-sm
-              bg-gradient-to-r
-              from-pink-500
-              via-fuchsia-500
-              to-purple-600
-              hover:scale-105
-              transition
-              ">
-                View Hotel
-              </button>
-
-            </div>
+            <motion.button
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.96 }}
+              className="bg-gradient-to-r from-pink-500 to-fuchsia-500 text-white font-semibold rounded-xl px-6 py-3 shadow hover:shadow-lg transition"
+            >
+              Search
+            </motion.button>
 
           </motion.div>
 
+          {/* Quick Filters */}
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ delay: 0.9 }}
+            className="flex flex-wrap gap-3 mt-6 text-sm"
+          >
+            {["⭐ Top Rated", "💰 Budget Friendly", "🛎 Premium", "🌅 Yamuna View"].map((f) => (
+              <motion.button
+                key={f}
+                whileHover={{ scale: 1.05 }}
+                className="px-3 py-1.5 rounded-full bg-white border border-pink-100 text-gray-600 hover:text-pink-600 hover:bg-pink-50 transition"
+              >
+                {f}
+              </motion.button>
+            ))}
+          </motion.div>
 
-          {/* Brand gradient streak */}
+          {/* Stats */}
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ delay: 1 }}
+            className="flex gap-8 mt-10"
+          >
+            <Stat number="200+" label="Hotels" />
+            <Stat number="5K+" label="Guests" />
+            <Stat number="₹999" label="Starting From" />
+          </motion.div>
 
-          <div className="
-          absolute
-          right-0
-          top-0
-          h-full
-          w-40
-          bg-gradient-to-b
-          from-pink-500/40
-          to-purple-600/40
-          blur-xl
-          "></div>
+        </motion.div>
 
-        </div>
+
+        {/* RIGHT SIDE FLOATING CARDS */}
+        <motion.div
+          initial={{ opacity: 0, x: 60 }}
+          animate={{ opacity: 1, x: 0 }}
+          transition={{ duration: 0.8 }}
+          className="relative h-[500px] hidden lg:block"
+        >
+
+          <div className="absolute top-0 left-24 float-slow">
+            <HotelCard image="https://images.unsplash.com/photo-1566073771259-6a8506099945" name="Radha Palace" rating="4.9" price="3499" />
+          </div>
+
+          <div className="absolute top-40 left-0 float-medium">
+            <HotelCard image="https://images.unsplash.com/photo-1551882547-ff40c63fe5fa" name="Nidhivan Resort" rating="4.7" price="2199" />
+          </div>
+
+          <div className="absolute bottom-0 right-10 float-fast">
+            <HotelCard image="https://images.unsplash.com/photo-1520250497591-112f2f40a3f4" name="Yamuna Riverside" rating="4.8" price="4299" />
+          </div>
+
+        </motion.div>
 
       </div>
 
+      {/* Wavy Divider */}
+      <div className="absolute bottom-0 left-0 w-full overflow-hidden leading-none">
+        <svg
+          className="relative block w-full h-[120px]"
+          viewBox="0 0 1440 320"
+          preserveAspectRatio="none"
+        >
+          <path
+            fill="#ffffff"
+            fillOpacity="1"
+            d="M0,224L80,213.3C160,203,320,181,480,176C640,171,800,181,960,197.3C1120,213,1280,235,1360,245.3L1440,256L1440,320L0,320Z"
+          ></path>
+        </svg>
+      </div>
     </section>
+  );
+}
+
+
+
+function HotelCard({ image, name, rating, price }: any) {
+  return (
+    <motion.div
+      whileHover={{ scale: 1.06, y: -5 }}
+      className="w-[260px] bg-white rounded-2xl shadow-xl overflow-hidden"
+    >
+      <div className="relative h-[150px]">
+        <Image src={image} alt={name} fill className="object-cover" />
+      </div>
+
+      <div className="p-4">
+        <h3 className="font-semibold text-gray-800 text-sm">{name}</h3>
+
+        <div className="flex justify-between items-center mt-2">
+          <span className="text-yellow-500 text-sm">★ {rating}</span>
+          <span className="text-pink-600 font-bold">₹{price}</span>
+        </div>
+      </div>
+    </motion.div>
+  );
+}
+
+
+
+function Stat({ number, label }: any) {
+  return (
+    <div>
+      <p className="text-2xl font-bold text-pink-600">{number}</p>
+      <p className="text-sm text-gray-400">{label}</p>
+    </div>
   );
 }

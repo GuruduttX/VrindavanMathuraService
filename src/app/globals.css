@@ -44,3 +44,33 @@
 .premium-scrollbar::-webkit-scrollbar-thumb:hover {
   background: linear-gradient(90deg,#db2777,#c026d3,#7c3aed);
 }
+
+@keyframes floatSlow {
+  0% { transform: translateY(0px) rotate(4deg); }
+  50% { transform: translateY(-12px) rotate(4deg); }
+  100% { transform: translateY(0px) rotate(4deg); }
+}
+
+@keyframes floatMedium {
+  0% { transform: translateY(0px) rotate(-6deg); }
+  50% { transform: translateY(-18px) rotate(-6deg); }
+  100% { transform: translateY(0px) rotate(-6deg); }
+}
+
+@keyframes floatFast {
+  0% { transform: translateY(0px) rotate(2deg); }
+  50% { transform: translateY(-16px) rotate(2deg); }
+  100% { transform: translateY(0px) rotate(2deg); }
+}
+
+.float-slow {
+  animation: floatSlow 6s ease-in-out infinite;
+}
+
+.float-medium {
+  animation: floatMedium 7s ease-in-out infinite;
+}
+
+.float-fast {
+  animation: floatFast 5s ease-in-out infinite;
+}
