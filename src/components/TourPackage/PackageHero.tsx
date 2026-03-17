@@ -62,7 +62,6 @@ export default function PackageHero({ PackageData }: any) {
           </div>
         </div>
 
-       {/* BOTTOM CONTENT - STACKED CARD DESIGN */}
 {/* BOTTOM CONTENT - MODERN SPLIT VIEW */}
 <div className="mx-auto max-w-7xl mt-10 px-4">
   <div className="bg-white rounded-3xl shadow-2xl overflow-hidden border border-gray-100">

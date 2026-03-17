@@ -10,7 +10,7 @@ export default function HomeHero() {
     return (
         <section className="relative overflow-hidden bg-gradient-to-br from-pink-50 via-rose-50 to-fuchsia-100">
 
-            
+
             {/* background decorative blur */}
             <div className="absolute top-[-100px] right-[-100px] w-[400px] h-[400px] bg-pink-400/30 rounded-full blur-[120px]" />
             <div className="absolute bottom-[-120px] left-[-120px] w-[350px] h-[350px] bg-fuchsia-400/30 rounded-full blur-[120px]" />
@@ -21,12 +21,12 @@ export default function HomeHero() {
                 <div className="z-10">
 
                     {/* badge */}
-                    <div className="inline-flex items-center gap-2 bg-white/60 backdrop-blur px-4 py-2 rounded-full shadow text-pink-600 font-medium mb-6 cursor-pointer hover:shadow-xl hover:shadow-pink-200 transition">
+                    <div className="inline-flex items-center gap-2 bg-white/60 backdrop-blur text-xs md:text-sm px-4 py-2 rounded-full shadow text-pink-600 font-medium mb-6 cursor-pointer hover:shadow-xl hover:shadow-pink-200 transition ml-15 md:ml-0">
                         🪷 Explore Divine Vrindavan
                     </div>
 
                     {/* heading */}
-                    <h1 className="text-4xl md:text-5xl font-bold leading-tight text-gray-800">
+                    <h1 className="text-3xl md:text-5xl font-bold leading-tight text-gray-800">
                         Discover{" "}
                         <span className="bg-gradient-to-r from-pink-600 to-fuchsia-600 text-transparent bg-clip-text">
                             Vrindavan Tour Packages
@@ -35,51 +35,60 @@ export default function HomeHero() {
                         Taxi & Hotel Booking
                     </h1>
 
-                    <p className="mt-4 text-gray-600 text-lg">
+                    <p className="mt-4  text-center md:text-start text-xs text-gray-600 md:text-lg">
                         Book spiritual tours, comfortable taxis, and premium hotels in
                         Vrindavan with trusted local service.
                     </p>
 
                     {/* SERVICE SELECTOR */}
-                    <div className="flex gap-3 mt-8">
-
+                    <div className="flex gap-2 mt-8 w-[90%] overflow-x-auto no-scrollbar">
                         <button
                             onClick={() => setService("tour")}
-                            className={`px-5 py-3 rounded-3xl flex items-center gap-2 font-medium transition cursor-pointer ${service === "tour"
-                                    ? "bg-pink-600 text-white shadow-lg"
-                                    : "bg-white hover:bg-pink-50"
+                            className={`px-3 py-2.5 md:px-5 md:py-3 text-xs md:text-base rounded-3xl flex items-center gap-1.5 md:gap-2 font-medium transition cursor-pointer whitespace-nowrap flex-shrink-0 ${service === "tour"
+                                ? "bg-pink-600 text-white shadow-lg"
+                                : "bg-white hover:bg-pink-50"
                                 }`}
                         >
-                            <MapPin size={18} />
+                            <MapPin size={16} className="md:w-[18px] md:h-[18px]" />
                             Tour Packages
                         </button>
 
                         <button
                             onClick={() => setService("taxi")}
-                            className={`px-5 py-3 rounded-3xl flex items-center gap-2 font-medium transition cursor-pointer ${service === "taxi"
-                                    ? "bg-pink-600 text-white shadow-lg"
-                                    : "bg-white hover:bg-pink-50"
+                            className={`px-3 py-2.5 md:px-5 md:py-3 text-xs md:text-base rounded-3xl flex items-center gap-1.5 md:gap-2 font-medium transition cursor-pointer whitespace-nowrap flex-shrink-0 ${service === "taxi"
+                                ? "bg-pink-600 text-white shadow-lg"
+                                : "bg-white hover:bg-pink-50"
                                 }`}
                         >
-                            <Car size={18} />
+                            <Car size={16} className="md:w-[18px] md:h-[18px]" />
                             Taxi Service
                         </button>
 
                         <button
                             onClick={() => setService("hotel")}
-                            className={`px-5 py-3 rounded-3xl flex items-center gap-2 font-medium transition cursor-pointer ${service === "hotel"
-                                    ? "bg-pink-600 text-white shadow-lg"
-                                    : "bg-white hover:bg-pink-50"
+                            className={`px-3 py-2.5 md:px-5 md:py-3 text-xs md:text-base rounded-3xl flex items-center gap-1.5 md:gap-2 font-medium transition cursor-pointer whitespace-nowrap flex-shrink-0 ${service === "hotel"
+                                ? "bg-pink-600 text-white shadow-lg"
+                                : "bg-white hover:bg-pink-50"
                                 }`}
                         >
-                            <Hotel size={18} />
+                            <Hotel size={16} className="md:w-[18px] md:h-[18px]" />
                             Hotels
                         </button>
 
+                        <button
+                            onClick={() => setService("puja")}
+                            className={`px-3 py-2.5 md:px-5 md:py-3 text-xs md:text-base rounded-3xl flex items-center gap-1.5 md:gap-2 font-medium transition cursor-pointer whitespace-nowrap flex-shrink-0 ${service === "puja"
+                                ? "bg-pink-600 text-white shadow-lg"
+                                : "bg-white hover:bg-pink-50"
+                                }`}
+                        >
+                            <Hotel size={16} className="md:w-[18px] md:h-[18px]" />
+                            Puja
+                        </button>
                     </div>
 
                     {/* SEARCH BOX */}
-                    <div className="mt-6 bg-white/70 backdrop-blur-lg shadow-xl rounded-4xl p-3 flex items-center">
+                    <div className="mt-6 bg-white/70 backdrop-blur-lg shadow-xl rounded-full p-2 sm:p-3 flex items-center gap-2 w-full min-w-0">
 
                         <input
                             type="text"
@@ -88,14 +97,16 @@ export default function HomeHero() {
                                     ? "Search Vrindavan Tour Packages..."
                                     : service === "taxi"
                                         ? "Enter Pickup Location..."
-                                        : "Search Hotels in Vrindavan..."
+                                        : service === "hotel"
+                                            ? "Search Hotels in Vrindavan..."
+                                            : "Search Related Puja"
                             }
-                            className="flex-1 px-4 py-3 outline-none bg-transparent"
+                            className="flex-1 min-w-0 px-3 sm:px-4 py-2 outline-none bg-transparent text-sm sm:text-base"
                         />
 
-                        <button className="bg-gradient-to-r from-pink-600 to-fuchsia-600 text-white px-6 py-3 rounded-3xl flex items-center gap-2 hover:scale-105 transition cursor-pointer">
+                        <button className="flex-shrink-0 bg-gradient-to-r from-pink-600 to-fuchsia-600 text-white px-3 sm:px-6 py-2 sm:py-3 rounded-full flex items-center gap-2 hover:scale-105 transition cursor-pointer text-sm sm:text-base">
                             <Search size={18} />
-                            Search
+                            <span className="hidden sm:inline">Search</span>
                         </button>
 
                     </div>
@@ -167,11 +178,11 @@ export default function HomeHero() {
 
                 </div>
 
-                
+
 
             </div>
-            
-            
+
+
         </section>
     );
 }

@@ -49,7 +49,7 @@ export default function Navbar() {
                     className={`
           relative
           flex items-center justify-between
-          px-8 lg:px-12 py-3
+          px-3 lg:px-12 py-3
           rounded-full
           backdrop-blur-xl
           bg-white/70
@@ -128,7 +128,8 @@ export default function Navbar() {
                         <button
                             className="
               relative
-              px-7 py-3
+              px-3 md:px-7 py-3
+              text-sm md:text-lg
               rounded-full
               font-medium
               text-white

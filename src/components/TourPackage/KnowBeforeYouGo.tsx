@@ -1,6 +1,6 @@
 "use client";
 
-import { Info, Check } from "lucide-react";
+import { Info } from "lucide-react";
 
 interface ItemType {
   description: string;
@@ -30,22 +30,20 @@ export default function KnowBeforeYouGo({
         </div>
 
         {/* CONTENT PANEL */}
-        <div className="rounded-3xl border border-pink-100 bg-gradient-to-br from-pink-50 to-white p-8">
-
-          <div className="grid md:grid-cols-2 gap-6">
-            {PackageData?.documents?.map((item, index) => (
-              <div
-                key={index}
-                className="flex items-start gap-3"
-              >
-                <Check className="w-4 h-4 text-pink-600 mt-1" />
-                <p className="text-gray-700 leading-relaxed text-[15px]">
-                  {item.description}
-                </p>
+        <div className="rounded-3xl border border-pink-100 bg-gradient-to-br from-pink-50 to-white p-6 flex flex-col gap-2.5">
+          {PackageData?.documents?.map((item, index) => (
+            <div
+              key={index}
+              className="flex items-start gap-4 bg-white border border-pink-100 rounded-2xl px-5 py-4"
+            >
+              <div className="flex-shrink-0 mt-0.5 flex h-7 w-7 items-center justify-center rounded-full bg-pink-100 text-pink-700 text-xs font-medium">
+                {index + 1}
               </div>
-            ))}
-          </div>
-
+              <p className="text-gray-700 leading-relaxed text-[15px]">
+                {item.description}
+              </p>
+            </div>
+          ))}
         </div>
 
       </div>

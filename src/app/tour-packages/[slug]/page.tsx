@@ -142,7 +142,7 @@ export default function PackagePage() {
 
      const knowBefore = {
     documents: [
-      { description: "Carry valid government ID for hotel check-in." },
+      { description: "Carry valid government ID for hotel check-in.Carry valid government ID for hotel check-in.Carry valid government ID for hotel check-in.Carry valid government ID for hotel check-in.Carry valid government ID for hotel check-in.Carry valid government ID for hotel check-in." },
       { description: "Temple timings may vary during festivals." },
       { description: "Comfortable walking footwear is recommended." },
       { description: "VIP darshan subject to temple authority approval." },
@@ -336,8 +336,6 @@ export default function PackagePage() {
  
       
     
-      
-
-    </>
+ </>
   );
 }

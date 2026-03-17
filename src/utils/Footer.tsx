@@ -19,15 +19,7 @@ export default function LuxuryFooter() {
   }, []);
 
   return (
-    <footer className="relative mt-40">
-
-      {/* TEMPLE SILHOUETTE DIVIDER */}
-      {/* <div className="absolute top-0 left-0 w-full -translate-y-full">
-        <svg viewBox="0 0 1440 120" className="w-full h-24 fill-pink-500">
-          <path d="M0,80L80,64L160,80L240,48L320,80L400,64L480,80L560,32L640,80L720,64L800,80L880,48L960,80L1040,64L1120,80L1200,48L1280,80L1360,64L1440,80L1440,120L0,120Z"/>
-        </svg>
-      </div> */}
-
+    <footer className="relative mt-5">
 
       {/* BACKGROUND */}
       <div className="relative overflow-hidden bg-gradient-to-br from-[#7a1f5c] via-[#c2185b] to-[#ff4da6] text-white">
