@@ -12,9 +12,9 @@ import PopularHotels from '@/utils/PopularHotels'
 import PopularTours from '@/utils/PopularTours'
 import ServicesSection from '@/utils/ServicesSection'
 import TaxiShowcase from '@/utils/TaxiShowCase'
-import React from 'react'
 
 const page = () => {
+
   return (
     <>
       <Navbar />
@@ -33,6 +33,7 @@ const page = () => {
       <Footer />
     </>
   )
+  
 }
 
 export default page
