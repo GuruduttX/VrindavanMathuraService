@@ -62,65 +62,65 @@ export default function PackageHero({ PackageData }: any) {
           </div>
         </div>
 
-{/* BOTTOM CONTENT - MODERN SPLIT VIEW */}
-<div className="mx-auto max-w-7xl mt-10 px-4">
-  <div className="bg-white rounded-3xl shadow-2xl overflow-hidden border border-gray-100">
-    
-    {/* TOP SECTION - Title & Description */}
-    <div className="p-6 lg:p-8 bg-gradient-to-br from-pink-50/50 to-rose-50/50">
-      <h1 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-gray-900 leading-tight text-center lg:text-left">
-        {PackageData.title}
-      </h1>
-      
-      <p className="mt-3 text-gray-600 text-center lg:text-left max-w-2xl mx-auto lg:mx-0 text-sm sm:text-base">
-        Experience the divine charm of Mathura & Vrindavan with a perfectly curated spiritual journey.
-      </p>
-      
-      {/* RATING BADGES */}
-      <div className="flex flex-wrap items-center justify-center lg:justify-start gap-3 mt-4">
-        <div className="bg-white px-3 py-1.5 rounded-full shadow-sm flex items-center gap-1.5">
-          <Star className="w-4 h-4 text-pink-500 fill-pink-500" />
-          <span className="font-semibold text-sm">{PackageData.rating || "4.8"}</span>
-        </div>
-        <div className="bg-white px-3 py-1.5 rounded-full shadow-sm">
-          <span className="text-sm text-gray-600">{PackageData.reviews || "120"} reviews</span>
-        </div>
-        <div className="bg-green-50 px-3 py-1.5 rounded-full hidden sm:block">
-          <span className="text-sm text-green-700 font-medium">Bestseller</span>
-        </div>
-      </div>
-    </div>
+        {/* BOTTOM CONTENT - MODERN SPLIT VIEW */}
+        <div className="mx-auto max-w-7xl mt-10 px-4">
+          <div className="bg-white rounded-3xl shadow-2xl overflow-hidden border border-gray-100">
+            
+            {/* TOP SECTION - Title & Description */}
+            <div className="p-6 lg:p-8 bg-gradient-to-br from-pink-50/50 to-rose-50/50">
+              <h1 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-gray-900 leading-tight text-center lg:text-left">
+                {PackageData.title}
+              </h1>
+              
+              <p className="mt-3 text-gray-600 text-center lg:text-left max-w-2xl mx-auto lg:mx-0 text-sm sm:text-base">
+                Experience the divine charm of Mathura & Vrindavan with a perfectly curated spiritual journey.
+              </p>
+              
+              {/* RATING BADGES */}
+              <div className="flex flex-wrap items-center justify-center lg:justify-start gap-3 mt-4">
+                <div className="bg-white px-3 py-1.5 rounded-full shadow-sm flex items-center gap-1.5">
+                  <Star className="w-4 h-4 text-pink-500 fill-pink-500" />
+                  <span className="font-semibold text-sm">{PackageData.rating || "4.8"}</span>
+                </div>
+                <div className="bg-white px-3 py-1.5 rounded-full shadow-sm">
+                  <span className="text-sm text-gray-600">{PackageData.reviews || "120"} reviews</span>
+                </div>
+                <div className="bg-green-50 px-3 py-1.5 rounded-full hidden sm:block">
+                  <span className="text-sm text-green-700 font-medium">Bestseller</span>
+                </div>
+              </div>
+            </div>
 
-    {/* BOTTOM SECTION - Price & CTA */}
-    <div className="p-6 lg:p-8 bg-gradient-to-r from-pink-600 to-rose-500 text-white">
-      <div className="flex flex-col sm:flex-row items-center justify-between gap-4">
-        
-        <div className="text-center sm:text-left">
-          <p className="text-pink-100 text-xs uppercase tracking-wide">
-            Special Offer
-          </p>
-          <div className="flex items-center justify-center sm:justify-start gap-2 mt-1">
-            <span className="text-3xl lg:text-4xl font-bold flex items-center">
-              <IndianRupee className="w-7 h-7" />
-              {PackageData.price}
-            </span>
-            <span className="text-pink-100">/person</span>
+            {/* BOTTOM SECTION - Price & CTA */}
+            <div className="p-6 lg:p-8 bg-gradient-to-r from-pink-600 to-rose-500 text-white">
+              <div className="flex flex-col sm:flex-row items-center justify-between gap-4">
+                
+                <div className="text-center sm:text-left">
+                  <p className="text-pink-100 text-xs uppercase tracking-wide">
+                    Special Offer
+                  </p>
+                  <div className="flex items-center justify-center sm:justify-start gap-2 mt-1">
+                    <span className="text-3xl lg:text-4xl font-bold flex items-center">
+                      <IndianRupee className="w-7 h-7" />
+                      {PackageData.price}
+                    </span>
+                    <span className="text-pink-100">/person</span>
+                  </div>
+                  <p className="text-xs text-pink-100 mt-1">
+                    Limited time offer • No hidden charges
+                  </p>
+                </div>
+
+                <button
+                  onClick={() => setIsOpen(true)}
+                  className="w-full sm:w-auto px-8 py-3.5 rounded-xl bg-white text-pink-600 font-bold shadow-lg hover:scale-105 transition-all duration-300 hover:shadow-xl"
+                >
+                  Book Now →
+                </button>
+              </div>
+            </div>
           </div>
-          <p className="text-xs text-pink-100 mt-1">
-            Limited time offer • No hidden charges
-          </p>
         </div>
-
-        <button
-          onClick={() => setIsOpen(true)}
-          className="w-full sm:w-auto px-8 py-3.5 rounded-xl bg-white text-pink-600 font-bold shadow-lg hover:scale-105 transition-all duration-300 hover:shadow-xl"
-        >
-          Book Now →
-        </button>
-      </div>
-    </div>
-  </div>
-</div>
 
 
 
