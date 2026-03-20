@@ -15,7 +15,41 @@ import SideForm from "@/components/TourPackage/SideForm";
 import LuxuryFooter from "@/utils/Footer";
 import Navbar from "@/utils/Navbar";
 import TrustBuildingSection from "@/utils/TrustBuildingSection";
-export default function PackagePage() {
+
+
+
+
+
+const getPackageData = async (slug: string, duration: string) => {
+  try {
+    
+   const res = await fetch(
+  `http://localhost:3000/api/tour-packages?slug=${slug}&duration=${duration}`
+  );
+
+  if(!res.ok) {
+    const text = await res.text();     
+    console.log("ERROR RESPONSE:", text);
+    throw new Error("Failed to fetch package");
+  }
+
+    const data = await res.json();
+    console.log("Data", data);
+    return data;
+
+  } catch (error) {
+    console.error("Error fetching package:", error);
+  }
+};
+
+
+export default async function page({ params }: { params: Promise<{ slug: string, duration: string }> }) {
+  
+  const { slug, duration } = await params;
+  const PackageData = await getPackageData(slug, duration);
+
+  console.log("Data A rha proper", PackageData);
+
 
   const dummyPackage = {
     title: "3 Days Mathura Vrindavan Divine Tour",
@@ -37,14 +71,13 @@ export default function PackagePage() {
     ],
   };
 
-    const dummyDuration = "7 Days / 6 Nights";
+  const dummyDuration = "7 Days / 6 Nights";
 
   const dummyBreakdown = [
     { id: "mathura", days: 2, place: "Mathura" },
     { id: "vrindavan", days: 3, place: "Vrindavan" },
     { id: "gokul", days: 2, place: "Gokul" },
   ];
-
 
    const dumyPackage = {
     transfer_included: true,
@@ -142,7 +175,7 @@ export default function PackagePage() {
 
      const knowBefore = {
     documents: [
-      { description: "Carry valid government ID for hotel check-in." },
+      { description: "Carry valid government ID for hotel check-in.Carry valid government ID for hotel check-in.Carry valid government ID for hotel check-in.Carry valid government ID for hotel check-in.Carry valid government ID for hotel check-in.Carry valid government ID for hotel check-in." },
       { description: "Temple timings may vary during festivals." },
       { description: "Comfortable walking footwear is recommended." },
       { description: "VIP darshan subject to temple authority approval." },
@@ -249,30 +282,32 @@ export default function PackagePage() {
     ],
   };
 
-   const policy = {
-    policies: [
-      {
-        title: "Refund Policy",
-        description:
-          "100% refund if cancelled 48 hours before trip starting time.",
-      },
-      {
-        title: "Cancel Policy",
-        description:
-          "To cancel your trip, simply contact our official booking number or email us.",
-      },
-      {
-        title: "Confirmation  Policy",
-        description:
-          "An advance payment is required to confirm your booking.",
-      },
-      {
-        title: "Payment Ploicy",
-        description:
-          "50% to be paid in advance and remaining at the start of the tour.",
-      },
-    ],
+  const policy = {
+  policies: [
+    {
+      title: "Refund Policy",
+      description:
+        "100% refund if cancelled 48 hours before trip starting time.",
+    },
+    {
+      title: "Cancel Policy",
+      description:
+        "To cancel your trip, simply contact our official booking number or email us.",
+    },
+    {
+      title: "Confirmation  Policy",
+      description:
+        "An advance payment is required to confirm your booking.",
+    },
+    {
+      title: "Payment Ploicy",
+      description:
+        "50% to be paid in advance and remaining at the start of the tour.",
+    },
+  ],
   };
+
+  
 
 
 
@@ -336,8 +371,6 @@ export default function PackagePage() {
  
       
     
-      
-
-    </>
+ </>
   );
 }

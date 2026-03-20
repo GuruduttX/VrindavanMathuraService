@@ -3,6 +3,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { motion } from "framer-motion";
+import dynamic from "next/dynamic";
 
 export default function TourHero() {
   return (
