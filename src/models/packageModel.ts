@@ -69,9 +69,8 @@ export interface ITourPackage extends Document {
   exclusions: string[];
 
   faqs: FAQ[];
-  policies: string[];
 
-  // ✅ NEW FIELDS
+
   metaTitle: string;
   metaDescription: string;
 
@@ -102,9 +101,7 @@ export interface ITourPackage extends Document {
   isBreakfastIncluded: boolean;
   isSightseeingIncluded: boolean;
 
-  isActive: boolean;
-  isFeatured: boolean;
-
+ 
   createdAt: Date;
   updatedAt: Date;
 }
@@ -161,7 +158,6 @@ const TourPackageSchema: Schema<ITourPackage> = new Schema(
       },
     ],
 
-    policies: [{ type: String }],
 
     /* ===== NEW FIELDS ===== */
 
@@ -210,15 +206,13 @@ const TourPackageSchema: Schema<ITourPackage> = new Schema(
       },
     ],
 
-    /* ===== FLAGS ===== */
 
     isTransferIncluded: { type: Boolean, default: false },
     isStayIncluded: { type: Boolean, default: false },
     isBreakfastIncluded: { type: Boolean, default: false },
     isSightseeingIncluded: { type: Boolean, default: false },
 
-    isActive: { type: Boolean, default: true },
-    isFeatured: { type: Boolean, default: false },
+   
   },
   { timestamps: true }
 );

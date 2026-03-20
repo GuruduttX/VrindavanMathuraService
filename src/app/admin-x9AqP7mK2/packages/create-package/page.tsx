@@ -15,7 +15,7 @@ import Policy from '@/components/Admin/PackageEditor/Policy';
 import Document from '@/components/Admin/PackageEditor/Document';
 import Testimonials from '@/components/Admin/PackageEditor/Testimonials';
 import ItinearyMaker from '@/components/Admin/PackageEditor/Itinerary';
-import DANDestination from '@/components/Admin/PackageEditor/DANDestination';
+import DANDestination, { destinations } from '@/components/Admin/PackageEditor/DANDestination';
 import ChildImagePicker from '@/components/Admin/PackageEditor/ChildImagePicker';
 import CMSSchema from '@/components/Admin/CMS/CMSSchema';
 import DurationSection from '@/components/Admin/PackageEditor/DurationSection';
@@ -23,47 +23,46 @@ import DestRoutes from '@/components/Admin/PackageEditor/DestRoute';
 import SelectedInclusion from '@/components/Admin/PackageEditor/SelectedInclusion';
 import PackageOverview from '@/components/Admin/PackageEditor/PackageOverview';
 
-
 type PackageForm = {
   title: string;
-  category: string,
-  slug: string,
-  price: string,
-  overview: string,
-  duration: string,
-  metaTitle: string,
-  metaDescription: string,
-  schemaTitle: string,
-  schemaDescription: string,
-  image: string,
-  alt: string,
-  refund: string,
-  cancel: string,
-  confirmation: string,
-  payment: string,
-  day: string,
-  night: string,
-  destination: string
+  category: string;
+  slug: string;
+  price: string;
+  overview: string;
+  duration: string;
+  metaTitle: string;
+  metaDescription: string;
+  schemaTitle: string;
+  schemaDescription: string;
+  image: string;
+  alt: string;
+  refund: string;
+  cancel: string;
+  confirmation: string;
+  payment: string;
+  day: string;
+  night: string;
+  destination: string;
   reviews: string;
   rating: string;
   breakfast_included: boolean;
   stay_included: boolean;
   transfer_included: boolean;
-  sightseeing_included: boolean
-}
+  sightseeing_included: boolean;
+  status: string;
+};
 
-type FAQ = { id: string, question: string, answer: string }
-type Testimonial = { id: string, name: string, description: string, rating: string }
-type HighLights = { id: string, description: string }
-type Inclusions = { id: string, description: string }
-type Exclusions = { id: string, description: string }
-type Documents = { id: string, description: string }
-type Itinerary = { id: string, day: number, title: string, description: string }
-type ChildImage = { id: string; image: string; alt: string; };
-type BreakdownItem = { id: string; days: string; place: string; }
-type SegmentType = { id: string; from: string; to: string; };
-type RouteType = { source: string; destination: string; segments: SegmentType[]; };
-
+type FAQ        = { id: string; question: string; answer: string };
+type Testimonial = { id: string; name: string; description: string; rating: string };
+type HighLights  = { id: string; description: string };
+type Inclusions  = { id: string; description: string };
+type Exclusions  = { id: string; description: string };
+type Documents   = { id: string; description: string };
+type Itinerary   = { id: string; day: number; title: string; description: string };
+type ChildImage  = { id: string; image: string; alt: string };
+type BreakdownItem = { id: string; days: string; place: string };
+type SegmentType = { id: string; from: string; to: string };
+type RouteType   = { source: string; destination: string; segments: SegmentType[] };
 
 export default function CreateNewPackage() {
 
@@ -74,66 +73,129 @@ export default function CreateNewPackage() {
     refund: "", cancel: "", confirmation: "", payment: "",
     reviews: "", rating: "",
     breakfast_included: false, stay_included: false,
-    transfer_included: false, sightseeing_included: false
+    transfer_included: false, sightseeing_included: false,
+    status: ""
   });
 
-  const [childImage, setChildImage] = useState<ChildImage[]>([]);
-  const [faqs, setFaqs] = useState<FAQ[]>([{ id: crypto.randomUUID(), question: "", answer: "" }]);
+  const [loading, setLoading] = useState(false);
+  const [childImage,   setChildImage]   = useState<ChildImage[]>([]);
+  const [faqs,         setFaqs]         = useState<FAQ[]>([{ id: crypto.randomUUID(), question: "", answer: "" }]);
   const [testimonials, setTestimonials] = useState<Testimonial[]>([{ id: crypto.randomUUID(), name: "", description: "", rating: "" }]);
-  const [highLights, setHighLights] = useState<HighLights[]>([{ id: crypto.randomUUID(), description: "" }]);
-  const [inclusions, setInclusions] = useState<Inclusions[]>([{ id: crypto.randomUUID(), description: "" }]);
-  const [exclusions, setExclusions] = useState<Exclusions[]>([{ id: crypto.randomUUID(), description: "" }]);
-  const [documents, setDocuments] = useState<Documents[]>([{ id: crypto.randomUUID(), description: "" }]);
-  const [itinerary, setItinerary] = useState<Itinerary[]>([{ id: crypto.randomUUID(), day: 1, title: "", description: "" }]);
-  const [breakdown, setBreakdown] = useState<BreakdownItem[]>([{ id: crypto.randomUUID(), days: "0", place: "" }]);
-  const [route, setRoute] = useState<RouteType>({ source: "", destination: "", segments: [] });
+  const [highLights,   setHighLights]   = useState<HighLights[]>([{ id: crypto.randomUUID(), description: "" }]);
+  const [inclusions,   setInclusions]   = useState<Inclusions[]>([{ id: crypto.randomUUID(), description: "" }]);
+  const [exclusions,   setExclusions]   = useState<Exclusions[]>([{ id: crypto.randomUUID(), description: "" }]);
+  const [documents,    setDocuments]    = useState<Documents[]>([{ id: crypto.randomUUID(), description: "" }]);
+  const [itinerary,    setItinerary]    = useState<Itinerary[]>([{ id: crypto.randomUUID(), day: 1, title: "", description: "" }]);
+  const [breakdown,    setBreakdown]    = useState<BreakdownItem[]>([{ id: crypto.randomUUID(), days: "0", place: "" }]);
+  const [route,        setRoute]        = useState<RouteType>({ source: "", destination: "", segments: [] });
 
   const updateForm = (field: keyof PackageForm, value: string) => {
     setForm((prev) => ({ ...prev, [field]: value }));
   };
 
+  const buildPayload = (status: "published" | "draft") => ({
+    title:  form.title,
+    category: form.category,
+    slug:    form.slug,
+    price:   form.price,
+    day:     form.day,
+    night:   form.night,
+    destination : form.destination,
+    reviews: form.reviews,
+    rating:    form.rating,
+    overview:  form.overview,
+    heroimage: { image: form.image, alt: form.alt },
+    duration:   form.duration,
+    meta:    { title: form.metaTitle,   description: form.metaDescription },
+    schema: { title: form.schemaTitle, description: form.schemaDescription },
+    
+    childImage,
+    faqs,
+    testimonials,
+    highlights:        highLights,
+    inclusions,
+    exclusions,
+    documents,
+    itinerary,
+    durationbreakdown: breakdown,
+    destroutes:        route,
+    breakfast_included:   form.breakfast_included,
+    stay_included:        form.stay_included,
+    transfer_included:    form.transfer_included,
+    sightseeing_included: form.sightseeing_included,
+    status,
+  });
+
+  const postPayload = async (payload: object) => {
+    const res = await fetch("/api/tour-packages", {
+      method:  "POST",
+      headers: { "Content-Type": "application/json" },
+      body:    JSON.stringify(payload),
+    });
+
+    const data = await res.json();
+    if (!res.ok || !data.success) throw new Error(data.message || "Something went wrong");
+    return data;
+  };
+
+  const validateForPublish = (formEl: HTMLFormElement): boolean => {
+    if (!formEl.checkValidity()) {
+      formEl.reportValidity();
+      return false;
+    }
+    if (!form.image) {
+      toast.error("Package image is missing");
+      return false;
+    }
+    if (!form.category) {
+      toast.error("Package category is missing");
+      return false;
+    }
+    if (
+      childImage.length < 4 ||
+      !childImage[0]?.image || !childImage[1]?.image ||
+      !childImage[2]?.image || !childImage[3]?.image
+    ) {
+      toast.error(`Only ${childImage.length} child image(s) added — need 4`);
+      return false;
+    }
+    return true;
+  };
+
   const handleSave = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    if (!validateForPublish(e.currentTarget)) return;
 
-    if (!e.currentTarget.checkValidity()) {
-      e.currentTarget.reportValidity();
+    setLoading(true);
+    try {
+      await postPayload(buildPayload("published"));
+      toast.success("Package published successfully!");
+    } catch (err: any) {
+      toast.error(err.message || "Failed to publish package");
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  // Save Draft
+  const handleSaveDraft = async () => {
+    if (!form.title.trim()) {
+      toast.error("Please add a title before saving as draft");
       return;
     }
 
-    if (!form.image) { toast.error("Package image is missing"); return; }
-    if (!form.category) { toast.error("Package category is missing"); return; }
-    if (childImage.length < 4 || !childImage[0].image || !childImage[1].image || !childImage[2].image || !childImage[3].image) {
-      toast.error(`You Only Add ${childImage.length} Child Images But We Need To Add 4 Child Images`);
-      return;
+    setLoading(true);
+    try {
+      await postPayload(buildPayload("draft"));
+      toast.success("Draft saved successfully!");
+    } catch (err: any) {
+      toast.error(err.message || "Failed to save draft");
+    } finally {
+      setLoading(false);
     }
-
-    const payload = {
-      title: form.title, category: form.category, slug: form.slug,
-      price: form.price, day: form.day, night: form.night,
-      destination: form.destination, reviews: form.reviews, rating: form.rating,
-      overview: form.overview,
-      heroimage: { image: form.image, alt: form.alt },
-      duration: form.duration,
-      meta: { title: form.metaTitle, description: form.metaDescription },
-      schema: { title: form.schemaTitle, description: form.schemaDescription },
-      policies: [
-        { id: crypto.randomUUID(), title: "Refund Policy", description: form.refund },
-        { id: crypto.randomUUID(), title: "Cancellation Policy", description: form.cancel },
-        { id: crypto.randomUUID(), title: "Confirmation Policy", description: form.confirmation },
-        { id: crypto.randomUUID(), title: "Payment Policy", description: form.payment },
-      ],
-      childImage, faqs, testimonials,
-      highlights: highLights, inclusions, exclusions, documents, itinerary,
-      durationbreakdown: breakdown, destroutes: route,
-      breakfast_included: form.breakfast_included,
-      stay_included: form.stay_included,
-      transfer_included: form.transfer_included,
-      sightseeing_included: form.sightseeing_included
-    };
   };
 
   const handlePreview = () => {};
-  const handlePublish = async () => {};
 
   return (
     <div
@@ -141,7 +203,7 @@ export default function CreateNewPackage() {
         shadow-[0_0_60px_-15px_rgba(236,72,153,0.15)]"
       style={{ background: "#1a0b11" }}
     >
-      {/* Subtle ambient glow */}
+      {/* Ambient glow */}
       <div
         className="pointer-events-none fixed inset-0 z-0"
         style={{
@@ -171,7 +233,13 @@ export default function CreateNewPackage() {
         <Policy refund={form.refund} cancel={form.cancel} confirm={form.confirmation} payment={form.payment} editorType="Package" onChange={updateForm} />
         <CMSMediaSection image={form.image} alt={form.alt} onChange={updateForm} editorType="Package" />
         <ChildImagePicker childImage={childImage} setChildImage={setChildImage} />
-        <CMSActions actionType="create" editorType="Package" onPreview={handlePreview} onPublish={handlePublish} />
+        <CMSActions
+          actionType="create"
+          editorType="Package"
+          onPreview={handlePreview}
+          onSaveDraft={handleSaveDraft}
+          loading={loading}
+        />
       </form>
     </div>
   );

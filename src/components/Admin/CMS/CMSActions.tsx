@@ -4,13 +4,13 @@ interface CMSActionsProps {
   actionType: 'create' | 'update';
   editorType: "Blog" | "Package" | "Temple";
   onPreview: () => void;
-  onPublish: () => void;
+  onSaveDraft: () => void;
   loading?: boolean;
 }
 
 const CMSActions = ({
   actionType, editorType,
-  onPreview, onPublish,
+  onPreview, onSaveDraft,
   loading = false,
 }: CMSActionsProps) => {
   return (
@@ -44,10 +44,10 @@ const CMSActions = ({
       )}
 
       {/* Save Draft */}
-      {onPublish && (
+      {onSaveDraft && (
         <button
           type="button"
-          onClick={onPublish}
+          onClick={onSaveDraft}
           disabled
           className="px-6 py-2.5 rounded-lg text-sm font-medium
             bg-pink-950/40 text-pink-400/70 border border-pink-900/50
