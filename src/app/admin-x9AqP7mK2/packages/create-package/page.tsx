@@ -219,7 +219,7 @@ export default function CreateNewPackage() {
 
   return (
     <div
-      className="max-w-6xl mx-auto p-8 rounded-2xl border border-pink-900/40
+      className=" p-8 rounded-2xl border border-pink-900/40
         shadow-[0_0_60px_-15px_rgba(236,72,153,0.15)]"
       style={{ background: "#1a0b11" }}
     >
@@ -256,7 +256,7 @@ export default function CreateNewPackage() {
         <CMSActions
           actionType="create"
           editorType="Package"
-          onPreview={handlePreview}
+          
           onSaveDraft={handleSaveDraft}
           loading={loading}
         />

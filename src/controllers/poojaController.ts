@@ -26,6 +26,7 @@ export async function createPoojaController(req: Request) {
     });
 
   } catch (error) {
+    console.log("Error", error);
     return NextResponse.json(
       { success: false, message: "Failed to create pooja" },
       { status: 500 }

@@ -23,8 +23,7 @@ import DestRoutes from '@/components/Admin/PackageEditor/DestRoute';
 import SelectedInclusion from '@/components/Admin/PackageEditor/SelectedInclusion';
 import PackageOverview from '@/components/Admin/PackageEditor/PackageOverview';
 import { useParams } from 'next/navigation';
-import { getPackages } from '@/services/packageService';
-import { data } from 'framer-motion/client';
+
 
 type PackageForm = {
   title: string;
@@ -158,7 +157,7 @@ export default function page() {
       setItinerary(data.itinerary ?? [])
       setChildImage(data.childImage ?? []);
       setBreakdown(data.durationbreakdown ?? []);
-      setRoute(data.destroutes ?? {source: "", destination : "", segments : []})
+      setRoute(data.routes ?? {source: "", destination : "", segments : []})
 
       
     } catch (error) {
@@ -303,7 +302,7 @@ export default function page() {
 
   return (
     <div
-      className="max-w-6xl mx-auto p-8 rounded-2xl border border-pink-900/40
+      className=" p-8 rounded-2xl border border-pink-900/40
         shadow-[0_0_60px_-15px_rgba(236,72,153,0.15)]"
       style={{ background: "#1a0b11" }}
     >
@@ -340,7 +339,7 @@ export default function page() {
         <CMSActions
           actionType="update"
           editorType="Package"
-          onPreview={handlePreview}
+         
           onSaveDraft={handleSaveDraft}
           loading={loading}
         />

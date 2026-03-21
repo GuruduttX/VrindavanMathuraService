@@ -15,7 +15,7 @@ const CMSSeoSection = ({
   metaTitle: string;
   metaDescription: string;
   onChange: any;
-  editorType: "Blog" | "Package" | "Temple";
+  editorType: "Blog" | "Package" | "Temple" | "Pooja";
 }) => {
   return (
     <div className="grid grid-cols-1 md:grid-cols-2 gap-6">

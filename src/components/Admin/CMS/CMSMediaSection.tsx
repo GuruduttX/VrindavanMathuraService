@@ -1,7 +1,7 @@
 import React from "react";
 import toast from "react-hot-toast";
 
-type EditorType = "Blog" | "Package" | "Temple";
+type EditorType = "Blog" | "Package" | "Temple" | "Pooja";
 
 interface CMSMediaSectionProps {
   image: string;

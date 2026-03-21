@@ -109,74 +109,129 @@ export interface ITourPackage extends Document {
 
 
 
+
+
 const TourPackageSchema: Schema<ITourPackage> = new Schema(
   {
-    title: { type: String, required: true, trim: true },
+    title: { type: String, required : true, trim: true },
 
-    slug: { type: String, required: true, unique: true },
+    slug: { type: String, function () : boolean {
+            return this.status === "published";
+          }, unique: true },
 
-    duration: { type: String, required: true },
+    duration: { type: String, required: function () : boolean {
+            return this.status === "published";
+          }
+     },
 
-    category: { type: String, required: true },
+    category: { type: String, function () : boolean {
+            return this.status === "published";
+          } },
 
-    price: { type: Number, required: true, min: 0 },
+    price: { type: Number, function () : boolean {
+            return this.status === "published";
+          }, min: 0 },
 
-    rating: { type: String, required : true},
+    rating: { type: String, function () : boolean {
+            return this.status === "published";
+          }},
 
-    reviews : {type : String, required : true},
+    reviews : {type : String,function () : boolean {
+            return this.status === "published";
+          }},
 
-    status: { type: String, required: true },
+    status: { type: String, function () : boolean {
+            return this.status === "published";
+          }},
 
-    days: { type: Number, required: true },
-    nights: { type: Number, required: true },
+    days: { type: Number, function () : boolean {
+            return this.status === "published";
+          } },
+    nights: { type: Number,function () : boolean {
+            return this.status === "published";
+          }},
 
     durationbreakdown: [
       {
-        id: { type: String, required: true },
-        days: { type: Number, required: true },
-        place: { type: String, required: true },
+        id: { type: String, function () : boolean {
+            return this.status === "published";
+          } },
+        days: { type: Number, function () : boolean {
+            return this.status === "published";
+          } },
+        place: { type: String, function () : boolean {
+            return this.status === "published";
+          } },
       },
     ],
 
-    destination: { type: String, required: true, index: true },
+    destination: { type: String, function () : boolean {
+            return this.status === "published";
+          }, index: true },
 
     overview: { type: String },
 
     highlights: [
       {
-        id: { type: String, required: true },
-        description: { type: String, required: true },
+        id: { type: String, function () : boolean {
+            return this.status === "published";
+          } },
+        description: { type: String, function () : boolean {
+            return this.status === "published";
+          } },
       },
     ],
 
     itinerary: [
       {
-        id: { type: String, required: true },
-        day: { type: Number, required: true },
-        title: { type: String, required: true },
-        description: { type: String, required: true },
+        id: { type: String, function () : boolean {
+            return this.status === "published";
+          } },
+        day: { type: Number, function () : boolean {
+            return this.status === "published";
+          } },
+        title: { type: String, function () : boolean {
+            return this.status === "published";
+          } },
+        description: { type: String, function () : boolean {
+            return this.status === "published";
+          } },
       },
     ],
 
     inclusions: [
       {
-        id: { type: String, required: true },
-        description: { type: String, required: true },
+        id: { type: String, function () : boolean {
+            return this.status === "published";
+          } },
+        description: { type: String, function () : boolean {
+            return this.status === "published";
+          } },
       },
     ],
 
     exclusions: [
       {
-        id: { type: String, required: true },
-        description: { type: String, required: true },
+        id: { type: String, function () : boolean {
+            return this.status === "published";
+          } },
+        description: { type: String, function () : boolean {
+            return this.status === "published";
+          } },
       },
     ],
 
     faqs: [
       {
-        id: { type: String, required: true },
-        question: { type: String, required: true },
-        answer: { type: String, required: true },
+        id: { type: String, function () : boolean {
+            return this.status === "published";
+          } },
+        question: { type: String, function () : boolean {
+            return this.status === "published";
+          } },
+        answer: { type: String, function () : boolean {
+            return this.status === "published";
+          } },
       },
     ],
 
@@ -205,29 +260,51 @@ const TourPackageSchema: Schema<ITourPackage> = new Schema(
 
     testimonials: [
       {
-        id: { type: String, required: true },
-        name: { type: String, required: true },
-        description: { type: String, required: true },
-        rating: { type: String, required: true, min: 0, max: 5 },
+        id: { type: String, function () : boolean {
+            return this.status === "published";
+          } },
+        name: { type: String, function () : boolean {
+            return this.status === "published";
+          } },
+        description: { type: String, function () : boolean {
+            return this.status === "published";
+          } },
+        rating: { type: String, function () : boolean {
+            return this.status === "published";
+          }, min: 0, max: 5 },
       },
     ],
 
     documents: [
       {
-        id: { type: String, required: true },
-        description: { type: String, required: true },
+        id: { type: String, function () : boolean {
+            return this.status === "published";
+          } },
+        description: { type: String, function () : boolean {
+            return this.status === "published";
+          } },
       },
     ],
 
     routes: 
       {
-        source: { type: String, required: true },
-        destination: { type: String, required: true },
+        source: { type: String, function () : boolean {
+            return this.status === "published";
+          } },
+        destination: { type: String, function () : boolean {
+            return this.status === "published";
+          } },
         segments: [
           {
-            id: { type: String, required: true },
-            from: { type: String, required: true },
-            to: { type: String, required: true },
+            id: { type: String, function () : boolean {
+            return this.status === "published";
+          } },
+            from: { type: String, function () : boolean {
+            return this.status === "published";
+          } },
+            to: { type: String, function () : boolean {
+            return this.status === "published";
+          } },
           },
         ],
       },
