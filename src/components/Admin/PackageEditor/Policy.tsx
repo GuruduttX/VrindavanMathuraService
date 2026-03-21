@@ -1,73 +1,55 @@
 import React from 'react'
 
+const textareaClass = `
+  mt-2 w-full px-5 py-3 rounded-xl
+  bg-pink-950/30 text-pink-100
+  placeholder-pink-400/40
+  border border-pink-900/50
+  focus:outline-none focus:ring-2 focus:ring-pink-500/50 focus:border-pink-600/50
+  transition resize-none
+`;
 
+const Policy = ({
+  refund, cancel, confirm, payment, onChange,
+}: {
+  refund: string;
+  cancel: string;
+  confirm: string;
+  payment: string;
+  onChange: any;
+  editorType: "Blog" | "Package";
+}) => {
 
+  const policies = [
+    { label: "Refund Policy",       field: "refund",        value: refund },
+    { label: "Cancel Policy",       field: "cancel",        value: cancel },
+    { label: "Confirmation Policy", field: "confirmation",  value: confirm },
+    { label: "Payment Policy",      field: "payment",       value: payment },
+  ];
 
+  return (
+    <div className="space-y-6 border border-pink-900/50 rounded-2xl w-full p-6 bg-pink-950/20 shadow-[0_4px_20px_rgba(0,0,0,0.4)]">
 
+      <h3 className="text-base font-semibold text-pink-100">
+        Policy & Terms and Conditions
+      </h3>
 
-const Policy = ({ refund , cancel , confirm , payment ,  onChange }: { refund : string, cancel : string,  confirm : string , payment : string , onChange: any, editorType : "Blog" | "Package" }) => {
-    return (
-        <div className='space-y-6 border-2 border-indigo-500 rounded-3xl w-full p-8 shadow-md shadow-indigo-500 hover:shadow-lg cursor-pointer transition'>
-
-            <div className='w-full text-3xl text-extrabold text-white text-center mb-5'>Policy And Terms & Conditions</div>
-            {/* SubContent */}
-            <div>
-                <label className="text-sm text-white/70">Refund Policy</label>
-                <textarea
-                    required
-                    rows={5}
-                    value={refund}
-                    onChange={(e) => { onChange("refund", e.target.value) }}
-                    placeholder="Let’s be real for a second..."
-                    className="mt-2 w-full px-5 py-3 rounded-xl bg-white/5 text-white
-          border border-white/10 focus:ring-2 focus:ring-sky-500 transition resize-none"
-                />
-            </div>
-
-            <div>
-                <label className="text-sm text-white/70">Cancel Policy</label>
-                <textarea
-                    required
-                    rows={5}
-                    value={cancel}
-                    onChange={(e) => { onChange("cancel", e.target.value) }}
-                    placeholder="Let’s be real for a second..."
-                    className="mt-2 w-full px-5 py-3 rounded-xl bg-white/5 text-white
-          border border-white/10 focus:ring-2 focus:ring-sky-500 transition resize-none"
-                />
-            </div>
-
-            <div>
-                <label className="text-sm text-white/70">Confirmation Policy</label>
-                <textarea
-                    required
-                    rows={5}
-                    value={confirm}
-                    onChange={(e) => { onChange("confirmation", e.target.value) }}
-                    placeholder="Let’s be real for a second..."
-                    className="mt-2 w-full px-5 py-3 rounded-xl bg-white/5 text-white
-          border border-white/10 focus:ring-2 focus:ring-sky-500 transition resize-none"
-                />
-            </div>
-
-            <div>
-                <label className="text-sm text-white/70">Payment Policy</label>
-                <textarea
-                    required
-                    rows={5}
-                    value={payment}
-                    onChange={(e) => { onChange("payment", e.target.value) }}
-                    placeholder="Let’s be real for a second..."
-                    className="mt-2 w-full px-5 py-3 rounded-xl bg-white/5 text-white
-          border border-white/10 focus:ring-2 focus:ring-sky-500 transition resize-none"
-                />
-            </div>
-
-
-
-            
+      {policies.map(({ label, field, value }) => (
+        <div key={field}>
+          <label className="text-sm text-pink-300/70">{label}</label>
+          <textarea
+            required
+            rows={5}
+            value={value}
+            onChange={(e) => onChange(field, e.target.value)}
+            placeholder="Enter policy details..."
+            className={textareaClass}
+          />
         </div>
-    )
-}
+      ))}
 
-export default Policy
+    </div>
+  );
+};
+
+export default Policy;

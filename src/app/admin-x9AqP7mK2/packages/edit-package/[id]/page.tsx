@@ -5,7 +5,7 @@ import CMSMediaSection from '@/components/Admin/CMS/CMSMediaSection';
 import CMSMetaSection from '@/components/Admin/CMS/CMSMetaSection';
 import CMSSeoSection from '@/components/Admin/CMS/CMSSeoSection';
 import FaqHandler from '@/components/Admin/CMS/FaqHandler';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import toast from 'react-hot-toast';
 import PackageDetails from '@/components/Admin/PackageEditor/PackageDetails';
 import TripHighlights from '@/components/Admin/PackageEditor/TripHighlights';
@@ -22,6 +22,9 @@ import DurationSection from '@/components/Admin/PackageEditor/DurationSection';
 import DestRoutes from '@/components/Admin/PackageEditor/DestRoute';
 import SelectedInclusion from '@/components/Admin/PackageEditor/SelectedInclusion';
 import PackageOverview from '@/components/Admin/PackageEditor/PackageOverview';
+import { useParams } from 'next/navigation';
+import { getPackages } from '@/services/packageService';
+import { data } from 'framer-motion/client';
 
 type PackageForm = {
   title: string;
@@ -52,7 +55,7 @@ type PackageForm = {
   status: string;
 };
 
-type FAQ        = { id: string; question: string; answer: string };
+type FAQ      = { id: string; question: string; answer: string };
 type Testimonial = { id: string; name: string; description: string; rating: string };
 type HighLights  = { id: string; description: string };
 type Inclusions  = { id: string; description: string };
@@ -64,7 +67,9 @@ type BreakdownItem = { id: string; days: string; place: string };
 type SegmentType = { id: string; from: string; to: string };
 type RouteType   = { source: string; destination: string; segments: SegmentType[] };
 
-export default function CreateNewPackage() {
+export default function page() {
+  const {id} = useParams();
+
 
   const [form, setForm] = useState<PackageForm>({
     title: "", category: "", slug: "", price: "", duration: "", overview: "",
@@ -78,16 +83,96 @@ export default function CreateNewPackage() {
   });
 
   const [loading, setLoading] = useState(false);
-  const [childImage,   setChildImage]   = useState<ChildImage[]>([]);
-  const [faqs,         setFaqs]         = useState<FAQ[]>([{ id: crypto.randomUUID(), question: "", answer: "" }]);
+  const [childImage,  setChildImage]   = useState<ChildImage[]>([]);
+  const [faqs, setFaqs]         = useState<FAQ[]>([{ id: crypto.randomUUID(), question: "", answer: "" }]);
   const [testimonials, setTestimonials] = useState<Testimonial[]>([{ id: crypto.randomUUID(), name: "", description: "", rating: "" }]);
   const [highLights,   setHighLights]   = useState<HighLights[]>([{ id: crypto.randomUUID(), description: "" }]);
-  const [inclusions,   setInclusions]   = useState<Inclusions[]>([{ id: crypto.randomUUID(), description: "" }]);
-  const [exclusions,   setExclusions]   = useState<Exclusions[]>([{ id: crypto.randomUUID(), description: "" }]);
-  const [documents,    setDocuments]    = useState<Documents[]>([{ id: crypto.randomUUID(), description: "" }]);
-  const [itinerary,    setItinerary]    = useState<Itinerary[]>([{ id: crypto.randomUUID(), day: 1, title: "", description: "" }]);
-  const [breakdown,    setBreakdown]    = useState<BreakdownItem[]>([{ id: crypto.randomUUID(), days: "0", place: "" }]);
-  const [route,        setRoute]        = useState<RouteType>({ source: "", destination: "", segments: [] });
+  const [inclusions, setInclusions]   = useState<Inclusions[]>([{ id: crypto.randomUUID(), description: "" }]);
+  const [exclusions, setExclusions]  = useState<Exclusions[]>([{ id: crypto.randomUUID(), description: "" }]);
+  const [documents,  setDocuments]   = useState<Documents[]>([{ id: crypto.randomUUID(), description: "" }]);
+  const [itinerary,  setItinerary]  = useState<Itinerary[]>([{ id: crypto.randomUUID(), day: 1, title: "", description: "" }]);
+  const [breakdown,  setBreakdown]  = useState<BreakdownItem[]>([{ id: crypto.randomUUID(), days: "0", place: "" }]);
+  const [route,  setRoute]   = useState<RouteType>({ source: "", destination: "", segments: [] });
+
+
+  //Fill data
+
+  const getPackages = async()=>{
+    try {
+        const res = await fetch(`/api/tour-packages/${id}`);
+        if(!res.ok){
+            toast.error("Error fetching package");
+        }
+        const result = await res.json();
+
+        const data = result.data;
+
+        console.log("data", data);
+
+    
+      setForm({
+        title: data.title ?? "",
+        price: data.price?.toString() ?? "",
+        duration: data.duration ?? "",
+        category: data.category ?? "",
+        slug: data.slug ?? "",
+
+        metaTitle: data.metaTitle ?? "",
+        metaDescription: data.metaDescription ?? "",
+
+        schemaTitle: data.schemaTitle ?? "",
+        schemaDescription: data.schemaDescription ?? "",
+
+        image: data.heroImage ?? "",  
+        alt: "",
+
+        overview: data.overview ?? "",
+
+        refund: data.refund ?? "",
+        cancel: data.cancel ?? "",
+        confirmation: data.confirmation ?? "",
+        payment: data.payment ?? "",
+
+        day: data.days?.toString() ?? "",
+        night: data.nights?.toString() ?? "",
+
+        rating: data.rating?.toString() ?? "",
+
+        breakfast_included: data.isBreakfastIncluded ?? false,
+        stay_included: data.isStayIncluded ?? false,
+        transfer_included: data.isTransferIncluded ?? false,
+        sightseeing_included: data.isSightseeingIncluded ?? false,
+
+        status: data.status ?? "",
+        destination: data.destination ?? "",
+        reviews : data.reviews ?? ""
+      });
+
+      setFaqs(data.faqs ?? []);
+
+      setTestimonials(data.testimonials ?? [])
+      setHighLights(data.highlights ?? [])
+      setInclusions(data.inclusions ?? [])
+      setExclusions(data.exclusions ?? [])
+      setDocuments(data.documents ?? [])
+      setItinerary(data.itinerary ?? [])
+      setChildImage(data.childImage ?? []);
+      setBreakdown(data.durationbreakdown ?? []);
+      setRoute(data.destroutes ?? {source: "", destination : "", segments : []})
+
+      
+    } catch (error) {
+       console.log("Errro", error);
+    }
+     
+
+  }
+
+  useEffect(()=>{
+      getPackages();
+  },[id])
+
+  
 
   const updateForm = (field: keyof PackageForm, value: string) => {
     setForm((prev) => ({ ...prev, [field]: value }));
@@ -101,26 +186,26 @@ export default function CreateNewPackage() {
         price: Number(form.price),
         days: Number(form.day),
         nights: Number(form.night),
-        reviews : form.reviews,
 
         destination: form.destination,
         rating: form.rating,
+        reviews : form.reviews,
 
         overview: form.overview,
         duration: form.duration,
-        refund: form.refund,
-        cancel: form.cancel,
-        confirmation: form.confirmation,
-        payment: form.payment,
 
-
-        heroImage:{image: form.image || "" , alt : form.alt  || ""},
+        heroImage: form.image || "",
 
         metaTitle: form.metaTitle,
         metaDescription: form.metaDescription,
 
         schemaTitle: form.schemaTitle,
         schemaDescription: form.schemaDescription,
+        refund: form.refund,
+        cancel: form.cancel,
+        confirmation: form.confirmation,
+        payment: form.payment,
+
 
         childImages: childImage,
         faqs,
@@ -145,8 +230,8 @@ export default function CreateNewPackage() {
   });
 
   const postPayload = async (payload: object) => {
-    const res = await fetch("/api/tour-packages", {
-      method:  "POST",
+    const res = await fetch(`/api/tour-packages/${id}`, {
+      method:  "PUT",
       headers: { "Content-Type": "application/json" },
       body:    JSON.stringify(payload),
     });
@@ -184,7 +269,6 @@ export default function CreateNewPackage() {
     e.preventDefault();
     if (!validateForPublish(e.currentTarget)) return;
 
-    console.log("hi");
 
     setLoading(true);
     try {
@@ -254,7 +338,7 @@ export default function CreateNewPackage() {
         <CMSMediaSection image={form.image} alt={form.alt} onChange={updateForm} editorType="Package" />
         <ChildImagePicker childImage={childImage} setChildImage={setChildImage} />
         <CMSActions
-          actionType="create"
+          actionType="update"
           editorType="Package"
           onPreview={handlePreview}
           onSaveDraft={handleSaveDraft}
