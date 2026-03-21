@@ -1,121 +1,125 @@
-import { createCarService, deleteCarService, getAllCarsSevice, getCarByIdService, updateCarService} from "@/services/carServices";
+import {
+    createTaxiService,
+    deleteTaxiService,
+    getAllTaxisService,
+    getTaxiByIdService,
+    updateTaxiService,
+} from "@/services/taxiServices";
 
 import { NextResponse } from "next/server";
 
 
-export const createCar = async (req: Request) => {
-
+export const createTaxi = async (req: Request) => {
     try {
+        const taxi = await createTaxiService(req);
 
-        const car = await createCarService(req);
-
-        return NextResponse.json({
-            success: true,
-            data: car
-        }, { status: 201 });
-
+        return NextResponse.json(
+            {
+                success: true,
+                data: taxi,
+            },
+            { status: 201 }
+        );
     } catch (error: any) {
-
-        return NextResponse.json({
-            success: false,
-            error: error.message
-        }, { status: 500 });
-
-    }
-
-};
-
-
-export const getAllCars = async () => {
-
-    try {
-
-        const cars = await getAllCarsSevice();
-
-        return NextResponse.json({
-            success: true,
-            data: cars
-        }, { status: 200 });
-
-    } catch (error: any) {
-
-        return NextResponse.json({
-            success: false,
-            error: error.message
-        }, { status: 500 });
-        
-    }
-
-};
-
-
-export const getCarById = async (id: string) => {
-
-    try {
-
-        const car = await getCarByIdService(id);
-
-        if (!car) {
-            return NextResponse.json({
+        return NextResponse.json(
+            {
                 success: false,
-                message: "Car not found"
-            }, { status: 404 });
+                error: error.message,
+            },
+            { status: 500 }
+        );
+    }
+};
+
+
+export const getAllTaxis = async () => {
+    try {
+        const taxis = await getAllTaxisService();
+
+        return NextResponse.json(
+            {
+                success: true,
+                data: taxis,
+            },
+            { status: 200 }
+        );
+    } catch (error: any) {
+        return NextResponse.json(
+            {
+                success: false,
+                error: error.message,
+            },
+            { status: 500 }
+        );
+    }
+};
+
+
+export const getTaxiById = async (id: string) => {
+    try {
+        const taxi = await getTaxiByIdService(id);
+
+        if (!taxi) {
+            return NextResponse.json(
+                {
+                    success: false,
+                    message: "Taxi not found",
+                },
+                { status: 404 }
+            );
         }
 
         return NextResponse.json({
             success: true,
-            data: car
+            data: taxi,
         });
-
     } catch (error: any) {
-
-        return NextResponse.json({
-            success: false,
-            error: error.message
-        }, { status: 500 });
+        return NextResponse.json(
+            {
+                success: false,
+                error: error.message,
+            },
+            { status: 500 }
+        );
     }
-
-};
-
-export const updateCar = async (req: Request, id: string) => {
-
-    try {
-
-        const car = await updateCarService(req, id);
-
-        return NextResponse.json({
-            success: true,
-            data: car
-        });
-
-    } catch (error: any) {
-        return NextResponse.json({
-            success: false,
-            error: error.message
-        }, { status: 500 });
-    }
-
 };
 
 
-export const deleteCar = async (id: string) => {
-
+export const updateTaxi = async (req: Request, id: string) => {
     try {
-
-        await deleteCarService(id);
+        const taxi = await updateTaxiService(req, id);
 
         return NextResponse.json({
             success: true,
-            message: "Car deleted successfully"
+            data: taxi,
         });
-
     } catch (error: any) {
+        return NextResponse.json(
+            {
+                success: false,
+                error: error.message,
+            },
+            { status: 500 }
+        );
+    }
+};
+
+
+export const deleteTaxi = async (id: string) => {
+    try {
+        await deleteTaxiService(id);
 
         return NextResponse.json({
-            success: false,
-            error: error.message
-        }, { status: 500 });
-
+            success: true,
+            message: "Taxi deleted successfully",
+        });
+    } catch (error: any) {
+        return NextResponse.json(
+            {
+                success: false,
+                error: error.message,
+            },
+            { status: 500 }
+        );
     }
-
 };
