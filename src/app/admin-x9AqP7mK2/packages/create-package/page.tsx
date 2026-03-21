@@ -171,7 +171,7 @@ export default function CreateNewPackage() {
         <Policy refund={form.refund} cancel={form.cancel} confirm={form.confirmation} payment={form.payment} editorType="Package" onChange={updateForm} />
         <CMSMediaSection image={form.image} alt={form.alt} onChange={updateForm} editorType="Package" />
         <ChildImagePicker childImage={childImage} setChildImage={setChildImage} />
-        <CMSActions actionType="create" editorType="Package" onPreview={handlePreview} onPublish={handlePublish} />
+        <CMSActions actionType="create" editorType="Package" onPublish={handlePublish} />
       </form>
     </div>
   );
