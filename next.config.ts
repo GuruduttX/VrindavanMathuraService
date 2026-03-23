@@ -36,7 +36,9 @@ const nextConfig: NextConfig = {
         hostname: "www.revv.co.in",
       },
     ],
-  }
+    domains: ['res.cloudinary.com']
+}
+  
 };
 
 export default nextConfig;

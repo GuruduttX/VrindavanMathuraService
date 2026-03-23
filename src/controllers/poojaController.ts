@@ -1,6 +1,7 @@
-import { deletePooja, getPoojas , updatePooja,getPoojaById } from "@/services/poojaServices";
+import { deletePooja, getPoojas , updatePooja,getPoojaById, getPoojaBySlug } from "@/services/poojaServices";
 import { createPooja } from "@/services/poojaServices";
 import { NextResponse } from "next/server";
+
 
 export async function getPoojasController(){
     try {
@@ -26,6 +27,7 @@ export async function createPoojaController(req: Request) {
     });
 
   } catch (error) {
+    console.log("Error", error);
     return NextResponse.json(
       { success: false, message: "Failed to create pooja" },
       { status: 500 }
@@ -96,3 +98,17 @@ export async function deletePoojaController(params: { id: string }) {
     );
   }
 }
+
+export const getPoojaBySlugController = async (slug: string) => {
+  try {
+    const pooja = await getPoojaBySlug(slug);
+
+    return NextResponse.json(pooja, { status: 200 });
+
+  } catch (error: any) {
+    return NextResponse.json(
+      { message: error.message || "Something went wrong" },
+      { status: 500 }
+    );
+  }
+};

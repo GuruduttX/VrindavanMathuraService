@@ -1,37 +1,33 @@
 import mongoose, { Schema, Document, Model } from "mongoose";
 
-/* ================= SUB TYPES ================= */
-
 interface Itinerary {
-  _id?: mongoose.Types.ObjectId;
+  id: string;
   day: number;
   title: string;
   description: string;
 }
 
 interface FAQ {
-  _id?: mongoose.Types.ObjectId;
+  id: string;
   question: string;
   answer: string;
 }
 
 interface Duration {
-  days: number;
+  id: string;
+  days: string;
   place: string;
 }
 
 interface Testimonial {
+  id: string;
   name: string;
   description: string;
-  rating: number;
-}
-
-interface BreakdownItem {
-  days: number;
-  place: string;
+  rating: string;
 }
 
 interface RouteSegment {
+  id: string;
   from: string;
   to: string;
 }
@@ -42,14 +38,24 @@ interface RouteType {
   segments: RouteSegment[];
 }
 
-/* ================= MAIN INTERFACE ================= */
+interface TextItem {
+  id: string;
+  description: string;
+}
+
+interface ChildImage {
+  id: string;
+  image: string;
+  alt: string;
+}
 
 export interface ITourPackage extends Document {
   title: string;
   slug: string;
   category: string;
   price: number;
-  rating: number;
+  rating: string;
+  reviews : string;
 
   duration: string;
   status: string;
@@ -62,108 +68,172 @@ export interface ITourPackage extends Document {
   destination: string;
   overview?: string;
 
-  highlights: string[];
+  highlights: TextItem[];
   itinerary: Itinerary[];
 
-  inclusions: string[];
-  exclusions: string[];
+  inclusions: TextItem[];
+  exclusions: TextItem[];
 
   faqs: FAQ[];
-  policies: string[];
 
-  // ✅ NEW FIELDS
-  metaTitle: string;
-  metaDescription: string;
+  metaTitle?: string;
+  metaDescription?: string;
 
-  schemaTitle: string;
-  schemaDescription: string;
+  schemaTitle?: string;
+  schemaDescription?: string;
 
-  refund: string;
-  cancel: string;
-  confirmation: string;
-  payment: string;
+  refund?: string;
+  cancel?: string;
+  confirmation?: string;
+  payment?: string;
 
-  heroImage?: string;
+  heroImage?: {alt : string, image : string};
   images: string[];
 
-  childImages: {
-    image: string;
-    alt: string;
-  }[];
+  childImages: ChildImage[];
 
   testimonials: Testimonial[];
 
-  documents: string[];
+  documents: TextItem[];
 
-  routes: RouteType[];
+  routes: RouteType;
 
   isTransferIncluded: boolean;
   isStayIncluded: boolean;
   isBreakfastIncluded: boolean;
   isSightseeingIncluded: boolean;
 
-  isActive: boolean;
-  isFeatured: boolean;
-
   createdAt: Date;
   updatedAt: Date;
 }
 
-/* ================= SCHEMA ================= */
+
+
+
 
 const TourPackageSchema: Schema<ITourPackage> = new Schema(
   {
-    title: { type: String, required: true, trim: true },
+    title: { type: String, required : true, trim: true },
 
-    slug: { type: String, required: true, unique: true },
+    slug: { type: String, function () : boolean {
+            return this.status === "published";
+          }, unique: true },
 
-    duration: { type: String, required: true },
+    duration: { type: String, required: function () : boolean {
+            return this.status === "published";
+          }
+     },
 
-    category: { type: String, required: true },
+    category: { type: String, function () : boolean {
+            return this.status === "published";
+          } },
 
-    price: { type: Number, required: true, min: 0 },
+    price: { type: Number, function () : boolean {
+            return this.status === "published";
+          }, min: 0 },
 
-    rating: { type: Number, default: 0, min: 0, max: 5 },
+    rating: { type: String, function () : boolean {
+            return this.status === "published";
+          }},
 
-    status: { type: String, required: true },
+    reviews : {type : String,function () : boolean {
+            return this.status === "published";
+          }},
 
-    days: { type: Number, required: true },
-    nights: { type: Number, required: true },
+    status: { type: String, function () : boolean {
+            return this.status === "published";
+          }},
+
+    days: { type: Number, function () : boolean {
+            return this.status === "published";
+          } },
+    nights: { type: Number,function () : boolean {
+            return this.status === "published";
+          }},
 
     durationbreakdown: [
       {
-        days: { type: Number, required: true },
-        place: { type: String, required: true },
+        id: { type: String, function () : boolean {
+            return this.status === "published";
+          } },
+        days: { type: Number, function () : boolean {
+            return this.status === "published";
+          } },
+        place: { type: String, function () : boolean {
+            return this.status === "published";
+          } },
       },
     ],
 
-    destination: { type: String, required: true, index: true },
+    destination: { type: String, function () : boolean {
+            return this.status === "published";
+          }, index: true },
 
     overview: { type: String },
 
-    highlights: [{ type: String }],
+    highlights: [
+      {
+        id: { type: String, function () : boolean {
+            return this.status === "published";
+          } },
+        description: { type: String, function () : boolean {
+            return this.status === "published";
+          } },
+      },
+    ],
 
     itinerary: [
       {
-        day: Number,
-        title: String,
-        description: String,
+        id: { type: String, function () : boolean {
+            return this.status === "published";
+          } },
+        day: { type: Number, function () : boolean {
+            return this.status === "published";
+          } },
+        title: { type: String, function () : boolean {
+            return this.status === "published";
+          } },
+        description: { type: String, function () : boolean {
+            return this.status === "published";
+          } },
       },
     ],
 
-    inclusions: [{ type: String }],
-    exclusions: [{ type: String }],
+    inclusions: [
+      {
+        id: { type: String, function () : boolean {
+            return this.status === "published";
+          } },
+        description: { type: String, function () : boolean {
+            return this.status === "published";
+          } },
+      },
+    ],
+
+    exclusions: [
+      {
+        id: { type: String, function () : boolean {
+            return this.status === "published";
+          } },
+        description: { type: String, function () : boolean {
+            return this.status === "published";
+          } },
+      },
+    ],
 
     faqs: [
       {
-        question: String,
-        answer: String,
+        id: { type: String, function () : boolean {
+            return this.status === "published";
+          } },
+        question: { type: String, function () : boolean {
+            return this.status === "published";
+          } },
+        answer: { type: String, function () : boolean {
+            return this.status === "published";
+          } },
       },
     ],
-
-    policies: [{ type: String }],
-
-    /* ===== NEW FIELDS ===== */
 
     metaTitle: { type: String },
     metaDescription: { type: String },
@@ -176,54 +246,79 @@ const TourPackageSchema: Schema<ITourPackage> = new Schema(
     confirmation: { type: String },
     payment: { type: String },
 
-    heroImage: { type: String },
+    heroImage: { alt : {type : String} , image : {type : String} },
 
     images: [{ type: String }],
 
     childImages: [
       {
-        image: String,
-        alt: String,
+        id: { type: String, default : "" },
+        image: { type: String, default : "" },
+        alt: { type: String, deafault : "" },
       },
     ],
 
     testimonials: [
       {
-        name: String,
-        description: String,
-        rating: Number,
+        id: { type: String, function () : boolean {
+            return this.status === "published";
+          } },
+        name: { type: String, function () : boolean {
+            return this.status === "published";
+          } },
+        description: { type: String, function () : boolean {
+            return this.status === "published";
+          } },
+        rating: { type: String, function () : boolean {
+            return this.status === "published";
+          }, min: 0, max: 5 },
       },
     ],
 
-    documents: [{ type: String }],
-
-    routes: [
+    documents: [
       {
-        source: String,
-        destination: String,
+        id: { type: String, function () : boolean {
+            return this.status === "published";
+          } },
+        description: { type: String, function () : boolean {
+            return this.status === "published";
+          } },
+      },
+    ],
+
+    routes: 
+      {
+        source: { type: String, function () : boolean {
+            return this.status === "published";
+          } },
+        destination: { type: String, function () : boolean {
+            return this.status === "published";
+          } },
         segments: [
           {
-            from: String,
-            to: String,
+            id: { type: String, function () : boolean {
+            return this.status === "published";
+          } },
+            from: { type: String, function () : boolean {
+            return this.status === "published";
+          } },
+            to: { type: String, function () : boolean {
+            return this.status === "published";
+          } },
           },
         ],
       },
-    ],
-
-    /* ===== FLAGS ===== */
+    
 
     isTransferIncluded: { type: Boolean, default: false },
     isStayIncluded: { type: Boolean, default: false },
     isBreakfastIncluded: { type: Boolean, default: false },
     isSightseeingIncluded: { type: Boolean, default: false },
-
-    isActive: { type: Boolean, default: true },
-    isFeatured: { type: Boolean, default: false },
   },
   { timestamps: true }
 );
 
-/* ================= MODEL ================= */
+
 
 const TourPackageModel: Model<ITourPackage> =
   mongoose.models.Packages ||

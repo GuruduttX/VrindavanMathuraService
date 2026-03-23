@@ -1,5 +1,11 @@
 import mongoose, { Schema, Document, Model } from "mongoose";
 
+/* ---------------- TYPES ---------------- */
+interface FAQI {
+  id: string;
+  question: string;
+  answer: string;
+}
 
 interface PoojaDocument extends Document {
   title: string;
@@ -9,29 +15,37 @@ interface PoojaDocument extends Document {
 
   price: number;
   discountPrice?: number;
-  ratings : number;
+  rating?: string;
+  reviews : string;
 
   description?: string;
   aboutContent?: string;
 
   duration?: string;
 
-  benefits: string[];
+  heroImage?: {
+    image: string;
+    alt: string;
+  };
 
-  availableDays: string[];
+  metaData : {
+     title : string;
+     description : string;
+  }
+  , 
+  schemaData : {
+    title : string;
+    description : string;
+  }
 
-  images: string[];
-
-  isActive: boolean;
-  isFeatured: boolean;
+  status: string;
+  faqs: FAQI[];
 
   createdAt: Date;
   updatedAt: Date;
 }
 
-
-
-
+/* SCHEMA */
 const PoojaSchema: Schema<PoojaDocument> = new Schema(
   {
     title: { type: String, required: true },
@@ -42,7 +56,14 @@ const PoojaSchema: Schema<PoojaDocument> = new Schema(
 
     location: { type: String, required: true },
 
-  
+    reviews : {type : String, required : true},
+
+    status: {
+      type: String,
+      required: true,
+      enum: ["published", "draft"], //  important
+    },
+
     price: {
       type: Number,
       required: true,
@@ -53,13 +74,10 @@ const PoojaSchema: Schema<PoojaDocument> = new Schema(
       type: Number,
       min: 0,
     },
-    ratings: {
-        type: Number,
-        default: 0,
-        min: 0,
-        max: 5
-    }
-    ,
+
+    rating: {
+      type: String,
+    },
 
     description: { type: String },
 
@@ -67,23 +85,33 @@ const PoojaSchema: Schema<PoojaDocument> = new Schema(
 
     duration: { type: String },
 
-    benefits: [{ type: String }],
+    metaData : {
+       title : { type : String},
+       description : {type : String}
+    },
 
-    availableDays: [{ type: String }],
-    
+    schemaData : {
+        title : {type : String},
+        description  : {type : String},
+    }
+    ,
 
-  
-    images: [{ type: String }],
+    faqs: [
+      {
 
-    isActive: { type: Boolean, default: true },
+        id: { type: String },
+        question: { type: String },
+        answer: { type: String },
+      },
+    ],
 
-    isFeatured: { type: Boolean, default: false },
+    heroImage: {
+      image: { type: String },
+      alt: { type: String },
+    },
   },
   { timestamps: true }
 );
-
-
-
 
 const PoojaModel: Model<PoojaDocument> =
   mongoose.models.Pooja ||

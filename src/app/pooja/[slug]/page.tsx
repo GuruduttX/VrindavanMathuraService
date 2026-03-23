@@ -13,41 +13,41 @@ import PoojaFAQ from "@/components/PoojaDetail/PoojaFAQ";
 import PoojaCTA from "@/components/PoojaDetail/PoojaCTA";
 import Navbar from "@/utils/Navbar";
 import LuxuryFooter from "@/utils/Footer";
-export default function PoojaPage() {
 
-  const dummyPooja = {
-    title: "Maha Mrityunjaya Jaap",
-    shortDesc: "Powerful Vedic ritual for health, protection and longevity.",
-    price: 5100,
-    duration: "2 Hours",
-    location: "Vrindavan Temple",
-    heroImage : "sfsdf/sdsjjdfjs"
-  };
+
+const getPooja = async (slug: string) => {
+ const res = await fetch(
+  `http://localhost:3000/api/pooja/search?slug=${slug}`
+);
+  if (!res.ok) throw new Error("Failed");
+
+  return res.json();
+};
+
+export default async function PoojaPage({ params }: { params: Promise<{ slug: string }> }) {
+  const {slug} = await params;
+  const pooja = await getPooja(slug);
+  console.log(pooja);
 
   return (
     <>
-      <Navbar/>
-      <PoojaHero pooja={dummyPooja}/>
+      <Navbar />
+      <PoojaHero pooja={pooja} />
+
       <div className="max-w-7xl mx-auto px-6 gap-12 py-20">
-
-        {/* LEFT MAIN CONTENT */}
-        <div className=" space-y-16">
-          <PoojaOverview />
+        <div className="space-y-16">
+          <PoojaOverview  />
           <PoojaBenefits />
-          <PoojaIncludesStrip />
+          <PoojaIncludesStrip  />
           <PoojaProcessTimeline />
-          <PoojaGallery />
+          <PoojaGallery  />
           <DevoteeTestimonials />
-          <PoojaFAQ />
+          <PoojaFAQ  />
         </div>
-
-        {/* RIGHT SIDEBAR */}
-       
-
       </div>
 
       <PoojaCTA />
-      <LuxuryFooter/>
+      <LuxuryFooter />
     </>
   );
 }

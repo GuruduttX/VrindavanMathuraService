@@ -21,7 +21,7 @@ const FaqHandler = ({
 }: {
   faqs: faq[];
   setFaqs: React.Dispatch<React.SetStateAction<faq[]>>;
-  editorType: "Blog" | "Package" | "Temple";
+  editorType: "Blog" | "Package" | "Temple" | "Pooja";
 }) => {
 
   const handleAddFaq = () => {
