@@ -93,55 +93,55 @@ export default function CreateNewPackage() {
     setForm((prev) => ({ ...prev, [field]: value }));
   };
 
-    const buildPayload = (status: "published" | "draft") => ({
-        title: form.title,
-        category: form.category,
-        slug: form.slug,
+  const buildPayload = (status: "published" | "draft") => ({
+      title: form.title,
+      category: form.category,
+      slug: form.slug,
 
-        price: Number(form.price),
-        days: Number(form.day),
-        nights: Number(form.night),
-        reviews : form.reviews,
+      price: Number(form.price),
+      days: Number(form.day),
+      nights: Number(form.night),
+      reviews : form.reviews,
 
-        destination: form.destination,
-        rating: form.rating,
+      destination: form.destination,
+      rating: form.rating,
 
-        overview: form.overview,
-        duration: form.duration,
-        refund: form.refund,
-        cancel: form.cancel,
-        confirmation: form.confirmation,
-        payment: form.payment,
+      overview: form.overview,
+      duration: form.duration,
+      refund: form.refund,
+      cancel: form.cancel,
+      confirmation: form.confirmation,
+      payment: form.payment,
 
 
-        heroImage:{image: form.image || "" , alt : form.alt  || ""},
+      heroImage:{image: form.image || "" , alt : form.alt  || ""},
 
-        metaTitle: form.metaTitle,
-        metaDescription: form.metaDescription,
+      metaTitle: form.metaTitle,
+      metaDescription: form.metaDescription,
 
-        schemaTitle: form.schemaTitle,
-        schemaDescription: form.schemaDescription,
+      schemaTitle: form.schemaTitle,
+      schemaDescription: form.schemaDescription,
 
-        childImages: childImage,
-        faqs,
-        testimonials: testimonials,
+      childImages: childImage,
+      faqs,
+      testimonials: testimonials,
 
-        highlights: highLights,
-        inclusions,
-        exclusions,
-        documents,
-        itinerary,
+      highlights: highLights,
+      inclusions,
+      exclusions,
+      documents,
+      itinerary,
 
-        durationbreakdown: breakdown,
+      durationbreakdown: breakdown,
 
-        routes: route,
+      routes: route,
 
-        isBreakfastIncluded: form.breakfast_included,
-        isStayIncluded: form.stay_included,
-        isTransferIncluded: form.transfer_included,
-        isSightseeingIncluded: form.sightseeing_included,
+      isBreakfastIncluded: form.breakfast_included,
+      isStayIncluded: form.stay_included,
+      isTransferIncluded: form.transfer_included,
+      isSightseeingIncluded: form.sightseeing_included,
 
-        status,
+      status,
   });
 
   const postPayload = async (payload: object) => {
@@ -184,7 +184,6 @@ export default function CreateNewPackage() {
     e.preventDefault();
     if (!validateForPublish(e.currentTarget)) return;
 
-    console.log("hi");
 
     setLoading(true);
     try {
@@ -253,7 +252,6 @@ export default function CreateNewPackage() {
         <Policy refund={form.refund} cancel={form.cancel} confirm={form.confirmation} payment={form.payment} editorType="Package" onChange={updateForm} />
         <CMSMediaSection image={form.image} alt={form.alt} onChange={updateForm} editorType="Package" />
         <ChildImagePicker childImage={childImage} setChildImage={setChildImage} />
-<<<<<<< HEAD
         <CMSActions
           actionType="create"
           editorType="Package"
@@ -261,9 +259,6 @@ export default function CreateNewPackage() {
           onSaveDraft={handleSaveDraft}
           loading={loading}
         />
-=======
-        <CMSActions actionType="create" editorType="Package" onPublish={handlePublish} />
->>>>>>> main
       </form>
     </div>
   );

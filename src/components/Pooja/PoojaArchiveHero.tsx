@@ -1,285 +1,228 @@
 "use client";
 
-import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useRef } from "react";
 
-const heroStyles = `
+const styles = `
+  @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,500&family=Nunito:wght@300;400;500;600&display=swap');
 
-  /* ── Spring-like easing curves (matches Framer's spring feel) ── */
-  :root {
-    --spring:          cubic-bezier(0.175, 0.885, 0.32, 1.275);
-    --ease-out-expo:   cubic-bezier(0.16, 1, 0.3, 1);
-    --ease-out-quart:  cubic-bezier(0.25, 1, 0.5, 1);
-  }
-
-  /* ── Entrance keyframes ── */
-  @keyframes heroFadeUp {
-    0%   { opacity: 0; transform: translateY(36px) scale(0.97); filter: blur(4px); }
-    60%  { filter: blur(0px); }
-    100% { opacity: 1; transform: translateY(0px)  scale(1);    filter: blur(0px); }
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(24px); }
+    to   { opacity: 1; transform: translateY(0); }
   }
 
-  @keyframes heroBadge {
-    0%   { opacity: 0; transform: translateY(12px) scale(0.88); }
-    100% { opacity: 1; transform: translateY(0px)  scale(1);    }
+  @keyframes gentleFloat {
+    0%, 100% { transform: translateY(0px); }
+    50%       { transform: translateY(-6px); }
   }
 
-  @keyframes heroButtons {
-    0%   { opacity: 0; transform: translateY(22px); }
-    100% { opacity: 1; transform: translateY(0px);  }
-  }
+  .ph-anim { opacity: 0; }
+  .ph-anim.in { animation: fadeUp 0.75s cubic-bezier(0.16,1,0.3,1) forwards; }
 
-  /* ── FloatingImage: dramatic flip-in from back ── */
-  @keyframes flipInCard {
-    0%   { opacity: 0; transform: perspective(900px) rotateY(180deg) scale(0.85); }
-    55%  { opacity: 1; }
-    100% { opacity: 1; transform: perspective(900px) rotateY(0deg)   scale(1);    }
-  }
+  .ph-d1.in { animation-delay: 0ms; }
+  .ph-d2.in { animation-delay: 150ms; }
+  .ph-d3.in { animation-delay: 280ms; }
+  .ph-d4.in { animation-delay: 400ms; }
+  .ph-d5.in { animation-delay: 520ms; }
 
-  /* ── Idle float after flip completes ── */
-  @keyframes idleFloat {
-    0%, 100% { transform: translateY(0px);  }
-    50%       { transform: translateY(-7px); }
-  }
+  .diya-icon { animation: gentleFloat 3.5s ease-in-out infinite; }
+  .diya-icon:nth-child(2) { animation-delay: 0.5s; }
+  .diya-icon:nth-child(3) { animation-delay: 1s; }
 
-  /* ── Base hidden state ── */
-  .hero-anim       { opacity: 0; will-change: transform, opacity; }
-  .flip-card-inner { opacity: 0; will-change: transform, opacity; transform-style: preserve-3d; }
-
-  /* ── Center content: triggered ── */
-  .hero-badge.is-visible {
-    animation: heroBadge   0.7s var(--spring)         forwards;
-    animation-delay: 0ms;
+  .btn-book {
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
   }
-  .hero-title.is-visible {
-    animation: heroFadeUp  0.95s var(--ease-out-expo) forwards;
-    animation-delay: 180ms;
+  .btn-book:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 16px 40px rgba(185,19,114,0.45);
   }
-  .hero-body.is-visible {
-    animation: heroFadeUp  0.95s var(--ease-out-expo) forwards;
-    animation-delay: 340ms;
-  }
-  .hero-cta.is-visible {
-    animation: heroButtons 0.85s var(--ease-out-quart) forwards;
-    animation-delay: 500ms;
-  }
-
-  /* ── FloatingImage: flip-in + idle float chained ── */
-  .flip-card-inner.is-visible {
-    animation:
-      flipInCard  0.85s var(--ease-out-expo) var(--flip-delay, 0ms)                        forwards,
-      idleFloat   3.8s  ease-in-out          calc(var(--flip-delay, 0ms) + 860ms)           infinite;
-  }
-
-  /* ── Hover: flip to back (overrides idle) ── */
-  .flip-card:hover .flip-card-inner.is-visible {
-    animation: none;
-    transform: perspective(900px) rotateY(180deg);
-    transition: transform 0.75s var(--spring);
-    opacity: 1;
-  }
-
-  /* ── CTA buttons ── */
-  .btn-primary {
-    position: relative;
-    overflow: hidden;
-    transition: transform 0.35s var(--spring), box-shadow 0.3s ease;
-  }
-  .btn-primary:hover {
-    transform: scale(1.06) translateY(-2px);
-    box-shadow: 0 22px 55px rgba(185,19,114,0.5);
-  }
-  .btn-primary::after {
-    content: '';
-    position: absolute;
-    inset: 0;
-    border-radius: inherit;
-    background: rgba(255,255,255,0.14);
-    opacity: 0;
-    transition: opacity 0.2s ease;
-  }
-  .btn-primary:hover::after { opacity: 1; }
-
   .btn-outline {
-    transition: background 0.3s ease, color 0.3s ease, transform 0.35s var(--spring);
+    transition: background 0.25s ease, color 0.25s ease;
   }
-  .btn-outline:hover { transform: scale(1.04) translateY(-2px); }
+  .btn-outline:hover {
+    background: white;
+    color: #b91372;
+  }
 
-  /* ── Respect reduced motion ── */
   @media (prefers-reduced-motion: reduce) {
-    .hero-anim, .flip-card-inner { opacity: 1 !important; will-change: auto !important; }
-    .hero-badge.is-visible,
-    .hero-title.is-visible,
-    .hero-body.is-visible,
-    .hero-cta.is-visible,
-    .flip-card-inner.is-visible { animation: none !important; }
-    .btn-primary:hover,
-    .btn-outline:hover          { transform: none !important; }
+    .ph-anim { opacity: 1 !important; animation: none !important; }
+    .diya-icon { animation: none !important; }
   }
 `;
 
-export default function TourHero() {
-  const sectionRef = useRef<HTMLDivElement>(null);
+const STATS = [
+  { icon: "🪔", value: "50+", label: "Pooja Types" },
+  { icon: "🙏", value: "10k+", label: "Devotees Served" },
+  { icon: "⭐", value: "4.9", label: "Rating" },
+];
+
+export default function PoojaHero() {
+  const ref = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const observer = new IntersectionObserver(
       (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            entry.target.classList.add("is-visible");
-            entry.target.addEventListener(
-              "animationend",
-              () => { (entry.target as HTMLElement).style.willChange = "auto"; },
-              { once: true }
-            );
-            observer.unobserve(entry.target);
+        entries.forEach((e) => {
+          if (e.isIntersecting) {
+            e.target.classList.add("in");
+            observer.unobserve(e.target);
           }
         });
       },
-      { threshold: 0.08 }
+      { threshold: 0.1 }
     );
-
-    const root = sectionRef.current;
-    if (!root) return;
-    root.querySelectorAll(".hero-anim, .flip-card-inner").forEach((el) => observer.observe(el));
+    ref.current?.querySelectorAll(".ph-anim").forEach((el) => observer.observe(el));
     return () => observer.disconnect();
   }, []);
 
   return (
     <>
-      <style>{heroStyles}</style>
+      <style>{styles}</style>
 
       <section
-        ref={sectionRef}
-        className="relative w-full min-h-[88vh] flex items-center justify-center overflow-hidden"
+        ref={ref}
+        className="relative w-full min-h-[82vh] flex items-center justify-center overflow-hidden mt-22"
+        style={{ fontFamily: "'Nunito', sans-serif" }}
       >
-        {/* Gradient background */}
-        <div className="absolute inset-0 bg-gradient-to-br from-[#b91372] via-[#e52e71] to-[#ff6a88]" />
+        {/* Background */}
         <div
           className="absolute inset-0"
           style={{
-            background:
-              "radial-gradient(circle at 20% 20%, #ff4db2, transparent 45%), radial-gradient(circle at 80% 30%, #ff2e93, transparent 45%)",
+            background: "linear-gradient(145deg, #fce4f3 0%, #fdf0f8 40%, #fff0f7 70%, #fde8f2 100%)",
+          }}
+        />
+
+        {/* Soft circle accents */}
+        <div
+          className="absolute rounded-full pointer-events-none"
+          style={{
+            width: 500, height: 500,
+            background: "radial-gradient(circle, rgba(185,19,114,0.08) 0%, transparent 70%)",
+            top: "-80px", left: "-80px",
+          }}
+        />
+        <div
+          className="absolute rounded-full pointer-events-none"
+          style={{
+            width: 400, height: 400,
+            background: "radial-gradient(circle, rgba(229,46,113,0.07) 0%, transparent 70%)",
+            bottom: "0px", right: "-60px",
           }}
         />
 
         {/* Dot pattern */}
         <div
-          className="absolute inset-0 opacity-25"
+          className="absolute inset-0 opacity-30 pointer-events-none"
           style={{
-            backgroundImage:
-              "radial-gradient(circle at 1px 1px, rgba(255,255,255,0.4) 1px, transparent 0)",
-            backgroundSize: "28px 28px",
+            backgroundImage: "radial-gradient(circle at 1px 1px, rgba(185,19,114,0.15) 1px, transparent 0)",
+            backgroundSize: "32px 32px",
           }}
         />
 
-        {/* Dark overlay */}
-        <div className="absolute inset-0 bg-black/25" />
-
         {/* Bottom wave */}
-        <div className="absolute bottom-0 left-0 w-full overflow-hidden leading-none">
-          <svg viewBox="0 0 1440 140" className="w-full h-28" preserveAspectRatio="none">
-            <path d="M0,60 C300,140 600,0 900,60 C1150,110 1350,30 1440,80 L1440,140 L0,140 Z" fill="#ffffff" opacity="0.9" />
-            <path d="M0,80 C300,160 600,20 900,80 C1150,130 1350,50 1440,100 L1440,140 L0,140 Z" fill="#fdf2f8" opacity="0.6" />
+        <div className="absolute bottom-0 left-0 w-full overflow-hidden leading-none pointer-events-none">
+          <svg viewBox="0 0 1440 100" className="w-full h-20" preserveAspectRatio="none">
+            <path d="M0,50 C360,100 900,0 1440,60 L1440,100 L0,100 Z" fill="white" opacity="0.9" />
           </svg>
         </div>
 
-        {/* ── Left columns ── */}
-        <div
-          className="hidden lg:block absolute -left-8 top-32 space-y-8"
-          style={{ maskImage: "linear-gradient(to right, transparent, black 40%)" }}
-        >
-          <FloatingImage src="/images/tourpackages/hero1.webp"  extraClass="opacity-40 scale-90" delay={60}  />
-          <FloatingImage src="/images/tourpackages/hero2.webp"  extraClass="opacity-70"           delay={160} />
-          <FloatingImage src="/images/tourpackages/hero6.webp"  extraClass="opacity-90"           delay={260} />
-        </div>
-        <div className="hidden lg:block absolute left-18 top-52 space-y-8">
-          <FloatingImage src="/images/tourpackages/hero9.webp"  extraClass="opacity-70" delay={130} />
-          <FloatingImage src="/images/tourpackages/hero10.webp" extraClass="opacity-80" delay={230} />
-        </div>
-        <div className="hidden lg:block absolute left-44 top-68 space-y-8">
-          <FloatingImage src="/images/tourpackages/hero8.webp" extraClass="opacity-90" delay={210} />
-        </div>
+        {/* Content */}
+        <div className="relative z-10 text-center px-6 max-w-3xl">
 
-        {/* ── Right columns ── */}
-        <div
-          className="hidden lg:block absolute -right-8 top-32 space-y-8"
-          style={{ maskImage: "linear-gradient(to left, transparent, black 40%)" }}
-        >
-          <FloatingImage src="/images/tourpackages/hero5.webp" extraClass="opacity-40 scale-90" delay={60}  />
-          <FloatingImage src="/images/tourpackages/hero1.webp" extraClass="opacity-70"           delay={160} />
-          <FloatingImage src="/images/tourpackages/hero2.webp" extraClass="opacity-90"           delay={260} />
-        </div>
-        <div className="hidden lg:block absolute right-18 top-52 space-y-8">
-          <FloatingImage src="/images/tourpackages/hero7.webp" extraClass="opacity-70" delay={130} />
-          <FloatingImage src="/images/tourpackages/hero6.webp" extraClass="opacity-80" delay={230} />
-        </div>
-        <div className="hidden lg:block absolute right-44 top-68 space-y-8">
-          <FloatingImage src="/images/tourpackages/hero4.webp" extraClass="opacity-90" delay={210} />
-        </div>
-
-        {/* ── Center content ── */}
-        <div className="relative z-20 text-center text-white px-6 max-w-5xl">
-
-          <div className="hero-anim hero-badge inline-flex items-center gap-2 px-5 py-2 rounded-full bg-white/15 backdrop-blur-md text-sm mb-6">
-            ✨ Mathura Vrindavan Tour Packages
+          {/* Diya icons */}
+          <div className="ph-anim ph-d1 flex justify-center gap-3 mb-6 text-2xl">
+            <span className="diya-icon">🪔</span>
+            <span className="diya-icon">🌸</span>
+            <span className="diya-icon">🪔</span>
           </div>
 
-          <h1 className="hero-anim hero-title text-4xl md:text-6xl lg:text-7xl font-serif leading-tight">
-            Discover the Divine Land of{" "}
-            <span className="block text-pink-200 italic font-medium">Krishna</span>
+          {/* Badge */}
+          <div
+            className="ph-anim ph-d2 inline-flex items-center gap-2 px-4 py-1.5 rounded-full text-sm font-medium mb-5"
+            style={{
+              background: "rgba(185,19,114,0.08)",
+              border: "1px solid rgba(185,19,114,0.2)",
+              color: "#b91372",
+            }}
+          >
+            Authentic Vedic Pooja Packages
+          </div>
+
+          {/* Title */}
+          <h1
+            className="ph-anim ph-d3"
+            style={{
+              fontFamily: "'Cormorant Garamond', serif",
+              fontSize: "clamp(2.4rem, 6.5vw, 4.8rem)",
+              lineHeight: 1.15,
+              color: "#1a0a12",
+              fontWeight: 600,
+            }}
+          >
+            Book Sacred{" "}
+            <em style={{ color: "#b91372", fontStyle: "italic" }}>Poojas</em>
+            <span
+              className="block mt-1"
+              style={{ fontSize: "0.5em", color: "#b91372", fontWeight: 400, letterSpacing: "0.04em" }}
+            >
+              in Mathura &amp; Vrindavan
+            </span>
           </h1>
 
-          <p className="hero-anim hero-body mt-6 text-lg md:text-xl text-white/90 leading-relaxed max-w-3xl mx-auto">
-            Explore sacred temples, vibrant festivals, and spiritual experiences
-            in Mathura &amp; Vrindavan with our curated tour packages.
+          {/* Body */}
+          <p
+            className="ph-anim ph-d4 mt-5 text-base md:text-lg leading-relaxed mx-auto"
+            style={{ color: "#6b3050", maxWidth: "30rem" }}
+          >
+            Performed by learned pandits — Rukmini Vivah, Govardhan Pooja,
+            Janmashtami Abhishek &amp; many more sacred rituals.
           </p>
 
-          <div className="hero-anim hero-cta mt-10 flex justify-center gap-6 flex-wrap">
-            <Link href="#tours">
-              <button className="btn-primary px-10 py-4 rounded-full bg-gradient-to-r from-pink-600 to-rose-500 text-white font-semibold shadow-xl cursor-pointer">
-                Explore Packages
+          {/* CTAs */}
+          <div className="ph-anim ph-d5 mt-8 flex flex-wrap justify-center gap-4">
+            <Link href="#poojas">
+              <button
+                className="btn-book px-9 py-3.5 rounded-full text-white font-semibold cursor-pointer"
+                style={{
+                  background: "linear-gradient(135deg, #b91372, #e52e71)",
+                  boxShadow: "0 8px 28px rgba(185,19,114,0.3)",
+                }}
+              >
+                🙏 Book a Pooja
               </button>
             </Link>
-            <Link href="/tour-packages">
-              <button className="btn-outline px-10 py-4 rounded-full border border-white/70 text-white font-semibold hover:bg-white hover:text-black cursor-pointer">
-                View All Tours
+            <Link href="/pooja-packages">
+              <button
+                className="btn-outline px-9 py-3.5 rounded-full font-semibold cursor-pointer"
+                style={{
+                  border: "1.5px solid #b91372",
+                  color: "#b91372",
+                  background: "transparent",
+                }}
+              >
+                View All Poojas
               </button>
             </Link>
+          </div>
+
+          {/* Stats */}
+          <div className="ph-anim ph-d5 mt-10 flex flex-wrap justify-center gap-6">
+            {STATS.map((s) => (
+              <div key={s.label} className="flex flex-col items-center">
+                <span className="text-xl mb-0.5">{s.icon}</span>
+                <span
+                  className="text-xl font-semibold"
+                  style={{ fontFamily: "'Cormorant Garamond', serif", color: "#b91372" }}
+                >
+                  {s.value}
+                </span>
+                <span className="text-xs" style={{ color: "#9b5070" }}>{s.label}</span>
+              </div>
+            ))}
           </div>
 
         </div>
       </section>
     </>
-  );
-}
-
-function FloatingImage({
-  src,
-  extraClass,
-  delay,
-}: {
-  src: string;
-  extraClass?: string;
-  delay: number;
-}) {
-  return (
-    <div className={`flip-card w-24 h-24 rounded-2xl ${extraClass ?? ""}`}>
-      <div
-        className="flip-card-inner relative w-full h-full rounded-2xl overflow-hidden"
-        style={{ "--flip-delay": `${delay}ms` } as React.CSSProperties}
-      >
-        <Image
-          src={src}
-          alt="Tour Preview"
-          fill
-          quality={80}
-          sizes="96px"
-          className="object-cover rounded-2xl"
-        />
-        <div className="absolute inset-0 rounded-2xl ring-1 ring-white/20 pointer-events-none" />
-      </div>
-    </div>
   );
 }

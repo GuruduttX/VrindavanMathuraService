@@ -2,23 +2,14 @@ import React from 'react'
 
 interface CMSActionsProps {
   actionType: 'create' | 'update';
-<<<<<<< HEAD
   editorType: "Blog" | "Package" | "Temple" | "Pooja";
   onSaveDraft: () => void;
-=======
-  editorType: "Blog" | "Package" | "Temple";
-  onPublish: () => void;
->>>>>>> main
   loading?: boolean;
 }
 
 const CMSActions = ({
   actionType, editorType,
-<<<<<<< HEAD
    onSaveDraft,
-=======
-   onPublish,
->>>>>>> main
   loading = false,
 }: CMSActionsProps) => {
   return (
@@ -37,7 +28,6 @@ const CMSActions = ({
         {actionType === 'update' ? "Update" : "Publish"}
       </button>
 
-<<<<<<< HEAD
        
       <button
         type="button"
@@ -56,8 +46,6 @@ const CMSActions = ({
       {/* Preview */}
      
 
-=======
->>>>>>> main
       {/* Save Draft */}
      
 

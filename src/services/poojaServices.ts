@@ -38,3 +38,15 @@ export async function deletePooja(id : string) {
     }
     return pooja;
 }
+
+export const getPoojaBySlug = async (slug: string) => {
+  await connectDB();
+
+  const pooja = await PoojaModel.findOne({ slug });
+
+  if (!pooja) {
+    throw new Error("Pooja not found");
+  }
+
+  return pooja;
+};
