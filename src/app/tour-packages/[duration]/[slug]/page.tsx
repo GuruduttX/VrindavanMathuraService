@@ -24,7 +24,7 @@ const getPackageData = async (slug: string, duration: string) => {
   try {
     
    const res = await fetch(
-  `http://localhost:3000/api/tour-packages?slug=${slug}&duration=${duration}`
+  `http://localhost:3000/api/tour-packages/search/?slug=${slug}&duration=${duration}`
   );
 
   if(!res.ok) {
@@ -307,6 +307,8 @@ export default async function page({ params }: { params: Promise<{ slug: string,
   ],
   };
 
+  if (!PackageData) return <div>Loading...</div>;
+
   
 
 
@@ -324,18 +326,28 @@ export default async function page({ params }: { params: Promise<{ slug: string,
             {/* LEFT CONTENT */}
             <main className="space-y-12">
               <PackageDurationStrip
-              duration={dummyDuration}
-              breakdown={dummyBreakdown}
+              duration={PackageData.duration}
+              breakdown={PackageData.durationbreakdown}
+
             />
-            <PackageInclusionsStrip packageData={dumyPackage} />
+           <PackageInclusionsStrip
+            packageData={{
+              transfer_included: PackageData.isTransferIncluded,
+              stay_included: PackageData.isStayIncluded,
+              breakfast_included: PackageData.isBreakfastIncluded,
+              sightseeing_included: PackageData.isSightseeingIncluded,
+            }}
+          />
           
-            <DestinationRoute routeData={dummyRoute} />
-
-            <PackageHighlights PackageData={dummyHighlights} />
-
-            <ItineraryAccordion PackageData = {dummyItenary}/>
-            <InclusionExclusion PackageData={dummyIncExc}/>
-              
+            <DestinationRoute routeData={PackageData.routes} /> 
+            <PackageHighlights PackageData={{ highlights: PackageData.highlights }} />       
+            <ItineraryAccordion PackageData={{ itinerary: PackageData.itinerary }} />            <InclusionExclusion PackageData={dummyIncExc}/>
+            <InclusionExclusion
+              PackageData={{
+                inclusions: PackageData.inclusions,
+                exclusions: PackageData.exclusions,
+              }}
+            />
             </main>
 
              <aside className="hidden lg:block ">
@@ -365,8 +377,17 @@ export default async function page({ params }: { params: Promise<{ slug: string,
     
     <TrustBuildingSection/>
 
-    <PackageFaqSection PackageData={dummyFaqs}/>
-    <Policies PackageData={policy} />
+    <PackageFaqSection PackageData={{ faqs: PackageData.faqs }} />
+    <Policies
+      PackageData={{
+        policies: [
+          { title: "Refund", description: PackageData.refund },
+          { title: "Cancel", description: PackageData.cancel },
+          { title: "Payment", description: PackageData.payment },
+          { title: "Confirmation", description: PackageData.confirmation },
+        ],
+      }}
+    />
     <LuxuryFooter/>
  
       
