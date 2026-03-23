@@ -1,9 +1,4 @@
-import {
-    createTaxiService,
-    deleteTaxiService,
-    getAllTaxisService,
-    getTaxiByIdService,
-    updateTaxiService,
+import { createTaxiService, deleteTaxiService, getAllTaxisService, getTaxiByIdService, updateTaxiService,
 } from "@/services/taxiServices";
 
 import { NextResponse } from "next/server";

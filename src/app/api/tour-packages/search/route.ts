@@ -16,9 +16,11 @@ export async function GET(req: NextRequest) {
     return await getTourBySlugAndDuration(slug, duration);
 
   } catch (error) {
+
     return NextResponse.json(
       { success: false, message: "Something went wrong" },
       { status: 500 }
     );
+    
   }
 }
