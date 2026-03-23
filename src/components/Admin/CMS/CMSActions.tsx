@@ -9,13 +9,14 @@ interface CMSActionsProps {
 
 const CMSActions = ({
   actionType, editorType,
-   onPublish,
+  onPublish,
   loading = false,
 }: CMSActionsProps) => {
   return (
     <div className="mt-10 flex gap-3 items-center">
 
       {/* Publish / Update */}
+      
       <button
         type="submit"
         disabled={loading}
@@ -29,20 +30,22 @@ const CMSActions = ({
       </button>
 
       {/* Save Draft */}
-      {onPublish && (
-        <button
-          type="button"
-          onClick={onPublish}
-          disabled
-          className="px-6 py-2.5 rounded-lg text-sm font-medium
-            bg-pink-950/40 text-pink-400/70 border border-pink-900/50
+
+      {
+        actionType === "create" ? <> {onPublish && (
+          <button
+            type="button"
+            onClick={onPublish}
+            className="px-6 py-2.5 rounded-lg text-sm font-medium
+            bg-pink-600/40 text-pink-50 border border-pink-400
             hover:bg-pink-950/60 hover:text-pink-300
             transition active:scale-95 cursor-pointer
-            disabled:opacity-40 disabled:cursor-not-allowed"
-        >
-          Save Draft
-        </button>
-      )}
+            disabled:opacity-40"
+          >
+            Save Draft
+          </button>
+        )}</> : <></>
+      }
 
       <span className="ml-auto text-xs text-pink-500/50 self-center">
         Editing {editorType}

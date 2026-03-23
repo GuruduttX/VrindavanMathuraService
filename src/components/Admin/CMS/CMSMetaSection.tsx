@@ -13,17 +13,56 @@ export const categories = [
   "10 Day Tour Package",
 ];
 
-const Blogcategories = [
-  "All Blogs",
-  "Krishna Leela & Spirtuality",
-  "Temple Guides",
-  "Sacred Places & Nature",
-  "Travel Guides",
-  "Festivals & Events",
-  "Pilgrimage & Yatra",
-  "Food & Culture",
-  "Tour Packages & Services",
-  "Stories & Experiences",
+export const Blogcategories = [
+  "Hotels in Vrindavan",
+  "Hotels in Mathura",
+  "Luxury Hotels",
+  "Budget Hotels",
+  "Family Hotels",
+  "Couple Friendly Hotels",
+  "Hotels Near Temple",
+  "Ashrams & Dharamshalas",
+  "Hotel Reviews",
+  "Best Hotels Guide",
+
+  "Taxi Services",
+  "Taxi Fare Guide",
+  "Airport Taxi Transfer",
+  "Local Sightseeing Taxi",
+  "Outstation Taxi",
+  "Taxi Travel Tips",
+  "Taxi Booking Guide",
+
+  "Vrindavan Tour Packages",
+  "Mathura Tour Packages",
+  "Same Day Tour Packages",
+  "Weekend Tour Packages",
+  "Family Tour Packages",
+  "Pilgrimage Tour Packages",
+  "Temple Tour Guide",
+
+  "Vrindavan Puja Services",
+  "Mathura Puja Services",
+  "Temple Puja Booking",
+  "Pandit Booking",
+  "Special Puja Services",
+  "Festival Puja",
+  "Online Puja Services",
+
+  "Places to Visit in Vrindavan",
+  "Places to Visit in Mathura",
+  "Temple Guide",
+  "Travel Tips",
+  "Local Food & Restaurants",
+  "Festivals in Vrindavan",
+  "Things to Do",
+
+  "Travel Guide",
+  "Pilgrimage Guide",
+  "Devotional Stories",
+  "Spiritual Knowledge",
+  "Customer Experiences",
+  "Latest Updates"
 ];
 
 const Templecategories = [

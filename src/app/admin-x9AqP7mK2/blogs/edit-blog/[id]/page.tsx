@@ -37,12 +37,10 @@ type FAQ = {
 export default function EditBlog() {
 
   const params = useParams();
-  const slug = params.slug as string;
-
-  console.log("THE SLUG IS : ");
-  console.log(slug);
+  const id = params.id ;
 
   const [loading, setLoading] = useState(true);
+  const [dataId , setDataId] = useState("");
 
   const [form, setForm] = useState<BlogForm>({
     title: "",
@@ -73,7 +71,7 @@ export default function EditBlog() {
 
       try {
 
-        const res = await fetch(`/api/blog/${slug}`);
+        const res = await fetch(`/api/blog/${id}`);
         const data = await res.json();
 
         console.log("THE DATA COME IS : ");
@@ -105,6 +103,7 @@ export default function EditBlog() {
         });
 
         setFaqs(blog.faqs || []);
+        setDataId(blog._id)
 
       } catch (error) {
         toast.error("Error fetching blog");
@@ -114,7 +113,7 @@ export default function EditBlog() {
 
     };
 
-    if (slug) fetchBlog();
+    if (id) fetchBlog();
 
   }, []);
 
@@ -144,12 +143,13 @@ export default function EditBlog() {
       subContent: form.subContent,
       content: form.content,
       author: form.author,
+      status : "published",
       faqs
     };
 
     try {
 
-      const res = await fetch(`/api/blog/${slug}`, {
+      const res = await fetch(`/api/blog/${dataId}`, {
         method: "PUT",
         headers: {
           "Content-Type": "application/json"

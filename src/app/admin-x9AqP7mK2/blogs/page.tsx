@@ -1,66 +1,149 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Link from "next/link";
 import { LayoutGrid, Table } from "lucide-react";
+import { IBlog } from "@/types/blogTypes";
 
-/* ------------------ Dummy Data ------------------ */
-const DUMMY_BLOGS = [
-  {
-    _id: "1",
-    title: "Top 10 Places to Visit in Vrindavan",
-    description: "Explore the spiritual beauty...",
-    category: "Travel",
-    image: "https://images.unsplash.com/photo-1609921212029-bb5a28e60960",
-    status: "published",
-    createdAt: new Date("2026-03-20"),
-  },
-  {
-    _id: "2",
-    title: "Best Time to Visit Mathura",
-    description: "Know the best season...",
-    category: "Guide",
-    image: "https://images.unsplash.com/photo-1593696954577-ab3d39317b97",
-    status: "draft",
-    createdAt: new Date("2026-03-18"),
-  },
-  {
-    _id: "3",
-    title: "Complete Guide for First-Time Visitors",
-    description: "Everything you need...",
-    category: "Tips",
-    image: "https://images.unsplash.com/photo-1507525428034-b723cf961d3e",
-    status: "published",
-    createdAt: new Date("2026-03-15"),
-  },
+
+export const BLOG_CATEGORIES = [
+  "Hotels in Vrindavan",
+  "Hotels in Mathura",
+  "Luxury Hotels",
+  "Budget Hotels",
+  "Family Hotels",
+  "Couple Friendly Hotels",
+  "Hotels Near Temple",
+  "Ashrams & Dharamshalas",
+  "Hotel Reviews",
+  "Best Hotels Guide",
+
+  "Taxi Services",
+  "Taxi Fare Guide",
+  "Airport Taxi Transfer",
+  "Local Sightseeing Taxi",
+  "Outstation Taxi",
+  "Taxi Travel Tips",
+  "Taxi Booking Guide",
+
+  "Vrindavan Tour Packages",
+  "Mathura Tour Packages",
+  "Same Day Tour Packages",
+  "Weekend Tour Packages",
+  "Family Tour Packages",
+  "Pilgrimage Tour Packages",
+  "Temple Tour Guide",
+
+  "Vrindavan Puja Services",
+  "Mathura Puja Services",
+  "Temple Puja Booking",
+  "Pandit Booking",
+  "Special Puja Services",
+  "Festival Puja",
+  "Online Puja Services",
+
+  "Places to Visit in Vrindavan",
+  "Places to Visit in Mathura",
+  "Temple Guide",
+  "Travel Tips",
+  "Local Food & Restaurants",
+  "Festivals in Vrindavan",
+  "Things to Do",
+
+  "Travel Guide",
+  "Pilgrimage Guide",
+  "Devotional Stories",
+  "Spiritual Knowledge",
+  "Customer Experiences",
+  "Latest Updates"
 ];
 
+/* ------------------ Page ------------------ */
 export default function BlogsPage() {
+
   const [view, setView] = useState<"card" | "table">("card");
   const [search, setSearch] = useState("");
   const [statusFilter, setStatusFilter] = useState("all");
+  const [categoryFilter, setCategoryFilter] = useState("all");
   const [sort, setSort] = useState("latest");
 
-  /* ------------------ Filtering Logic ------------------ */
-  const filteredBlogs = DUMMY_BLOGS.filter((blog) => {
-    const matchesSearch = blog.title
-      .toLowerCase()
-      .includes(search.toLowerCase());
+  const [blogs, setBlogs] = useState<IBlog[]>([]);
+  const [loading, setLoading] = useState(true);
 
-    const matchesStatus =
-      statusFilter === "all" || blog.status === statusFilter;
+  /* ------------------ Fetch Blogs ------------------ */
+  const fetchBlogs = async () => {
+    try {
 
-    return matchesSearch && matchesStatus;
-  }).sort((a, b) => {
-    return sort === "latest"
-      ? b.createdAt.getTime() - a.createdAt.getTime()
-      : a.createdAt.getTime() - b.createdAt.getTime();
-  });
+      setLoading(true);
+
+      const res = await fetch("/api/blog", {
+        cache: "no-store"
+      });
+
+      const data = await res.json();
+
+      if (data.success) {
+        setBlogs(data.data);
+      }
+
+    } catch (error) {
+      console.error("Blog fetch error:", error);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  useEffect(() => {
+    fetchBlogs();
+  }, []);
+
+  /* ------------------ Filtering ------------------ */
+
+  const filteredBlogs = blogs
+    .filter((blog) => {
+
+      const matchesSearch = blog.title
+        .toLowerCase()
+        .includes(search.toLowerCase());
+
+      const matchesStatus =
+        statusFilter === "all" || blog.status === statusFilter;
+
+      const matchesCategory =
+        categoryFilter === "all" || blog.category === categoryFilter;
+
+      return matchesSearch && matchesStatus && matchesCategory;
+
+    })
+    .sort((a, b) => {
+
+      return sort === "latest"
+        ? new Date(b.createdAt!).getTime() - new Date(a.createdAt!).getTime()
+        : new Date(a.createdAt!).getTime() - new Date(b.createdAt!).getTime();
+
+    });
 
   /* ------------------ Stats ------------------ */
-  const total = DUMMY_BLOGS.length;
-  const published = DUMMY_BLOGS.filter(b => b.status === "published").length;
-  const drafts = DUMMY_BLOGS.filter(b => b.status === "draft").length;
+
+  const total = blogs.length;
+
+  const published = blogs.filter(
+    (b) => b.status === "published"
+  ).length;
+
+  const drafts = blogs.filter(
+    (b) => b.status === "draft"
+  ).length;
+
+  /* ------------------ Loading ------------------ */
+
+  if (loading) {
+    return (
+      <div className="text-pink-400">
+        Loading blogs...
+      </div>
+    );
+  }
 
   return (
     <section className="min-h-screen">
@@ -97,56 +180,74 @@ export default function BlogsPage() {
         <select
           value={statusFilter}
           onChange={(e) => setStatusFilter(e.target.value)}
-          className="px-3 py-2 bg-pink-950/40 border border-pink-900/40 rounded-lg text-pink-200"
+          className="px-3 py-2 bg-pink-950/40 border border-pink-900/40 rounded-lg text-pink-200 cursor-pointer"
         >
           <option value="all">All</option>
           <option value="published">Published</option>
           <option value="draft">Draft</option>
         </select>
 
+        {/* Category Filter */}
+        <select
+          value={categoryFilter}
+          onChange={(e) => setCategoryFilter(e.target.value)}
+          className="px-3 py-2 bg-pink-950/40 border border-pink-900/40 rounded-lg text-pink-200 cursor-pointer"
+        >
+          <option value="all">All Categories</option>
+
+          {BLOG_CATEGORIES.map((cat) => (
+            <option key={cat} value={cat}>
+              {cat}
+            </option>
+          ))}
+        </select>
+
         {/* Sort */}
         <select
           value={sort}
           onChange={(e) => setSort(e.target.value)}
-          className="px-3 py-2 bg-pink-950/40 border border-pink-900/40 rounded-lg text-pink-200"
+          className="px-3 py-2 bg-pink-950/40 border border-pink-900/40 rounded-lg text-pink-200 cursor-pointer"
         >
-          <option value="latest">Latest</option>
-          <option value="oldest">Oldest</option>
+          <option value="latest" className="cursor-pointer">Latest</option>
+          <option value="oldest" className="cursor-pointer">Oldest</option>
         </select>
 
         {/* View Toggle */}
-        <div className="flex bg-pink-950/40 rounded-lg border border-pink-900/40">
-          <button onClick={() => setView("card")} className="px-3 py-2">
+        <div className="flex bg-pink-950/40 rounded-lg border border-pink-900/40 cursor-pointer">
+          <button onClick={() => setView("card")} className="px-3 py-2 hover:bg-pink-800 cursor-pointer">
             <LayoutGrid size={16} />
           </button>
-          <button onClick={() => setView("table")} className="px-3 py-2">
+          <button onClick={() => setView("table")} className="px-3 py-2 hover:bg-pink-800 cursor-pointer">
             <Table size={16} />
           </button>
         </div>
 
-        {/* Create */}
+        {/* Create Blog */}
         <Link
-          href="/admin-x9AqP7mK2/blogs/create"
+          href="/admin-x9AqP7mK2/blogs/create-blog"
           className="px-4 py-2 bg-pink-600/30 rounded-lg text-pink-200"
         >
           + Create Blog
         </Link>
+
       </div>
 
       {/* CONTENT */}
       {filteredBlogs.length === 0 ? (
-        <p className="text-pink-400">No results found</p>
+        <p className="text-pink-400">No blogs found</p>
       ) : view === "card" ? (
         <BlogCards blogs={filteredBlogs} />
       ) : (
         <BlogTable blogs={filteredBlogs} />
       )}
+
     </section>
   );
 }
 
-/* ------------------ CARD VIEW ------------------ */
-function BlogCards({ blogs }: { blogs: any[] }) {
+/* ------------------ Card View ------------------ */
+
+function BlogCards({ blogs }: { blogs: IBlog[] }) {
   return (
     <div
       className="grid gap-6"
@@ -154,11 +255,11 @@ function BlogCards({ blogs }: { blogs: any[] }) {
     >
       {blogs.map((blog) => (
         <div
-          key={blog._id}
+          key={blog._id.toString()}
           className="group relative rounded-xl overflow-hidden bg-[#1e0d14]
           border border-pink-900/40 hover:-translate-y-1 transition"
         >
-          {/* Status Badge */}
+
           <span
             className={`absolute top-3 right-3 px-2 py-1 text-md rounded-full z-10
             ${
@@ -170,7 +271,6 @@ function BlogCards({ blogs }: { blogs: any[] }) {
             {blog.status}
           </span>
 
-          {/* Image */}
           <div className="h-44 overflow-hidden">
             <img
               src={blog.image}
@@ -178,25 +278,25 @@ function BlogCards({ blogs }: { blogs: any[] }) {
             />
           </div>
 
-          {/* Content */}
           <div className="p-4">
+
             <h3 className="text-pink-100 font-semibold mb-2">
               {blog.title}
             </h3>
 
             <p className="text-sm text-pink-400/60 line-clamp-3">
-              {blog.description}
+              {blog.subContent}
             </p>
 
             <div className="flex justify-between mt-4 text-xs text-pink-400">
               <span>{blog.category}</span>
-              <span>{new Date(blog.createdAt).toDateString()}</span>
+              <span>{new Date(blog.createdAt!).toDateString()}</span>
             </div>
 
-            {/* Actions */}
             <div className="flex gap-2 mt-4">
+
               <Link
-                href={`/admin-x9AqP7mK2/blogs/edit/${blog._id}`}
+                href={`/admin-x9AqP7mK2/blogs/edit-blog/${blog.slug}`}
                 className="flex-1 text-center py-2 rounded-lg text-sm
                 bg-pink-600/20 text-pink-300"
               >
@@ -207,16 +307,20 @@ function BlogCards({ blogs }: { blogs: any[] }) {
                 bg-red-900/20 text-red-400">
                 Delete
               </button>
+
             </div>
+
           </div>
+
         </div>
       ))}
     </div>
   );
 }
 
-/* ------------------ TABLE VIEW ------------------ */
-function BlogTable({ blogs }: { blogs: any[] }) {
+/* ------------------ Table View ------------------ */
+
+function BlogTable({ blogs }: { blogs: IBlog[] }) {
   return (
     <div className="overflow-x-auto border border-pink-900/40 rounded-xl">
       <table className="w-full text-sm text-pink-200">
@@ -232,9 +336,10 @@ function BlogTable({ blogs }: { blogs: any[] }) {
         </thead>
 
         <tbody>
+
           {blogs.map((blog) => (
             <tr
-              key={blog._id}
+              key={blog._id.toString()}
               className="border-t border-pink-900/30 hover:bg-pink-900/20"
             >
               <td className="px-4 py-3">{blog.title}</td>
@@ -253,12 +358,13 @@ function BlogTable({ blogs }: { blogs: any[] }) {
               </td>
 
               <td className="px-4 py-3 text-center">
-                {new Date(blog.createdAt).toDateString()}
+                {new Date(blog.createdAt!).toDateString()}
               </td>
 
               <td className="px-4 py-3 flex gap-2 justify-center">
+
                 <Link
-                  href={`/admin-x9AqP7mK2/blogs/edit/${blog._id}`}
+                  href={`/admin-x9AqP7mK2/blogs/edit-blog/${blog.slug}`}
                   className="px-3 py-1 rounded text-xs bg-pink-600/20 text-pink-300"
                 >
                   Edit
@@ -267,9 +373,12 @@ function BlogTable({ blogs }: { blogs: any[] }) {
                 <button className="px-3 py-1 rounded text-xs bg-red-900/20 text-red-400">
                   Delete
                 </button>
+
               </td>
+
             </tr>
           ))}
+
         </tbody>
 
       </table>
@@ -277,23 +386,8 @@ function BlogTable({ blogs }: { blogs: any[] }) {
   );
 }
 
-/* ------------------ EMPTY STATE ------------------ */
-function EmptyState() {
-  return (
-    <div className="text-center py-20">
-      <p className="text-pink-400 mb-4">No blogs yet</p>
-
-      <Link
-        href="/admin-x9AqP7mK2/blogs/create"
-        className="px-4 py-2 bg-pink-600/30 rounded-lg text-pink-200"
-      >
-        Create your first blog
-      </Link>
-    </div>
-  );
-}
-
 /* ------------------ Stat Card ------------------ */
+
 function StatCard({ title, value }: any) {
   return (
     <div className="bg-[#1e0d14] border border-pink-900/40 rounded-xl p-4">

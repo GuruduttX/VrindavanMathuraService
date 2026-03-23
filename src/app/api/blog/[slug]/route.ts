@@ -2,7 +2,7 @@ import { deleteBlog, getBlogById, updateBlog } from "@/controllers/blogControlle
 import { connectDB } from "@/lib/mongodb";
 import { NextResponse } from "next/server";
 
-export async function GET(
+export async function GET(req : Request,
   { params }: { params: Promise<{ slug : string }> }
 ) {
 
@@ -10,7 +10,7 @@ export async function GET(
 
     await connectDB();
 
-    const {slug} = await params;
+     const {slug} = await params;
 
     return getBlogById(slug);
 
@@ -31,16 +31,16 @@ export async function GET(
 
 export async function PUT(
   req: Request,
-  { params }: { params: Promise<{ id: string }> }
+  { params }: { params: Promise<{ slug : string }> }
 ) {
 
   try {
 
     await connectDB();
 
-    const { id } = await params;
+    const { slug } = await params;
 
-    return updateBlog(req, id);
+    return updateBlog(req, slug);
 
   } catch (error) {
 
@@ -57,16 +57,16 @@ export async function PUT(
 
 export async function DELETE(
   req: Request,
-  { params }: { params: Promise<{ id: string }> }
+  { params }: { params: Promise<{ slug: string }> }
 ) {
 
   try {
 
     await connectDB();
 
-    const { id } = await params;
+    const { slug } = await params;
 
-    return deleteBlog(id);
+    return deleteBlog(slug);
 
   } catch (error) {
 

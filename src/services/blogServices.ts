@@ -23,9 +23,9 @@ export const getAllBlogsService = async () => {
 
 
 
-export const getBlogByIdService = async (id: string) => {
+export const getBlogByIdService = async (slug : string) => {
   try {
-    const blog = await Blog.findById(id);
+    const blog = await Blog.findOne({slug : slug});
 
     if (!blog) {
       throw new Error("Blog not found");

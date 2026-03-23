@@ -52,7 +52,7 @@ const CMSContentSection = ({
         <div className="absolute -top-10 left-10 w-40 h-40 bg-pink-600/10 blur-3xl pointer-events-none hover:bg-pink-700" />
 
         <SunEditor
-          defaultValue={content}
+          setContents={content}
           setOptions={{
             minHeight: "60vh",
             maxHeight: "65vh",

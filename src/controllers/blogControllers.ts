@@ -1,9 +1,4 @@
-import { 
-    createBlogService, 
-    deleteBlogService, 
-    getAllBlogsService, 
-    getBlogByIdService, 
-    updateBlogService 
+import { createBlogService, deleteBlogService, getAllBlogsService, getBlogByIdService ,updateBlogService 
 } from "@/services/blogServices";
 
 import { NextResponse } from "next/server";
@@ -59,11 +54,11 @@ export const getAllBlogs = async () => {
 
 
 
-export const getBlogById = async (id: string) => {
+export const getBlogById = async (slug : string) => {
 
     try {
 
-        const blog = await getBlogByIdService(id);
+        const blog = await getBlogByIdService(slug);
 
         if (!blog) {
             return NextResponse.json({

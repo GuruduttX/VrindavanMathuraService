@@ -1,5 +1,4 @@
 "use client"
-
 import CMSActions from '@/components/Admin/CMS/CMSActions';
 import CMSContentSection from '@/components/Admin/CMS/CMSContentSection';
 import CMSHeader from '@/components/Admin/CMS/CMSHeader';
@@ -12,6 +11,7 @@ import toast from 'react-hot-toast';
 import CMSSchema from '@/components/Admin/CMS/CMSSchema';
 
 type BlogForm = {
+
   title: string;
   category: string
   slug: string
@@ -24,6 +24,7 @@ type BlogForm = {
   content: string
   schemaTitle: string
   schemaDescription: string
+  
 }
 
 type FAQ = {
@@ -54,8 +55,6 @@ export default function CreateNewBlog() {
   const updateForm = (field: keyof BlogForm, value: string) => {
     setForm((prev) => ({ ...prev, [field]: value }))
   }
-
-  /* ---------------- VALIDATION ---------------- */
 
   const validateBeforePublish = async () => {
 
@@ -126,6 +125,7 @@ export default function CreateNewBlog() {
       subContent: form.subContent,
       content: form.content,
       author: form.author,
+      status : "published",
       faqs
     };
 
@@ -147,6 +147,23 @@ export default function CreateNewBlog() {
       }
 
       toast.success("Blog Published Successfully");
+
+      setForm({
+        title: "",
+        category: "",
+        slug: "",
+        author: "",
+        metaTitle: "",
+        metaDescription: "",
+        image: "",
+        alt: "",
+        subContent: "",
+        content: "",
+        schemaTitle: "",
+        schemaDescription: ""
+      });
+
+      setFaqs([{ id: crypto.randomUUID(), question: "", answer: "" }])
 
     } catch (error) {
       toast.error("Server Error");
@@ -166,15 +183,16 @@ export default function CreateNewBlog() {
         title: form.metaTitle,
         description: form.metaDescription,
       },
-      schema: {
+      structuredData: {
         title: form.schemaTitle,
         description: form.schemaDescription
       },
       image: form.image,
       alt: form.alt,
-      subcontent: form.subContent,
+      subContent: form.subContent,
       content: form.content,
       author: form.author,
+      status : "draft",
       faqs
     };
 
@@ -195,7 +213,24 @@ export default function CreateNewBlog() {
         return;
       }
 
-      toast.success("Blog Published Successfully");
+      toast.success("Blog Drafted Successfully");
+
+      setForm({
+        title: "",
+        category: "",
+        slug: "",
+        author: "",
+        metaTitle: "",
+        metaDescription: "",
+        image: "",
+        alt: "",
+        subContent: "",
+        content: "",
+        schemaTitle: "",
+        schemaDescription: ""
+      });
+
+      setFaqs([{ id: crypto.randomUUID(), question: "", answer: "" }])
 
     } catch (error) {
       toast.error("Server Error");

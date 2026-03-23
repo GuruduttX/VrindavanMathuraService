@@ -68,17 +68,22 @@ const blogSchema = new Schema<IBlog>(
         },
 
         structuredData: {
-            schemaTitle: {
+            title: {
                 type: String
             },
 
-            schemaDescription: {
+            description: {
                 type: String
             }
         },
 
         faqs: [
             {
+                id : {
+                    type : String,
+                    required : true
+                },
+
                 question: {
                     type: String,
                     required: true
