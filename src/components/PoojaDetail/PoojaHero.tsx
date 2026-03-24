@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
 
 interface PoojaHeroProps {
   pooja: {
@@ -10,6 +11,7 @@ interface PoojaHeroProps {
     location: string;
     price: number;
     heroImage: string;
+    discountPrice : string;
   };
 }
 
@@ -19,10 +21,12 @@ export default function PoojaHero({ pooja }: PoojaHeroProps) {
 
       {/* Background Image */}
       <div className="absolute inset-0">
-        <img
+        <Image
           src={"/images/pooja/mainHero.webp"}
           alt={pooja.title}
-          className="w-full h-full object-cover object-center brightness-[0.35]"
+          fill
+          className=" object-cover object-center brightness-[0.35]"
+          priority
         />
       </div>
 
@@ -85,11 +89,11 @@ export default function PoojaHero({ pooja }: PoojaHeroProps) {
           </p>
 
           {/* Stats Row */}
-          <div className="mt-9 flex flex-wrap gap-3">
+         <div className="mt-9 flex flex-wrap gap-3">
             {[
-              { icon: "⏱", label: "Duration", value: pooja.duration },
-              { icon: "📍", label: "Location", value: pooja.location },
-              { icon: "₹", label: "Starting From", value: `₹${pooja.price.toLocaleString("en-IN")}` },
+              { icon: "⏱", label: "Duration", value: pooja.duration, originalPrice: null },
+              { icon: "📍", label: "Location", value: pooja.location, originalPrice: null },
+              { icon: "₹", label: "Starting From", value: pooja.price ?? pooja.price, originalPrice: pooja.discountPrice ?  pooja.discountPrice : pooja.price },
             ].map((item) => (
               <div
                 key={item.label}
@@ -101,12 +105,18 @@ export default function PoojaHero({ pooja }: PoojaHeroProps) {
                 <span className="text-lg leading-none">{item.icon}</span>
                 <div>
                   <p className="text-white/55 text-[10px] uppercase tracking-wider leading-none mb-0.5">{item.label}</p>
-                  <p className="text-white font-semibold text-sm leading-tight">{item.value}</p>
+                  <p className="text-white font-semibold text-sm leading-tight flex items-center gap-1.5">
+                    {typeof item.value === "number" ? `₹${item.value.toLocaleString("en-IN")}` : item.value}
+                    {item.originalPrice && (
+                      <span className="text-white/45 text-xs font-normal line-through">
+                        ₹{item.originalPrice.toLocaleString("en-IN")}
+                      </span>
+                    )}
+                  </p>
                 </div>
               </div>
             ))}
           </div>
-
           {/* CTA Buttons */}
           <div className="mt-9 flex flex-wrap gap-4">
 

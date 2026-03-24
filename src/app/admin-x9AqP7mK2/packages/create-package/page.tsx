@@ -78,7 +78,7 @@ export default function CreateNewPackage() {
   });
 
   const [loading, setLoading] = useState(false);
-  const [childImage,   setChildImage]   = useState<ChildImage[]>([]);
+  const [childImage,   setChildImage]   = useState<ChildImage[]>([{id : crypto.randomUUID(), image : "", alt : ""}]);
   const [faqs,         setFaqs]         = useState<FAQ[]>([{ id: crypto.randomUUID(), question: "", answer: "" }]);
   const [testimonials, setTestimonials] = useState<Testimonial[]>([{ id: crypto.randomUUID(), name: "", description: "", rating: "" }]);
   const [highLights,   setHighLights]   = useState<HighLights[]>([{ id: crypto.randomUUID(), description: "" }]);
@@ -129,7 +129,7 @@ export default function CreateNewPackage() {
       highlights: highLights,
       inclusions,
       exclusions,
-      documents,
+      knowBeforeYouGo : documents,
       itinerary,
 
       durationbreakdown: breakdown,

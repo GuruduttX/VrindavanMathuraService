@@ -31,55 +31,66 @@ export default function PackageDurationStrip({
           {duration}
         </motion.div>
 
-        {/* Timeline Wrapper */}
-        <div className="relative">
+        {/* Mobile: vertical timeline */}
+        <div className="flex flex-col gap-0 md:hidden">
+          {breakdown.map((item, index) => (
+            <motion.div
+              key={item.id}
+              initial={{ opacity: 0, x: -20 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              transition={{ delay: index * 0.1 }}
+              className="flex items-start gap-4"
+            >
+              {/* Left: node + line */}
+              <div className="flex flex-col items-center">
+                <div className="w-4 h-4 bg-pink-500 rounded-full border-4 border-white shadow-md shrink-0 mt-1" />
+                {index < breakdown.length - 1 && (
+                  <div className="w-0.5 h-10 bg-gradient-to-b from-pink-400 to-rose-300" />
+                )}
+              </div>
+              {/* Right: content */}
+              <div className="pb-6">
+                <span className="text-3xl font-extrabold text-gray-800">{item.days}</span>
+                <span className="text-xs text-gray-500 ml-1">days in</span>
+                <p className="text-sm font-semibold text-gray-900 leading-tight">{item.place}</p>
+              </div>
+            </motion.div>
+          ))}
+        </div>
 
-          {/* Animated Line */}
-          <motion.div
-            initial={{ width: 0 }}
-            whileInView={{ width: "100%" }}
-            transition={{ duration: 1.2, ease: "easeOut" }}
-            className="absolute top-6 left-0 h-1 bg-gradient-to-r from-pink-400 to-rose-500 rounded-full"
-          />
-
-          <div className="relative flex flex-wrap md:flex-nowrap justify-between gap-10">
-
+        {/* Desktop: horizontal scroll timeline */}
+        <div className="hidden md:block relative overflow-x-auto pb-2">
+          <div className="relative flex gap-10 w-max min-w-full">
+            <motion.div
+              initial={{ width: 0 }}
+              whileInView={{ width: "100%" }}
+              transition={{ duration: 1.2, ease: "easeOut" }}
+              className="absolute top-[10px] left-0 h-1 bg-gradient-to-r from-pink-400 to-rose-500 rounded-full"
+            />
             {breakdown.map((item, index) => (
               <motion.div
                 key={item.id}
                 initial={{ opacity: 0, y: 30 }}
                 whileInView={{ opacity: 1, y: 0 }}
-                transition={{ delay: index * 0.15 }}
-                className="relative flex flex-col items-center text-center group"
+                transition={{ delay: index * 0.1 }}
+                className="relative flex flex-col items-center text-center group shrink-0 w-24"
               >
-
-                {/* Node */}
                 <div className="w-5 h-5 bg-pink-500 rounded-full border-4 border-white shadow-md group-hover:scale-110 transition-transform duration-300" />
-
-                {/* Days */}
                 <motion.span
                   initial={{ scale: 0 }}
                   whileInView={{ scale: 1 }}
-                  transition={{ delay: index * 0.2, type: "spring" }}
+                  transition={{ delay: index * 0.1, type: "spring" }}
                   className="mt-4 text-4xl font-extrabold text-gray-800"
                 >
                   {item.days}
                 </motion.span>
-
-                {/* Label */}
-                <span className="text-xs text-gray-500 mt-1">
-                  Days in
-                </span>
-
-                <span className="text-sm font-semibold text-gray-900">
-                  {item.place}
-                </span>
-
+                <span className="text-xs text-gray-500 mt-1">Days in</span>
+                <span className="text-sm font-semibold text-gray-900 leading-tight">{item.place}</span>
               </motion.div>
             ))}
-
           </div>
         </div>
+
       </div>
     </section>
   );

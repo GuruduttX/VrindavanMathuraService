@@ -153,7 +153,7 @@ export default function page() {
       setHighLights(data.highlights ?? [])
       setInclusions(data.inclusions ?? [])
       setExclusions(data.exclusions ?? [])
-      setDocuments(data.documents ?? [])
+      setDocuments(data.knowBeforeYouGo ?? [])
       setItinerary(data.itinerary ?? [])
       setChildImage(data.childImage ?? []);
       setBreakdown(data.durationbreakdown ?? []);
@@ -213,7 +213,7 @@ export default function page() {
         highlights: highLights,
         inclusions,
         exclusions,
-        documents,
+        knowBeforeYouGo : documents,
         itinerary,
 
         durationbreakdown: breakdown,

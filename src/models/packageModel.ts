@@ -49,6 +49,11 @@ interface ChildImage {
   alt: string;
 }
 
+interface KnowBeforeYouGo {
+   id : string;
+   description : string;
+}
+
 export interface ITourPackage extends Document {
   title: string;
   slug: string;
@@ -73,6 +78,8 @@ export interface ITourPackage extends Document {
 
   inclusions: TextItem[];
   exclusions: TextItem[];
+
+  knowBeforeYouGo : KnowBeforeYouGo[];
 
   faqs: FAQ[];
 
