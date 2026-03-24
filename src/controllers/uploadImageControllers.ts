@@ -25,6 +25,8 @@ export const uploadImage = async (req: Request) => {
 
   } catch (error: any) {
 
+    console.log(error)
+
     return NextResponse.json({
       success: false,
       error: error.message,

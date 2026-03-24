@@ -25,11 +25,11 @@ export default function TourArchiveCTA() {
       </svg>
 
       {/* MAIN CTA */}
-      <div className="bg-gradient-to-br from-rose-50 to-amber-50 py-28 px-6 lg:px-20">
-        <div className="max-w-6xl mx-auto grid lg:grid-cols-2 items-center gap-20">
+      <div className="bg-gradient-to-br from-rose-50 to-amber-50 py-16 px-6 lg:py-28 lg:px-20">
+        <div className="max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-2 items-center gap-12 lg:gap-20">
 
           {/* LEFT TEXT */}
-          <div className="space-y-8">
+          <div className="space-y-6 text-center lg:text-left">
             <motion.h2
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
@@ -48,7 +48,7 @@ export default function TourArchiveCTA() {
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.2, duration: 0.6 }}
               viewport={{ once: true }}
-              className="text-lg text-gray-600 leading-relaxed"
+              className="text-base lg:text-lg text-gray-600 leading-relaxed"
             >
               Our Braj travel specialists craft custom itineraries covering sacred
               temples, comfortable stays, private transfers, and guided experiences —
@@ -56,13 +56,13 @@ export default function TourArchiveCTA() {
             </motion.p>
 
             <Link href="/contact">
-              <button className="px-10 py-4 rounded-full bg-pink-600 text-white font-medium tracking-wide hover:bg-pink-700 transition duration-300 shadow-md">
+              <button className="px-8 py-3.5 lg:px-10 lg:py-4 rounded-full bg-pink-600 text-white font-medium tracking-wide hover:bg-pink-700 transition duration-300 shadow-md cursor-pointer">
                 Speak With Our Travel Expert
               </button>
             </Link>
           </div>
 
-          {/* RIGHT IMAGE WITH SVG DECORATION */}
+          {/* RIGHT IMAGE */}
           <motion.div
             initial={{ opacity: 0, x: 40 }}
             whileInView={{ opacity: 1, x: 0 }}
@@ -70,24 +70,19 @@ export default function TourArchiveCTA() {
             viewport={{ once: true }}
             className="relative flex justify-center"
           >
-            {/* Decorative Vertical SVG */}
+            {/* Decorative line — hidden on mobile */}
             <svg
-              className="absolute -left-6 top-10 h-60 w-6"
+              className="absolute -left-6 top-10 h-60 w-6 hidden lg:block"
               viewBox="0 0 20 200"
               fill="none"
             >
-              <path
-                d="M10 0 L10 200"
-                stroke="#ec4899"
-                strokeWidth="2"
-              />
+              <path d="M10 0 L10 200" stroke="#ec4899" strokeWidth="2" />
               <circle cx="10" cy="40" r="3" fill="#f43f5e" />
               <circle cx="10" cy="100" r="3" fill="#f43f5e" />
               <circle cx="10" cy="160" r="3" fill="#f43f5e" />
             </svg>
 
-            {/* Image */}
-            <div className="relative w-[420px] h-[300px] rounded-3xl overflow-hidden shadow-2xl">
+            <div className="relative w-full max-w-sm sm:max-w-md lg:w-[420px] h-[220px] sm:h-[260px] lg:h-[300px] rounded-3xl overflow-hidden shadow-2xl">
               <Image
                 src="/images/tourpackages/TourPackage-CTA.webp"
                 alt="Custom Mathura Vrindavan Tour"
