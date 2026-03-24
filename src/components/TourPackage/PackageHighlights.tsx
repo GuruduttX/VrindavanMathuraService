@@ -14,43 +14,32 @@ export default function PackageHighlights({
   PackageData: PackageType;
 }) {
   return (
-    <section className="py-8">
-      <div className="max-w-7xl mx-auto px-6">
+    <section className="py-10">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6">
 
-        {/* TOP DIVIDER */}
         <div className="border-t border-pink-100 mb-8" />
 
-        <h2 className="text-2xl font-semibold text-gray-900 mb-8">
+        <h2 className="text-2xl font-semibold text-gray-900 mb-6">
           Trip Highlights
         </h2>
 
-        <div className="space-y-5">
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
           {PackageData.highlights.map((item, index) => (
             <div
               key={index}
-              className="relative flex gap-4 items-start rounded-2xl 
-              bg-gradient-to-br from-pink-50 to-white 
-              border border-pink-100 
-              px-6 py-5"
+              className="flex items-start gap-3 p-4 rounded-2xl border border-pink-100 bg-pink-50/50 hover:bg-pink-50 transition-colors duration-200 min-w-0 overflow-hidden"
             >
-              {/* LEFT ACCENT BAR */}
-              <div className="absolute left-0 top-0 bottom-0 w-1 bg-pink-500 rounded-l-2xl" />
-
-              {/* ICON */}
-              <div className="mt-1 text-pink-600">
-                <Sparkles className="w-5 h-5" />
+              <div className="shrink-0 w-8 h-8 rounded-full bg-pink-100 flex items-center justify-center mt-0.5">
+                <Sparkles className="w-4 h-4 text-pink-500" />
               </div>
-
-              {/* TEXT */}
-              <p className="text-gray-800 leading-relaxed text-[15px]">
+              <p className="text-gray-700 leading-relaxed text-sm pt-1 break-words min-w-0 flex-1">
                 {item.description}
               </p>
             </div>
           ))}
         </div>
 
-        {/* BOTTOM DIVIDER */}
-        <div className="border-b border-pink-100 mt-10" />
+        <div className="border-b border-pink-100 mt-8" />
 
       </div>
     </section>

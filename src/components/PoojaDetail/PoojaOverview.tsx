@@ -1,4 +1,13 @@
-export default function PoojaOverview() {
+interface ImageType {
+   image : string;
+   alt : string;
+}
+interface PoojaOverviewProps {
+  imageData: ImageType;
+  description: string;
+}
+
+export default function PoojaOverview({ imageData, description }: PoojaOverviewProps) {
   return (
     <section className="py-24 px-6 bg-white relative overflow-hidden">
 
@@ -19,11 +28,10 @@ export default function PoojaOverview() {
 
           <div className="relative h-[440px] w-full rounded-2xl overflow-hidden shadow-xl">
             <img
-              src="/images/vrindavan-pooja.jpg"
-              alt="Vrindavan Pooja"
+              src={imageData?.image || ""}
+              alt={imageData?.alt}
               className="w-full h-full object-cover"
             />
-            {/* Subtle inner overlay for richness */}
             <div className="absolute inset-0 bg-gradient-to-t from-rose-900/20 to-transparent" />
           </div>
 
@@ -70,21 +78,8 @@ export default function PoojaOverview() {
             <div className="h-0.5 w-20 bg-gradient-to-r from-pink-500 to-rose-400 rounded-full" />
           </div>
 
-          {/* Body text */}
-          <p className="text-gray-500 leading-relaxed text-[15px]">
-            Mathura and Vrindavan are among the most sacred places in India,
-            known as the divine land of Lord Krishna. Devotees from across
-            the world visit these holy cities to perform spiritual rituals
-            and poojas to seek blessings, peace, and prosperity.
-          </p>
-
-          <p className="text-gray-500 leading-relaxed text-[15px]">
-            We help you arrange authentic pooja ceremonies guided by
-            experienced priests at renowned temples and sacred ghats.
-            Whether you want a personal pooja, family ritual, or special
-            religious ceremony, we make the entire process smooth and
-            spiritually fulfilling.
-          </p>
+          {/* Backend description */}
+          <p className="text-gray-500 leading-relaxed text-[15px]">{description}</p>
 
           {/* Feature pills */}
           <div className="flex flex-wrap gap-2 mt-1">

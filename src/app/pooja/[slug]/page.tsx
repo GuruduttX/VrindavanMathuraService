@@ -13,6 +13,7 @@ import PoojaFAQ from "@/components/PoojaDetail/PoojaFAQ";
 import PoojaCTA from "@/components/PoojaDetail/PoojaCTA";
 import Navbar from "@/utils/Navbar";
 import LuxuryFooter from "@/utils/Footer";
+import PoojaContent from "@/components/PoojaDetail/PoojaContent";
 
 
 const getPooja = async (slug: string) => {
@@ -36,13 +37,14 @@ export default async function PoojaPage({ params }: { params: Promise<{ slug: st
 
       <div className="max-w-7xl mx-auto px-6 gap-12 py-20">
         <div className="space-y-16">
-          <PoojaOverview  />
-          <PoojaBenefits />
+          <PoojaOverview description={pooja.description} imageData={pooja.heroImage} />
+          <PoojaBenefits  />
           <PoojaIncludesStrip  />
-          <PoojaProcessTimeline />
+          <PoojaContent html={pooja.aboutContent}/>
+          <PoojaProcessTimeline  />
           <PoojaGallery  />
           <DevoteeTestimonials />
-          <PoojaFAQ  />
+          <PoojaFAQ faqs={pooja.faqs}  />
         </div>
       </div>
 
