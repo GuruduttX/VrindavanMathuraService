@@ -3,17 +3,15 @@ import React from 'react'
 interface CMSActionsProps {
   actionType: 'create' | 'update';
   editorType: "Blog" | "Package" | "Temple" | "Pooja";
+  onPublish: () => void
   onSaveDraft: () => void;
   loading?: boolean;
 }
 
 const CMSActions = ({
   actionType, editorType,
-<<<<<<< HEAD
   onPublish,
-=======
    onSaveDraft,
->>>>>>> 925109d0358d53d7867f9fea42ebd69f7cb617fd
   loading = false,
 }: CMSActionsProps) => {
   return (
@@ -47,12 +45,7 @@ const CMSActions = ({
         Save Draft
       </button>
     
-
-      {/* Preview */}
-     
-
       {/* Save Draft */}
-<<<<<<< HEAD
 
       {
         actionType === "create" ? <> {onPublish && (
@@ -69,9 +62,7 @@ const CMSActions = ({
           </button>
         )}</> : <></>
       }
-=======
      
->>>>>>> 925109d0358d53d7867f9fea42ebd69f7cb617fd
 
       <span className="ml-auto text-xs text-pink-500/50 self-center">
         Editing {editorType}
