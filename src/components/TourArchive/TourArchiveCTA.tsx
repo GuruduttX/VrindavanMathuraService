@@ -25,7 +25,7 @@ export default function TourArchiveCTA() {
       </svg>
 
       {/* MAIN CTA */}
-      <div className="bg-gradient-to-br from-rose-50 to-amber-50 py-16 px-6 lg:py-28 lg:px-20">
+      <div className="bg-gradient-to-br from-rose-50 to-amber-50 py-12 px-4 sm:py-16 sm:px-6 md:py-20 md:px-10 lg:py-28 lg:px-20">
         <div className="max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-2 items-center gap-12 lg:gap-20">
 
           {/* LEFT TEXT */}
@@ -35,7 +35,7 @@ export default function TourArchiveCTA() {
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6 }}
               viewport={{ once: true }}
-              className="text-3xl md:text-4xl font-serif text-gray-900 leading-snug"
+              className="text-2xl sm:text-3xl md:text-4xl font-serif text-gray-900 leading-snug"
             >
               Let Us Design Your
               <span className="block italic text-pink-600">
@@ -56,7 +56,7 @@ export default function TourArchiveCTA() {
             </motion.p>
 
             <Link href="/contact">
-              <button className="px-8 py-3.5 lg:px-10 lg:py-4 rounded-full bg-pink-600 text-white font-medium tracking-wide hover:bg-pink-700 transition duration-300 shadow-md cursor-pointer">
+              <button className="px-6 py-3 sm:px-8 sm:py-3.5 lg:px-10 lg:py-4 text-sm sm:text-base rounded-full bg-pink-600 text-white font-medium tracking-wide hover:bg-pink-700 transition duration-300 shadow-md cursor-pointer">
                 Speak With Our Travel Expert
               </button>
             </Link>
@@ -87,6 +87,9 @@ export default function TourArchiveCTA() {
                 src="/images/tourpackages/TourPackage-CTA.webp"
                 alt="Custom Mathura Vrindavan Tour"
                 fill
+                loading="lazy"
+                placeholder="blur"
+                blurDataURL="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mNk+M9QDwADhgGAWjR9awAAAABJRU5ErkJggg=="
                 className="object-cover"
               />
             </div>

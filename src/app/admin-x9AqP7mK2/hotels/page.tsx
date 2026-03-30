@@ -127,7 +127,7 @@ export default function HotelsPage() {
         </div>
 
         <Link
-          href="/admin-x9AqP7mK2/hotels/create"
+          href="/admin-x9AqP7mK2/hotels/create-hotel"
           className="px-4 py-2 bg-pink-600/30 rounded-lg text-pink-200"
         >
           + Add Hotel

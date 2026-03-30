@@ -37,7 +37,7 @@ type Props = {
   cabtype: string
   fueltype: string
   onChange: (field: keyof CarForm, value: string) => void
-  editorType: "Car"
+  editorType: "Taxi"
 }
 
 /* ================== COMPONENT ================== */
@@ -53,8 +53,8 @@ const TaxiDetailsSection = ({
 }: Props) => {
 
   return (
+    
     <div className="space-y-6">
-
         <div>
         <label className="text-sm text-white/70">
           {editorType} name

@@ -1,121 +1,227 @@
-import TourArchiveCTA from "@/components/TourArchive/TourArchiveCTA"
-import TourFAQSection from "@/components/TourArchive/TourArchiveFAQS"
-import TourArchiveLayout from "@/components/TourArchive/TourArchiveLayout"
-import TourFilters from "@/components/TourArchive/TourFilters"
-import TourGrid from "@/components/TourArchive/TourGrid"
-import TourHero from "@/components/TourArchive/TourHero"
-import TourTrustStrip from "@/components/TourArchive/TourTrustStrip"
-import LuxuryFooter from "@/utils/Footer"
+import dynamic from "next/dynamic"
+
 import Navbar from "@/utils/Navbar"
+import LuxuryFooter from "@/utils/Footer"
+import TourHero from "@/components/TourArchive/TourHero"
+const TourArchiveLayout = dynamic(() => import("@/components/TourArchive/TourArchiveLayout"))
+const TourFilters = dynamic(() => import("@/components/TourArchive/TourFilters"))
+const TourGrid = dynamic(() => import("@/components/TourArchive/TourGrid"))
+const TourTrustStrip = dynamic(() => import("@/components/TourArchive/TourTrustStrip"))
+const ToursReadMore = dynamic(() => import("@/components/TourArchive/TourReadMore"))
+const TourFAQSection = dynamic(() => import("@/components/TourArchive/TourArchiveFAQS"))
+const TourArchiveCTA = dynamic(() => import("@/components/TourArchive/TourArchiveCTA"))
+import { Metadata } from "next"
 
-export const tours = [
-  {
-    id: 1,
-    title: "Mathura Vrindavan Divine Darshan",
-    image: "https://id-preview--6ab10f08-4578-4d50-b1e0-2997d9…e1.lovable.app/assets/mathura-temple-oQ3oXqUw.jpg",
-    category: "Spiritual",
-    duration: "2 Days / 1 Night",
-    rating: 4.8,
-    reviews: 342,
-    price: 4999,
-    oldPrice: 7499,
-    groupType: "Families & Devotees",
-    tags: ["Krishna Janmabhoomi", "Banke Bihari Temple", "ISKCON Temple"],
-    description:
-      "Experience the divine essence of Mathura and Vrindavan with visits to the most sacred temples.",
+export const metadata: Metadata = {
+  title:
+    "Mathura Vrindavan Tour Packages | 1 Day, 2 Day & Braj Yatra Packages",
+
+  description:
+    "Explore Mathura Vrindavan tour packages including 1 day, 2 day and Braj Yatra packages. Visit Banke Bihari Temple, Prem Mandir, ISKCON and other sacred places with guided spiritual tours.",
+
+  keywords: [
+    "Mathura Vrindavan tour packages",
+    "Vrindavan tour package",
+    "Mathura Vrindavan 1 day tour",
+    "Braj Yatra tour package",
+    "Vrindavan temple tour",
+    "Mathura pilgrimage tour",
+    "Vrindavan spiritual tour"
+  ],
+
+  alternates: {
+    canonical: "https://vrindavantoursandpackages.com/tour-packages"
   },
-  {
-    id: 2,
-    title: "Vrindavan Holi Special Tour",
-    image: "https://id-preview--6ab10f08-4578-4d50-b1e0-2997d9…e1.lovable.app/assets/vrindavan-holi-6ZfA0udw.jpg",
-    category: "Festival",
-    duration: "3 Days / 2 Nights",
-    rating: 4.9,
-    reviews: 189,
-    price: 8999,
-    oldPrice: 12999,
-    groupType: "Groups & Couples",
-    tags: ["Lathmar Holi", "Phoolon ki Holi", "Banke Bihari Holi"],
-    description:
-      "Celebrate the world-famous Vrindavan Holi with colors, music, and spiritual bliss.",
+
+  robots: {
+    index: true,
+    follow: true
   },
-  {
-    id: 3,
-    title: "Yamuna Ghat Sunset Experience",
-    image: "https://id-preview--6ab10f08-4578-4d50-b1e0-2997d96553e1.lovable.app/assets/yamuna-ghat-0Ege25Tf.jpg",
-    category: "Heritage",
-    duration: "1 Day",
-    rating: 4.7,
-    reviews: 521,
-    price: 1999,
-    oldPrice: 2499,
-    groupType: "Solo Travelers & Couples",
-    tags: ["Vishram Ghat", "Yamuna Aarti", "Boat Ride"],
+
+  openGraph: {
+    title:
+      "Mathura Vrindavan Tour Packages | Braj Yatra & Temple Tours",
     description:
-      "A serene evening at the sacred Yamuna Ghats with boat rides and aarti ceremony.",
+      "Book Mathura Vrindavan tour packages including temple darshan, Braj Yatra tours and spiritual travel experiences.",
+    url: "https://vrindavantoursandpackages.com/tour-packages",
+    siteName: "Mathura Vrindavan Travel Guide",
+    images: [
+      {
+        url: "https://vrindavantoursandpackages.com/Experience_my_India.webp",
+        width: 1200,
+        height: 630,
+        alt: "Mathura Vrindavan Tour Packages"
+      }
+    ],
+    type: "website"
   },
-  {
-    id: 4,
-    title: "Krishna Janmabhoomi Heritage Walk",
-    image: "https://id-preview--6ab10f08-4578-4d50-b1e0-2997d96553e1.lovable.app/assets/janmabhoomi-CdvHG-Ma.jpg",
-    category: "Heritage",
-    duration: "1 Day",
-    rating: 4.6,
-    reviews: 278,
-    price: 2499,
-    oldPrice: 3999,
-    groupType: "History Lovers",
-    tags: ["Janmabhoomi Temple", "Dwarkadhish Temple", "Mathura Museum"],
+
+  twitter: {
+    card: "summary_large_image",
+    title: "Mathura Vrindavan Tour Packages",
     description:
-      "Walk through the birthplace of Lord Krishna and explore Mathura’s rich heritage.",
-  },
-  {
-    id: 5,
-    title: "Govardhan Parikrama Yatra",
-    image: "https://id-preview--6ab10f08-4578-4d50-b1e0-2997d96553e1.lovable.app/assets/govardhan-Do8OJg9M.jpg",
-    category: "Adventure",
-    duration: "2 Days / 1 Night",
-    rating: 4.8,
-    reviews: 156,
-    price: 3999,
-    oldPrice: 5999,
-    groupType: "Pilgrims & Adventure Seekers",
-    tags: ["21 KM Parikrama", "Govardhan Hill", "Manasi Ganga"],
-    description:
-      "Complete the sacred 21 km Govardhan Parikrama with guided spiritual experience.",
-  },
-  {
-    id: 6,
-    title: "Complete Braj Dham Premium Tour",
-    image: "https://id-preview--6ab10f08-4578-4d50-b1e0-2997d9…e1.lovable.app/assets/vrindavan-hero-BgF8FWzB.jpg",
-    category: "Premium",
-    duration: "5 Days / 4 Nights",
-    rating: 5.0,
-    reviews: 98,
-    price: 15999,
-    oldPrice: 19999,
-    groupType: "Premium Travelers",
-    tags: ["All Major Temples", "Govardhan Parikrama", "Barsana Visit"],
-    description:
-      "The ultimate Braj Dham experience covering every sacred site with premium accommodation.",
-  },
-];
+      "Discover spiritual tour packages for Mathura and Vrindavan temples and Braj Yatra pilgrimage.",
+    images: ["https://vrindavantoursandpackages.com/Experience_my_India.webp"]
+  }
+};
+
+const getTourPackageData = async () => {
+  try {
+
+    const res = await fetch(
+      `http://localhost:3000/api/tour-packages/`
+    );
+
+    if (!res.ok) {
+      const text = await res.text();
+      console.log("ERROR RESPONSE:", text);
+      throw new Error("Failed to fetch package");
+    }
+
+    const data = await res.json();
+    console.log("Data", data);
+    return data.data;
+
+  } catch (error) {
+    console.error("Error fetching package:", error);
+  }
+}
 
 
 
-export default function page(){
-    return  (   <>
-                    <Navbar/>
-                    <TourHero/>
-                    <TourTrustStrip/>
-                    <TourArchiveLayout sidebar={<TourFilters />}>
-                        <TourGrid tours={tours} />
-                    </TourArchiveLayout>
+export default async function page() {
+  const tours = await getTourPackageData();
 
-                    <TourArchiveCTA/>
-                    
-                    <TourFAQSection/>
-                    <LuxuryFooter/>
-                </>
-    )
+  const tourServiceSchema = {
+    "@context": "https://schema.org",
+    "@type": "Service",
+    "serviceType": "Mathura Vrindavan Tour Packages",
+    "provider": {
+      "@type": "TravelAgency",
+      "name": "Mathura Vrindavan Travel Guide",
+      "url": "https://vrindavantoursandpackages.com"
+    },
+    "areaServed": {
+      "@type": "Place",
+      "name": "Mathura Vrindavan, Uttar Pradesh, India"
+    },
+    "description":
+      "Spiritual tour packages for Mathura and Vrindavan including temple darshan, Braj Yatra tours and guided pilgrimage experiences."
+  };
+
+  const tourListSchema = {
+    "@context": "https://schema.org",
+    "@type": "ItemList",
+    "name": "Mathura Vrindavan Tour Packages",
+    "itemListElement": tours.map((tour : any, index : number) => (
+      [
+
+       {
+        "@type": "ListItem",
+        "position": index,
+        "name": tour.title,
+        "url": `https://vrindavantoursandpackages.com/tour-packages/${tour.duration}/${tour.slug}`
+      },
+     
+    ]
+
+    ))
+     
+  };
+
+  const travelAgencySchema = {
+    "@context": "https://schema.org",
+    "@type": "TravelAgency",
+    "name": "Mathura Vrindavan Travel Guide",
+    "url": "https://vrindavantoursandpackages.com",
+    "logo": "https://vrindavantoursandpackages.com/Experience_my_India.webp",
+    "description":
+      "Travel agency providing Mathura Vrindavan tour packages, taxi services, hotel booking and temple darshan arrangements.",
+    "areaServed": {
+      "@type": "Place",
+      "name": "Mathura Vrindavan"
+    },
+    "address": {
+      "@type": "PostalAddress",
+      "addressLocality": "Vrindavan",
+      "addressRegion": "Uttar Pradesh",
+      "addressCountry": "India"
+    }
+  };
+
+  const breadcrumbSchema = {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      {
+        "@type": "ListItem",
+        "position": 1,
+        "name": "Home",
+        "item": "https://vrindavantoursandpackages.com/"
+      },
+      {
+        "@type": "ListItem",
+        "position": 2,
+        "name": "Tour Packages",
+        "item": "https://vrindavantoursandpackages.com/tours"
+      }
+    ]
+  };
+
+  const faqSchema = {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "What places are covered in Mathura Vrindavan tour packages?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text":
+            "Tour packages include visits to Banke Bihari Temple, Prem Mandir, ISKCON Temple, Krishna Janmabhoomi and other sacred Braj temples."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "How many days are required for Mathura Vrindavan tour?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text":
+            "Most travelers prefer 1 day or 2 day tour packages to explore Mathura and Vrindavan temples and spiritual attractions."
+        }
+      }
+    ]
+  };
+
+
+  return (
+    <>
+
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify([
+            tourServiceSchema,
+            tourListSchema,
+            breadcrumbSchema,
+            travelAgencySchema,
+            faqSchema
+          ])
+        }}
+      />
+
+      <Navbar />
+      <TourHero />
+      <TourTrustStrip />
+      <TourArchiveLayout sidebar={<TourFilters />}>
+        <TourGrid tours={tours} />
+      </TourArchiveLayout>
+      <ToursReadMore />
+
+      <TourArchiveCTA />
+
+      <TourFAQSection />
+      <LuxuryFooter />
+    </>
+  )
 }

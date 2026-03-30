@@ -3,7 +3,7 @@
 import React, { useState } from "react";
 import toast from "react-hot-toast";
 
-type EditorType = "Blog" | "Package" | "Temple" | "Pooja";
+type EditorType = "Blog" | "Package" | "Temple" | "Pooja" | "Taxi" | "Hotel";
 
 interface CMSMediaSectionProps {
   image: string;

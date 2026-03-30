@@ -20,7 +20,7 @@ const Inclusion = ({
 }: {
   inclusions: Inclusions[];
   setInclusions: React.Dispatch<React.SetStateAction<Inclusions[]>>;
-  editorType: "Blog" | "Package";
+  editorType: "Blog" | "Package" | "Hotel";
 }) => {
 
   const handleAddInclusions = () => {

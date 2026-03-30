@@ -21,23 +21,23 @@ export default function PoojaCTASection() {
 
           {/* Left Content */}
           <div>
-            <h2 className="text-4xl lg:text-5xl font-serif font-semibold text-white mb-6">
+            <h2 className="text-4xl lg:text-5xl font-serif font-semibold text-white mb-6 text-center md:text-left">
               Preserve the Divine Moments
             </h2>
 
-            <p className="text-pink-100 mb-8 text-lg leading-relaxed">
+            <p className="text-pink-100 mb-8 text-lg leading-relaxed text-center md:text-left">
               Explore sacred ceremonies and spiritual events conducted with
               devotion and tradition. Revisit divine blessings anytime.
             </p>
 
-            <button className="bg-white text-pink-600 px-8 py-3 rounded-full font-medium hover:bg-pink-100 transition">
+            <button className="bg-white text-pink-600 px-8 py-3 rounded-full font-medium hover:bg-pink-100 transition ml-14 md:ml-0">
               Browse All Poojas
             </button>
           </div>
 
         {/* Right Image */}
         <div className="flex justify-center">
-          <div className="relative w-[480px] h-[420px]">
+          <div className="relative w-[280px] h-[220px] md:w-[480px] md:h-[420px]">
 
             {/* Gradient Border Frame */}
             <div className="absolute inset-0 rounded-2xl p-[2px] bg-gradient-to-br from-pink-500 to-rose-400">

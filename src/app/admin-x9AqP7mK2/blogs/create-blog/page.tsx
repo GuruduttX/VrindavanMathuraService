@@ -173,7 +173,7 @@ export default function CreateNewBlog() {
 
 
 
-  const handlePublish = async () => {
+  const SaveDraft = async () => {
 
     const payload = {
       title: form.title,
@@ -290,7 +290,7 @@ export default function CreateNewBlog() {
           <CMSContentSection subContent={form.subContent} content={form.content} onChange={updateForm} editorType="Blog"
           />
 
-          <CMSActions actionType="create" editorType="Blog" onPublish={handlePublish} />
+          <CMSActions actionType="create" editorType="Blog" onSaveDraft={SaveDraft} />
 
         </form>
 

@@ -1,40 +1,9 @@
 "use client";
+import Link from "next/link";
 import { useState } from "react";
 
-export default function PoojaSection() {
-    const poojaData = [
-            {
-                id: 1,
-                title: "Shri Krishna Janmashtami",
-                category: "Festival",
-                date: "2025-08-26",
-                location: "Mathura",
-                image: "/images/janmashtami.jpg",
-                description: "Divine celebration of Lord Krishna’s sacred birth."
-            },
-            {
-                id: 2,
-                title: "Maha Shivratri Abhishek",
-                category: "Temple",
-                date: "2025-03-08",
-                location: "Varanasi",
-                image: "/images/shivratri.jpg",
-                description: "Night-long Rudrabhishek performed in Kashi."
-            },
-            {
-                id: 3,
-                title: "Griha Pravesh Pooja",
-                category: "Personal",
-                date: "2025-05-14",
-                location: "Delhi",
-                image: "/images/griha.jpg",
-                description: "Sacred housewarming ceremony with Vedic rituals."
-            }
-    ];
+export default function PoojaSection({ poojaData }: { poojaData: any }) {
 
-   
-
-  
   const [activeCategory, setActiveCategory] = useState("All");
 
   const categories = ["All", "Festival", "Personal", "Temple", "Special"];
@@ -42,7 +11,7 @@ export default function PoojaSection() {
   const filteredPoojas =
     activeCategory === "All"
       ? poojaData
-      : poojaData.filter((item) => item.category === activeCategory);
+      : poojaData.filter((item: any) => item.category === activeCategory);
 
   return (
     <section className="py-20 bg-white">
@@ -61,10 +30,9 @@ export default function PoojaSection() {
               key={cat}
               onClick={() => setActiveCategory(cat)}
               className={`px-6 py-2 rounded-full border text-sm font-medium transition
-                ${
-                  activeCategory === cat
-                    ? "bg-pink-500 text-white border-pink-500"
-                    : "border-gray-300 text-gray-700 hover:border-pink-400 hover:text-pink-600"
+                ${activeCategory === cat
+                  ? "bg-pink-500 text-white border-pink-500"
+                  : "border-gray-300 text-gray-700 hover:border-pink-400 hover:text-pink-600"
                 }
               `}
             >
@@ -75,16 +43,16 @@ export default function PoojaSection() {
 
         {/* 3️⃣ Pooja Cards Grid */}
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-10">
-          {filteredPoojas.map((item) => (
-            <div
+          {filteredPoojas.map((item: any) => (
+            item.status == "published" ? <div
               key={item.id}
               className="border rounded-2xl overflow-hidden shadow-sm hover:shadow-lg transition duration-300 bg-white"
             >
               {/* Image */}
               <div className="h-56 overflow-hidden">
                 <img
-                  src={item.image}
-                  alt={item.title}
+                  src={item.heroimage.image}
+                  alt={item.heroimage.alt}
                   className="w-full h-full object-cover hover:scale-105 transition duration-500"
                 />
               </div>
@@ -103,11 +71,13 @@ export default function PoojaSection() {
                   {item.description}
                 </p>
 
-                <button className="text-pink-600 font-medium hover:underline">
-                  View Details →
-                </button>
+                <Link href={`/pooja/${item.slug}`}>
+                  <button className="text-pink-600 font-medium hover:underline">
+                    View Details →
+                  </button>
+                </Link>
               </div>
-            </div>
+            </div> : <></>
           ))}
         </div>
 

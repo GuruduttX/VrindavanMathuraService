@@ -28,7 +28,7 @@ const places = [
 
 export default function BrajExplorer() {
   return (
-    <section className="relative py-28 overflow-hidden">
+    <section className="relative py-10 md:py-28 overflow-hidden">
 
       {/* gradient background */}
       <div className="absolute inset-0 bg-gradient-to-br from-pink-50 via-white to-purple-50"></div>
@@ -43,7 +43,7 @@ export default function BrajExplorer() {
 
         <div className="text-center mb-16">
 
-          <h2 className="text-5xl font-bold bg-gradient-to-r from-pink-600 via-fuchsia-600 to-purple-600 bg-clip-text text-transparent">
+          <h2 className="text-3xl md:text-5xl font-bold bg-gradient-to-r from-pink-600 via-fuchsia-600 to-purple-600 bg-clip-text text-transparent">
             Explore Braj Destinations
           </h2>
 
@@ -55,10 +55,10 @@ export default function BrajExplorer() {
 
         {/* route line */}
 
-        <div className="relative flex items-center justify-between">
+        <div className="relative flex flex-col md:flex-row items-center justify-between">
 
           {/* line */}
-          <div className="absolute left-0 right-0 h-[3px] bg-gradient-to-r from-pink-400 via-fuchsia-500 to-purple-500"></div>
+          <div className=" absolute top-0 bottom-0 w-[3px] left-1/2 -translate-x-1/2 bg-gradient-to-b from-pink-400 via-fuchsia-500 to-purple-500 lg:top-auto lg:left-0 lg:right-0 lg:h-[3px] lg:w-auto lg:bg-gradient-to-r"></div>
 
           {places.map((place, index) => (
 

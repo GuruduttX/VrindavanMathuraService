@@ -10,14 +10,14 @@ export default function TourArchiveLayout({
   children,
 }: TourArchiveLayoutProps) {
   return (
-    <section className="bg-gray-50 py-20 px-6 lg:px-20">
+    <section className="bg-gray-50 py-10 sm:py-20 px-4 sm:px-6 md:px-10 lg:px-20">
       <div className="max-w-[1400px] mx-auto">
 
-        <div className="grid grid-cols-1 lg:grid-cols-[320px_1fr] gap-16">
+        <div className="grid grid-cols-1 xl:grid-cols-[320px_1fr] gap-8 xl:gap-16">
 
           {/* Sidebar (Filters) */}
-          <aside className="lg:sticky lg:top-16 self-start ">
-            <div className="bg-white rounded-3xl shadow-lg border border-gray-100 p-6">
+          <aside className="xl:sticky xl:top-16 self-start">
+            <div className="xl:bg-white xl:rounded-3xl xl:shadow-lg xl:border xl:border-gray-100 xl:p-6">
               {sidebar}
             </div>
           </aside>

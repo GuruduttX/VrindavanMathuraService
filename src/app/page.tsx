@@ -124,11 +124,7 @@ const page = () => {
       "addressRegion": "Uttar Pradesh",
       "addressCountry": "India"
     },
-    "sameAs": [
-      "https://www.facebook.com/",
-      "https://www.instagram.com/",
-      "https://www.youtube.com/"
-    ]
+    
   };
 
   const touristDestinationSchema = {

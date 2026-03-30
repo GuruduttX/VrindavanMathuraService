@@ -33,14 +33,14 @@ const tours = [
 
 export default function PopularTours() {
   return (
-    <section className="py-28 bg-gradient-to-b from-white via-pink-50 to-white overflow-hidden">
+    <section className="py-10 md:py-28 bg-gradient-to-b from-white via-pink-50 to-white overflow-hidden">
 
       <div className="max-w-7xl mx-auto px-6">
 
         {/* heading */}
         <div className="text-center mb-16">
 
-          <h2 className="text-5xl font-bold bg-gradient-to-r from-pink-600 via-fuchsia-600 to-purple-600 bg-clip-text text-transparent">
+          <h2 className="text-3xl md:text-5xl font-bold bg-gradient-to-r from-pink-600 via-fuchsia-600 to-purple-600 bg-clip-text text-transparent">
             Popular Tour Packages
           </h2>
 
@@ -70,6 +70,7 @@ export default function PopularTours() {
                     src={tour.image}
                     alt={tour.title}
                     fill
+                    loading="lazy"
                     className="object-cover"
                   />
 

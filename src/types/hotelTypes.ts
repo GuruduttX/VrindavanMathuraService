@@ -41,6 +41,9 @@ export interface IRatingSummary {
 export interface IHotel extends Document {
   title: string;
   subcontent: string;
+  duration : string,
+  slug : string
+  category : string,
   rating: number;
   reviews: number;
   price: number;

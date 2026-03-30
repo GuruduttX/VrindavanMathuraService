@@ -6,21 +6,31 @@ const hotelSchema = new Schema<IHotel>({
 
   title: {
     type: String,
-    required: true,
-    trim: true
+   
   },
 
   subcontent: {
+
     type: String,
-    required: true,
-    trim: true
+    
+  },
+
+  slug : {
+
+    type : String,
+    
+  },
+
+  duration : {
+
+    type : String,
+    
   },
 
   rating: {
+    
     type: Number,
-    default: 0,
-    min: 0,
-    max: 5
+    
   },
 
   reviews: {
@@ -30,26 +40,20 @@ const hotelSchema = new Schema<IHotel>({
 
   price: {
     type: Number,
-    required: true,
-    min: 0
+   
   },
 
-  location: {
+  category: {
     type: String,
-    required: true,
-    index: true,
-    trim: true
+   
   },
 
   host: {
     type: String,
-    required: true,
-    trim: true
   },
 
   about: {
     type: String,
-    required: true
   },
 
 
@@ -71,7 +75,6 @@ const hotelSchema = new Schema<IHotel>({
   ratingSummary: {
     reviewText: {
       type: String,
-      required: true
     },
 
     scores: {

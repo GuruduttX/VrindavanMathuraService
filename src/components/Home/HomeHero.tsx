@@ -9,8 +9,6 @@ export default function HomeHero() {
         <>
             <section className="relative overflow-hidden bg-gradient-to-br from-pink-50 via-rose-50 to-fuchsia-100">
 
-
-
                 {/* background decorative blur */}
                 <div className="absolute top-[-100px] right-[-100px] w-[400px] h-[400px] bg-pink-400/30 rounded-full blur-[120px]" />
                 <div className="absolute bottom-[-120px] left-[-120px] w-[350px] h-[350px] bg-fuchsia-400/30 rounded-full blur-[120px]" />
@@ -40,7 +38,7 @@ export default function HomeHero() {
                         </div>
 
                         {/* heading */}
-                        <h1 className="text-center text-3xl md:text-5xl font-bold leading-tight text-gray-800">
+                        <h1 className="text-center md:text-left text-3xl md:text-5xl font-bold leading-tight text-gray-800">
                             Discover{" "}
                             <span className="bg-gradient-to-r from-pink-600 to-fuchsia-600 text-transparent bg-clip-text">
                                 Vrindavan Tour Packages

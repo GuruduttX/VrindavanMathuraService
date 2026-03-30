@@ -2,194 +2,161 @@
 
 import Image from "next/image";
 import { useState } from "react";
-import { CarTaxiFront, MapPin, Users } from "lucide-react";
-
-type TaxiType = "sedan" | "suv" | "luxury";
-
-const taxis = {
-  sedan: {
-    name: "Sedan Taxi",
-    baseFare: 15,
-    image: "/images/Home/taxi1.jpg",
-    capacity: 4,
-  },
-  suv: {
-    name: "SUV Taxi",
-    baseFare: 20,
-    image: "/images/Home/taxi2.jpg",
-    capacity: 6,
-  },
-  luxury: {
-    name: "Luxury Taxi",
-    baseFare: 30,
-    image: "/images/Home/taxi3.jpg",
-    capacity: 4,
-  },
-};
+import { MapPin, Phone, User, CarTaxiFront } from "lucide-react";
 
 export default function TaxiShowCase() {
-  const [taxiType, setTaxiType] = useState<TaxiType>("sedan");
-  const [pickup, setPickup] = useState("");
-  const [drop, setDrop] = useState("");
-  const [distance, setDistance] = useState(10);
-  const [passengers, setPassengers] = useState(1);
 
-  const taxi = taxis[taxiType];
-
-  const estimatedFare = taxi.baseFare * distance;
+  const [name,setName] = useState("");
+  const [phone,setPhone] = useState("");
+  const [pickup,setPickup] = useState("");
+  const [drop,setDrop] = useState("");
 
   return (
-    <section className="relative py-28 overflow-hidden">
+    <section className="relative py-24 overflow-hidden">
 
-      {/* gradient background */}
+      {/* Background Gradient */}
       <div className="absolute inset-0 bg-gradient-to-br from-pink-50 via-white to-purple-50"></div>
 
-      {/* glow */}
+      {/* Glow Effects */}
       <div className="absolute top-0 left-0 w-[350px] h-[350px] bg-pink-400/20 blur-[120px] rounded-full"></div>
       <div className="absolute bottom-0 right-0 w-[350px] h-[350px] bg-purple-400/20 blur-[120px] rounded-full"></div>
 
       <div className="relative max-w-7xl mx-auto px-6 grid lg:grid-cols-2 gap-14 items-center">
 
-        {/* Taxi image */}
-        <div className="relative h-[380px] rounded-3xl overflow-hidden shadow-xl group">
+        {/* Taxi Image */}
+        <div className="relative h-[420px] rounded-3xl overflow-hidden shadow-xl group">
 
           <Image
-            src={taxi.image}
-            alt={taxi.name}
+            src="/images/Home/Book-Taxi.png"
+            alt="Taxi Service"
             fill
+            loading="lazy"
             className="object-cover group-hover:scale-105 transition duration-700"
           />
 
-          <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent"></div>
+          <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent"></div>
 
-          <div className="absolute bottom-4 left-4 text-white text-xl font-semibold">
-            {taxi.name}
+          <div className="absolute bottom-6 left-6 text-white">
+            <h3 className="text-2xl font-bold">Premium Taxi Service</h3>
+            <p className="text-sm opacity-90">
+              Comfortable rides for your spiritual journey
+            </p>
           </div>
 
         </div>
 
-        {/* Booking widget */}
-        <div className="bg-white rounded-3xl shadow-xl p-8">
+        {/* Booking Card */}
+        <div className="relative">
 
-          <h2 className="text-3xl font-bold mb-6 bg-gradient-to-r from-pink-600 via-fuchsia-600 to-purple-600 bg-clip-text text-transparent">
-            Book Your Taxi
-          </h2>
+          <div className="absolute -inset-1 bg-gradient-to-r from-pink-500 via-fuchsia-500 to-purple-600 rounded-3xl blur opacity-20"></div>
 
-          {/* taxi type */}
-          <div className="flex gap-3 mb-6">
+          <div className="relative bg-white/80 backdrop-blur-xl rounded-3xl shadow-xl p-8">
 
-            {Object.keys(taxis).map((type) => (
-              <button
-                key={type}
-                onClick={() => setTaxiType(type as TaxiType)}
-                className={`px-5 py-2 rounded-full font-medium transition ${
-                  taxiType === type
-                    ? "bg-gradient-to-r from-pink-500 via-fuchsia-500 to-purple-600 text-white"
-                    : "bg-gray-100 text-gray-600"
-                }`}
-              >
-                {taxis[type as TaxiType].name}
-              </button>
-            ))}
+            <h2 className="text-3xl font-bold mb-8 bg-gradient-to-r from-pink-600 via-fuchsia-600 to-purple-600 bg-clip-text text-transparent">
+              Book Your Taxi
+            </h2>
 
-          </div>
+            <div className="space-y-6">
 
-          {/* pickup */}
-          <div className="flex items-center border rounded-xl px-3 py-2 mb-4">
-            <MapPin size={18} className="text-gray-400"/>
-            <input
-              type="text"
-              placeholder="Pickup location"
-              value={pickup}
-              onChange={(e)=>setPickup(e.target.value)}
-              className="flex-1 outline-none px-2"
-            />
-          </div>
+              {/* Name */}
+              <div className="relative group">
 
-          {/* drop */}
-          <div className="flex items-center border rounded-xl px-3 py-2 mb-4">
-            <MapPin size={18} className="text-gray-400"/>
-            <input
-              type="text"
-              placeholder="Drop location"
-              value={drop}
-              onChange={(e)=>setDrop(e.target.value)}
-              className="flex-1 outline-none px-2"
-            />
-          </div>
+                <User
+                  size={18}
+                  className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400 group-focus-within:text-pink-500 transition"
+                />
 
-          {/* distance slider */}
-          <div className="mb-6">
+                <input
+                  type="text"
+                  value={name}
+                  onChange={(e)=>setName(e.target.value)}
+                  placeholder=" "
+                  className="peer w-full pl-11 pr-4 py-3 rounded-xl border border-gray-200 bg-white/70 backdrop-blur outline-none text-sm transition focus:border-pink-500 focus:ring-2 focus:ring-pink-200"
+                />
 
-            <label className="text-sm text-gray-500">
-              Distance: {distance} km
-            </label>
+                <label className="absolute left-11 top-3 text-gray-500 text-sm transition-all peer-focus:-top-2 peer-focus:text-xs peer-focus:text-pink-600 peer-focus:bg-white peer-focus:px-1 peer-placeholder-shown:top-3 peer-placeholder-shown:text-sm">
+                  Your Name
+                </label>
 
-            <input
-              type="range"
-              min={1}
-              max={100}
-              value={distance}
-              onChange={(e)=>setDistance(Number(e.target.value))}
-              className="w-full mt-2 accent-pink-600"
-            />
+              </div>
 
-          </div>
+              {/* Phone */}
+              <div className="relative group">
 
-          {/* passengers */}
-          <div className="flex items-center justify-between mb-6">
+                <Phone
+                  size={18}
+                  className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400 group-focus-within:text-pink-500 transition"
+                />
 
-            <div className="flex items-center gap-2 text-gray-600">
-              <Users size={18}/>
-              Passengers
+                <input
+                  type="number"
+                  value={phone}
+                  onChange={(e)=>setPhone(e.target.value)}
+                  placeholder=" "
+                  className="peer w-full pl-11 pr-4 py-3 rounded-xl border border-gray-200 bg-white/70 backdrop-blur outline-none text-sm transition focus:border-pink-500 focus:ring-2 focus:ring-pink-200"
+                />
+
+                <label className="absolute left-11 top-3 text-gray-500 text-sm transition-all peer-focus:-top-2 peer-focus:text-xs peer-focus:text-pink-600 peer-focus:bg-white peer-focus:px-1 peer-placeholder-shown:top-3 peer-placeholder-shown:text-sm">
+                  Phone Number
+                </label>
+
+              </div>
+
+              {/* Pickup */}
+              <div className="relative group">
+
+                <MapPin
+                  size={18}
+                  className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400 group-focus-within:text-pink-500 transition"
+                />
+
+                <input
+                  type="text"
+                  value={pickup}
+                  onChange={(e)=>setPickup(e.target.value)}
+                  placeholder=" "
+                  className="peer w-full pl-11 pr-4 py-3 rounded-xl border border-gray-200 bg-white/70 backdrop-blur outline-none text-sm transition focus:border-pink-500 focus:ring-2 focus:ring-pink-200"
+                />
+
+                <label className="absolute left-11 top-3 text-gray-500 text-sm transition-all peer-focus:-top-2 peer-focus:text-xs peer-focus:text-pink-600 peer-focus:bg-white peer-focus:px-1 peer-placeholder-shown:top-3 peer-placeholder-shown:text-sm">
+                  Pickup Location
+                </label>
+
+              </div>
+
+              {/* Drop */}
+              <div className="relative group">
+
+                <MapPin
+                  size={18}
+                  className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400 group-focus-within:text-purple-500 transition"
+                />
+
+                <input
+                  type="text"
+                  value={drop}
+                  onChange={(e)=>setDrop(e.target.value)}
+                  placeholder=" "
+                  className="peer w-full pl-11 pr-4 py-3 rounded-xl border border-gray-200 bg-white/70 backdrop-blur outline-none text-sm transition focus:border-purple-500 focus:ring-2 focus:ring-purple-200"
+                />
+
+                <label className="absolute left-11 top-3 text-gray-500 text-sm transition-all peer-focus:-top-2 peer-focus:text-xs peer-focus:text-purple-600 peer-focus:bg-white peer-focus:px-1 peer-placeholder-shown:top-3 peer-placeholder-shown:text-sm">
+                  Drop Location
+                </label>
+
+              </div>
+
             </div>
 
-            <div className="flex gap-2">
-
-              <button
-                onClick={()=>setPassengers(Math.max(1, passengers-1))}
-                className="px-3 py-1 border rounded"
-              >
-                -
-              </button>
-
-              <span>{passengers}</span>
-
-              <button
-                onClick={()=>setPassengers(Math.min(taxi.capacity, passengers+1))}
-                className="px-3 py-1 border rounded"
-              >
-                +
-              </button>
-
-            </div>
+            {/* Button */}
+            <button
+              className="w-full mt-8 py-3 rounded-full text-white font-medium flex items-center justify-center gap-2 bg-gradient-to-r from-pink-500 via-fuchsia-500 to-purple-600 hover:scale-[1.02] transition shadow-lg"
+            >
+              <CarTaxiFront size={18}/>
+              Book Taxi Now
+            </button>
 
           </div>
-
-          {/* estimated fare */}
-          <div className="text-xl font-semibold text-pink-600 mb-6">
-            Estimated Fare: ₹{estimatedFare}
-          </div>
-
-          <button className="
-          w-full
-          py-3
-          rounded-full
-          text-white
-          font-medium
-          flex items-center
-          justify-center
-          gap-2
-          bg-gradient-to-r
-          from-pink-500
-          via-fuchsia-500
-          to-purple-600
-          hover:scale-105
-          transition
-          ">
-            <CarTaxiFront size={18}/>
-            Book Taxi Now
-          </button>
 
         </div>
 

@@ -3,52 +3,7 @@
 import Link from "next/link";
 import { useEffect, useRef } from "react";
 
-const styles = `
-  @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,500&family=Nunito:wght@300;400;500;600&display=swap');
 
-  @keyframes fadeUp {
-    from { opacity: 0; transform: translateY(24px); }
-    to   { opacity: 1; transform: translateY(0); }
-  }
-
-  @keyframes gentleFloat {
-    0%, 100% { transform: translateY(0px); }
-    50%       { transform: translateY(-6px); }
-  }
-
-  .ph-anim { opacity: 0; }
-  .ph-anim.in { animation: fadeUp 0.75s cubic-bezier(0.16,1,0.3,1) forwards; }
-
-  .ph-d1.in { animation-delay: 0ms; }
-  .ph-d2.in { animation-delay: 150ms; }
-  .ph-d3.in { animation-delay: 280ms; }
-  .ph-d4.in { animation-delay: 400ms; }
-  .ph-d5.in { animation-delay: 520ms; }
-
-  .diya-icon { animation: gentleFloat 3.5s ease-in-out infinite; }
-  .diya-icon:nth-child(2) { animation-delay: 0.5s; }
-  .diya-icon:nth-child(3) { animation-delay: 1s; }
-
-  .btn-book {
-    transition: transform 0.25s ease, box-shadow 0.25s ease;
-  }
-  .btn-book:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 16px 40px rgba(185,19,114,0.45);
-  }
-  .btn-outline {
-    transition: background 0.25s ease, color 0.25s ease;
-  }
-  .btn-outline:hover {
-    background: white;
-    color: #b91372;
-  }
-
-  @media (prefers-reduced-motion: reduce) {
-    .ph-anim { opacity: 1 !important; animation: none !important; }
-    .diya-icon { animation: none !important; }
-  }
-`;
 
 const STATS = [
   { icon: "🪔", value: "50+", label: "Pooja Types" },
@@ -77,11 +32,10 @@ export default function PoojaHero() {
 
   return (
     <>
-      <style>{styles}</style>
 
       <section
         ref={ref}
-        className="relative w-full min-h-[82vh] flex items-center justify-center overflow-hidden mt-22"
+        className="relative w-full min-h-[95vh] flex items-center justify-center overflow-hidden pt-30 md:pt-20"
         style={{ fontFamily: "'Nunito', sans-serif" }}
       >
         {/* Background */}

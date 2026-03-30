@@ -4,12 +4,18 @@ import Taxi from "@/models/taxiModel";
 
 export const createTaxiService = async (req: Request) => {
   try {
+
     await connectDB();
 
     const taxiData = await req.json();
 
+    console.log("THE DATA OF THE TAXI IS : ");
+    console.log(taxiData);
+
     return await Taxi.create(taxiData);
+
   } catch (error) {
+    console.log(error);
     throw new Error("Error creating taxi");
   }
 };

@@ -93,7 +93,7 @@ const CMSMetaSection = ({
   category: string;
   slug: string;
   onChange: any;
-  editorType: "Blog" | "Package" | "Temple" | "Pooja";
+  editorType: "Blog" | "Package" | "Temple" | "Pooja" | "Hotel";
 }) => {
   return (
     <div className="space-y-6">

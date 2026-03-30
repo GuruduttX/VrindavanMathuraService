@@ -1,20 +1,19 @@
 "use client";
 
-import { label } from "framer-motion/client";
 import Image from "next/image";
 import Link from "next/link";
 import { useState, useEffect, useRef } from "react";
+import { Menu, X } from "lucide-react";
 
 export default function Navbar() {
     const [scrolled, setScrolled] = useState(false);
     const [active, setActive] = useState("Home");
+    const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
-    // const navItems = ["Home", "Tours", "Taxi", "Hotels", "Puja", "About"];
     const navItems = [{label : "Home", url : "/"}, {label : "Tours" ,url : "/tour-packages"}, {label : "Taxi" , url : '/taxi'}, {label : "Hotels", url : '/hotels'}, {label :"Puja" , url : "/pooja"}, {label : "About" , url : '/about'}];
 
-
-    const containerRef = useRef(null);
-    const indicatorRef = useRef(null);
+    const containerRef = useRef<HTMLElement>(null);
+    const indicatorRef = useRef<HTMLDivElement>(null);
 
     useEffect(() => {
         const handleScroll = () => setScrolled(window.scrollY > 10);
@@ -25,16 +24,25 @@ export default function Navbar() {
     useEffect(() => {
         const activeEl = document.querySelector(`[data-nav="${active}"]`);
         if (activeEl && indicatorRef.current) {
-            indicatorRef.current.style.width = `${activeEl.offsetWidth}px`;
-            indicatorRef.current.style.left = `${activeEl.offsetLeft}px`;
+            indicatorRef.current.style.width = `${(activeEl as HTMLElement).offsetWidth}px`;
+            indicatorRef.current.style.left = `${(activeEl as HTMLElement).offsetLeft}px`;
         }
     }, [active]);
+
+    // Close mobile menu on resize to desktop
+    useEffect(() => {
+        const handleResize = () => {
+            if (window.innerWidth >= 1280) setIsMobileMenuOpen(false);
+        };
+        window.addEventListener("resize", handleResize);
+        return () => window.removeEventListener("resize", handleResize);
+    }, []);
 
     return (
         <header className="fixed top-6 left-0 w-full z-50 flex justify-center">
 
             {/* OUTER GLOW */}
-            <div className="relative w-[85vw]">
+            <div className="relative w-[92vw] sm:w-[90vw] xl:w-[85vw]">
 
                 <div className="
           absolute inset-0
@@ -49,7 +57,7 @@ export default function Navbar() {
                     className={`
           relative
           flex items-center justify-between
-          px-3 lg:px-12 py-3
+          px-3 xl:px-12 py-3
           rounded-full
           backdrop-blur-xl
           bg-white/70
@@ -59,7 +67,8 @@ export default function Navbar() {
           `}
                 >
 
-                    <Link href="/" className="flex items-center">
+                    {/* LOGO */}
+                    <Link href="/" className="flex items-center flex-shrink-0">
                         <div className="h-12 w-[140px] md:w-[180px] rounded-full bg-gradient-to-br from-pink-100 to-pink-200 flex items-center justify-center px-4">
                             <Image
                                 src="/images/Experience_my_India.webp"
@@ -73,8 +82,8 @@ export default function Navbar() {
 
 
 
-                    {/* CENTER NAV */}
-                    <div className="relative hidden md:flex items-center">
+                    {/* CENTER NAV — visible only on xl+ (1280px) */}
+                    <div className="relative hidden xl:flex items-center">
 
                         {/* sliding pill indicator */}
                         <div
@@ -122,14 +131,16 @@ export default function Navbar() {
 
 
 
-                    {/* CTA */}
-                    <Link href="/taxi">
+                    {/* RIGHT SIDE: CTA + Hamburger */}
+                    <div className="flex items-center gap-3 flex-shrink-0">
 
-                        <button
-                            className="
+                        {/* CTA Button */}
+                        <Link href="/taxi">
+                            <button
+                                className="
               relative
-              px-3 md:px-7 py-3
-              text-sm md:text-lg
+              px-3 xl:px-7 py-3
+              text-sm xl:text-lg
               rounded-full
               font-medium
               text-white
@@ -138,23 +149,58 @@ export default function Navbar() {
               hover:scale-105
               transition
               overflow-hidden
+              cursor-pointer
               "
-                        >
+                            >
+                                Enquire Now
 
-                            Enquire Now
-
-                            {/* shine effect */}
-                            <span className="
+                                {/* shine effect */}
+                                <span className="
                 absolute inset-0
                 bg-white opacity-0 hover:opacity-20
                 transition
               "></span>
+                            </button>
+                        </Link>
 
+                        {/* Hamburger Menu Button — visible below lg (1024px) */}
+                        <button
+                            onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+                            className="xl:hidden flex items-center justify-center h-10 w-10 rounded-full bg-pink-50 text-pink-600 hover:bg-pink-100 transition cursor-pointer"
+                            aria-label="Toggle menu"
+                        >
+                            {isMobileMenuOpen ? <X size={20} /> : <Menu size={20} />}
                         </button>
-
-                    </Link>
+                    </div>
 
                 </nav>
+
+                {/* MOBILE/TABLET DROPDOWN MENU */}
+                {isMobileMenuOpen && (
+                    <div className="xl:hidden absolute top-full left-0 right-0 mt-3 mx-2 sm:mx-4 rounded-2xl bg-white/95 backdrop-blur-xl border border-white/40 shadow-2xl overflow-hidden z-50">
+                        <div className="flex flex-col py-3">
+                            {navItems.map((item, idx) => (
+                                <Link
+                                    href={item.url}
+                                    key={idx}
+                                    onClick={() => {
+                                        setActive(item.label);
+                                        setIsMobileMenuOpen(false);
+                                    }}
+                                    className={`
+                                        px-6 py-3.5 text-base font-medium transition
+                                        ${active === item.label
+                                            ? "text-pink-600 bg-pink-50"
+                                            : "text-gray-700 hover:text-pink-600 hover:bg-pink-50/50"
+                                        }
+                                    `}
+                                >
+                                    {item.label}
+                                </Link>
+                            ))}
+                        </div>
+                    </div>
+                )}
 
             </div>
 

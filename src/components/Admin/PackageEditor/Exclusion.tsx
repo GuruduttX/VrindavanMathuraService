@@ -20,7 +20,7 @@ const Exclusion = ({
 }: {
   exclusions: Exclusions[];
   setExclusions: React.Dispatch<React.SetStateAction<Exclusions[]>>;
-  editorType: "Blog" | "Package";
+  editorType: "Blog" | "Package" | "Hotel";
 }) => {
 
   const handleAddExclusions = () => {

@@ -26,7 +26,7 @@ const DANDestination = ({
 }: {
   destination: string;
   onChange: any;
-  editorType: "Blog" | "Package";
+  editorType: "Blog" | "Package" | "Hotel";
 }) => {
   return (
     <div className="space-y-3">

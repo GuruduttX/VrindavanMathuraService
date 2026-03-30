@@ -5,12 +5,7 @@ import { NextResponse } from "next/server";
 
 export async function GET(req: Request) {
   try {
-    await connectDB();
-
-    const { searchParams } = new URL(req.url);
-    const id = searchParams.get("id");
-
-    
+    await connectDB();    
     return await getAllTaxis();
 
   } catch (error: any) {
@@ -21,9 +16,9 @@ export async function GET(req: Request) {
   }
 }
 
-// ✅ CREATE TAXI
 export async function POST(req: Request) {
   try {
+    
     await connectDB();
     return await createTaxi(req);
 

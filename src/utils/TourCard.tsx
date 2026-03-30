@@ -26,7 +26,7 @@ export default function TourCard({ tour }: any) {
       {/* Image Section */}
       <div className="relative h-60 w-full overflow-hidden">
 
-        <Image src={"/images/Home/holy-image.webp"} alt={"The name is something called"} fill className="object-cover transition-transform duration-500 hover:scale-105 w-full h-full" />
+        <Image src={"/images/Home/holy-image.webp"} alt={"The name is something called"} fill className="object-cover transition-transform duration-500 hover:scale-105 w-full h-full" loading="lazy"/>
 
         {/* Festival Badge */}
         <div className="absolute top-4 left-4 flex gap-2">

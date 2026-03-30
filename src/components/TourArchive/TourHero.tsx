@@ -3,11 +3,10 @@
 import Image from "next/image";
 import Link from "next/link";
 import { motion } from "framer-motion";
-import dynamic from "next/dynamic";
 
 export default function TourHero() {
   return (
-    <section className="relative w-full min-h-[88vh] flex items-center justify-center overflow-hidden">
+    <section className="relative w-full min-h-[90vh] md:min-h-[80vh] xl:min-h-[95vh] flex items-center justify-center overflow-hidden pt-2 md:pt-10">
       
        <div className="absolute inset-0 bg-gradient-to-br 
       from-[#b91372] 
@@ -51,7 +50,7 @@ export default function TourHero() {
       </div>
 
       {/* LEFT IMAGES */}
-      <div className="hidden b lg:block absolute -left-8 top-32 space-y-8   sh
+      <div className="hidden xl:block absolute -left-8 top-32 space-y-8   sh
         [mask-image:linear-gradient(to_right,transparent,black_40%)]"   style={{ perspective: 1200 }}>
 
         <FloatingImage src="/images/tourpackages/hero1.webp" size="w-24 h-24 opacity-40 scale-90" />
@@ -59,17 +58,17 @@ export default function TourHero() {
         <FloatingImage src="/images/tourpackages/hero6.webp" size="w-24 h-24 opacity-90" />
       </div>
 
-      <div className="hidden lg:block absolute left-18 top-52 space-y-8"   style={{ perspective: 1200 }}>
+      <div className="hidden xl:block absolute left-18 top-52 space-y-8"   style={{ perspective: 1200 }}>
         <FloatingImage src="/images/tourpackages/hero9.webp" size="w-24 h-24 opacity-70" />
         <FloatingImage src="/images/tourpackages/hero10.webp" size="w-24 h-24 opacity-80" />
       </div>
 
-      <div className="hidden lg:block absolute left-44 top-68 space-y-8 "  style={{ perspective: 1200 }}>
+      <div className="hidden xl:block absolute left-44 top-68 space-y-8 "  style={{ perspective: 1200 }}>
         <FloatingImage src="/images/tourpackages/hero8.webp" size="w-24 h-24 opacity-90" />
       </div>
 
       {/* RIGHT IMAGES MIRROR */}
-      <div className="hidden lg:block absolute -right-8 top-32 space-y-8 
+      <div className="hidden xl:block absolute -right-8 top-32 space-y-8 
         [mask-image:linear-gradient(to_left,transparent,black_40%)]"   style={{ perspective: 1200 }}>
 
         <FloatingImage src="/images/tourpackages/hero5.webp" size="w-24 h-24 opacity-40 scale-90" />
@@ -77,12 +76,12 @@ export default function TourHero() {
         <FloatingImage src="/images/tourpackages/hero2.webp" size="w-24 h-24 opacity-90" />
       </div>
 
-      <div className="hidden lg:block absolute right-18 top-52 space-y-8"   style={{ perspective: 1200 }}>
+      <div className="hidden xl:block absolute right-18 top-52 space-y-8"   style={{ perspective: 1200 }}>
         <FloatingImage src="/images/tourpackages/hero7.webp" size="w-24 h-24 opacity-70" />
         <FloatingImage src="/images/tourpackages/hero6.webp" size="w-24 h-24 opacity-80" />
       </div>
 
-      <div className="hidden lg:block absolute right-44 top-68 space-y-8"   style={{ perspective: 1200 }}>
+      <div className="hidden xl:block absolute right-44 top-68 space-y-8"   style={{ perspective: 1200 }}>
         <FloatingImage src="/images/tourpackages/hero4.webp" size="w-24 h-24 opacity-90" />
       </div>
 
@@ -93,7 +92,7 @@ export default function TourHero() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
-          className="inline-flex items-center gap-2 px-5 py-2 rounded-full bg-white/15 backdrop-blur-md text-sm mb-6"
+          className="inline-flex items-center gap-2 px-4 py-1.5 sm:px-5 sm:py-2 rounded-full bg-white/15 backdrop-blur-md text-xs sm:text-sm mb-4 sm:mb-6"
         >
           ✨ Mathura Vrindavan Tour Packages
         </motion.div>
@@ -102,7 +101,7 @@ export default function TourHero() {
           initial={{ opacity: 0, y: 40 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.2 }}
-          className="text-4xl md:text-6xl lg:text-7xl font-serif leading-tight"
+          className="text-3xl sm:text-4xl md:text-6xl lg:text-7xl font-serif leading-tight"
         >
           Discover the Divine Land of{" "}
           <span className="block text-pink-200 italic font-medium">
@@ -114,7 +113,7 @@ export default function TourHero() {
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.4 }}
-          className="mt-6 text-lg md:text-xl text-white/90 leading-relaxed max-w-3xl mx-auto"
+          className="mt-4 sm:mt-6 text-sm sm:text-lg md:text-xl text-white/90 leading-relaxed max-w-3xl mx-auto"
         >
           Explore sacred temples, vibrant festivals, and spiritual
           experiences in Mathura & Vrindavan with our curated tour packages.
@@ -124,16 +123,16 @@ export default function TourHero() {
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.6 }}
-          className="mt-10 flex justify-center gap-6 flex-wrap"
+          className="mt-6 sm:mt-10 flex flex-col sm:flex-row justify-center items-center gap-3 sm:gap-6 px-4 sm:px-2 w-full"
         >
-          <Link href="#tours">
-            <button className="px-10 py-4 rounded-full bg-gradient-to-r from-pink-600 to-rose-500 text-white cursor-pointer font-semibold shadow-xl hover:scale-105 transition duration-300">
+          <Link href="#tours" className="w-full sm:w-auto">
+            <button className="w-full sm:w-auto px-6 py-3.5 sm:px-10 sm:py-4 text-sm sm:text-base rounded-full bg-gradient-to-r from-pink-600 to-rose-500 text-white cursor-pointer font-semibold shadow-xl hover:scale-105 transition duration-300">
               Explore Packages
             </button>
           </Link>
 
-          <Link href="/tour-packages">
-            <button className="px-10 py-4 rounded-full border border-white/70 cursor-pointer text-white font-semibold hover:bg-white hover:text-black transition duration-300">
+          <Link href="/tour-packages" className="w-full sm:w-auto">
+            <button className="w-full sm:w-auto px-6 py-3.5 sm:px-10 sm:py-4 text-sm sm:text-base rounded-full border border-white/70 cursor-pointer text-white font-semibold hover:bg-white hover:text-black transition duration-300">
               View All Tours
             </button>
           </Link>
@@ -170,7 +169,10 @@ function FloatingImage({
         src={src}
         alt="Tour Preview"
         fill
-        quality={100}
+        quality={75}
+        loading="lazy"
+        placeholder="blur"
+        blurDataURL="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mNk+M9QDwADhgGAWjR9awAAAABJRU5ErkJggg=="
         className="object-cover rounded-2xl"
       />
 

@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import { useState, useEffect, useRef } from "react";
-import { MapPin, Clock, CheckCircle, Star, Car, Hotel } from "lucide-react";
+import { MapPin, CheckCircle, Star, Car, Hotel } from "lucide-react";
 
 type FilterId = "tours" | "taxi" | "hotels" | "puja";
 
@@ -202,6 +202,7 @@ export default function ProductsShowcase() {
                       src={product.image}
                       alt={product.title}
                       fill
+                      loading="lazy"
                       className="object-cover"
                     />
 
@@ -312,6 +313,7 @@ export default function ProductsShowcase() {
                       src={product.image}
                       alt={product.title}
                       fill
+                      loading="lazy"
                       className="object-cover"
                     />
 
@@ -368,6 +370,7 @@ export default function ProductsShowcase() {
                       src={product.image}
                       alt={product.title}
                       fill
+                      loading="lazy"
                       className="object-cover"
                     />
 

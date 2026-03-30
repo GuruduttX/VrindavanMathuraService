@@ -6,7 +6,7 @@ import { Phone, CarTaxiFront, ShieldCheck, Clock, Star } from "lucide-react";
 
 export default function TaxiNewCTA() {
   return (
-    <section className="relative py-28 overflow-hidden">
+    <section className="relative py-10 md:py-28 overflow-hidden">
 
       {/* gradient background */}
       <div className="absolute inset-0 bg-gradient-to-br from-pink-50 via-white to-purple-50"></div>
@@ -32,7 +32,7 @@ export default function TaxiNewCTA() {
 
           <div>
 
-            <h2 className="text-4xl font-bold leading-tight">
+            <h2 className="text-2xl md:text-4xl font-bold leading-tight">
 
               Ready to Travel with
 
@@ -42,7 +42,7 @@ export default function TaxiNewCTA() {
 
             </h2>
 
-            <p className="text-gray-600 mt-5 max-w-md">
+            <p className="text-gray-600 mt-5 max-w-md text-sm md:text-md">
               Enjoy safe and comfortable rides across Vrindavan,
               Mathura, Govardhan and nearby destinations with our
               trusted drivers and well-maintained taxis.
@@ -50,24 +50,24 @@ export default function TaxiNewCTA() {
 
             {/* trust points */}
 
-            <div className="grid grid-cols-2 gap-4 mt-8 text-sm text-gray-600">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mt-8 text-sm text-gray-600">
 
-              <div className="flex items-center gap-2">
+              <div className="flex items-center gap-2 whitespace-nowrap">
                 <ShieldCheck className="text-pink-600"/>
                 Verified Drivers
               </div>
 
-              <div className="flex items-center gap-2">
+              <div className="flex items-center gap-2 whitespace-nowrap">
                 <Clock className="text-pink-600"/>
                 On-Time Pickup
               </div>
 
-              <div className="flex items-center gap-2">
+              <div className="flex items-center gap-2 whitespace-nowrap">
                 <Star className="text-pink-600"/>
                 4.8 Customer Rating
               </div>
 
-              <div className="flex items-center gap-2">
+              <div className="flex items-center gap-2 whitespace-nowrap">
                 <CarTaxiFront className="text-pink-600"/>
                 Clean AC Cars
               </div>
@@ -76,7 +76,7 @@ export default function TaxiNewCTA() {
 
             {/* buttons */}
 
-            <div className="flex gap-4 mt-10">
+            <div className="flex flex-col md:flex-row gap-4 mt-10">
 
               <motion.button
                 whileHover={{ scale: 1.05 }}
@@ -88,12 +88,14 @@ export default function TaxiNewCTA() {
                 font-medium
                 flex
                 items-center
+                justify-center
                 gap-2
                 bg-gradient-to-r
                 from-pink-500
                 via-fuchsia-500
                 to-purple-600
                 shadow-lg
+                whitespace-nowrap
                 "
               >
                 <CarTaxiFront size={18}/>
@@ -111,6 +113,7 @@ export default function TaxiNewCTA() {
                 text-pink-600
                 flex
                 items-center
+                justify-center
                 gap-2
                 hover:bg-pink-50
                 "
@@ -130,7 +133,7 @@ export default function TaxiNewCTA() {
             initial={{ y: 0 }}
             animate={{ y: [-10, 10, -10] }}
             transition={{ repeat: Infinity, duration: 6 }}
-            className="relative h-[360px]"
+            className="relative h-[360px] hidden md:block"
           >
 
             <div className="
@@ -145,6 +148,7 @@ export default function TaxiNewCTA() {
                 src="/images/Home/taxi1.jpg"
                 alt="Taxi Ride"
                 fill
+                loading="lazy"
                 className="object-cover"
               />
 

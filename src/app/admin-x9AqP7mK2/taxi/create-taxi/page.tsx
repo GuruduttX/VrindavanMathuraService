@@ -1,14 +1,14 @@
 "use client"
-
 import { useState } from "react"
-import toast from "react-hot-toast"
 import CMSHeader from "@/components/Admin/CMS/CMSHeader"
-import TaxiInclusion from "@/components/Admin/TaxiEditor/TaxiInclusion"
-import TaxiExclusion from "@/components/Admin/TaxiEditor/TaxiExclusion"
+import Inclusion from "@/components/Admin/TaxiEditor/TaxiInclusion"
+import Exclusion from "@/components/Admin/TaxiEditor/TaxiExclusion"
 import CMSMediaSection from "@/components/Admin/CMS/CMSMediaSection"
 import TaxiDetailsSection from "@/components/Admin/TaxiEditor/TaxiDetails"
+import CMSActions from "@/components/Admin/CMS/CMSActions"
+import toast from "react-hot-toast"
 
-type CarForm = {
+type TaxiForm = {
   name: string
   category: string
   price: string
@@ -32,7 +32,7 @@ type Exclusions = {
 
 export default function CreateNewTaxi() {
 
-  const [form, setForm] = useState<CarForm>({
+  const [form, setForm] = useState<TaxiForm>({
     name: "",
     category: "",
     price: "",
@@ -52,135 +52,183 @@ export default function CreateNewTaxi() {
     { id: crypto.randomUUID(), description: "" }
   ])
 
-  const updateForm = (field: keyof CarForm, value: string) => {
+  const updateForm = (field: keyof TaxiForm, value: string) => {
     setForm((prev) => ({
       ...prev,
       [field]: value
     }))
   }
 
-  // const handleSave = async (e: React.FormEvent<HTMLFormElement>) => {
-  //   e.preventDefault()
+  const handleSave = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault()
 
-  //   if (!e.currentTarget.checkValidity()) {
-  //     e.currentTarget.reportValidity()
-  //     return
-  //   }
+    if (!e.currentTarget.checkValidity()) {
+      e.currentTarget.reportValidity()
+      return
+    }
 
-  //   if (!form.image) {
-  //     toast.error("Car image is missing")
-  //     return
-  //   }
+    if (!form.image) {
+      toast.error("Taxi image is missing")
+      return
+    }
 
-  //   if (!form.cabtype) {
-  //     toast.error("Car cabcategory is missing")
-  //     return
-  //   }
+    if (!form.cabtype) {
+      toast.error("Taxi cab type is missing")
+      return
+    }
 
-  //   const payload = {
-  //     name: form.name,
-  //     seat: form.seat,
-  //     cabtype: form.cabtype,
-  //     fueltype: form.fueltype,
-  //     baseprice: form.price,
-  //     image: form.image,
-  //     alt: form.alt,
-  //     inclusion: inclusions,
-  //     exclusion: exclusions
-  //   }
+    const payload = {
+      title: form.name,
+      seats: form.seat,
+      cabType: form.cabtype,
+      fuelType: form.fueltype,
+      basePrice: form.price,
+      image: form.image,
+      alt: form.alt,
+      inclusions: inclusions,
+      exclusions: exclusions
+    }
 
-  //   const { error } = await supabase
-  //     .from("Cars")
-  //     .insert([payload])   // ✅ must be array
+    try {
 
-  //   if (error) {
-  //     toast.error(error.message)
-  //     return
-  //   }
+      const res = await fetch("/api/taxi", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify(payload)
+      });
 
-  //   toast.success("Car Published Successfully")
+      const data = await res.json();
 
-  //   // Optional: reset form
-  //   setForm({
-  //     name: "",
-  //     category: "",
-  //     price: "",
-  //     duration: "",
-  //     image: "",
-  //     alt: "",
-  //     seat : "",
-  //     cabtype :"",
-  //     fueltype : ""
+      if (!data.success) {
+        toast.error(data.error || "Failed to publish Taxi");
+        return;
+      }
 
-  //   })
-  // }
+      toast.success("Taxi Published Successfully")
+
+      setForm({
+        name: "",
+        category: "",
+        price: "",
+        duration: "",
+        image: "",
+        alt: "",
+        seat: "",
+        cabtype: "",
+        fueltype: ""
+
+      });
+
+    } catch (error) {
+
+      toast.error("Server Error");
+
+    }
+
+   
+
+   
+  }
+
+
+  const SaveDraft = async () => {
+
+     const payload = {
+      title: form.name,
+      seats: form.seat,
+      cabType: form.cabtype,
+      fuelType: form.fueltype,
+      basePrice: form.price,
+      image: form.image,
+      alt: form.alt,
+      inclusions: inclusions,
+      exclusions: exclusions
+    }
+
+    try {
+
+      const res = await fetch("/api/taxi", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify(payload)
+      });
+
+      const data = await res.json();
+
+      if (!data.success) {
+        toast.error(data.error || "Failed to Draft Taxi");
+        return;
+      }
+
+      toast.success("Taxi Drafted Successfully");
+
+        setForm({
+        name: "",
+        category: "",
+        price: "",
+        duration: "",
+        image: "",
+        alt: "",
+        seat: "",
+        cabtype: "",
+        fueltype: ""
+
+      });
+
+    } catch (error) {
+      toast.error("Server Error");
+    }
+
+  };
 
   return (
-    <section className="relative min-h-screen p-6">
+    <div
+      className="max-w-8xl mx-auto p-8 rounded-2xl
+      bg-[#1e0d14]
+      backdrop-blur-xl border border-white/10
+      shadow-[0_0_60px_-15px_rgba(56,189,248,0.25)]"
+    >
 
+      <form className="space-y-6" onSubmit={handleSave}>
 
-      <div className="absolute inset-0 pointer-events-none">
-        <div className="absolute top-0 left-10 w-72 h-72 bg-pink-600/10 blur-3xl" />
-        <div className="absolute bottom-0 right-10 w-72 h-72 bg-pink-500/10 blur-3xl" />
-      </div>
+        <CMSHeader editorType="Taxi" />
 
-      <div className="grid lg:grid-cols-1 gap-6">
+        <TaxiDetailsSection
+          name={form.name}
+          seat={form.seat}
+          price={form.price}
+          cabtype={form.cabtype}
+          fueltype={form.fueltype}
+          onChange={updateForm}
+          editorType="Taxi"
+        />
 
+        <Inclusion
+          inclusions={inclusions}
+          setInclusions={setInclusions}
+          editorType="Taxi"
+        />
 
-        <div className="space-y-6 bg-[#1e0d14] border border-pink-900/40 p-6 rounded-xl
-          shadow-[0_0_30px_rgba(236,72,153,0.08)]">
+        <Exclusion
+          exclusions={exclusions}
+          setExclusions={setExclusions}
+          editorType="Taxi"
+        />
 
-          <form className="space-y-6">
+        <CMSMediaSection
+          image={form.image}
+          alt={form.alt}
+          onChange={updateForm}
+          editorType="Taxi"
+        />
 
-            <CMSHeader editorType="Taxi" />
+        <CMSActions actionType="create" editorType="Taxi" onSaveDraft={SaveDraft} />
 
-            <TaxiDetailsSection
-              name={form.name}
-              seat={form.seat}
-              price={form.price}
-              cabtype={form.cabtype}
-              fueltype={form.fueltype}
-              onChange={updateForm}
-              editorType="Car"
-            />
-
-            <TaxiInclusion
-              inclusions={inclusions}
-              setInclusions={setInclusions}
-              editorType="Taxi"
-            />
-
-            <TaxiExclusion
-              exclusions={exclusions}
-              setExclusions={setExclusions}
-              editorType="Taxi"
-            />
-
-            <CMSMediaSection
-              image={form.image}
-              alt={form.alt}
-              onChange={updateForm}
-              editorType="Taxi"
-            />
-
-
-            <button
-              type="submit"
-              className="px-6 py-3 rounded-xl text-white
-              bg-pink-600 hover:bg-pink-700
-              transition-all duration-300
-              shadow-[0_0_15px_rgba(236,72,153,0.4)]
-              hover:shadow-[0_0_25px_rgba(236,72,153,0.7)]"
-            >
-              Save Taxi
-            </button>
-
-          </form>
-
-        </div>
-
-      </div>
-
-    </section>
+      </form>
+    </div>
   )
 }

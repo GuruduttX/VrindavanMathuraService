@@ -27,7 +27,7 @@ const journey = [
 
 export default function SpiritualJourney() {
   return (
-    <section className="relative py-28 overflow-hidden">
+    <section className="relative py-10 md:py-28 overflow-hidden">
 
       {/* background */}
       <div className="absolute inset-0 bg-gradient-to-br from-pink-50 via-white to-purple-50"></div>
@@ -41,7 +41,7 @@ export default function SpiritualJourney() {
         {/* heading */}
         <div className="text-center mb-20">
 
-          <h2 className="text-5xl font-bold bg-gradient-to-r from-pink-600 via-fuchsia-600 to-purple-600 bg-clip-text text-transparent">
+          <h2 className="text-3xl md:text-5xl font-bold bg-gradient-to-r from-pink-600 via-fuchsia-600 to-purple-600 bg-clip-text text-transparent">
             Your Spiritual Journey
           </h2>
 
@@ -79,6 +79,7 @@ export default function SpiritualJourney() {
                     src={item.image}
                     alt={item.title}
                     fill
+                    loading="lazy"
                     className="object-cover"
                   />
 

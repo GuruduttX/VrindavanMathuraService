@@ -7,7 +7,7 @@ export default function BlogSearch() {
   const [query, setQuery] = useState("");
 
   return (
-    <div className="w-full flex justify-center px-6 lg:px-0 mt-10">
+    <div className="w-full flex justify-center px-6 lg:px-0 mt-10 mb-10">
       <div className="relative w-full max-w-2xl">
 
         {/* Search Icon */}

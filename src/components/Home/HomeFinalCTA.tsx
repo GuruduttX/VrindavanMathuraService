@@ -46,6 +46,7 @@ export default function FinalCTA() {
                 src="/images/Home/prem-mandir.jpg"
                 alt="Vrindavan Tour"
                 fill
+                loading="lazy"
                 className="object-cover"
               />
 
@@ -81,7 +82,7 @@ export default function FinalCTA() {
             viewport={{ once: true }}
           >
 
-            <h2 className="text-4xl font-bold leading-tight">
+            <h2 className="text-3xl md:text-4xl font-bold leading-tight text-center">
 
               Begin Your
 
@@ -114,10 +115,12 @@ export default function FinalCTA() {
                 className="
                 px-7
                 py-3
+                w-full
                 rounded-full
                 text-white
                 font-medium
                 flex items-center gap-2
+                justify-center
                 bg-gradient-to-r
                 from-pink-500
                 via-fuchsia-500
@@ -139,10 +142,12 @@ export default function FinalCTA() {
                 px-7
                 py-3
                 rounded-full
+                w-full
                 border
                 border-pink-500
                 text-pink-600
                 flex items-center gap-2
+                justify-center
                 hover:bg-pink-50
                 transition
                 "

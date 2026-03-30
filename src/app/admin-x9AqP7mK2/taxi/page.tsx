@@ -133,7 +133,7 @@ export default function TaxiPage() {
         </div>
 
         <Link
-          href="/admin-x9AqP7mK2/taxi/create"
+          href="/admin-x9AqP7mK2/taxi/create-taxi"
           className="px-4 py-2 bg-pink-600/30 rounded-lg text-pink-200"
         >
           + Add Taxi

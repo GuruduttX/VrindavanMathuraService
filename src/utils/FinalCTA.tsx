@@ -16,17 +16,7 @@ export default function FinalCTA() {
                     whileInView={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.6 }}
                     viewport={{ once: true }}
-                    className="
-          text-5xl
-          font-bold
-          leading-tight
-          bg-gradient-to-r
-          from-pink-600
-          via-fuchsia-600
-          to-purple-600
-          bg-clip-text
-          text-transparent
-          "
+                    className="text-3xl md:text-5xl font-bold leading-tight bg-gradient-to-r from-pink-600 via-fuchsia-600 to-purple-600 bg-clip-text text-transparent"
                 >
                     Begin Your Divine Journey
                     <span className="block text-gray-800 mt-2">

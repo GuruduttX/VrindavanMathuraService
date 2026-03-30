@@ -15,7 +15,7 @@ const CMSSchema = ({
   schemaTitle: string;
   schemaDescription: string;
   onChange: any;
-  editorType: "Blog" | "Package" | "Temple" | "Pooja";
+  editorType: "Blog" | "Package" | "Temple" | "Pooja" | "Hotel";
 }) => {
   return (
     <div className="grid grid-cols-1 md:grid-cols-2 gap-6">

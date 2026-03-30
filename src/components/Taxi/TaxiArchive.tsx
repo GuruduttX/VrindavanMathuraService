@@ -2,49 +2,18 @@
 
 import { useState } from "react";
 import Image from "next/image";
-import { CarTaxiFront, Users, Fuel, Search } from "lucide-react";
+import { Users, Fuel, Search } from "lucide-react";
 import { motion } from "framer-motion";
 
-const taxis = [
-  {
-    id: 1,
-    name: "Sedan Premium",
-    type: "Sedan",
-    seats: 4,
-    fuel: "Diesel",
-    price: 3000,
-    image: "/images/Home/taxi1.jpg",
-    badge: "NEW",
-  },
-  {
-    id: 2,
-    name: "Sedan Economy",
-    type: "Sedan",
-    seats: 4,
-    fuel: "Petrol",
-    price: 2500,
-    image: "/images/Home/taxi2.jpg",
-    badge: "POPULAR",
-  },
-  {
-    id: 3,
-    name: "SUV Luxury",
-    type: "SUV",
-    seats: 6,
-    fuel: "Diesel",
-    price: 4200,
-    image: "/images/Home/taxi3.jpg",
-    badge: "BEST",
-  },
-];
 
-export default function TaxiArchive() {
+
+export default function TaxiArchive({taxis} : {taxis : any}) {
 
   const [search, setSearch] = useState("");
   const [filter, setFilter] = useState("all");
 
-  const filteredTaxis = taxis.filter((taxi) => {
-    const matchesSearch = taxi.name.toLowerCase().includes(search.toLowerCase());
+  const filteredTaxis = taxis.filter((taxi : any) => {
+    const matchesSearch = taxi.title.toLowerCase().includes(search.toLowerCase());
     const matchesFilter = filter === "all" || taxi.type === filter;
     return matchesSearch && matchesFilter;
   });
@@ -63,15 +32,14 @@ export default function TaxiArchive() {
 
           <div className="space-y-3">
 
-            {["all","Sedan","SUV"].map((type)=>(
+            {["all", "Sedan", "SUV", "HatchBack", "MiniBus", "TempoTraveller"].map((type) => (
               <button
                 key={type}
-                onClick={()=>setFilter(type)}
-                className={`w-full text-left px-4 py-3 rounded-xl transition ${
-                  filter === type
+                onClick={() => setFilter(type)}
+                className={`w-full text-left px-4 py-3 rounded-xl transition cursor-pointer ${filter === type
                     ? "bg-gradient-to-r from-pink-500 to-purple-600 text-white"
                     : "bg-gray-100 hover:bg-pink-50"
-                }`}
+                  }`}
               >
                 {type === "all" ? "All Cabs" : type}
               </button>
@@ -89,16 +57,43 @@ export default function TaxiArchive() {
           <div className="flex flex-col lg:flex-row gap-6 items-center justify-between">
 
             {/* Search */}
-            <div className="flex items-center border rounded-xl px-3 py-2 bg-white w-full lg:w-96">
+            <div className="relative w-full lg:w-96 group">
 
-              <Search size={18} className="text-gray-400"/>
+              <div className="
+    flex items-center
+    rounded-2xl
+    bg-white
+    px-4 py-3
+    border border-pink-100
+    shadow-sm
+    transition-all
+    duration-300
+    group-focus-within:border-pink-400
+    group-focus-within:ring-2
+    group-focus-within:ring-pink-200
+  ">
 
-              <input
-                placeholder="Search Taxi..."
-                value={search}
-                onChange={(e)=>setSearch(e.target.value)}
-                className="flex-1 outline-none px-2"
-              />
+                <Search
+                  size={18}
+                  className="text-gray-400 group-focus-within:text-pink-500 transition-colors"
+                />
+
+                <input
+                  placeholder="Search Taxi..."
+                  value={search}
+                  onChange={(e) => setSearch(e.target.value)}
+                  className="
+        flex-1
+        bg-transparent
+        outline-none
+        px-3
+        text-sm
+        text-gray-700
+        placeholder:text-gray-400
+      "
+                />
+
+              </div>
 
             </div>
 
@@ -117,10 +112,10 @@ export default function TaxiArchive() {
 
           {/* Taxi Cards */}
 
-          {filteredTaxis.map((taxi)=>(
+          {filteredTaxis.map((taxi : any) => (
             <motion.div
               key={taxi.id}
-              whileHover={{y:-6}}
+              whileHover={{ y: -6 }}
               className="bg-white rounded-3xl shadow-lg p-6 flex flex-col lg:flex-row items-center justify-between gap-6"
             >
 
@@ -132,8 +127,9 @@ export default function TaxiArchive() {
 
                   <Image
                     src={taxi.image}
-                    alt={taxi.name}
+                    alt={taxi.alt}
                     fill
+                    loading="lazy"
                     className="object-cover"
                   />
 
@@ -144,11 +140,11 @@ export default function TaxiArchive() {
                   <div className="flex items-center gap-3">
 
                     <h3 className="font-semibold text-lg">
-                      {taxi.name}
+                      {taxi.title}
                     </h3>
 
                     <span className="text-xs px-2 py-1 rounded bg-green-100 text-green-700">
-                      {taxi.badge}
+                      {taxi.cabType}
                     </span>
 
                   </div>
@@ -156,13 +152,13 @@ export default function TaxiArchive() {
                   <div className="flex gap-4 text-gray-500 text-sm mt-2">
 
                     <span className="flex items-center gap-1">
-                      <Users size={14}/>
+                      <Users size={14} />
                       {taxi.seats} Seats
                     </span>
 
                     <span className="flex items-center gap-1">
-                      <Fuel size={14}/>
-                      {taxi.fuel}
+                      <Fuel size={14} />
+                      {taxi.fuelType}
                     </span>
 
                   </div>
@@ -176,7 +172,7 @@ export default function TaxiArchive() {
               <div className="text-right">
 
                 <p className="text-2xl font-bold text-pink-600">
-                  ₹{taxi.price}
+                  ₹{taxi.basePrice}
                 </p>
 
                 <p className="text-sm text-gray-500">
@@ -199,6 +195,7 @@ export default function TaxiArchive() {
                 to-purple-600
                 hover:scale-105
                 transition
+                cursor-pointer
               ">
                 Select Cab
               </button>

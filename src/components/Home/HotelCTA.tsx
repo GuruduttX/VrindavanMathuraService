@@ -28,13 +28,13 @@ export default function HotelCTA() {
 
             {/* TITLE */}
 
-            <h2 className="text-3xl md:text-4xl font-bold text-gray-800">
+            <h2 className="text-2xl md:text-4xl font-bold text-gray-800 text-center">
               Plan Your Peaceful Stay in Vrindavan
             </h2>
 
             {/* DESCRIPTION */}
 
-            <p className="text-gray-500 mt-4 max-w-2xl mx-auto leading-relaxed">
+            <p className="text-gray-500 mt-4 max-w-2xl mx-auto leading-relaxed text-sm md:text-lg">
               Experience a comfortable and spiritual stay near the sacred
               temples of Vrindavan. Our carefully selected hotels ensure a
               relaxing environment for pilgrims and travellers.
@@ -42,7 +42,7 @@ export default function HotelCTA() {
 
             {/* FEATURES */}
 
-            <div className="flex flex-wrap justify-center gap-8 mt-10 text-gray-600">
+            <div className="flex flex-wrap justify-center gap-8 mt-10 text-gray-600 text-sm md:text-md">
 
               <div className="flex items-center gap-2">
                 <MapPin size={18} className="text-pink-500" />

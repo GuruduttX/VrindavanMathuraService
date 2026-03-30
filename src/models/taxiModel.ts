@@ -36,7 +36,7 @@ const taxiSchema = new Schema<ITaxi>(
           type: String, 
           required: true,
         },
-        inclusion: {
+        description: {
           type: String,
           required: true,
         },
@@ -49,7 +49,7 @@ const taxiSchema = new Schema<ITaxi>(
           type: String,
           required: true,
         },
-        exclusion: {
+        description: {
           type: String,
           required: true,
         },

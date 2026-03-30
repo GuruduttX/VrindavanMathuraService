@@ -73,10 +73,10 @@ export default function PopularHotels() {
   };
 
   return (
-    <section className="relative py-28 overflow-hidden">
+    <section className="relative py-10 md:py-28 overflow-hidden">
 
       {/* background gradient */}
-      <div className="absolute inset-0 bg-gradient-to-br from-pink-50 via-white to-purple-50"></div>
+      <div className="absolute inset-0 bg-gradient-to-br from-pink-100 via-pink-50 to-purple-50"></div>
 
       {/* glow */}
       <div className="absolute top-0 left-0 w-[350px] h-[350px] bg-pink-400/20 blur-[120px] rounded-full"></div>
@@ -86,7 +86,7 @@ export default function PopularHotels() {
 
         {/* heading */}
         <div className="text-center mb-14">
-          <h2 className="text-5xl font-bold bg-gradient-to-r from-pink-600 via-fuchsia-600 to-purple-600 bg-clip-text text-transparent">
+          <h2 className="text-3xl md:text-5xl font-bold bg-gradient-to-r from-pink-600 via-fuchsia-600 to-purple-600 bg-clip-text text-transparent">
             Popular Hotels in Vrindavan
           </h2>
 
@@ -153,6 +153,7 @@ export default function PopularHotels() {
                       src={hotel.image}
                       alt={hotel.name}
                       fill
+                      loading="lazy"
                       className="object-cover group-hover:scale-110 transition duration-700"
                     />
 
@@ -247,6 +248,7 @@ export default function PopularHotels() {
             shadow-lg
             hover:scale-105
             transition
+            cursor-pointer
           ">
             View All Hotels
           </button>

@@ -1,10 +1,9 @@
 "use client";
-
 import TourCard from "@/utils/TourCard";
 
 
 interface Tour {
-  id: number;
+  _id: string;
   title: string;
   image: string;
 }
@@ -33,7 +32,7 @@ export default function TourGrid({ tours }: Props) {
       {/* Grid */}
       <div className="grid gap-10 sm:grid-cols-1 md:grid-cols-2 xl:grid-cols-2 2xl:grid-cols-3">
         {tours.map((tour) => (
-          <TourCard key={tour.id} tour={tour} />
+          <TourCard key={tour._id} tour={tour} />
         ))}
       </div>
     </div>
