@@ -1,9 +1,10 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Image from "next/image";
 import { motion } from "framer-motion";
 import { Star, Wifi, Car, Utensils, MapPin, Hotel } from "lucide-react";
+import Link from "next/link";
 
 const hotels = [
   {
@@ -48,59 +49,130 @@ const hotels = [
   },
 ];
 
+
+interface HotelInclusion {
+  freeWifi: boolean;
+  breakfast: boolean;
+  parking: boolean;
+}
+
+interface RatingSummary {
+  // Using Record<string, any> since the highlights object was truncated in the log
+  // Replace 'any' with a specific type if you know the exact shape of highlights
+  highlights: Record<string, any>;
+}
+
+interface Hotel {
+  _id: string;
+  __v: number;
+  title: string;
+  slug: string;
+  image: string;
+  alt: string;
+  category: string;
+  host: string;
+  duration: string;
+  price: number;
+  rating: number;
+  reviews: number;
+  status: "published" | "draft" | "archived" | string; // Typed as a union for strictness, falling back to string
+  inclusion: HotelInclusion;
+  ratingSummary: RatingSummary;
+  faqs: any[]; // Update 'any' to a specific FAQ interface if you have one
+  offers: any[]; // Update 'any' to a specific Offer interface if you have one
+  createdAt: string;
+  updatedAt: string;
+}
+
 export default function HotelsArchive() {
 
+
   const [rating, setRating] = useState(0);
-  const [price, setPrice] = useState(5000);
+  const [price, setPrice] = useState(10000);
   const [wifi, setWifi] = useState(false);
   const [parking, setParking] = useState(false);
   const [restaurant, setRestaurant] = useState(false);
+  const [hotels, setHotels] = useState<Hotel[]>([]);
 
-  const filteredHotels = hotels.filter((hotel) => {
-    return (
-      hotel.rating >= rating &&
-      hotel.price <= price &&
-      (!wifi || hotel.amenities.includes("wifi")) &&
-      (!parking || hotel.amenities.includes("parking")) &&
-      (!restaurant || hotel.amenities.includes("restaurant"))
-    );
-  });
+
+  useEffect(() => {
+    const fetchHotels = async () => {
+      try {
+        const res = await fetch("api/hotels");
+
+        if (!res.ok) {
+          throw new Error(`HTTP error! status: ${res.status}`);
+        }
+        const data = await res.json();
+        // console.log(data.data)
+        setHotels(data.data);
+        // console.log(hotels, "this is hotels");
+      } catch (error) {
+        console.error("Failed to fetch hotels:", error);
+      }
+    };
+    fetchHotels();
+  }, []);
+
+ const filteredHotels = hotels.filter((hotel) => {
+   // 1. Basic Number Comparisons
+   const matchesRating = hotel.rating >= rating;
+   const matchesPrice = hotel.price <= price;
+
+   // 2. Boolean Inclusion Checks (Replacing the old .includes() array method)
+   // If the user hasn't toggled 'wifi' (!wifi), it passes. If they have, the hotel MUST have freeWifi.
+   const matchesWifi = !wifi || hotel.inclusion?.freeWifi === true;
+   const matchesParking = !parking || hotel.inclusion?.parking === true;
+
+   // Note: Your dummy data checked for "restaurant", but the real data has "breakfast".
+   // I have mapped your restaurant state to check the breakfast boolean here.
+   const matchesRestaurant = !restaurant || hotel.inclusion?.breakfast === true;
+
+   // 3. Final Evaluation
+   return (
+     matchesRating &&
+     matchesPrice &&
+     matchesWifi &&
+     matchesParking &&
+     matchesRestaurant
+   );
+ });
+
+console.log(filteredHotels);
 
   return (
     <section className="py-24">
-
       <div className="max-w-7xl mx-auto px-6">
-
         {/* INTRO */}
 
         <div className="text-center mb-16">
-
-          <h2 className="
+          <h2
+            className="
           text-4xl md:text-5xl font-bold
           bg-gradient-to-r
-          from-pink-500
-          via-fuchsia-500
-          to-purple-400
+          from-amber-500
+          via-amber-500
+          to-orange-400
           bg-clip-text
           text-transparent
-          ">
+          "
+          >
             Our Hotels in Vrindavan
           </h2>
 
           <p className="text-gray-600 mt-4 max-w-xl mx-auto">
-            Comfortable stays near temples and peaceful places
-            for your Vrindavan journey.
+            Comfortable stays near temples and peaceful places for your
+            Vrindavan journey.
           </p>
-
         </div>
 
         {/* MAIN GRID */}
 
         <div className="grid lg:grid-cols-4 gap-10">
-
           {/* FILTERS */}
 
-          <div className="
+          <div
+            className="
           sticky
           top-24
           bg-white
@@ -109,80 +181,65 @@ export default function HotelsArchive() {
           p-6
           space-y-8
           border border-gray-100
-          ">
-
-            <h3 className="text-xl font-semibold">
-              Filter Hotels
-            </h3>
+          "
+          >
+            <h3 className="text-xl font-semibold">Filter Hotels</h3>
 
             {/* PRICE */}
 
             <div>
-
-              <p className="text-sm text-gray-500 mb-3">
-                Price Range
-              </p>
+              <p className="text-sm text-gray-500 mb-3">Price Range</p>
 
               <input
                 type="range"
                 min={500}
                 max={5000}
                 value={price}
-                onChange={(e)=>setPrice(Number(e.target.value))}
-                className="w-full accent-pink-500"
+                onChange={(e) => setPrice(Number(e.target.value))}
+                className="w-full accent-amber-500"
               />
 
-              <p className="text-sm mt-2 text-gray-600">
-                Up to ₹{price}
-              </p>
-
+              <p className="text-sm mt-2 text-gray-600">Up to ₹{price}</p>
             </div>
 
             {/* RATING */}
 
             <div>
+              <p className="text-sm text-gray-500 mb-3">Rating</p>
 
-              <p className="text-sm text-gray-500 mb-3">
-                Rating
-              </p>
-
-              {[4,4.5].map((value)=>(
+              {[4, 4.5].map((value) => (
                 <button
                   key={value}
-                  onClick={()=>setRating(value)}
+                  onClick={() => setRating(value)}
                   className="
                   flex items-center gap-2
                   w-full
                   px-3 py-2
                   rounded-lg
-                  hover:bg-pink-50
+                  hover:bg-amber-50
                   transition
                   text-sm
                   "
                 >
-                  <Star size={16} className="text-yellow-500"/>
+                  <Star size={16} className="text-yellow-500" />
                   {value}+ Rating
                 </button>
               ))}
-
             </div>
 
             {/* AMENITIES */}
 
             <div>
-
-              <p className="text-sm text-gray-500 mb-3">
-                Amenities
-              </p>
+              <p className="text-sm text-gray-500 mb-3">Amenities</p>
 
               <label className="flex items-center gap-2 text-sm mb-2">
                 <input
                   type="checkbox"
                   checked={wifi}
-                  onChange={()=>setWifi(!wifi)}
-                  className="accent-pink-500"
+                  onChange={() => setWifi(!wifi)}
+                  className="accent-amber-500"
                 />
-                <Wifi size={16} className="text-pink-500"/>
+                <Wifi size={16} className="text-amber-500" />
                 Free WiFi
               </label>
 
@@ -190,10 +247,10 @@ export default function HotelsArchive() {
                 <input
                   type="checkbox"
                   checked={parking}
-                  onChange={()=>setParking(!parking)}
-                  className="accent-pink-500"
+                  onChange={() => setParking(!parking)}
+                  className="accent-amber-500"
                 />
-                <Car size={16} className="text-pink-500"/>
+                <Car size={16} className="text-amber-500" />
                 Parking
               </label>
 
@@ -201,25 +258,22 @@ export default function HotelsArchive() {
                 <input
                   type="checkbox"
                   checked={restaurant}
-                  onChange={()=>setRestaurant(!restaurant)}
-                  className="accent-pink-500"
+                  onChange={() => setRestaurant(!restaurant)}
+                  className="accent-amber-500"
                 />
-                <Utensils size={16} className="text-pink-500"/>
+                <Utensils size={16} className="text-amber-500" />
                 Restaurant
               </label>
-
             </div>
-
           </div>
 
           {/* HOTEL LIST */}
 
           <div className="lg:col-span-3 grid md:grid-cols-2 gap-8">
-
-            {filteredHotels.map((hotel)=>(
+            {filteredHotels.map((hotel) => (
               <motion.div
-                key={hotel.id}
-                whileHover={{y:-8}}
+                key={hotel._id} // Changed from hotel.id to hotel._id
+                whileHover={{ y: -8 }}
                 className="
                 bg-white
                 rounded-3xl
@@ -228,14 +282,12 @@ export default function HotelsArchive() {
                 group
                 "
               >
-
                 {/* IMAGE */}
 
                 <div className="relative h-56 overflow-hidden">
-
                   <Image
                     src={hotel.image}
-                    alt={hotel.name}
+                    alt={hotel.alt || hotel.title} // Uses the specific alt text from backend, falls back to title
                     fill
                     className="object-cover group-hover:scale-110 transition duration-700"
                   />
@@ -243,89 +295,72 @@ export default function HotelsArchive() {
                   <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent"></div>
 
                   <div className="absolute top-4 right-4 bg-white px-2 py-1 rounded-lg text-sm shadow flex items-center gap-1">
-
-                    <Star size={14} className="text-yellow-500"/>
-                    {hotel.rating}
-
+                    <Star size={14} className="text-yellow-500" />
+                    {hotel.rating}{" "}
+                    <span className="text-xs text-gray-500 ml-1">
+                      ({hotel.reviews})
+                    </span>
                   </div>
-
                 </div>
 
                 {/* CONTENT */}
 
-                <div className="p-6">
-
-                  <h3 className="text-lg font-semibold">
-                    {hotel.name}
-                  </h3>
-
+                <div className="p-6 z-999">
+                  <h3 className="text-lg font-semibold">{hotel.title}</h3>{" "}
+                  {/* Changed from name to title */}
                   <div className="flex items-center text-gray-500 text-sm mt-1">
-
-                    <MapPin size={14} className="mr-1"/>
-                    {hotel.location}
-
+                    <MapPin size={14} className="mr-1" />
+                    {hotel.category} {/* Changed from location to category */}
                   </div>
-
-                  {/* AMENITIES */}
-
+                  {/* AMENITIES -> INCLUSIONS */}
                   <div className="flex gap-4 mt-4 text-sm text-gray-600">
-
-                    {hotel.amenities.includes("wifi") && (
+                    {hotel.inclusion?.freeWifi && ( // Checks boolean directly
                       <span className="flex items-center gap-1">
-                        <Wifi size={14}/> WiFi
+                        <Wifi size={14} /> WiFi
                       </span>
                     )}
 
-                    {hotel.amenities.includes("parking") && (
+                    {hotel.inclusion?.parking && ( // Checks boolean directly
                       <span className="flex items-center gap-1">
-                        <Car size={14}/> Parking
+                        <Car size={14} /> Parking
                       </span>
                     )}
 
-                    {hotel.amenities.includes("restaurant") && (
+                    {hotel.inclusion?.breakfast && ( // Checks boolean directly
                       <span className="flex items-center gap-1">
-                        <Utensils size={14}/> Restaurant
+                        <Utensils size={14} /> Breakfast{" "}
+                        {/* Changed label to Breakfast */}
                       </span>
                     )}
-
                   </div>
-
                   {/* PRICE */}
-
                   <div className="flex items-center justify-between mt-6">
-
-                    <span className="text-pink-600 font-semibold">
+                    <span className="text-amber-600 font-semibold">
                       ₹{hotel.price} / night
                     </span>
 
-                    <button className="
+                    <Link href={`/hotels/${hotel.slug}`}>
+                      <button
+                        className="
                     px-4 py-2
                     rounded-full
                     text-white
                     text-sm
-                    bg-gradient-to-r
-                    from-pink-500
-                    via-fuchsia-500
-                    to-purple-600
+                    bg-gradient-to-r from-orange-500 to-amber-600
                     hover:scale-105
                     transition
-                    ">
-                      View Hotel
-                    </button>
-
+                    "
+                      >
+                        View Hotel
+                      </button>
+                    </Link>
                   </div>
-
                 </div>
-
               </motion.div>
             ))}
-
           </div>
-
         </div>
-
       </div>
-
     </section>
   );
 }

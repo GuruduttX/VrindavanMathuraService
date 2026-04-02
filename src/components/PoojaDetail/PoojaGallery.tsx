@@ -24,20 +24,20 @@ export default function PoojaGallery() {
 
         {/* Section header */}
         <div className="text-center mb-16">
-          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-pink-50 border border-pink-200 mb-5">
-            <span className="w-1.5 h-1.5 rounded-full bg-pink-500 inline-block" />
-            <span className="text-pink-600 text-xs font-semibold uppercase tracking-widest">Sacred Moments</span>
+          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-amber-50 border border-amber-200 mb-5">
+            <span className="w-1.5 h-1.5 rounded-full bg-amber-500 inline-block" />
+            <span className="text-amber-600 text-xs font-semibold uppercase tracking-widest">Sacred Moments</span>
           </div>
           <h2 className="text-3xl md:text-4xl font-extrabold text-gray-900 leading-tight">
             Pooja{" "}
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-pink-600 to-rose-500">
+            <span className="text-transparent bg-clip-text bg-gradient-to-r from-amber-600 to-orange-500">
               Gallery
             </span>
           </h2>
           <div className="flex items-center justify-center gap-2 mt-4 mb-5">
-            <div className="h-px w-10 bg-pink-200 rounded-full" />
-            <div className="h-0.5 w-16 bg-gradient-to-r from-pink-500 to-rose-400 rounded-full" />
-            <div className="h-px w-10 bg-pink-200 rounded-full" />
+            <div className="h-px w-10 bg-amber-200 rounded-full" />
+            <div className="h-0.5 w-16 bg-gradient-to-r from-amber-500 to-orange-400 rounded-full" />
+            <div className="h-px w-10 bg-amber-200 rounded-full" />
           </div>
           <p className="text-gray-500 max-w-xl mx-auto text-[15px] leading-relaxed">
             Glimpses of sacred pooja ceremonies and spiritual moments
@@ -52,8 +52,8 @@ export default function PoojaGallery() {
               key={index}
               onClick={() => setActive(index)}
               className={`relative overflow-hidden rounded-2xl cursor-pointer group
-                border-2 border-transparent hover:border-pink-300
-                shadow-sm hover:shadow-xl hover:shadow-pink-100
+                border-2 border-transparent hover:border-amber-300
+                shadow-sm hover:shadow-xl hover:shadow-amber-100
                 transition-all duration-300
                 ${img.span}`}
             >
@@ -65,10 +65,10 @@ export default function PoojaGallery() {
               />
 
               {/* Default gradient overlay */}
-              <div className="absolute inset-0 bg-gradient-to-t from-rose-900/50 via-transparent to-transparent" />
+              <div className="absolute inset-0 bg-gradient-to-t from-orange-900/50 via-transparent to-transparent" />
 
               {/* Hover overlay */}
-              <div className="absolute inset-0 bg-gradient-to-br from-pink-600/60 to-rose-600/50
+              <div className="absolute inset-0 bg-gradient-to-br from-amber-600/60 to-orange-600/50
                 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
 
               {/* Label */}
@@ -89,7 +89,7 @@ export default function PoojaGallery() {
 
               {/* Index badge */}
               <div className="absolute top-3 left-3 w-7 h-7 rounded-full
-                bg-gradient-to-br from-pink-500 to-rose-500 text-white
+                bg-gradient-to-br from-amber-500 to-orange-500 text-white
                 flex items-center justify-center text-[11px] font-bold shadow-md
                 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
                 {index + 1}
@@ -100,16 +100,16 @@ export default function PoojaGallery() {
 
         {/* View all strip */}
         <div className="mt-10 flex items-center justify-center gap-4">
-          <div className="h-px flex-1 max-w-[160px] bg-gradient-to-r from-transparent to-pink-200" />
+          <div className="h-px flex-1 max-w-[160px] bg-gradient-to-r from-transparent to-amber-200" />
           <button className="inline-flex items-center gap-2.5 px-8 py-3.5 rounded-full
-            bg-gradient-to-r from-pink-600 to-rose-500 text-white font-semibold text-sm
+            bg-gradient-to-r from-amber-600 to-orange-500 text-white font-semibold text-sm
             shadow-[0_4px_20px_rgba(236,72,153,0.35)]
             hover:shadow-[0_6px_28px_rgba(236,72,153,0.5)] hover:scale-[1.03]
             active:scale-95 transition-all duration-200 cursor-pointer">
             View Full Gallery
             <span className="w-6 h-6 rounded-full bg-white/20 flex items-center justify-center text-xs">→</span>
           </button>
-          <div className="h-px flex-1 max-w-[160px] bg-gradient-to-l from-transparent to-pink-200" />
+          <div className="h-px flex-1 max-w-[160px] bg-gradient-to-l from-transparent to-amber-200" />
         </div>
 
       </div>
@@ -140,7 +140,7 @@ export default function PoojaGallery() {
                 className="w-full max-h-[75vh] object-cover"
               />
               {/* Caption bar */}
-              <div className="bg-gradient-to-r from-pink-700 to-rose-600 px-6 py-3 flex items-center justify-between">
+              <div className="bg-gradient-to-r from-amber-700 to-orange-600 px-6 py-3 flex items-center justify-between">
                 <span className="text-white font-semibold text-sm tracking-wide">
                   🌸 {images[active].label}
                 </span>

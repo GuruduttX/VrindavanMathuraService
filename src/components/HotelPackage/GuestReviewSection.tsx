@@ -12,7 +12,7 @@ import {
 
 export default function GuestReviewSection() {
   return (
-    <section className="py-28 bg-gradient-to-b from-pink-100 via-pink-50 to-white">
+    <section className="py-28 bg-gradient-to-b from-amber-100 via-amber-50 to-white">
 
       <div className="max-w-7xl mx-auto px-6">
 
@@ -29,7 +29,7 @@ export default function GuestReviewSection() {
 
             <span className="text-5xl">🏆</span>
 
-            <h2 className="text-7xl font-bold bg-gradient-to-r from-pink-500 via-fuchsia-500 to-purple-600 bg-clip-text text-transparent">
+            <h2 className="text-7xl font-bold bg-gradient-to-r from-amber-500 via-amber-500 to-orange-600 bg-clip-text text-transparent">
               5.0
             </h2>
 
@@ -138,10 +138,10 @@ function RatingCard({ title, rating, icon }: any) {
 
     <motion.div
       whileHover={{ y: -6 }}
-      className="bg-white border border-pink-100 rounded-2xl p-6 text-center shadow-sm hover:shadow-xl transition"
+      className="bg-white border border-amber-100 rounded-2xl p-6 text-center shadow-sm hover:shadow-xl transition"
     >
 
-      <div className="flex justify-center mb-3 text-pink-500">
+      <div className="flex justify-center mb-3 text-amber-500">
         {icon}
       </div>
 
@@ -175,7 +175,7 @@ function RatingBar({ stars, width }: any) {
           initial={{ width: 0 }}
           whileInView={{ width }}
           transition={{ duration: 1 }}
-          className="h-full bg-gradient-to-r from-pink-500 via-fuchsia-500 to-purple-600"
+          className="h-full bg-gradient-to-r from-amber-500 via-amber-500 to-orange-600"
         />
 
       </div>
@@ -192,7 +192,7 @@ function Tag({ label }: any) {
 
     <motion.div
       whileHover={{ scale: 1.05 }}
-      className="px-5 py-2 bg-white border border-pink-200 rounded-full shadow-sm text-sm text-gray-700 hover:shadow-md cursor-pointer"
+      className="px-5 py-2 bg-white border border-amber-200 rounded-full shadow-sm text-sm text-gray-700 hover:shadow-md cursor-pointer"
     >
       {label}
     </motion.div>

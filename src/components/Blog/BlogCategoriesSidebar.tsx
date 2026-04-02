@@ -29,7 +29,7 @@ export default function BlogCategoriesSidebar() {
 
       {/* Header */}
       <div className="flex items-center gap-3 mb-8">
-        <div className="h-6 w-1.5 rounded-full bg-rose-500"></div>
+        <div className="h-6 w-1.5 rounded-full bg-orange-500"></div>
         <h4 className="text-lg font-semibold text-gray-900 tracking-wide">
           Blog Categories
         </h4>
@@ -49,8 +49,8 @@ export default function BlogCategoriesSidebar() {
                 px-5 py-2.5 text-sm font-medium rounded-full border transition-all duration-300
                 ${
                   isActive
-                    ? "bg-rose-500 text-white border-rose-500 shadow-md"
-                    : "bg-gray-50 text-gray-700 border-gray-200 hover:bg-rose-50 hover:border-rose-400 hover:text-rose-600"
+                    ? "bg-orange-500 text-white border-orange-500 shadow-md"
+                    : "bg-gray-50 text-gray-700 border-gray-200 hover:bg-orange-50 hover:border-orange-400 hover:text-orange-600"
                 }
               `}
             >

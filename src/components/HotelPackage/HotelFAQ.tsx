@@ -44,18 +44,18 @@ export default function HotelFAQ() {
   };
 
   return (
-    <section className="py-20 bg-gradient-to-b from-pink-50 to-white">
+    <section className="py-20 bg-gradient-to-b from-amber-50 to-white">
       <div className="max-w-5xl mx-auto px-6">
         
         <h2 className="text-4xl font-bold text-center mb-12">
-          Hotel Booking <span className="text-pink-600">FAQs</span>
+          Hotel Booking <span className="text-amber-600">FAQs</span>
         </h2>
 
         <div className="space-y-5">
           {faqs.map((faq, index) => (
             <div
               key={index}
-              className="bg-white/70 backdrop-blur-md rounded-2xl shadow-md border border-pink-100 hover:shadow-xl transition"
+              className="bg-white/70 backdrop-blur-md rounded-2xl shadow-md border border-amber-100 hover:shadow-xl transition"
             >
               
               <button
@@ -68,7 +68,7 @@ export default function HotelFAQ() {
 
                 <ChevronDown
                   className={`transition-transform ${
-                    active === index ? "rotate-180 text-pink-600" : ""
+                    active === index ? "rotate-180 text-amber-600" : ""
                   }`}
                 />
               </button>

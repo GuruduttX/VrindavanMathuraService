@@ -4,10 +4,10 @@ import Link from "next/link";
 
 export default function BlogCTA() {
   return (
-    <div className="relative my-16 rounded-2xl border border-pink-200 bg-gradient-to-r from-pink-50 to-rose-50 p-8 md:p-12 overflow-hidden">
+    <div className="relative my-16 rounded-2xl border border-amber-200 bg-gradient-to-r from-amber-50 to-orange-50 p-8 md:p-12 overflow-hidden">
 
       {/* Soft Decorative Glow */}
-      <div className="absolute -top-10 -right-10 h-32 w-32 rounded-full bg-pink-300/20 blur-2xl"></div>
+      <div className="absolute -top-10 -right-10 h-32 w-32 rounded-full bg-amber-300/20 blur-2xl"></div>
 
       <div className="relative text-center">
 
@@ -26,7 +26,7 @@ export default function BlogCTA() {
         {/* Button */}
         <div className="mt-6">
           <Link href="/tour-packages">
-            <button className="rounded-full bg-gradient-to-r from-pink-600 to-rose-500 px-8 py-3 text-white font-medium transition-all duration-300 hover:shadow-lg hover:scale-105">
+            <button className="rounded-full bg-gradient-to-r from-amber-600 to-orange-500 px-8 py-3 text-white font-medium transition-all duration-300 hover:shadow-lg hover:scale-105">
               Explore Tour Packages
             </button>
           </Link>

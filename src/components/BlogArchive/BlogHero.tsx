@@ -4,11 +4,11 @@ import { motion } from "framer-motion";
 
 export default function BlogHero() {
   return (
-    <section className="relative overflow-hidden bg-gradient-to-br from-pink-600 to-rose-500 py-10 px-6 lg:px-20 text-white md:py-28">
+    <section className="relative overflow-hidden bg-gradient-to-br from-amber-600 to-orange-500 py-10 px-6 lg:px-20 text-white md:py-28">
       
       {/* Decorative Blur Circles */}
-      <div className="absolute -top-20 -left-20 h-72 w-72 rounded-full bg-pink-400/30 blur-3xl"></div>
-      <div className="absolute bottom-0 right-0 h-80 w-80 rounded-full bg-rose-300/30 blur-3xl"></div>
+      <div className="absolute -top-20 -left-20 h-72 w-72 rounded-full bg-amber-400/30 blur-3xl"></div>
+      <div className="absolute bottom-0 right-0 h-80 w-80 rounded-full bg-orange-300/30 blur-3xl"></div>
 
       <div className="relative mx-auto max-w-4xl text-center">
         
@@ -27,7 +27,7 @@ export default function BlogHero() {
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.9, delay: 0.2 }}
-          className="mt-6 text-lg md:text-xl text-pink-100 leading-relaxed"
+          className="mt-6 text-lg md:text-xl text-amber-100 leading-relaxed"
         >
           Discover temple guides, travel tips, hotel recommendations,
           taxi services, pooja rituals, and complete tour planning insights

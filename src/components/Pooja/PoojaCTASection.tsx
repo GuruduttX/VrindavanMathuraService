@@ -1,6 +1,6 @@
 export default function PoojaCTASection() {
   return (
-    <section className="relative py-14 bg-gradient-to-r from-pink-600 to-rose-500 overflow-hidden">
+    <section className="relative py-14 bg-gradient-to-r from-amber-600 to-orange-500 overflow-hidden">
 
       {/* Top Wave */}
       <svg
@@ -25,12 +25,12 @@ export default function PoojaCTASection() {
               Preserve the Divine Moments
             </h2>
 
-            <p className="text-pink-100 mb-8 text-lg leading-relaxed text-center md:text-left">
+            <p className="text-amber-100 mb-8 text-lg leading-relaxed text-center md:text-left">
               Explore sacred ceremonies and spiritual events conducted with
               devotion and tradition. Revisit divine blessings anytime.
             </p>
 
-            <button className="bg-white text-pink-600 px-8 py-3 rounded-full font-medium hover:bg-pink-100 transition ml-14 md:ml-0">
+            <button className="bg-white text-amber-600 px-8 py-3 rounded-full font-medium hover:bg-amber-100 transition ml-14 md:ml-0">
               Browse All Poojas
             </button>
           </div>
@@ -40,7 +40,7 @@ export default function PoojaCTASection() {
           <div className="relative w-[280px] h-[220px] md:w-[480px] md:h-[420px]">
 
             {/* Gradient Border Frame */}
-            <div className="absolute inset-0 rounded-2xl p-[2px] bg-gradient-to-br from-pink-500 to-rose-400">
+            <div className="absolute inset-0 rounded-2xl p-[2px] bg-gradient-to-br from-amber-500 to-orange-400">
               <div className="w-full h-full rounded-2xl bg-white"></div>
             </div>
 

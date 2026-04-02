@@ -7,13 +7,13 @@ import { Star, Wifi, Coffee, Car, MapPin } from "lucide-react";
 export default function HotelDetailsHero({HotelData } : {HotelData : any}) {
 
   return (
-    <section className="relative bg-gradient-to-b from-pink-50 to-white pt-30 pb-5">
+    <section className="relative bg-gradient-to-b from-amber-50 to-white pt-30 pb-5">
 
       <div className="max-w-[1200px] mx-auto px-6">
 
         {/* Breadcrumb */}
         <p className="text-sm text-gray-400 mb-4">
-          Home / Hotels / <span className="text-pink-600 font-medium">{HotelData.title}</span>
+          Home / Hotels / <span className="text-amber-600 font-medium">{HotelData.title}</span>
         </p>
 
         {/* Hero Image */}
@@ -62,7 +62,7 @@ export default function HotelDetailsHero({HotelData } : {HotelData : any}) {
           {/* Rating + Reviews */}
           <div className="flex items-center gap-4 mt-4">
 
-            <span className="flex items-center gap-1 text-pink-600 font-medium text-sm">
+            <span className="flex items-center gap-1 text-amber-600 font-medium text-sm">
               ⭐ {HotelData.Rating}
             </span>
 
@@ -100,7 +100,7 @@ export default function HotelDetailsHero({HotelData } : {HotelData : any}) {
 
 
           {/* Price Card */}
-          <div className="mt-8 bg-gradient-to-r from-pink-500 to-purple-500 rounded-2xl p-6 flex items-center justify-between text-white">
+          <div className="mt-8 bg-gradient-to-r from-amber-500 to-orange-500 rounded-2xl p-6 flex items-center justify-between text-white">
 
             <div>
               <p className="text-xs uppercase opacity-80">Special Offer</p>
@@ -118,7 +118,7 @@ export default function HotelDetailsHero({HotelData } : {HotelData : any}) {
             <motion.button
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
-              className="bg-white text-pink-600 font-semibold px-6 py-3 rounded-xl shadow"
+              className="bg-white text-amber-600 font-semibold px-6 py-3 rounded-xl shadow"
             >
               Book Now →
             </motion.button>

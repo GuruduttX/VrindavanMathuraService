@@ -12,10 +12,10 @@ export default function HotelsHero() {
   const [guests, setGuests] = useState("");
 
   return (
-    <section className="relative overflow-hidden bg-gradient-to-br from-pink-50 via-rose-50 to-fuchsia-100 pt-12">
+    <section className="relative overflow-hidden bg-gradient-to-br from-orange-50 via-amber-50 to-amber-100 pt-12">
 
       {/* Background blobs */}
-      <div className="absolute -top-40 -left-40 w-[500px] h-[500px] bg-pink-200/40 rounded-full blur-[90px]" />
+      <div className="absolute -top-40 -left-40 w-[500px] h-[500px] bg-amber-200/40 rounded-full blur-[90px]"/>
       <div className="absolute bottom-0 right-0 w-[500px] h-[500px] bg-fuchsia-200/40 rounded-full blur-[100px]" />
 
       <div className="max-w-[1300px] mx-auto px-6 lg:px-20 py-20 grid lg:grid-cols-2 gap-16 items-center">
@@ -32,7 +32,7 @@ export default function HotelsHero() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.2 }}
-            className="inline-flex items-center gap-2 bg-pink-100 text-pink-600 font-semibold text-sm px-4 py-2 rounded-full mb-6"
+            className="inline-flex items-center gap-2 bg-amber-100 text-amber-600 font-semibold text-sm px-4 py-2 rounded-full mb-6"
           >
             🏨 Explore Luxury Stays
           </motion.div>
@@ -46,7 +46,7 @@ export default function HotelsHero() {
           >
             Find the Perfect Hotel
             <br />
-            in <span className="text-pink-600">Vrindavan</span>
+            in <span className="text-amber-600">Vrindavan</span>
           </motion.h1>
 
           {/* Description */}
@@ -78,7 +78,7 @@ export default function HotelsHero() {
                 key={item}
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.96 }}
-                className="px-4 py-2 rounded-full bg-white border border-pink-100 text-gray-600 text-sm font-medium hover:bg-pink-50 hover:text-pink-600 transition"
+                className="px-4 py-2 rounded-full bg-white border border-amber-100 text-gray-600 text-sm font-medium hover:bg-amber-50 hover:text-amber-600 transition"
               >
                 {item}
               </motion.button>
@@ -90,7 +90,7 @@ export default function HotelsHero() {
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.7 }}
-            className="mt-8 bg-white rounded-2xl shadow-xl border border-pink-100 p-4 grid md:grid-cols-5 gap-3"
+            className="mt-8 bg-white rounded-2xl shadow-xl border border-amber-100 p-4 grid md:grid-cols-5 gap-3"
           >
 
             <input
@@ -98,7 +98,7 @@ export default function HotelsHero() {
               placeholder="Location"
               value={location}
               onChange={(e) => setLocation(e.target.value)}
-              className="px-4 py-3 rounded-xl border border-gray-200 focus:outline-none focus:ring-2 focus:ring-pink-300"
+              className="px-4 py-3 rounded-xl border border-gray-200 focus:outline-none focus:ring-2 focus:ring-amber-300"
             />
 
             <input
@@ -126,7 +126,7 @@ export default function HotelsHero() {
             <motion.button
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.96 }}
-              className="bg-gradient-to-r from-pink-500 to-fuchsia-500 text-white font-semibold rounded-xl px-6 py-3 shadow hover:shadow-lg transition"
+              className="bg-gradient-to-r from-orange-500 to-amber-500 text-white font-semibold rounded-xl px-6 py-3 shadow hover:shadow-lg transition"
             >
               Search
             </motion.button>
@@ -144,7 +144,7 @@ export default function HotelsHero() {
               <motion.button
                 key={f}
                 whileHover={{ scale: 1.05 }}
-                className="px-3 py-1.5 rounded-full bg-white border border-pink-100 text-gray-600 hover:text-pink-600 hover:bg-pink-50 transition"
+                className="px-3 py-1.5 rounded-full bg-white border border-amber-100 text-gray-600 hover:text-amber-600 hover:bg-amber-50 transition"
               >
                 {f}
               </motion.button>
@@ -225,7 +225,7 @@ function HotelCard({ image, name, rating, price }: any) {
 
         <div className="flex justify-between items-center mt-2">
           <span className="text-yellow-500 text-sm">★ {rating}</span>
-          <span className="text-pink-600 font-bold">₹{price}</span>
+          <span className="text-amber-600 font-bold">₹{price}</span>
         </div>
       </div>
     </motion.div>
@@ -237,7 +237,7 @@ function HotelCard({ image, name, rating, price }: any) {
 function Stat({ number, label }: any) {
   return (
     <div>
-      <p className="text-2xl font-bold text-pink-600">{number}</p>
+      <p className="text-2xl font-bold text-amber-600">{number}</p>
       <p className="text-sm text-gray-400">{label}</p>
     </div>
   );

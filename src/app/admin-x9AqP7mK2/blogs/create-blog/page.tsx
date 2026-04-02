@@ -293,7 +293,6 @@ export default function CreateNewBlog() {
           <CMSActions actionType="create" editorType="Blog" onSaveDraft={SaveDraft} />
 
         </form>
-
       </div>
 
     </section>

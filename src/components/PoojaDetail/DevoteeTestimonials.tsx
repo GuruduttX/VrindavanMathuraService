@@ -27,7 +27,7 @@ export default function DevoteeTestimonials() {
   ];
 
   return (
-    <section className="py-24 px-6 relative overflow-hidden bg-gradient-to-br from-pink-700 via-rose-600 to-pink-600">
+    <section className="py-24 px-6 relative overflow-hidden bg-gradient-to-br from-amber-700 via-orange-600 to-amber-600">
 
       {/* Dot pattern */}
       <div
@@ -47,13 +47,13 @@ export default function DevoteeTestimonials() {
         {/* Section header */}
         <div className="text-center mb-16">
           <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white/15 border border-white/25 mb-5">
-            <span className="w-1.5 h-1.5 rounded-full bg-pink-200 inline-block" />
+            <span className="w-1.5 h-1.5 rounded-full bg-amber-200 inline-block" />
             <span className="text-white/90 text-xs font-semibold uppercase tracking-widest">Devotee Stories</span>
           </div>
 
           <h2 className="text-3xl md:text-4xl font-extrabold text-white leading-tight">
             What Our{" "}
-            <span className="text-pink-200">Devotees Say</span>
+            <span className="text-amber-200">Devotees Say</span>
           </h2>
 
           <div className="flex items-center justify-center gap-2 mt-4 mb-5">
@@ -84,7 +84,7 @@ export default function DevoteeTestimonials() {
 
                 {/* Quote icon */}
                 <div className="w-10 h-10 rounded-xl bg-white/15 border border-white/20 flex items-center justify-center
-                  text-pink-200 text-xl font-serif leading-none">
+                  text-amber-200 text-xl font-serif leading-none">
                   "
                 </div>
 
@@ -114,7 +114,7 @@ export default function DevoteeTestimonials() {
                 <div className="flex items-center justify-between">
                   <div className="flex items-center gap-3">
                     {/* Avatar */}
-                    <div className="w-10 h-10 rounded-full bg-gradient-to-br from-pink-300 to-rose-400
+                    <div className="w-10 h-10 rounded-full bg-gradient-to-br from-amber-300 to-orange-400
                       flex items-center justify-center text-white font-bold text-sm shadow-md">
                       {item.initials}
                     </div>

@@ -17,7 +17,7 @@ export default function BlogAuthor({
     <section className="px-6 lg:px-20 py-16 bg-white">
       <div className="mx-auto max-w-3xl">
 
-        <div className="flex flex-col sm:flex-row items-start gap-6 p-8 rounded-2xl border border-pink-100 shadow-sm bg-pink-50/40">
+        <div className="flex flex-col sm:flex-row items-start gap-6 p-8 rounded-2xl border border-amber-100 shadow-sm bg-amber-50/40">
 
           {/* Author Image */}
           <div className="relative h-20 w-20 shrink-0">
@@ -35,7 +35,7 @@ export default function BlogAuthor({
               {name}
             </h3>
 
-            <p className="text-sm text-pink-600 font-medium mt-1">
+            <p className="text-sm text-amber-600 font-medium mt-1">
               {role}
             </p>
 

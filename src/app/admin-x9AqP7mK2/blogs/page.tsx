@@ -73,7 +73,6 @@ export default function BlogsPage() {
   /* ------------------ Fetch Blogs ------------------ */
   const fetchBlogs = async () => {
     try {
-
       setLoading(true);
 
       const res = await fetch("/api/blog", {

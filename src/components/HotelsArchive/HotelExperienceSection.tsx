@@ -32,12 +32,12 @@ const highlights = [
 
 export default function HotelExperienceSection() {
   return (
-    <section className="py-24 relative bg-gradient-to-br from-pink-50 via-rose-50 to-purple-50">
+    <section className="py-24 relative bg-gradient-to-br from-amber-50 via-orange-100 to-amber-50">
 
       {/* subtle glow accents */}
 
-      <div className="absolute -top-10 left-0 w-[300px] h-[300px] bg-pink-400/20 blur-[120px] rounded-full"></div>
-      <div className="absolute bottom-0 right-0 w-[300px] h-[300px] bg-purple-400/20 blur-[120px] rounded-full"></div>
+      <div className="absolute -top-10 left-0 w-[300px] h-[300px] bg-amber-400/20 blur-[120px] rounded-full"></div>
+      <div className="absolute bottom-0 right-0 w-[300px] h-[300px] bg-orange-400/20 blur-[120px] rounded-full"></div>
 
       <div className="max-w-7xl mx-auto px-6">
 
@@ -48,9 +48,9 @@ export default function HotelExperienceSection() {
           <h2 className="
           text-4xl md:text-5xl font-bold
           bg-gradient-to-r
-          from-pink-500
-          via-fuchsia-500
-          to-purple-400
+          from-amber-500
+          via-amber-600
+          to-orange-600
           bg-clip-text
           text-transparent
           ">
@@ -95,9 +95,9 @@ export default function HotelExperienceSection() {
                 justify-center
                 rounded-full
                 bg-gradient-to-r
-                from-pink-500
-                via-fuchsia-500
-                to-purple-600
+                from-amber-500
+                via-amber-500
+                to-orange-600
                 text-white
                 ">
 

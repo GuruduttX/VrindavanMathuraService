@@ -25,14 +25,14 @@ export default function PoojaSection({ poojaData }: { poojaData: any }) {
 
         {/* 2️ Filter / Category Section */}
         <div className="flex flex-wrap justify-center gap-4 mb-14">
-          {categories.map((cat) => (
+          {categories.map((cat,index) => (
             <button
-              key={cat}
+              key={index}
               onClick={() => setActiveCategory(cat)}
               className={`px-6 py-2 rounded-full border text-sm font-medium transition
                 ${activeCategory === cat
-                  ? "bg-pink-500 text-white border-pink-500"
-                  : "border-gray-300 text-gray-700 hover:border-pink-400 hover:text-pink-600"
+                  ? "bg-amber-500 text-white border-amber-500"
+                  : "border-gray-300 text-gray-700 hover:border-amber-400 hover:text-amber-600"
                 }
               `}
             >
@@ -72,7 +72,7 @@ export default function PoojaSection({ poojaData }: { poojaData: any }) {
                 </p>
 
                 <Link href={`/pooja/${item.slug}`}>
-                  <button className="text-pink-600 font-medium hover:underline">
+                  <button className="text-amber-600 font-medium hover:underline">
                     View Details →
                   </button>
                 </Link>
@@ -80,7 +80,6 @@ export default function PoojaSection({ poojaData }: { poojaData: any }) {
             </div> : <></>
           ))}
         </div>
-
       </div>
     </section>
   );

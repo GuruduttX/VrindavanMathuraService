@@ -34,7 +34,7 @@ export default function PoojaFAQ({faqs}: { faqs : FAQSI[]}) {
           {faqs.map((faq : any, index : number) => (
             <div
               key={index}
-              className="border border-pink-100 rounded-lg"
+              className="border border-amber-100 rounded-lg"
             >
               <button
                 onClick={() => toggleFAQ(index)}
@@ -42,7 +42,7 @@ export default function PoojaFAQ({faqs}: { faqs : FAQSI[]}) {
               >
                 <span>{faq.question}</span>
 
-                <span className="text-pink-500 text-xl">
+                <span className="text-amber-500 text-xl">
                   {openIndex === index ? "-" : "+"}
                 </span>
               </button>

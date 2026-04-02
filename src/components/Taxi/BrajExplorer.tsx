@@ -31,11 +31,11 @@ export default function BrajExplorer() {
     <section className="relative py-10 md:py-28 overflow-hidden">
 
       {/* gradient background */}
-      <div className="absolute inset-0 bg-gradient-to-br from-pink-50 via-white to-purple-50"></div>
+      <div className="absolute inset-0 bg-gradient-to-br from-amber-50 via-white to-orange-50"></div>
 
       {/* glow */}
-      <div className="absolute top-0 left-0 w-[350px] h-[350px] bg-pink-400/20 blur-[140px] rounded-full"></div>
-      <div className="absolute bottom-0 right-0 w-[350px] h-[350px] bg-purple-400/20 blur-[140px] rounded-full"></div>
+      <div className="absolute top-0 left-0 w-[350px] h-[350px] bg-amber-400/20 blur-[140px] rounded-full"></div>
+      <div className="absolute bottom-0 right-0 w-[350px] h-[350px] bg-orange-400/20 blur-[140px] rounded-full"></div>
 
       <div className="relative max-w-6xl mx-auto px-6">
 
@@ -43,7 +43,7 @@ export default function BrajExplorer() {
 
         <div className="text-center mb-16">
 
-          <h2 className="text-3xl md:text-5xl font-bold bg-gradient-to-r from-pink-600 via-fuchsia-600 to-purple-600 bg-clip-text text-transparent">
+          <h2 className="text-3xl md:text-5xl font-bold bg-gradient-to-r from-amber-600 via-orange-600 to-orange-600 bg-clip-text text-transparent">
             Explore Braj Destinations
           </h2>
 
@@ -58,7 +58,7 @@ export default function BrajExplorer() {
         <div className="relative flex flex-col md:flex-row items-center justify-between">
 
           {/* line */}
-          <div className=" absolute top-0 bottom-0 w-[3px] left-1/2 -translate-x-1/2 bg-gradient-to-b from-pink-400 via-fuchsia-500 to-purple-500 lg:top-auto lg:left-0 lg:right-0 lg:h-[3px] lg:w-auto lg:bg-gradient-to-r"></div>
+          <div className=" absolute top-0 bottom-0 w-[3px] left-1/2 -translate-x-1/2 bg-gradient-to-b from-amber-400 via-orange-500 to-orange-500 lg:top-auto lg:left-0 lg:right-0 lg:h-[3px] lg:w-auto lg:bg-gradient-to-r"></div>
 
           {places.map((place, index) => (
 
@@ -77,9 +77,9 @@ export default function BrajExplorer() {
                 justify-center
                 rounded-full
                 bg-gradient-to-r
-                from-pink-500
-                via-fuchsia-500
-                to-purple-600
+                from-amber-500
+                via-orange-500
+                to-orange-600
                 text-white
                 shadow-lg
               ">

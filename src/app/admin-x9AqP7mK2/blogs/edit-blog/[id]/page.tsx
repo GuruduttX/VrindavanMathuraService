@@ -213,7 +213,6 @@ export default function EditBlog() {
               className="mt-2 w-full px-5 py-3 rounded-xl bg-white/5 text-white
             border border-white/10 focus:ring-2 focus:ring-sky-500 transition"
             />
-
           </div>
 
           <CMSSeoSection
@@ -255,11 +254,8 @@ export default function EditBlog() {
             editorType="Blog"
             onPublish={handlePublish}
           />
-
         </form>
-
       </div>
-
     </section>
 
   );

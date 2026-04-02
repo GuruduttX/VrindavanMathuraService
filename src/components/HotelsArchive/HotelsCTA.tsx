@@ -26,8 +26,8 @@ export default function HotelsCTA() {
 
           {/* subtle glow */}
 
-          <div className="absolute -top-16 left-0 w-[260px] h-[260px] bg-pink-400/20 blur-[120px] rounded-full"></div>
-          <div className="absolute bottom-0 right-0 w-[260px] h-[260px] bg-purple-400/20 blur-[120px] rounded-full"></div>
+          <div className="absolute -top-16 left-0 w-[260px] h-[260px] bg-amber-400/20 blur-[120px] rounded-full"></div>
+          <div className="absolute bottom-0 right-0 w-[260px] h-[260px] bg-orange-400/20 blur-[120px] rounded-full"></div>
 
 
           {/* LEFT TEXT */}
@@ -41,9 +41,9 @@ export default function HotelsCTA() {
               <span className="
               block
               bg-gradient-to-r
-              from-pink-600
-              via-fuchsia-600
-              to-purple-600
+              from-amber-600
+              via-amber-600
+              to-orange-600
               bg-clip-text
               text-transparent
               ">
@@ -72,9 +72,9 @@ export default function HotelsCTA() {
                 text-white
                 font-medium
                 bg-gradient-to-r
-                from-pink-500
-                via-fuchsia-500
-                to-purple-600
+                from-amber-500
+                via-amber-500
+                to-orange-600
                 shadow-lg
                 flex items-center gap-2
                 "
@@ -93,9 +93,9 @@ export default function HotelsCTA() {
                 py-3
                 rounded-full
                 border
-                border-pink-500
-                text-pink-600
-                hover:bg-pink-50
+                border-amber-500
+                text-amber-600
+                hover:bg-amber-50
                 transition
                 flex items-center gap-2
                 "

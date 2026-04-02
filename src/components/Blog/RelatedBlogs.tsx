@@ -48,7 +48,7 @@ export default function RelatedBlogs() {
           <h3 className="text-3xl md:text-4xl font-bold text-gray-900">
             Related Articles
           </h3>
-          <div className="mx-auto mt-4 h-1 w-20 rounded-full bg-gradient-to-r from-pink-500 to-rose-400"></div>
+          <div className="mx-auto mt-4 h-1 w-20 rounded-full bg-gradient-to-r from-amber-500 to-orange-400"></div>
         </div>
 
         {/* Blog Grid */}
@@ -70,12 +70,12 @@ export default function RelatedBlogs() {
                 <div className="p-6">
 
                   {/* Category */}
-                  <span className="inline-block rounded-full bg-pink-100 px-3 py-1 text-xs font-medium text-pink-600">
+                  <span className="inline-block rounded-full bg-amber-100 px-3 py-1 text-xs font-medium text-amber-600">
                     {blog.category}
                   </span>
 
                   {/* Title */}
-                  <h4 className="mt-4 text-lg font-semibold text-gray-900 group-hover:text-pink-600 transition-colors duration-300">
+                  <h4 className="mt-4 text-lg font-semibold text-gray-900 group-hover:text-amber-600 transition-colors duration-300">
                     {blog.title}
                   </h4>
 
@@ -85,7 +85,7 @@ export default function RelatedBlogs() {
                   </p>
 
                   {/* Read More */}
-                  <span className="mt-4 inline-block text-sm font-medium text-pink-600">
+                  <span className="mt-4 inline-block text-sm font-medium text-amber-600">
                     Read More →
                   </span>
 

@@ -4,7 +4,7 @@ const RightReviewSection = () => {
     return (
         <div className="sticky top-28 h-fit">
 
-            <div className="bg-white rounded-3xl shadow-xl p-6 border border-pink-100">
+            <div className="bg-white rounded-3xl shadow-xl p-6 border border-amber-100">
 
                 <h2 className="text-lg font-semibold mb-4">
                     Fare Summary
@@ -33,10 +33,10 @@ const RightReviewSection = () => {
 
                 <div className="flex justify-between font-semibold text-lg">
                     <span>Total</span>
-                    <span className="text-pink-600">₹3000</span>
+                    <span className="text-amber-600">₹3000</span>
                 </div>
 
-                <button className="mt-6 w-full bg-gradient-to-r from-pink-500 to-purple-600 text-white py-3 rounded-xl font-medium hover:scale-105 transition">
+                <button className="mt-6 w-full bg-gradient-to-r from-amber-500 to-orange-600 text-white py-3 rounded-xl font-medium hover:scale-105 transition">
                     Confirm Booking
                 </button>
 
@@ -46,15 +46,15 @@ const RightReviewSection = () => {
 
                 <div className="grid grid-cols-3 gap-2 mt-6 text-xs text-center">
 
-                    <div className="bg-pink-50 rounded-lg p-2">
+                    <div className="bg-amber-50 rounded-lg p-2">
                         🔒 Secure
                     </div>
 
-                    <div className="bg-pink-50 rounded-lg p-2">
+                    <div className="bg-amber-50 rounded-lg p-2">
                         💸 No Hidden Charges
                     </div>
 
-                    <div className="bg-pink-50 rounded-lg p-2">
+                    <div className="bg-amber-50 rounded-lg p-2">
                         📞 24/7 Support
                     </div>
 

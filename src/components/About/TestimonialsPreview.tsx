@@ -37,22 +37,22 @@ export default function TestimonialsPreview() {
   }, []);
 
   return (
-    <section className="relative bg-pink-50 py-24 overflow-hidden">
+    <section className="relative bg-amber-50 py-24 overflow-hidden">
       
       {/* Background Blur Shapes */}
-      <div className="absolute top-0 left-0 w-72 h-72 bg-pink-300/30 rounded-full blur-3xl -z-10" />
+      <div className="absolute top-0 left-0 w-72 h-72 bg-amber-300/30 rounded-full blur-3xl -z-10" />
       <div className="absolute bottom-0 right-0 w-72 h-72 bg-rose-300/30 rounded-full blur-3xl -z-10" />
 
       <div className="max-w-4xl mx-auto px-6 text-center">
 
         {/* Heading */}
-        <h2 className="text-4xl md:text-5xl font-bold text-pink-700">
+        <h2 className="text-4xl md:text-5xl font-bold text-amber-700">
           What Our Travelers Say
         </h2>
 
         <p className="mt-4 text-gray-600 text-lg">
           Real experiences from devotees and travelers who trusted 
-          <span className="font-semibold text-pink-600"> MathuraVrindavanService</span>
+          <span className="font-semibold text-amber-600"> MathuraVrindavanService</span>
         </p>
 
         {/* Slider */}
@@ -65,14 +65,14 @@ export default function TestimonialsPreview() {
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: -40 }}
               transition={{ duration: 0.6 }}
-              className="bg-white shadow-xl shadow-pink-200/40 rounded-3xl p-10"
+              className="bg-white shadow-xl shadow-amber-200/40 rounded-3xl p-10"
             >
               {/* Stars */}
               <div className="flex justify-center mb-6">
                 {Array(5)
                   .fill(0)
                   .map((_, i) => (
-                    <span key={i} className="text-pink-500 text-xl">
+                    <span key={i} className="text-amber-500 text-xl">
                       ★
                     </span>
                   ))}
@@ -85,7 +85,7 @@ export default function TestimonialsPreview() {
 
               {/* User Info */}
               <div className="mt-8">
-                <h4 className="font-semibold text-pink-700 text-lg">
+                <h4 className="font-semibold text-amber-700 text-lg">
                   {testimonials[index].name}
                 </h4>
                 <p className="text-gray-500 text-sm">
@@ -103,8 +103,8 @@ export default function TestimonialsPreview() {
                 onClick={() => setIndex(i)}
                 className={`h-3 w-3 rounded-full transition-all duration-300 ${
                   index === i
-                    ? "bg-pink-600 w-6"
-                    : "bg-pink-300"
+                    ? "bg-amber-600 w-6"
+                    : "bg-amber-300"
                 }`}
               />
             ))}

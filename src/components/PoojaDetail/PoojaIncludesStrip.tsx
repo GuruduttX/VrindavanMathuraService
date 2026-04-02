@@ -8,7 +8,7 @@ export default function PoojaIncludesStrip() {
   ];
 
   return (
-    <section className="relative py-14 px-6 overflow-hidden rounded-2xl bg-gradient-to-r from-pink-700 via-rose-600 to-pink-600">
+    <section className="relative py-14 px-6 overflow-hidden rounded-2xl bg-gradient-to-r from-amber-700 via-orange-600 to-amber-600">
 
       {/* Decorative blurred orbs */}
       <div className="absolute -top-10 -left-10 w-52 h-52 bg-white/10 rounded-full blur-2xl pointer-events-none" />
@@ -43,12 +43,12 @@ export default function PoojaIncludesStrip() {
               <span className="text-xl leading-none group-hover:scale-110 transition-transform duration-200">
                 {item.icon}
               </span>
-              <span className="text-white group-hover:text-pink-700 font-semibold text-sm tracking-wide transition-colors duration-200">
+              <span className="text-white group-hover:text-amber-700 font-semibold text-sm tracking-wide transition-colors duration-200">
                 {item.label}
               </span>
 
               {/* Tick on hover */}
-              <span className="w-5 h-5 rounded-full bg-pink-100 text-pink-600 text-[10px] font-bold
+              <span className="w-5 h-5 rounded-full bg-amber-100 text-amber-600 text-[10px] font-bold
                 flex items-center justify-center opacity-0 group-hover:opacity-100 -ml-1
                 transition-opacity duration-200">
                 ✓

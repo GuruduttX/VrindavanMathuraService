@@ -5,7 +5,7 @@ import Image from "next/image";
 
 export default function BlogStickyCTA() {
   return (
-    <div className="relative overflow-hidden rounded-3xl bg-white shadow-xl border border-pink-100">
+    <div className="relative overflow-hidden rounded-3xl bg-white shadow-xl border border-amber-100">
 
       {/* Top Image */}
       <div className="relative h-60 w-full">
@@ -34,7 +34,7 @@ export default function BlogStickyCTA() {
 
         {/* Button */}
         <Link href="/contact">
-          <button className="mt-6 w-full rounded-full bg-gradient-to-r from-pink-600 to-rose-500 px-5 py-3 text-sm font-semibold text-white transition-all duration-300 hover:scale-105 hover:shadow-lg hover:shadow-pink-300/40">
+          <button className="mt-6 w-full rounded-full bg-gradient-to-r from-amber-600 to-orange-500 px-5 py-3 text-sm font-semibold text-white transition-all duration-300 hover:scale-105 hover:shadow-lg hover:shadow-amber-300/40">
             Send Enquiry
           </button>
         </Link>

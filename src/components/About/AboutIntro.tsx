@@ -5,10 +5,10 @@ import Image from "next/image";
 
 export default function AboutIntro() {
   return (
-    <section className="relative w-full py-24 bg-pink-50 overflow-hidden">
+    <section className="relative w-full py-24 bg-amber-50 overflow-hidden">
 
       {/* Background Blur Shape */}
-      <div className="absolute top-0 left-0 w-72 h-72 bg-pink-200 rounded-full blur-3xl opacity-30 -z-10" />
+      <div className="absolute top-0 left-0 w-72 h-72 bg-amber-200 rounded-full blur-3xl opacity-30 -z-10" />
       <div className="absolute bottom-0 right-0 w-72 h-72 bg-rose-300 rounded-full blur-3xl opacity-30 -z-10" />
 
       <div className="max-w-7xl mx-auto px-6 lg:px-16 grid lg:grid-cols-2 gap-14 items-center">
@@ -20,19 +20,19 @@ export default function AboutIntro() {
           transition={{ duration: 0.8, ease: "easeOut" }}
           viewport={{ once: true }}
         >
-          <span className="text-pink-600 font-semibold uppercase tracking-wider">
+          <span className="text-amber-600 font-semibold uppercase tracking-wider">
             Who We Are
           </span>
 
           <h2 className="mt-4 text-4xl lg:text-5xl font-bold text-gray-800 leading-tight">
             Your Trusted Companion in
-            <span className="block text-pink-600">
+            <span className="block text-amber-600">
               Mathura & Vrindavan
             </span>
           </h2>
 
           {/* Elegant underline */}
-          <div className="mt-4 h-1 w-24 bg-gradient-to-r from-pink-600 to-rose-400 rounded-full" />
+          <div className="mt-4 h-1 w-24 bg-gradient-to-r from-amber-600 to-rose-400 rounded-full" />
 
           <p className="mt-8 text-gray-600 text-lg leading-relaxed">
             At <strong>MathuraVrindavanService</strong>, we specialize in 

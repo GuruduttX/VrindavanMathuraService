@@ -22,7 +22,7 @@ export default function BlogShare({ url, title }: BlogShareProps) {
             href={`https://wa.me/?text=${encodedTitle}%20${encodedUrl}`}
             target="_blank"
             rel="noopener noreferrer"
-            className="rounded-full border border-gray-300 px-5 py-2 text-sm font-medium text-gray-700 transition-all duration-300 hover:border-pink-500 hover:text-pink-600"
+            className="rounded-full border border-gray-300 px-5 py-2 text-sm font-medium text-gray-700 transition-all duration-300 hover:border-amber-500 hover:text-amber-600"
           >
             WhatsApp
           </a>
@@ -32,7 +32,7 @@ export default function BlogShare({ url, title }: BlogShareProps) {
             href={`https://twitter.com/intent/tweet?text=${encodedTitle}&url=${encodedUrl}`}
             target="_blank"
             rel="noopener noreferrer"
-            className="rounded-full border border-gray-300 px-5 py-2 text-sm font-medium text-gray-700 transition-all duration-300 hover:border-pink-500 hover:text-pink-600"
+            className="rounded-full border border-gray-300 px-5 py-2 text-sm font-medium text-gray-700 transition-all duration-300 hover:border-amber-500 hover:text-amber-600"
           >
             Twitter
           </a>
@@ -42,7 +42,7 @@ export default function BlogShare({ url, title }: BlogShareProps) {
             href={`https://www.facebook.com/sharer/sharer.php?u=${encodedUrl}`}
             target="_blank"
             rel="noopener noreferrer"
-            className="rounded-full border border-gray-300 px-5 py-2 text-sm font-medium text-gray-700 transition-all duration-300 hover:border-pink-500 hover:text-pink-600"
+            className="rounded-full border border-gray-300 px-5 py-2 text-sm font-medium text-gray-700 transition-all duration-300 hover:border-amber-500 hover:text-amber-600"
           >
             Facebook
           </a>

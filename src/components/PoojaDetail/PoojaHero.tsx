@@ -31,12 +31,12 @@ export default function PoojaHero({ pooja }: PoojaHeroProps) {
       </div>
 
       {/* Gradient Overlays */}
-      <div className="absolute inset-0 bg-gradient-to-br from-rose-950/80 via-pink-800/70 to-pink-500/50" />
+      <div className="absolute inset-0 bg-gradient-to-br from-orange-950/80 via-amber-800/70 to-amber-500/50" />
       <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
 
       {/* Decorative blurred circles — static, no JS */}
-      <div className="absolute -top-40 -left-40 w-[500px] h-[500px] rounded-full bg-pink-400/20 blur-3xl pointer-events-none" />
-      <div className="absolute -bottom-32 -right-32 w-[450px] h-[450px] rounded-full bg-rose-600/20 blur-3xl pointer-events-none" />
+      <div className="absolute -top-40 -left-40 w-[500px] h-[500px] rounded-full bg-amber-400/20 blur-3xl pointer-events-none" />
+      <div className="absolute -bottom-32 -right-32 w-[450px] h-[450px] rounded-full bg-orange-600/20 blur-3xl pointer-events-none" />
 
       {/* Decorative mandala ring — static SVG */}
       <div className="absolute right-10 top-1/2 -translate-y-1/2 hidden lg:block pointer-events-none opacity-[0.12]">
@@ -65,7 +65,7 @@ export default function PoojaHero({ pooja }: PoojaHeroProps) {
           {/* Location Badge */}
           <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full mb-6
             bg-white/10 backdrop-blur-sm border border-white/20 cursor-default">
-            <span className="w-2 h-2 rounded-full bg-pink-300 inline-block" />
+            <span className="w-2 h-2 rounded-full bg-amber-300 inline-block" />
             <span className="text-white/90 text-xs tracking-widest uppercase font-medium">
               Sacred Ritual · {pooja.location}
             </span>
@@ -76,11 +76,11 @@ export default function PoojaHero({ pooja }: PoojaHeroProps) {
             {pooja.title}
           </h1>
 
-          {/* Pink accent divider */}
+          {/* amber accent divider */}
           <div className="mt-5 flex items-center gap-3">
-            <div className="h-px w-10 bg-pink-300/50" />
-            <div className="h-1 w-36 rounded-full bg-gradient-to-r from-pink-300 via-pink-500 to-rose-600 shadow-[0_0_12px_2px_rgba(236,72,153,0.5)]" />
-            <div className="h-px w-10 bg-pink-300/50" />
+            <div className="h-px w-10 bg-amber-300/50" />
+            <div className="h-1 w-36 rounded-full bg-gradient-to-r from-amber-300 via-amber-500 to-orange-600 shadow-[0_0_12px_2px_rgba(236,72,153,0.5)]" />
+            <div className="h-px w-10 bg-amber-300/50" />
           </div>
 
           {/* Description */}
@@ -99,7 +99,7 @@ export default function PoojaHero({ pooja }: PoojaHeroProps) {
                 key={item.label}
                 className="flex items-center gap-3 px-5 py-3 rounded-2xl cursor-default
                   bg-white/10 backdrop-blur-sm border border-white/15
-                  hover:bg-white/20 hover:border-pink-300/40
+                  hover:bg-white/20 hover:border-amber-300/40
                   transition-colors duration-200"
               >
                 <span className="text-lg leading-none">{item.icon}</span>
@@ -122,13 +122,13 @@ export default function PoojaHero({ pooja }: PoojaHeroProps) {
 
             <Link href="#enquiry" className="cursor-pointer">
               <button className="inline-flex items-center gap-2.5 px-9 py-4 rounded-full
-                bg-white text-pink-700 font-bold text-sm tracking-wide
+                bg-white text-amber-700 font-bold text-sm tracking-wide
                 shadow-[0_4px_24px_rgba(255,80,160,0.35)]
                 hover:shadow-[0_6px_32px_rgba(255,80,160,0.55)]
-                hover:bg-pink-50 hover:scale-[1.03]
+                hover:bg-amber-50 hover:scale-[1.03]
                 active:scale-95 transition-all duration-200 cursor-pointer">
                 Book This Pooja
-                <span className="w-6 h-6 rounded-full bg-pink-600 text-white text-xs flex items-center justify-center">
+                <span className="w-6 h-6 rounded-full bg-amber-600 text-white text-xs flex items-center justify-center">
                   →
                 </span>
               </button>
@@ -138,7 +138,7 @@ export default function PoojaHero({ pooja }: PoojaHeroProps) {
               <button className="inline-flex items-center gap-2.5 px-9 py-4 rounded-full
                 text-white font-semibold text-sm tracking-wide
                 border border-white/40 bg-white/10 backdrop-blur-sm
-                hover:bg-white hover:text-pink-700 hover:border-white
+                hover:bg-white hover:text-amber-700 hover:border-white
                 hover:scale-[1.03] active:scale-95
                 transition-all duration-200 cursor-pointer">
                 Talk to Priest
@@ -152,7 +152,7 @@ export default function PoojaHero({ pooja }: PoojaHeroProps) {
           <div className="mt-8 flex flex-wrap items-center gap-x-5 gap-y-2 text-white/45 text-xs">
             {["100% Vedic Rituals", "Certified Pandits", "Doorstep Service", "Secure Booking"].map((t) => (
               <span key={t} className="flex items-center gap-1.5">
-                <span className="text-pink-300/70">✦</span>
+                <span className="text-amber-300/70">✦</span>
                 {t}
               </span>
             ))}

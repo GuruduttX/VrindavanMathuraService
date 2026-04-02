@@ -35,7 +35,7 @@ export default function PoojaPricingCard() {
   ];
 
   return (
-    <section className="py-20 bg-pink-50 px-6">
+    <section className="py-20 bg-amber-50 px-6">
       <div className="max-w-6xl mx-auto">
 
         {/* Heading */}
@@ -56,13 +56,13 @@ export default function PoojaPricingCard() {
             <div
               key={index}
               className={`bg-white rounded-xl shadow-lg p-8 relative border ${
-                pkg.popular ? "border-pink-500 scale-105" : "border-pink-100"
+                pkg.popular ? "border-amber-500 scale-105" : "border-amber-100"
               }`}
             >
 
               {/* Popular Tag */}
               {pkg.popular && (
-                <span className="absolute top-4 right-4 bg-pink-500 text-white text-xs px-3 py-1 rounded-full">
+                <span className="absolute top-4 right-4 bg-amber-500 text-white text-xs px-3 py-1 rounded-full">
                   Popular
                 </span>
               )}
@@ -71,7 +71,7 @@ export default function PoojaPricingCard() {
                 {pkg.title}
               </h3>
 
-              <p className="text-3xl font-bold text-pink-600 mb-6">
+              <p className="text-3xl font-bold text-amber-600 mb-6">
                 {pkg.price}
               </p>
 
@@ -83,7 +83,7 @@ export default function PoojaPricingCard() {
                 ))}
               </ul>
 
-              <button className="w-full bg-pink-500 hover:bg-pink-600 text-white py-3 rounded-lg font-semibold transition">
+              <button className="w-full bg-amber-500 hover:bg-amber-600 text-white py-3 rounded-lg font-semibold transition">
                 Book Now
               </button>
 

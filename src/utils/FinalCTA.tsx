@@ -16,7 +16,7 @@ export default function FinalCTA() {
                     whileInView={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.6 }}
                     viewport={{ once: true }}
-                    className="text-3xl md:text-5xl font-bold leading-tight bg-gradient-to-r from-pink-600 via-fuchsia-600 to-purple-600 bg-clip-text text-transparent"
+                    className="text-3xl md:text-5xl font-bold leading-tight bg-gradient-to-r from-amber-600 via-amber-600 to-orange-600 bg-clip-text text-transparent"
                 >
                     Begin Your Divine Journey
                     <span className="block text-gray-800 mt-2">
@@ -48,7 +48,7 @@ export default function FinalCTA() {
             "
                     >
 
-                        <MapPin className="mx-auto text-pink-600" />
+                        <MapPin className="mx-auto text-amber-600" />
 
                         <h3 className="text-xl font-semibold mt-4 text-gray-800">
                             Explore Tours
@@ -65,9 +65,9 @@ export default function FinalCTA() {
               rounded-full
               text-white
               bg-gradient-to-r
-              from-pink-500
-              via-fuchsia-500
-              to-purple-600
+              from-amber-500
+              via-amber-500
+              to-orange-600
               hover:scale-105
               transition
             ">
@@ -92,7 +92,7 @@ export default function FinalCTA() {
             "
                     >
 
-                        <CarTaxiFront className="mx-auto text-pink-600" />
+                        <CarTaxiFront className="mx-auto text-amber-600" />
 
                         <h3 className="text-xl font-semibold mt-4 text-gray-800">
                             Book Taxi
@@ -109,9 +109,9 @@ export default function FinalCTA() {
               rounded-full
               text-white
               bg-gradient-to-r
-              from-pink-500
-              via-fuchsia-500
-              to-purple-600
+              from-amber-500
+              via-amber-500
+              to-orange-600
               hover:scale-105
               transition
             ">
@@ -136,7 +136,7 @@ export default function FinalCTA() {
             "
                     >
 
-                        <Hotel className="mx-auto text-pink-600" />
+                        <Hotel className="mx-auto text-amber-600" />
 
                         <h3 className="text-xl font-semibold mt-4 text-gray-800">
                             Find Hotels
@@ -153,9 +153,9 @@ export default function FinalCTA() {
               rounded-full
               text-white
               bg-gradient-to-r
-              from-pink-500
-              via-fuchsia-500
-              to-purple-600
+              from-amber-500
+              via-amber-500
+              to-orange-600
               hover:scale-105
               transition
             ">

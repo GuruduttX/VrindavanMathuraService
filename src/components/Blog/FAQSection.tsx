@@ -46,7 +46,7 @@ export default function FAQSection() {
           <h2 className="text-3xl md:text-4xl font-bold text-gray-900">
             Frequently Asked Questions
           </h2>
-          <div className="mx-auto mt-4 h-1 w-20 rounded-full bg-gradient-to-r from-pink-500 to-rose-400"></div>
+          <div className="mx-auto mt-4 h-1 w-20 rounded-full bg-gradient-to-r from-amber-500 to-orange-400"></div>
         </div>
 
         {/* FAQ List */}
@@ -59,7 +59,7 @@ export default function FAQSection() {
                 key={index}
                 className={`border rounded-xl transition-all duration-300 ${
                   isActive
-                    ? "border-pink-500 shadow-md shadow-pink-100"
+                    ? "border-amber-500 shadow-md shadow-amber-100"
                     : "border-gray-200"
                 }`}
               >
@@ -74,7 +74,7 @@ export default function FAQSection() {
 
                   {/* Plus Icon */}
                   <span
-                    className={`text-pink-600 text-xl font-bold transition-transform duration-300 ${
+                    className={`text-amber-600 text-xl font-bold transition-transform duration-300 ${
                       isActive ? "rotate-45" : ""
                     }`}
                   >

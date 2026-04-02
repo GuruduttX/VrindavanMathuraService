@@ -66,8 +66,8 @@ function StepRow({
 
   const card = (side: "left" | "right") => (
     <div
-      className={`group max-w-[280px] w-full bg-white border border-pink-100 rounded-2xl p-6
-        shadow-sm hover:shadow-lg hover:shadow-pink-100 hover:-translate-y-1
+      className={`group max-w-[280px] w-full bg-white border border-amber-100 rounded-2xl p-6
+        shadow-sm hover:shadow-lg hover:shadow-amber-100 hover:-translate-y-1
         cursor-default relative overflow-hidden
         transition-all duration-600
         ${inView
@@ -81,21 +81,21 @@ function StepRow({
       {/* Top accent bar */}
       <div
         className={`absolute top-0 inset-x-0 h-1 rounded-t-2xl bg-gradient-to-r
-          ${side === "left" ? "from-pink-500 to-rose-400" : "from-rose-400 to-pink-500"}`}
+          ${side === "left" ? "from-amber-500 to-orange-400" : "from-orange-400 to-amber-500"}`}
       />
 
       <div className="flex items-start gap-3">
         <div
           className={`w-11 h-11 rounded-xl flex items-center justify-center text-xl shrink-0
             border group-hover:scale-110 transition-transform duration-200
-            ${side === "left" ? "bg-pink-50 border-pink-100" : "bg-rose-50 border-rose-100"}`}
+            ${side === "left" ? "bg-amber-50 border-amber-100" : "bg-orange-50 border-orange-100"}`}
         >
           {step.icon}
         </div>
         <div>
           <span
             className={`text-[10px] font-bold uppercase tracking-widest
-              ${side === "left" ? "text-pink-400" : "text-rose-400"}`}
+              ${side === "left" ? "text-amber-400" : "text-orange-400"}`}
           >
             {step.tag}
           </span>
@@ -110,11 +110,11 @@ function StepRow({
       {/* Connector arrow toward spine */}
       {side === "left" ? (
         <div className="absolute right-0 top-1/2 -translate-y-1/2 translate-x-full">
-          <div className="w-0 h-0 border-t-[8px] border-t-transparent border-b-[8px] border-b-transparent border-l-[8px] border-l-pink-200" />
+          <div className="w-0 h-0 border-t-[8px] border-t-transparent border-b-[8px] border-b-transparent border-l-[8px] border-l-amber-200" />
         </div>
       ) : (
         <div className="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-full">
-          <div className="w-0 h-0 border-t-[8px] border-t-transparent border-b-[8px] border-b-transparent border-r-[8px] border-r-rose-200" />
+          <div className="w-0 h-0 border-t-[8px] border-t-transparent border-b-[8px] border-b-transparent border-r-[8px] border-r-orange-200" />
         </div>
       )}
     </div>
@@ -134,9 +134,9 @@ function StepRow({
         {/* Spine node */}
         <div className="flex flex-col items-center shrink-0 z-10">
           <div
-            className={`w-14 h-14 rounded-full bg-gradient-to-br from-pink-500 to-rose-500
+            className={`w-14 h-14 rounded-full bg-gradient-to-br from-amber-500 to-orange-500
               flex items-center justify-center text-white font-extrabold text-lg
-              ring-2 ring-pink-300
+              ring-2 ring-amber-300
               shadow-[0_0_0_6px_rgba(236,72,153,0.15),_0_0_0_12px_rgba(236,72,153,0.07)]
               transition-all duration-500
               ${inView ? "opacity-100 scale-100" : "opacity-0 scale-50"}`}
@@ -156,18 +156,18 @@ function StepRow({
       {!isLast && (
         <div className="flex flex-col items-center my-1">
           <div
-            className={`w-px h-10 bg-gradient-to-b from-pink-400 to-pink-200
+            className={`w-px h-10 bg-gradient-to-b from-amber-400 to-amber-200
               transition-all duration-500 origin-top
               ${inView ? "opacity-100 scale-y-100" : "opacity-0 scale-y-0"}`}
             style={{ transitionDelay: "280ms" }}
           />
           <div
-            className={`w-2 h-2 rounded-full bg-pink-300 transition-all duration-300
+            className={`w-2 h-2 rounded-full bg-amber-300 transition-all duration-300
               ${inView ? "opacity-100 scale-100" : "opacity-0 scale-0"}`}
             style={{ transitionDelay: "380ms" }}
           />
           <div
-            className={`w-px h-10 bg-gradient-to-b from-pink-200 to-pink-400
+            className={`w-px h-10 bg-gradient-to-b from-amber-200 to-amber-400
               transition-all duration-500 origin-top
               ${inView ? "opacity-100 scale-y-100" : "opacity-0 scale-y-0"}`}
             style={{ transitionDelay: "430ms" }}
@@ -185,13 +185,13 @@ function FinalNode() {
   return (
     <div ref={ref} className="flex flex-col items-center mt-2">
       <div
-        className={`w-px h-8 bg-gradient-to-b from-pink-400 to-pink-200
+        className={`w-px h-8 bg-gradient-to-b from-amber-400 to-amber-200
           transition-all duration-500 origin-top
           ${inView ? "opacity-100 scale-y-100" : "opacity-0 scale-y-0"}`}
       />
       <div
-        className={`w-16 h-16 rounded-full bg-gradient-to-br from-pink-100 to-rose-100
-          border-2 border-pink-300 flex items-center justify-center text-2xl
+        className={`w-16 h-16 rounded-full bg-gradient-to-br from-amber-100 to-orange-100
+          border-2 border-amber-300 flex items-center justify-center text-2xl
           shadow-[0_0_0_6px_rgba(236,72,153,0.1)]
           transition-all duration-500
           ${inView ? "opacity-100 scale-100" : "opacity-0 scale-50"}`}
@@ -200,7 +200,7 @@ function FinalNode() {
         🙏
       </div>
       <p
-        className={`text-pink-500 text-xs font-semibold uppercase tracking-widest mt-3
+        className={`text-amber-500 text-xs font-semibold uppercase tracking-widest mt-3
           transition-all duration-400
           ${inView ? "opacity-100 translate-y-0" : "opacity-0 translate-y-3"}`}
         style={{ transitionDelay: "300ms" }}
@@ -218,7 +218,7 @@ export default function PoojaProcessTimeline() {
     <section className="py-24 px-6 bg-white relative overflow-hidden">
 
       {/* Background accent */}
-      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[700px] h-[700px] bg-pink-50 rounded-full blur-3xl opacity-60 pointer-events-none" />
+      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[700px] h-[700px] bg-amber-50 rounded-full blur-3xl opacity-60 pointer-events-none" />
 
       <div className="relative max-w-5xl mx-auto">
 
@@ -228,23 +228,23 @@ export default function PoojaProcessTimeline() {
           className={`text-center mb-20 transition-all duration-700
             ${headingInView ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"}`}
         >
-          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-pink-50 border border-pink-200 mb-5">
-            <span className="w-1.5 h-1.5 rounded-full bg-pink-500 inline-block" />
-            <span className="text-pink-600 text-xs font-semibold uppercase tracking-widest">Simple Process</span>
+          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-amber-50 border border-amber-200 mb-5">
+            <span className="w-1.5 h-1.5 rounded-full bg-amber-500 inline-block" />
+            <span className="text-amber-600 text-xs font-semibold uppercase tracking-widest">Simple Process</span>
           </div>
 
           <h2 className="text-3xl md:text-4xl font-extrabold text-gray-900 leading-tight">
             How the{" "}
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-pink-600 to-rose-500">
+            <span className="text-transparent bg-clip-text bg-gradient-to-r from-amber-600 to-orange-500">
               Pooja Process
             </span>{" "}
             Works
           </h2>
 
           <div className="flex items-center justify-center gap-2 mt-4 mb-5">
-            <div className="h-px w-10 bg-pink-200 rounded-full" />
-            <div className="h-0.5 w-16 bg-gradient-to-r from-pink-500 to-rose-400 rounded-full" />
-            <div className="h-px w-10 bg-pink-200 rounded-full" />
+            <div className="h-px w-10 bg-amber-200 rounded-full" />
+            <div className="h-0.5 w-16 bg-gradient-to-r from-amber-500 to-orange-400 rounded-full" />
+            <div className="h-px w-10 bg-amber-200 rounded-full" />
           </div>
 
           <p className="text-gray-500 max-w-xl mx-auto text-[15px] leading-relaxed">

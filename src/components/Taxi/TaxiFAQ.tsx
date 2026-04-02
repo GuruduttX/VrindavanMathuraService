@@ -35,23 +35,23 @@ export default function TaxiFAQ() {
   }
 
   return (
-    <section className="relative py-28 bg-gradient-to-b from-pink-50 via-white to-pink-50 overflow-hidden">
+    <section className="relative py-28 bg-gradient-to-b from-amber-50 via-white to-amber-50 overflow-hidden">
 
       {/* Background Glow */}
-      <div className="absolute top-[-200px] left-1/2 -translate-x-1/2 w-[800px] h-[800px] bg-pink-400/20 blur-[160px] rounded-full"/>
+      <div className="absolute top-[-200px] left-1/2 -translate-x-1/2 w-[800px] h-[800px] bg-amber-400/20 blur-[160px] rounded-full"/>
 
       <div className="max-w-6xl mx-auto px-6 relative">
 
         {/* Heading */}
         <div className="text-center mb-20">
 
-          <p className="text-pink-600 uppercase tracking-widest text-sm mb-4">
+          <p className="text-amber-600 uppercase tracking-widest text-sm mb-4">
             Frequently Asked Questions
           </p>
 
           <h2 className="text-3xl md:text-4xl font-bold text-gray-900">
             Taxi Services in
-            <span className="text-pink-600"> Mathura & Vrindavan</span>
+            <span className="text-amber-600"> Mathura & Vrindavan</span>
           </h2>
 
         </div>
@@ -60,7 +60,7 @@ export default function TaxiFAQ() {
         <div className="relative">
 
           {/* Vertical Line */}
-          <div className="hidden md:block absolute left-1/2 top-0 h-full w-[3px] bg-gradient-to-b from-pink-400 to-pink-600"/>
+          <div className="hidden md:block absolute left-1/2 top-0 h-full w-[3px] bg-gradient-to-b from-amber-400 to-amber-600"/>
 
           <div className="space-y-16">
 
@@ -77,11 +77,11 @@ export default function TaxiFAQ() {
                 >
 
                   {/* Timeline Dot */}
-                  <div className="hidden md:block absolute left-1/2 -translate-x-1/2 w-5 h-5 bg-pink-500 rounded-full shadow-lg shadow-pink-400"/>
+                  <div className="hidden md:block absolute left-1/2 -translate-x-1/2 w-5 h-5 bg-amber-500 rounded-full shadow-lg shadow-amber-400"/>
 
                   {/* Card */}
                   <div
-                    className={`bg-white/80 backdrop-blur-xl border border-pink-100 rounded-2xl shadow-lg p-6 max-w-md w-full ${
+                    className={`bg-white/80 backdrop-blur-xl border border-amber-100 rounded-2xl shadow-lg p-6 max-w-md w-full ${
                       isLeft ? "md:mr-auto md:pr-12" : "md:ml-auto md:pl-12"
                     }`}
                   >
@@ -97,7 +97,7 @@ export default function TaxiFAQ() {
 
                       <ChevronDown
                         size={20}
-                        className={`text-pink-600 transition-transform ${
+                        className={`text-amber-600 transition-transform ${
                           openIndex === index ? "rotate-180" : ""
                         }`}
                       />

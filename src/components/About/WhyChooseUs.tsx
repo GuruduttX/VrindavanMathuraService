@@ -32,17 +32,17 @@ const features = [
 
 export default function WhyChooseUs() {
   return (
-    <section className="w-full bg-pink-50 py-24">
+    <section className="w-full bg-amber-50 py-24">
       <div className="mx-auto max-w-7xl px-6 lg:px-16">
 
         {/* Section Heading */}
         <div className="text-center mb-16">
-          <h2 className="text-4xl font-bold text-pink-700">
-            Why Choose <span className="text-rose-500">MathuraVrindavanService</span>?
+          <h2 className="text-4xl font-bold text-amber-700">
+            Why Choose <span className="text-orange-500">MathuraVrindavanService</span>?
           </h2>
 
           {/* Elegant underline */}
-          <div className="mx-auto mt-4 h-1 w-24 rounded-full bg-gradient-to-r from-pink-600 to-rose-400" />
+          <div className="mx-auto mt-4 h-1 w-24 rounded-full bg-gradient-to-r from-amber-600 to-orange-400" />
         </div>
 
         {/* Feature Grid */}
@@ -59,15 +59,15 @@ export default function WhyChooseUs() {
                 transition={{ duration: 0.6, delay: index * 0.15 }}
                 viewport={{ once: true }}
                 whileHover={{ scale: 1.03 }}
-                className="group rounded-2xl bg-white p-8 shadow-md transition-all duration-300 hover:shadow-pink-200"
+                className="group rounded-2xl bg-white p-8 shadow-md transition-all duration-300 hover:shadow-amber-200"
               >
                 {/* Icon */}
-                <div className="mb-6 inline-flex rounded-xl bg-pink-100 p-4 text-pink-600 transition group-hover:bg-pink-600 group-hover:text-white">
+                <div className="mb-6 inline-flex rounded-xl bg-amber-100 p-4 text-amber-600 transition group-hover:bg-amber-600 group-hover:text-white">
                   <Icon size={28} />
                 </div>
 
                 {/* Title */}
-                <h3 className="mb-3 text-xl font-semibold text-pink-700">
+                <h3 className="mb-3 text-xl font-semibold text-amber-700">
                   {feature.title}
                 </h3>
 

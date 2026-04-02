@@ -6,9 +6,8 @@ import { Car, ArrowRight } from "lucide-react";
 export default function TaxiCTA() {
   return (
     <section className="relative py-10 md:py-28 overflow-hidden">
-
       {/* layered background gradient */}
-      <div className="absolute inset-0 bg-gradient-to-br from-pink-50 via-white to-purple-50"></div>
+      <div className="absolute inset-0 bg-gradient-to-br from-amber-50 via-orange-50 to-yellow-100"></div>
 
       {/* grid pattern */}
       <div className="absolute inset-0 opacity-20 bg-[linear-gradient(rgba(236,72,153,0.15)_1px,transparent_1px),linear-gradient(90deg,rgba(236,72,153,0.15)_1px,transparent_1px)] bg-[size:60px_60px]"></div>
@@ -18,9 +17,9 @@ export default function TaxiCTA() {
       <div className="absolute -bottom-24 -right-24 w-[380px] h-[380px] bg-purple-400/25 blur-[120px] rounded-full"></div>
 
       <div className="relative max-w-7xl mx-auto px-6">
-
         {/* glass container */}
-        <div className="
+        <div
+          className="
         relative
         rounded-3xl
         border
@@ -34,33 +33,30 @@ export default function TaxiCTA() {
         lg:grid-cols-2
         gap-10
         items-center
-        ">
-
+        "
+        >
           {/* left content */}
           <div>
-
             <div className="inline-flex ml-8 md:ml-0 items-center gap-2 bg-pink-100 text-pink-600 px-4 py-2 rounded-full text-sm font-medium mb-6">
-              <Car size={16}/>
+              <Car size={16} />
               Reliable Taxi Services
             </div>
 
             <h2 className="text-2xl md:text-4xl font-bold text-gray-800 leading-tight text-center md:text-left">
-
               Book Comfortable
               <span className="block bg-gradient-to-r from-pink-600 via-fuchsia-600 to-purple-600 bg-clip-text text-transparent">
                 Taxi Rides in Vrindavan
               </span>
-
             </h2>
 
             <p className="text-gray-600 mt-5 max-w-md text-center md:text-left">
-              Travel easily between temples, cities, and sacred places with
-              our trusted AC taxi services and experienced drivers.
+              Travel easily between temples, cities, and sacred places with our
+              trusted AC taxi services and experienced drivers.
             </p>
 
             <div className="flex flex-col md:flex-row gap-4 mt-8">
-
-              <button className="
+              <button
+                className="
               px-7 py-3
               rounded-full
               text-white
@@ -76,12 +72,14 @@ export default function TaxiCTA() {
               hover:scale-105
               transition
               cursor-pointer
-              ">
+              "
+              >
                 Book Taxi
-                <ArrowRight size={18}/>
+                <ArrowRight size={18} />
               </button>
 
-              <button className="
+              <button
+                className="
               px-7 py-3
               rounded-full
               border
@@ -92,19 +90,17 @@ export default function TaxiCTA() {
               hover:bg-pink-50
               transition
               cursor-pointer
-              ">
+              "
+              >
                 View Routes
               </button>
-
             </div>
-
           </div>
-
 
           {/* right visual */}
           <div className="relative">
-
-            <div className="
+            <div
+              className="
             relative
             h-[200px]
             md:h-[320px]
@@ -112,8 +108,8 @@ export default function TaxiCTA() {
             overflow-hidden
             shadow-xl
             group
-            ">
-
+            "
+            >
               <Image
                 src="/images/tourpackages/TourPackage-CTA.webp"
                 alt="Vrindavan Taxi"
@@ -123,11 +119,11 @@ export default function TaxiCTA() {
               />
 
               <div className="absolute inset-0 bg-gradient-to-t from-black/30 to-transparent"></div>
-
             </div>
 
             {/* floating price card */}
-            <div className="
+            <div
+              className="
             absolute
             bottom-5
             right-5
@@ -138,22 +134,14 @@ export default function TaxiCTA() {
             py-3
             shadow-lg
             border
-            ">
+            "
+            >
+              <p className="text-xs text-gray-500">Starting from</p>
 
-              <p className="text-xs text-gray-500">
-                Starting from
-              </p>
-
-              <p className="text-lg font-semibold text-pink-600">
-                ₹799 / trip
-              </p>
-
+              <p className="text-lg font-semibold text-pink-600">₹799 / trip</p>
             </div>
-
           </div>
-
         </div>
-
       </div>
     </section>
   );

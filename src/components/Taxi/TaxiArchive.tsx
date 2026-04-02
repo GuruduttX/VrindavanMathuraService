@@ -19,7 +19,7 @@ export default function TaxiArchive({taxis} : {taxis : any}) {
   });
 
   return (
-    <section className="bg-gradient-to-br from-pink-50 via-white to-purple-50 min-h-screen py-20">
+    <section className="bg-gradient-to-br from-amber-50 via-white to-orange-50 min-h-screen py-20">
 
       <div className="max-w-7xl mx-auto px-6 grid lg:grid-cols-4 gap-10">
 
@@ -37,8 +37,8 @@ export default function TaxiArchive({taxis} : {taxis : any}) {
                 key={type}
                 onClick={() => setFilter(type)}
                 className={`w-full text-left px-4 py-3 rounded-xl transition cursor-pointer ${filter === type
-                    ? "bg-gradient-to-r from-pink-500 to-purple-600 text-white"
-                    : "bg-gray-100 hover:bg-pink-50"
+                    ? "bg-gradient-to-r from-amber-500 to-orange-600 text-white"
+                    : "bg-gray-100 hover:bg-amber-50"
                   }`}
               >
                 {type === "all" ? "All Cabs" : type}
@@ -64,18 +64,18 @@ export default function TaxiArchive({taxis} : {taxis : any}) {
     rounded-2xl
     bg-white
     px-4 py-3
-    border border-pink-100
+    border border-amber-100
     shadow-sm
     transition-all
     duration-300
-    group-focus-within:border-pink-400
+    group-focus-within:border-amber-400
     group-focus-within:ring-2
-    group-focus-within:ring-pink-200
+    group-focus-within:ring-amber-200
   ">
 
                 <Search
                   size={18}
-                  className="text-gray-400 group-focus-within:text-pink-500 transition-colors"
+                  className="text-gray-400 group-focus-within:text-amber-500 transition-colors"
                 />
 
                 <input
@@ -99,7 +99,7 @@ export default function TaxiArchive({taxis} : {taxis : any}) {
 
             {/* Trust banner */}
 
-            <div className="flex gap-6 text-white px-6 py-3 rounded-full bg-gradient-to-r from-pink-500 via-fuchsia-500 to-purple-600 shadow-lg">
+            <div className="flex gap-6 text-white px-6 py-3 rounded-full bg-gradient-to-r from-amber-500 via-amber-500 to-orange-600 shadow-lg">
 
               <span>Trusted Drivers</span>
               <span>Clean Cabs</span>
@@ -114,7 +114,7 @@ export default function TaxiArchive({taxis} : {taxis : any}) {
 
           {filteredTaxis.map((taxi : any) => (
             <motion.div
-              key={taxi.id}
+              key={taxi._id}
               whileHover={{ y: -6 }}
               className="bg-white rounded-3xl shadow-lg p-6 flex flex-col lg:flex-row items-center justify-between gap-6"
             >
@@ -171,7 +171,7 @@ export default function TaxiArchive({taxis} : {taxis : any}) {
 
               <div className="text-right">
 
-                <p className="text-2xl font-bold text-pink-600">
+                <p className="text-2xl font-bold text-amber-600">
                   ₹{taxi.basePrice}
                 </p>
 
@@ -190,9 +190,9 @@ export default function TaxiArchive({taxis} : {taxis : any}) {
                 text-white
                 font-medium
                 bg-gradient-to-r
-                from-pink-500
-                via-fuchsia-500
-                to-purple-600
+                from-amber-500
+                via-amber-500
+                to-orange-600
                 hover:scale-105
                 transition
                 cursor-pointer

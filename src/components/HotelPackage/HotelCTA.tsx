@@ -9,12 +9,12 @@ export default function HotelCTA() {
 
       {/* BACKGROUND GRADIENT */}
 
-      <div className="absolute inset-0 bg-gradient-to-r from-pink-500 via-fuchsia-500 to-purple-600 opacity-95" />
+      <div className="absolute inset-0 bg-gradient-to-r from-amber-500 via-amber-500 to-orange-600 opacity-95" />
 
       {/* GLOW EFFECT */}
 
-      <div className="absolute w-[600px] h-[600px] bg-pink-400 rounded-full blur-[140px] opacity-30 -top-40 -left-40" />
-      <div className="absolute w-[500px] h-[500px] bg-purple-400 rounded-full blur-[140px] opacity-30 bottom-0 right-0" />
+      <div className="absolute w-[600px] h-[600px] bg-amber-400 rounded-full blur-[140px] opacity-30 -top-40 -left-40" />
+      <div className="absolute w-[500px] h-[500px] bg-orange-400 rounded-full blur-[140px] opacity-30 bottom-0 right-0" />
 
       <div className="relative max-w-7xl mx-auto px-6 text-center text-white">
 
@@ -67,7 +67,7 @@ export default function HotelCTA() {
           <motion.button
             whileHover={{ scale: 1.07 }}
             whileTap={{ scale: 0.95 }}
-            className="bg-white text-pink-600 font-semibold px-8 py-4 rounded-xl shadow-xl flex items-center gap-2 justify-center"
+            className="bg-white text-amber-600 font-semibold px-8 py-4 rounded-xl shadow-xl flex items-center gap-2 justify-center"
           >
             Book Your Stay
           </motion.button>

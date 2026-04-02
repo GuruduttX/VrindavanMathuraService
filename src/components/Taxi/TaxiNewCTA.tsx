@@ -9,11 +9,11 @@ export default function TaxiNewCTA() {
     <section className="relative py-10 md:py-28 overflow-hidden">
 
       {/* gradient background */}
-      <div className="absolute inset-0 bg-gradient-to-br from-pink-50 via-white to-purple-50"></div>
+      <div className="absolute inset-0 bg-gradient-to-br from-orange-50 via-white to-amber-50"></div>
 
       {/* glow blobs */}
-      <div className="absolute -top-20 left-0 w-[350px] h-[350px] bg-pink-400/25 blur-[140px] rounded-full"></div>
-      <div className="absolute bottom-0 right-0 w-[350px] h-[350px] bg-purple-400/25 blur-[140px] rounded-full"></div>
+      <div className="absolute -top-20 left-0 w-[350px] h-[350px] bg-orange-400/25 blur-[140px] rounded-full"></div>
+      <div className="absolute bottom-0 right-0 w-[350px] h-[350px] bg-amber-400/25 blur-[140px] rounded-full"></div>
 
       <div className="relative max-w-7xl mx-auto px-6">
 
@@ -36,7 +36,7 @@ export default function TaxiNewCTA() {
 
               Ready to Travel with
 
-              <span className="block bg-gradient-to-r from-pink-600 via-fuchsia-600 to-purple-600 bg-clip-text text-transparent">
+              <span className="block bg-gradient-to-r from-orange-600 via-amber-600 to-amber-600 bg-clip-text text-transparent">
                 Reliable Taxi Services?
               </span>
 
@@ -53,22 +53,22 @@ export default function TaxiNewCTA() {
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mt-8 text-sm text-gray-600">
 
               <div className="flex items-center gap-2 whitespace-nowrap">
-                <ShieldCheck className="text-pink-600"/>
+                <ShieldCheck className="text-orange-600"/>
                 Verified Drivers
               </div>
 
               <div className="flex items-center gap-2 whitespace-nowrap">
-                <Clock className="text-pink-600"/>
+                <Clock className="text-orange-600"/>
                 On-Time Pickup
               </div>
 
               <div className="flex items-center gap-2 whitespace-nowrap">
-                <Star className="text-pink-600"/>
+                <Star className="text-orange-600"/>
                 4.8 Customer Rating
               </div>
 
               <div className="flex items-center gap-2 whitespace-nowrap">
-                <CarTaxiFront className="text-pink-600"/>
+                <CarTaxiFront className="text-orange-600"/>
                 Clean AC Cars
               </div>
 
@@ -91,9 +91,9 @@ export default function TaxiNewCTA() {
                 justify-center
                 gap-2
                 bg-gradient-to-r
-                from-pink-500
-                via-fuchsia-500
-                to-purple-600
+                from-orange-500
+                via-amber-500
+                to-amber-600
                 shadow-lg
                 whitespace-nowrap
                 "
@@ -109,13 +109,13 @@ export default function TaxiNewCTA() {
                 py-3
                 rounded-full
                 border
-                border-pink-500
-                text-pink-600
+                border-orange-500
+                text-orange-600
                 flex
                 items-center
                 justify-center
                 gap-2
-                hover:bg-pink-50
+                hover:bg-orange-50
                 "
               >
                 <Phone size={18}/>
@@ -145,9 +145,10 @@ export default function TaxiNewCTA() {
             ">
 
               <Image
-                src="/images/Home/taxi1.jpg"
+                src="/images/Home/taxi-home.webp"
                 alt="Taxi Ride"
                 fill
+                sizes=""
                 loading="lazy"
                 className="object-cover"
               />
@@ -173,7 +174,7 @@ export default function TaxiNewCTA() {
                 Starting Fare
               </p>
 
-              <p className="text-lg font-semibold text-pink-600">
+              <p className="text-lg font-semibold text-orange-600">
                 ₹799 / trip
               </p>
 

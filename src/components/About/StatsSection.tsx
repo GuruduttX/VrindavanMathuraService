@@ -43,9 +43,9 @@ function StatItem({ value, suffix = "+", label, delay }: StatItemProps) {
       initial={{ opacity: 0, y: 40 }}
       animate={isInView ? { opacity: 1, y: 0 } : {}}
       transition={{ duration: 0.8, delay }}
-      className="rounded-2xl bg-white/70 backdrop-blur-md shadow-lg border border-pink-200 p-8 text-center hover:shadow-pink-200/50 transition"
+      className="rounded-2xl bg-white/70 backdrop-blur-md shadow-lg border border-amber-200 p-8 text-center hover:shadow-amber-200/50 transition"
     >
-      <h3 className="text-4xl md:text-5xl font-bold bg-gradient-to-r from-pink-600 to-rose-500 bg-clip-text text-transparent">
+      <h3 className="text-4xl md:text-5xl font-bold bg-gradient-to-r from-amber-600 to-orange-500 bg-clip-text text-transparent">
         {count}
         {suffix}
       </h3>
@@ -56,10 +56,10 @@ function StatItem({ value, suffix = "+", label, delay }: StatItemProps) {
 
 export default function StatsSection() {
   return (
-    <section className="relative py-24 bg-pink-50 overflow-hidden">
+    <section className="relative py-24 bg-amber-50 overflow-hidden">
       {/* Soft Decorative Blur */}
-      <div className="absolute -top-20 -left-20 w-72 h-72 bg-pink-300 rounded-full blur-3xl opacity-20"></div>
-      <div className="absolute bottom-0 right-0 w-96 h-96 bg-rose-300 rounded-full blur-3xl opacity-20"></div>
+      <div className="absolute -top-20 -left-20 w-72 h-72 bg-amber-300 rounded-full blur-3xl opacity-20"></div>
+      <div className="absolute bottom-0 right-0 w-96 h-96 bg-orange-300 rounded-full blur-3xl opacity-20"></div>
 
       <div className="max-w-7xl mx-auto px-6 lg:px-16 relative z-10">
         <motion.div
@@ -72,7 +72,7 @@ export default function StatsSection() {
           <h2 className="text-3xl md:text-4xl font-bold text-gray-800">
             Our Journey in Numbers
           </h2>
-          <div className="w-24 h-1 bg-gradient-to-r from-pink-600 to-rose-500 mx-auto mt-4 rounded-full"></div>
+          <div className="w-24 h-1 bg-gradient-to-r from-amber-600 to-orange-500 mx-auto mt-4 rounded-full"></div>
         </motion.div>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">

@@ -15,7 +15,7 @@ import {
 
 export default function HotelDetailsSection({HotelData} : {HotelData : any}) {
   return (
-    <section className="py-24 bg-gradient-to-b from-white via-pink-50 to-white">
+    <section className="py-24 bg-gradient-to-b from-white via-amber-50 to-white">
 
       <div className="max-w-7xl mx-auto px-6 grid lg:grid-cols-[1.6fr_1fr] gap-16 items-start">
 
@@ -34,7 +34,7 @@ export default function HotelDetailsSection({HotelData} : {HotelData : any}) {
           </h1>
 
           <p className="text-gray-500 mt-2 flex items-center gap-2">
-            <Star size={16} className="text-pink-500" />
+            <Star size={16} className="text-amber-500" />
             {HotelData.rating} · {HotelData.reviews} reviews · {HotelData.category}
           </p>
 
@@ -42,7 +42,7 @@ export default function HotelDetailsSection({HotelData} : {HotelData : any}) {
 
           <motion.div
             whileHover={{ scale: 1.02 }}
-            className="mt-8 bg-gradient-to-r from-pink-500 via-fuchsia-500 to-purple-600 text-white rounded-2xl p-6 flex justify-between items-center shadow-xl"
+            className="mt-8 bg-gradient-to-r from-amber-500 via-amber-500 to-orange-600 text-white rounded-2xl p-6 flex justify-between items-center shadow-xl"
           >
             <div>
               <p className="text-sm opacity-80">Guest Favourite</p>
@@ -63,7 +63,7 @@ export default function HotelDetailsSection({HotelData} : {HotelData : any}) {
 
           <div className="mt-10 flex items-center gap-4">
 
-            <div className="w-14 h-14 rounded-full bg-pink-100 flex items-center justify-center font-semibold text-pink-600 text-lg">
+            <div className="w-14 h-14 rounded-full bg-amber-100 flex items-center justify-center font-semibold text-amber-600 text-lg">
               R
             </div>
 
@@ -173,7 +173,7 @@ export default function HotelDetailsSection({HotelData} : {HotelData : any}) {
 
             <div className="flex items-end gap-2">
 
-              <p className="text-3xl font-bold text-pink-600">
+              <p className="text-3xl font-bold text-amber-600">
                 ₹1,299
               </p>
 
@@ -213,7 +213,7 @@ export default function HotelDetailsSection({HotelData} : {HotelData : any}) {
             <motion.button
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
-              className="w-full mt-6 py-3 rounded-xl text-white font-semibold bg-gradient-to-r from-pink-500 via-fuchsia-500 to-purple-600 shadow-lg"
+              className="w-full mt-6 py-3 rounded-xl text-white font-semibold bg-gradient-to-r from-amber-500 via-amber-500 to-orange-600 shadow-lg"
             >
               Reserve Now
             </motion.button>
@@ -241,7 +241,7 @@ function Feature({ icon, title, desc }: any) {
       transition={{ type: "spring", stiffness: 200 }}
       className="flex gap-4 items-start"
     >
-      <div className="text-pink-500">{icon}</div>
+      <div className="text-amber-500">{icon}</div>
 
       <div>
         <p className="font-semibold">{title}</p>
@@ -259,7 +259,7 @@ function Amenity({ icon, title }: any) {
       whileHover={{ y: -3 }}
       className="flex items-center gap-3 bg-white border p-4 rounded-xl shadow-sm"
     >
-      <div className="text-pink-500">{icon}</div>
+      <div className="text-amber-500">{icon}</div>
       <span className="text-sm font-medium">{title}</span>
     </motion.div>
   );

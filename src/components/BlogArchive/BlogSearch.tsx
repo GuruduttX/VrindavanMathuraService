@@ -12,7 +12,7 @@ export default function BlogSearch() {
 
         {/* Search Icon */}
         <Search
-          className="absolute left-4 top-1/2 -translate-y-1/2 text-pink-400"
+          className="absolute left-4 top-1/2 -translate-y-1/2 text-amber-400"
           size={20}
         />
 
@@ -26,7 +26,7 @@ export default function BlogSearch() {
             w-full
             rounded-full
             border
-            border-pink-200
+            border-amber-200
             bg-white
             py-4
             pl-12
@@ -36,9 +36,9 @@ export default function BlogSearch() {
             outline-none
             transition-all
             duration-300
-            focus:border-pink-600
+            focus:border-amber-600
             focus:ring-4
-            focus:ring-pink-200
+            focus:ring-amber-200
           "
         />
 

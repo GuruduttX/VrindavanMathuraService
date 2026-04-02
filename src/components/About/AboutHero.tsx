@@ -6,7 +6,7 @@ export default function AboutHero() {
 
   return (
     
-    <section className="relative w-full overflow-hidden bg-gradient-to-br from-rose-50 via-pink-100 to-amber-50 py-32">
+    <section className="relative w-full overflow-hidden bg-gradient-to-br from-oramge-50 via-amber-100 to-amber-50 py-32">
 
       {/* Floating Images LEFT */}
       <div className="hidden lg:block absolute left-10 top-20 space-y-6 mt-10">
@@ -32,7 +32,7 @@ export default function AboutHero() {
           className="text-4xl md:text-6xl font-serif font-semibold text-gray-900 leading-tight"
         >
           Your Spiritual Journey,
-          <span className="block text-pink-600 italic">
+          <span className="block text-amber-600 italic">
             Perfectly Curated.
           </span>
         </motion.h1>

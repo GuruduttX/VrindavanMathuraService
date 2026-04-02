@@ -16,11 +16,11 @@ export default function BlogHero({
   image,
 }: BlogHeroProps) {
   return (
-    <header className="h-[90vh] relative pt-32 pb-28 px-6 lg:px-20 bg-gradient-to-br from-pink-700 via-fuchsia-400 to-purple-500 overflow-hidden">
+    <header className="h-[90vh] relative pt-32 pb-28 px-6 lg:px-20 bg-gradient-to-br from-amber-700 via-amber-400 to-orange-500 overflow-hidden">
 
       {/* Subtle glow blobs */}
-      <div className="absolute top-0 left-0 w-96 h-96 bg-pink-300 opacity-30 rounded-full blur-3xl -translate-x-1/2 -translate-y-1/2 pointer-events-none" />
-      <div className="absolute bottom-0 right-0 w-96 h-96 bg-purple-400 opacity-30 rounded-full blur-3xl translate-x-1/3 translate-y-1/3 pointer-events-none" />
+      <div className="absolute top-0 left-0 w-96 h-96 bg-amber-300 opacity-30 rounded-full blur-3xl -translate-x-1/2 -translate-y-1/2 pointer-events-none" />
+      <div className="absolute bottom-0 right-0 w-96 h-96 bg-orange-400 opacity-30 rounded-full blur-3xl translate-x-1/3 translate-y-1/3 pointer-events-none" />
 
       <div className="relative max-w-7xl mx-auto grid lg:grid-cols-2 gap-5 items-center">
 
@@ -66,7 +66,7 @@ export default function BlogHero({
 
           {/* CTA buttons */}
           <div className="flex items-center gap-4 pt-1">
-            <button className="bg-white text-fuchsia-600 text-sm font-semibold px-6 py-2.5 rounded-full shadow-md hover:shadow-lg hover:-translate-y-0.5 transition-all duration-200">
+            <button className="bg-white text-amber-600 text-sm font-semibold px-6 py-2.5 rounded-full shadow-md hover:shadow-lg hover:-translate-y-0.5 transition-all duration-200">
               Plan Your Visit
             </button>
             <button className="text-white/80 text-sm font-medium hover:text-white transition-colors flex items-center gap-1">
@@ -100,7 +100,7 @@ export default function BlogHero({
                 <p className="text-white text-xs font-bold uppercase tracking-wider">Temple Darshan</p>
                 <p className="text-white/70 text-xs">Open Daily</p>
               </div>
-              <button className="flex items-center gap-1.5 bg-gradient-to-r from-pink-500 to-purple-500 text-white text-xs font-semibold px-4 py-1.5 rounded-full shadow">
+              <button className="flex items-center gap-1.5 bg-gradient-to-r from-amber-500 to-orange-500 text-white text-xs font-semibold px-4 py-1.5 rounded-full shadow">
                 <span className="w-1.5 h-1.5 rounded-full bg-white animate-pulse" />
                 Live Darshan
               </button>

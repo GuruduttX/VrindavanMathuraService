@@ -16,7 +16,7 @@ const LeftReviewSection = () => {
         <div className="lg:col-span-2 space-y-8">
 
             {/* JOURNEY ROUTE CARD */}
-            <div className="bg-gradient-to-r from-pink-500 to-purple-600 text-white rounded-3xl p-6 shadow-xl">
+            <div className="bg-gradient-to-r from-amber-500 to-orange-600 text-white rounded-3xl p-6 shadow-xl">
 
                 <h2 className="text-xl font-semibold mb-4 flex items-center gap-2">
                     <Route size={20} /> Journey Route
@@ -47,7 +47,7 @@ const LeftReviewSection = () => {
             </div>
 
             {/* TRAVELLER DETAILS */}
-            <div className="bg-white rounded-3xl shadow-lg p-6 border border-pink-100">
+            <div className="bg-white rounded-3xl shadow-lg p-6 border border-amber-100">
 
                 <h2 className="text-lg font-semibold mb-4">
                     Traveller Details
@@ -57,25 +57,25 @@ const LeftReviewSection = () => {
 
                     <input
                         placeholder="Full Name"
-                        className="border rounded-xl px-4 py-3 focus:ring-2 focus:ring-pink-400 outline-none"
+                        className="border rounded-xl px-4 py-3 focus:ring-2 focus:ring-amber-400 outline-none"
                     />
 
                     <input
                         placeholder="Mobile Number"
-                        className="border rounded-xl px-4 py-3 focus:ring-2 focus:ring-pink-400 outline-none"
+                        className="border rounded-xl px-4 py-3 focus:ring-2 focus:ring-amber-400 outline-none"
                     />
 
                 </div>
 
                 <input
                     placeholder="Email Address"
-                    className="border rounded-xl px-4 py-3 mt-4 w-full focus:ring-2 focus:ring-pink-400 outline-none"
+                    className="border rounded-xl px-4 py-3 mt-4 w-full focus:ring-2 focus:ring-amber-400 outline-none"
                 />
 
             </div>
 
             {/* CAB DETAILS */}
-            <div className="bg-white rounded-3xl p-6 shadow-lg border border-pink-100 flex gap-6 hover:shadow-xl transition">
+            <div className="bg-white rounded-3xl p-6 shadow-lg border border-amber-100 flex gap-6 hover:shadow-xl transition">
 
                 <Image
                     src="/cars/sedan.png"
@@ -97,7 +97,7 @@ const LeftReviewSection = () => {
                         <span>Diesel</span>
                     </div>
 
-                    <div className="mt-3 flex gap-2 text-sm text-pink-600 font-medium">
+                    <div className="mt-3 flex gap-2 text-sm text-amber-600 font-medium">
                         Best Seller • Comfortable Ride
                     </div>
 
@@ -106,7 +106,7 @@ const LeftReviewSection = () => {
             </div>
 
             {/* INCLUSIONS */}
-            <div className="bg-white rounded-3xl p-6 shadow-lg border border-pink-100">
+            <div className="bg-white rounded-3xl p-6 shadow-lg border border-amber-100">
 
                 <h2 className="text-lg font-semibold mb-4">
                     Inclusions
@@ -149,7 +149,7 @@ const LeftReviewSection = () => {
             </div>
 
             {/* EXCLUSIONS */}
-            <div className="bg-white rounded-3xl p-6 shadow-lg border border-pink-100">
+            <div className="bg-white rounded-3xl p-6 shadow-lg border border-amber-100">
 
                 <h2 className="text-lg font-semibold mb-4">
                     Exclusions
@@ -177,7 +177,7 @@ const LeftReviewSection = () => {
             </div>
 
             {/* TRIP ITINERARY */}
-            <div className="bg-white rounded-3xl p-6 shadow-lg border border-pink-100">
+            <div className="bg-white rounded-3xl p-6 shadow-lg border border-amber-100">
 
                 <h2 className="text-lg font-semibold mb-6">
                     Trip Itinerary
@@ -188,8 +188,8 @@ const LeftReviewSection = () => {
                     {/* STEP 1 */}
                     <div className="flex gap-4">
 
-                        <div className="w-10 h-10 bg-pink-100 flex items-center justify-center rounded-full">
-                            <MapPin className="text-pink-600" />
+                        <div className="w-10 h-10 bg-amber-100 flex items-center justify-center rounded-full">
+                            <MapPin className="text-amber-600" />
                         </div>
 
                         <div>
@@ -208,8 +208,8 @@ const LeftReviewSection = () => {
                     {/* STEP 2 */}
                     <div className="flex gap-4">
 
-                        <div className="w-10 h-10 bg-purple-100 flex items-center justify-center rounded-full">
-                            <Car className="text-purple-600" />
+                        <div className="w-10 h-10 bg-orange-100 flex items-center justify-center rounded-full">
+                            <Car className="text-orange-600" />
                         </div>
 
                         <div>
@@ -227,8 +227,8 @@ const LeftReviewSection = () => {
                     {/* STEP 3 */}
                     <div className="flex gap-4">
 
-                        <div className="w-10 h-10 bg-pink-100 flex items-center justify-center rounded-full">
-                            <Clock className="text-pink-600" />
+                        <div className="w-10 h-10 bg-amber-100 flex items-center justify-center rounded-full">
+                            <Clock className="text-amber-600" />
                         </div>
 
                         <div>
