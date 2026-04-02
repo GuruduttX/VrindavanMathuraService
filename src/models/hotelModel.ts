@@ -1,80 +1,99 @@
 import mongoose, { Schema } from "mongoose";
-import {IHotel} from "@/types/hotelTypes"
-
+import { IHotel } from "@/types/hotelTypes";
 
 const hotelSchema = new Schema<IHotel>({
 
   title: {
     type: String,
-   
+    trim: true,
+    required: true
+  },
+
+  slug: {
+    type: String,
+    unique: true,
+    required: true
   },
 
   subcontent: {
-
     type: String,
-    
-  },
-
-  slug : {
-
-    type : String,
-    
-  },
-
-  duration : {
-
-    type : String,
-    
-  },
-
-  rating: {
-    
-    type: Number,
-    
-  },
-
-  reviews: {
-    type: Number,
-    default: 0
-  },
-
-  price: {
-    type: Number,
-   
+    required: true
   },
 
   category: {
     type: String,
-   
+    required: true
+  },
+
+  duration: {
+    type: String,
+    required: true
+  },
+
+  price: {
+    type: Number,
+    required: true,
+    min: 0
+  },
+
+  rating: {
+    type: Number,
+    min: 0,
+    max: 5,
+    required: true
+  },
+
+  reviews: {
+    type: Number,
+    default: 0,
+    required: true
   },
 
   host: {
     type: String,
+    required: true
   },
 
   about: {
     type: String,
+    required: true,
   },
 
-
-  inclusion: {
-    freeWifi: { type: Boolean, default: false },
-    breakfast: { type: Boolean, default: false },
-    parking: { type: Boolean, default: false }
+  image: {
+    type: String,
+    required: true
   },
 
-  
-  offers: [
+  alt: {
+    type: String,
+    required: true
+  },
+
+  faqs: [
+
     {
-      title: { type: String },
-      discount: { type: Number },
-      validTill: { type: Date }
+      id: {
+        type: String,
+        required: true
+      },
+
+      question: {
+        type: String,
+        required: true
+      },
+
+      answer: {
+        type: String,
+        required: true
+      }
     }
+
   ],
+
 
   ratingSummary: {
     reviewText: {
-      type: String,
+      type: String
     },
 
     scores: {
@@ -91,18 +110,38 @@ const hotelSchema = new Schema<IHotel>({
       greatLocation: { type: Number, default: 0 },
       comfortStay: { type: Number, default: 0 }
     }
+
   },
 
-  status : {
-    type : String,
-    required : true
+  metaTitle: {
+    type: String
+  },
+
+  metaDescription: {
+    type: String
+  },
+
+  schemaTitle: {
+    type: String
+  },
+
+  schemaDescription: {
+    type: String
+  },
+
+  status: {
+    type: String,
+    enum: ["draft", "published"],
+    default: "draft"
   }
 
-}, {
-  timestamps: true
-});
+},
 
-
+  {
+    timestamps: true
+  }
+  
+);
 
 const Hotel = mongoose.models.Hotel || mongoose.model<IHotel>("Hotel", hotelSchema);
 

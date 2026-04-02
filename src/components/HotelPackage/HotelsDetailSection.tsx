@@ -1,5 +1,4 @@
 "use client";
-
 import { motion } from "framer-motion";
 import {
   Star,
@@ -11,9 +10,10 @@ import {
   Car,
   Utensils,
   Bath,
+  Hotel,
 } from "lucide-react";
 
-export default function HotelDetailsSection() {
+export default function HotelDetailsSection({HotelData} : {HotelData : any}) {
   return (
     <section className="py-24 bg-gradient-to-b from-white via-pink-50 to-white">
 
@@ -35,7 +35,7 @@ export default function HotelDetailsSection() {
 
           <p className="text-gray-500 mt-2 flex items-center gap-2">
             <Star size={16} className="text-pink-500" />
-            4.8 · 231 reviews · Vrindavan, Uttar Pradesh
+            {HotelData.rating} · {HotelData.reviews} reviews · {HotelData.category}
           </p>
 
           {/* GUEST FAVORITE */}
@@ -47,13 +47,13 @@ export default function HotelDetailsSection() {
             <div>
               <p className="text-sm opacity-80">Guest Favourite</p>
               <p className="font-semibold text-lg">
-                One of the most loved hotels in Vrindavan
+                One of the most loved hotels in {HotelData.category}
               </p>
             </div>
 
             <div className="text-center">
               <p className="text-3xl font-bold flex items-center gap-1 justify-center">
-                <Star size={18} fill="white" /> 4.8
+                <Star size={18} fill="white" /> 
               </p>
               <p className="text-xs opacity-80">231 Reviews</p>
             </div>
@@ -69,7 +69,7 @@ export default function HotelDetailsSection() {
 
             <div>
               <p className="font-semibold text-lg">
-                Hosted by Radha Palace
+                Hosted by {HotelData.host}
               </p>
               <p className="text-sm text-gray-500">
                 Superhost · 6 years hosting

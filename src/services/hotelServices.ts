@@ -21,17 +21,19 @@ export const getAllHotelsService = async () => {
 
   } catch (error) {
 
-    throw new Error ("failed to fetch All Hotels: ");
+    throw new Error("failed to fetch All Hotels: ");
 
   }
 }
 
 
-export const getHotelByIdService = async (id: string) => {
+export const getHotelByIdService = async (slug: string) => {
 
   try {
-    const hotel = await Hotel.findById(id);
+
+    const hotel = await Hotel.findOne({ slug : slug });
     return hotel;
+
   } catch (error: any) {
     throw new Error("Failed to fetch hotel");
   }
@@ -39,7 +41,7 @@ export const getHotelByIdService = async (id: string) => {
 };
 
 
-export const updateHotelService = async ( id: string, data: Partial<IHotel>) => {
+export const updateHotelService = async (id: string, data: Partial<IHotel>) => {
 
   try {
     const updatedHotel = await Hotel.findByIdAndUpdate(id, data, {
@@ -48,7 +50,7 @@ export const updateHotelService = async ( id: string, data: Partial<IHotel>) => 
     });
 
     return updatedHotel;
-    
+
   } catch (error: any) {
     throw new Error("Failed to update hotel");
   }

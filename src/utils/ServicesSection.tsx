@@ -32,11 +32,11 @@ const services = [
 
 export default function ServicesSection() {
   return (
-    <section className="py-10 md:py-28 relative bg-gradient-to-b from-white via-pink-50 to-white overflow-hidden">
+    <section className="py-10 md:py-28 relative bg-gradient-to-b from-white via-amber-50 to-white overflow-hidden">
 
       {/* soft glow background */}
-      <div className="absolute top-0 left-0 w-[420px] h-[420px] bg-pink-300/30 blur-[140px] rounded-full"></div>
-      <div className="absolute bottom-0 right-0 w-[420px] h-[420px] bg-purple-300/30 blur-[140px] rounded-full"></div>
+      <div className="absolute top-0 left-0 w-[420px] h-[420px] bg-orange-300/30 blur-[140px] rounded-full"></div>
+      <div className="absolute bottom-0 right-0 w-[420px] h-[420px] bg-amber-300/30 blur-[140px] rounded-full"></div>
 
       <div className="max-w-7xl mx-auto px-6 relative">
 
@@ -49,7 +49,7 @@ export default function ServicesSection() {
           className="text-center mb-16"
         >
 
-          <h2 className="text-2xl md:text-5xl font-bold bg-gradient-to-r from-pink-600 via-fuchsia-600 to-purple-600 bg-clip-text text-transparent">
+          <h2 className="text-2xl md:text-5xl font-bold bg-gradient-to-r from-orange-600 via-amber-600 to-yellow-500 bg-clip-text text-transparent">
             Everything You Need For Your Vrindavan Journey
           </h2>
 
@@ -74,11 +74,11 @@ export default function ServicesSection() {
                 transition={{ duration: 0.6, delay: index * 0.15 }}
                 viewport={{ once: true }}
                 whileHover={{ y: -10 }}
-                className="relative group bg-white/70 backdrop-blur-xl border border-white/40 rounded-3xl p-8 shadow-xl hover:shadow-2xl transition cursor-pointer"
+                className="relative group bg-white/80 backdrop-blur-xl border border-amber-100 rounded-3xl p-8 shadow-xl hover:shadow-2xl transition cursor-pointer"
               >
 
                 {/* icon */}
-                <div className="w-16 h-16 flex items-center justify-center rounded-2xl bg-gradient-to-r from-pink-500 to-fuchsia-600 text-white mb-6 shadow-lg">
+                <div className="w-16 h-16 flex items-center justify-center rounded-2xl bg-gradient-to-r from-orange-500 to-amber-600 text-white mb-6 shadow-lg">
                   <Icon size={28} />
                 </div>
 
@@ -93,7 +93,7 @@ export default function ServicesSection() {
                 </p>
 
                 {/* hover glow */}
-                <div className="absolute inset-0 rounded-3xl opacity-0 group-hover:opacity-100 transition pointer-events-none bg-gradient-to-r from-pink-500/20 via-fuchsia-500/20 to-purple-500/20"></div>
+                <div className="absolute inset-0 rounded-3xl opacity-0 group-hover:opacity-100 transition pointer-events-none bg-gradient-to-r from-orange-500/20 via-amber-500/20 to-yellow-500/20"></div>
 
               </motion.div>
             );

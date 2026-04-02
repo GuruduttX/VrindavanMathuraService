@@ -1,18 +1,17 @@
 import Image from "next/image";
 import SearchBar from "./SearchBar";
 
-
 export default function HomeHero() {
-
 
     return (
         <>
-            <section className="relative overflow-hidden bg-gradient-to-br from-pink-50 via-rose-50 to-fuchsia-100">
+            <section className="relative overflow-hidden bg-gradient-to-br from-amber-50 via-orange-50 to-yellow-100">
 
                 {/* background decorative blur */}
-                <div className="absolute top-[-100px] right-[-100px] w-[400px] h-[400px] bg-pink-400/30 rounded-full blur-[120px]" />
-                <div className="absolute bottom-[-120px] left-[-120px] w-[350px] h-[350px] bg-fuchsia-400/30 rounded-full blur-[120px]" />
+                <div className="absolute top-[-100px] right-[-100px] w-[400px] h-[400px] bg-orange-400/30 rounded-full blur-[120px]" />
+                <div className="absolute bottom-[-120px] left-[-120px] w-[350px] h-[350px] bg-amber-400/30 rounded-full blur-[120px]" />
 
+                {/* bottom wave */}
                 <div className="absolute bottom-0 left-0 w-full overflow-hidden leading-none pointer-events-none">
                     <svg
                         viewBox="0 0 1440 80"
@@ -33,21 +32,21 @@ export default function HomeHero() {
                     <div className="z-10">
 
                         {/* badge */}
-                        <div className="inline-flex items-center gap-2 bg-white/60 backdrop-blur text-xs md:text-sm px-4 py-2 rounded-full shadow text-pink-600 font-medium mb-6 cursor-pointer hover:shadow-xl hover:shadow-pink-200 transition ml-15 md:ml-0">
+                        <div className="inline-flex items-center gap-2 bg-white/70 backdrop-blur text-xs md:text-sm px-4 py-2 rounded-full shadow text-amber-700 font-medium mb-6 cursor-pointer hover:shadow-xl hover:shadow-amber-200 transition ml-15 md:ml-0">
                             🪷 Explore Divine Vrindavan
                         </div>
 
                         {/* heading */}
                         <h1 className="text-center md:text-left text-3xl md:text-5xl font-bold leading-tight text-gray-800">
                             Discover{" "}
-                            <span className="bg-gradient-to-r from-pink-600 to-fuchsia-600 text-transparent bg-clip-text">
+                            <span className="bg-gradient-to-r from-orange-600 to-amber-600 text-transparent bg-clip-text">
                                 Vrindavan Tour Packages
                             </span>
                             <br />
                             Taxi & Hotel Booking
                         </h1>
 
-                        <p className="mt-4  text-center md:text-start text-xs text-gray-600 md:text-lg">
+                        <p className="mt-4 text-center md:text-start text-xs text-gray-600 md:text-lg">
                             Book spiritual tours, comfortable taxis, and premium hotels in
                             Vrindavan with trusted local service.
                         </p>
@@ -56,22 +55,27 @@ export default function HomeHero() {
                             <SearchBar />
                         </div>
 
-
                         {/* trust indicators */}
                         <div className="flex gap-20 mt-10 text-sm text-gray-600">
 
                             <div>
-                                <div className="font-extrabold text-pink-600 text-xl cursor-pointer">5000+</div>
+                                <div className="font-extrabold text-amber-600 text-xl cursor-pointer">
+                                    5000+
+                                </div>
                                 Travelers
                             </div>
 
                             <div>
-                                <div className="font-extrabold text-pink-600 text-xl cursor-pointer">200+</div>
+                                <div className="font-extrabold text-amber-600 text-xl cursor-pointer">
+                                    200+
+                                </div>
                                 Hotels
                             </div>
 
                             <div>
-                                <div className="font-extrabold text-pink-600 text-xl cursor-pointer">24/7</div>
+                                <div className="font-extrabold text-amber-600 text-xl cursor-pointer">
+                                    24/7
+                                </div>
                                 Taxi Service
                             </div>
 
@@ -120,21 +124,16 @@ export default function HomeHero() {
                             <div className="text-sm text-gray-500">
                                 Starting from
                             </div>
-                            <div className="text-xl font-bold text-pink-600">
+                            <div className="text-xl font-bold text-amber-600">
                                 ₹1,999
                             </div>
                         </div>
 
                     </div>
 
-
-
                 </div>
 
-
             </section>
-
-
         </>
     );
 }

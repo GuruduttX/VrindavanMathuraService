@@ -2,11 +2,13 @@ import { deletedHotel, getHotelById, updateHotel } from "@/controllers/hotelCont
 import { connectDB } from "@/lib/mongodb";
 
 
-export async function GET({params} : {params : {id : string}}){
+export async function GET(req : Request, { params }: { params: Promise<{ id : string }>}){
 
     await connectDB();
 
-    return getHotelById(params.id);
+    const {id} = await params;
+
+    return getHotelById(id);
 }
 
 export async function PUT(req : Request , {params} : {params : {id : string}}){
