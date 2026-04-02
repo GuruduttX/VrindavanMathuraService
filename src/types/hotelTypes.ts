@@ -42,6 +42,16 @@ export interface IRatingSummary {
   highlights: IHighlights;
 }
 
+export interface IInc {
+   id : string;
+   description : string;
+}
+
+export interface IExc { 
+    id : string;
+    description : string;
+}
+
 
 export interface IHotel extends Document {
 
@@ -62,11 +72,11 @@ export interface IHotel extends Document {
   location: string;
   host: string;
   about: string;
-  inclusion: IInclusion;
+  quickInclusions: IInclusion;
   offers: IOffer[];
   faqs: IFAQ[];
-  inclusions: string[];
-  exclusions: string[];
+  inclusions: IInc[];
+  exclusions: IExc[];
   ratingSummary: IRatingSummary;
   status : string
   createdAt?: Date;

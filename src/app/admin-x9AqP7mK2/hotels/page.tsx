@@ -1,77 +1,91 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Link from "next/link";
 import { LayoutGrid, Table } from "lucide-react";
-
-/* ------------------ Dummy Data ------------------ */
-const DUMMY_HOTELS = [
-  {
-    _id: "1",
-    title: "Radha Krishna Residency",
-    location: "Vrindavan",
-    price: 2499,
-    rating: 4.5,
-    reviews: 120,
-    image: "https://images.unsplash.com/photo-1566073771259-6a8506099945",
-    status: "published",
-    createdAt: new Date("2026-03-20"),
-  },
-  {
-    _id: "2",
-    title: "Mathura Palace Hotel",
-    location: "Mathura",
-    price: 1800,
-    rating: 4.2,
-    reviews: 85,
-    image: "https://images.unsplash.com/photo-1551882547-ff40c63fe5fa",
-    status: "draft",
-    createdAt: new Date("2026-03-18"),
-  },
-  {
-    _id: "3",
-    title: "Govardhan Stay Inn",
-    location: "Govardhan",
-    price: 3200,
-    rating: 4.8,
-    reviews: 200,
-    image: "https://images.unsplash.com/photo-1582719478250-c89cae4dc85b",
-    status: "published",
-    createdAt: new Date("2026-03-15"),
-  },
-];
+import DeleteConfirmModal from "@/utils/Admin/DeleteConfirmModal";
 
 export default function HotelsPage() {
   const [view, setView] = useState<"card" | "table">("card");
   const [search, setSearch] = useState("");
   const [statusFilter, setStatusFilter] = useState("all");
   const [sort, setSort] = useState("latest");
+  const [hotels, setHotels] = useState<any[]>([]);
+  const [loading, setLoading] = useState(false);
+  const [deletingId, setDeletingId] = useState<string | null>(null);
+  const [open, setOpen] = useState(false);
 
-  /* ------------------ Filtering ------------------ */
-  const filteredHotels = DUMMY_HOTELS.filter((hotel) => {
-    const matchesSearch = hotel.title
-      .toLowerCase()
-      .includes(search.toLowerCase());
+  /* ---------------- FETCH ---------------- */
+  const fetchHotels = async () => {
+    try {
+      setLoading(true);
+      const res = await fetch("/api/hotels", {
+        cache: "no-store",
+      });
 
-    const matchesStatus =
-      statusFilter === "all" || hotel.status === statusFilter;
+      if (!res.ok) throw new Error("Failed to fetch");
 
-    return matchesSearch && matchesStatus;
-  }).sort((a, b) => {
-    return sort === "latest"
-      ? b.createdAt.getTime() - a.createdAt.getTime()
-      : a.createdAt.getTime() - b.createdAt.getTime();
-  });
+      const data = await res.json();
+      setHotels(data.data || []);
+    } catch (err) {
+      console.log(err);
+    } finally {
+      setLoading(false);
+    }
+  };
 
-  /* ------------------ Stats ------------------ */
-  const total = DUMMY_HOTELS.length;
-  const published = DUMMY_HOTELS.filter(h => h.status === "published").length;
-  const drafts = DUMMY_HOTELS.filter(h => h.status === "draft").length;
+  useEffect(() => {
+    fetchHotels();
+  }, []);
+
+  /* ---------------- DELETE ---------------- */
+  const handleDelete = async (id: string) => {
+    try {
+      setDeletingId(id);
+
+      const res = await fetch(`/api/hotels/${id}`, {
+        method: "DELETE",
+      });
+
+      if (!res.ok) throw new Error("Delete failed");
+
+      // Optimistic UI
+      setHotels((prev) => prev.filter((h) => h._id !== id));
+    } catch (err) {
+      console.log(err);
+    } finally {
+      setDeletingId(null);
+    }
+  };
+
+  /* ---------------- FILTER ---------------- */
+  const filteredHotels = hotels
+    .filter((hotel) => {
+      const matchesSearch = hotel.title
+        ?.toLowerCase()
+        .includes(search.toLowerCase());
+
+      const matchesStatus =
+        statusFilter === "all" || hotel.status === statusFilter;
+
+      return matchesSearch && matchesStatus;
+    })
+    .sort((a, b) => {
+      const aDate = new Date(a.createdAt).getTime();
+      const bDate = new Date(b.createdAt).getTime();
+
+      return sort === "latest" ? bDate - aDate : aDate - bDate;
+    });
+
+  /* ---------------- STATS ---------------- */
+  const total = hotels.length;
+  const published = hotels.filter((h) => h.status === "published").length;
+  const drafts = hotels.filter((h) => h.status === "draft").length;
 
   return (
     <section className="min-h-screen">
-
       {/* HEADER */}
+     
       <div className="mb-6">
         <h1 className="text-2xl font-semibold text-pink-100">
           Hotel Management
@@ -90,7 +104,6 @@ export default function HotelsPage() {
 
       {/* CONTROLS */}
       <div className="flex flex-wrap gap-3 mb-6">
-
         <input
           placeholder="Search hotels..."
           value={search}
@@ -135,62 +148,56 @@ export default function HotelsPage() {
       </div>
 
       {/* CONTENT */}
-      {filteredHotels.length === 0 ? (
+      {loading ? (
+        <p className="text-pink-400">Loading...</p>
+      ) : filteredHotels.length === 0 ? (
         <p className="text-pink-400">No hotels found</p>
       ) : view === "card" ? (
-        <HotelCards hotels={filteredHotels} />
+        <HotelCards hotels={filteredHotels} onDelete={handleDelete} deletingId={deletingId} />
       ) : (
-        <HotelTable hotels={filteredHotels} />
+        <HotelTable hotels={filteredHotels} onDelete={handleDelete} deletingId={deletingId} />
       )}
     </section>
   );
 }
 
-/* ------------------ CARD VIEW ------------------ */
-function HotelCards({ hotels }: { hotels: any[] }) {
+/* ---------------- CARD ---------------- */
+function HotelCards({ hotels, onDelete, deletingId }: any) {
   return (
-    <div className="grid gap-6"
+    <div
+      className="grid gap-6"
       style={{ gridTemplateColumns: "repeat(auto-fill, minmax(280px, 1fr))" }}
     >
-      {hotels.map((hotel) => (
-        <div key={hotel._id}
-          className="rounded-xl overflow-hidden bg-[#1e0d14]
-          border border-pink-900/40 hover:-translate-y-1 transition">
-
-          {/* Image */}
+      {hotels.map((hotel: any) => (
+        <div key={hotel._id} className="rounded-xl overflow-hidden bg-[#1e0d14] border border-pink-900/40">
           <div className="h-44 overflow-hidden">
-            <img src={hotel.image}
-              className="w-full h-full object-cover" />
+            <img src={hotel.image} className="w-full h-full object-cover" />
           </div>
 
-          {/* Content */}
           <div className="p-4">
-
-            <h3 className="text-pink-100 font-semibold">
-              {hotel.title}
-            </h3>
-
-            <p className="text-xs text-pink-400 mt-1">
-              📍 {hotel.location}
-            </p>
-
+            <h3 className="text-pink-100 font-semibold">{hotel.title}</h3>
+            <p className="text-xs text-pink-400 mt-1">📍 {hotel.location}</p>
             <p className="text-sm text-yellow-400 mt-1">
               ⭐ {hotel.rating} ({hotel.reviews})
             </p>
-
             <p className="text-pink-300 mt-2 font-semibold">
-              ₹ {hotel.price} / night
+              ₹ {hotel.price}
             </p>
 
-            {/* Actions */}
             <div className="flex gap-2 mt-4">
-              <Link href={`/admin-x9AqP7mK2/hotels/edit/${hotel._id}`}
-                className="flex-1 text-center py-2 bg-pink-600/20 rounded-lg text-pink-300">
+              <Link
+                href={`/admin-x9AqP7mK2/hotels/edit-hotel/${hotel._id}`}
+                className="flex-1 text-center py-2 bg-pink-600/20 rounded-lg text-pink-300"
+              >
                 Edit
               </Link>
 
-              <button className="flex-1 py-2 bg-red-900/20 rounded-lg text-red-400">
-                Delete
+              <button
+                onClick={() => onDelete(hotel._id)}
+                disabled={deletingId === hotel._id}
+                className="flex-1 py-2 bg-red-900/20 rounded-lg text-red-400"
+              >
+                {deletingId === hotel._id ? "Deleting..." : "Delete"}
               </button>
             </div>
           </div>
@@ -200,12 +207,11 @@ function HotelCards({ hotels }: { hotels: any[] }) {
   );
 }
 
-/* ------------------ TABLE VIEW ------------------ */
-function HotelTable({ hotels }: { hotels: any[] }) {
+/* ---------------- TABLE ---------------- */
+function HotelTable({ hotels, onDelete, deletingId }: any) {
   return (
     <div className="overflow-x-auto border border-pink-900/40 rounded-xl">
       <table className="w-full text-sm text-pink-200">
-
         <thead className="bg-pink-950/40 text-pink-300 text-xs uppercase">
           <tr>
             <th className="px-4 py-3">Hotel</th>
@@ -217,10 +223,8 @@ function HotelTable({ hotels }: { hotels: any[] }) {
         </thead>
 
         <tbody>
-          {hotels.map((hotel) => (
-            <tr key={hotel._id}
-              className="border-t border-pink-900/30 hover:bg-pink-900/20">
-
+          {hotels.map((hotel: any) => (
+            <tr key={hotel._id} className="border-t border-pink-900/30">
               <td className="px-4 py-3">{hotel.title}</td>
               <td className="px-4 py-3">{hotel.location}</td>
               <td className="px-4 py-3">₹ {hotel.price}</td>
@@ -228,17 +232,20 @@ function HotelTable({ hotels }: { hotels: any[] }) {
 
               <td className="px-4 py-3 flex gap-2 justify-center">
                 <Link
-                  href={`/admin-x9AqP7mK2/hotels/edit/${hotel._id}`}
+                  href={`/admin-x9AqP7mK2/hotels/edit-hotel/${hotel._id}`}
                   className="px-3 py-1 bg-pink-600/20 rounded text-pink-300"
                 >
                   Edit
                 </Link>
 
-                <button className="px-3 py-1 bg-red-900/20 rounded text-red-400">
-                  Delete
+                <button
+                  onClick={() => onDelete(hotel._id)}
+                  disabled={deletingId === hotel._id}
+                  className="px-3 py-1 bg-red-900/20 rounded text-red-400"
+                >
+                  {deletingId === hotel._id ? "..." : "Delete"}
                 </button>
               </td>
-
             </tr>
           ))}
         </tbody>
@@ -247,7 +254,7 @@ function HotelTable({ hotels }: { hotels: any[] }) {
   );
 }
 
-/* ------------------ STAT CARD ------------------ */
+/* ---------------- STAT ---------------- */
 function StatCard({ title, value }: any) {
   return (
     <div className="bg-[#1e0d14] border border-pink-900/40 rounded-xl p-4">

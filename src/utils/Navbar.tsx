@@ -3,11 +3,13 @@ import Image from "next/image";
 import Link from "next/link";
 import { useState, useEffect, useRef } from "react";
 import { Menu, X } from "lucide-react";
+import TourEnquiryPopup from "./TourEnquiryPopUp";
 
 export default function Navbar() {
     const [scrolled, setScrolled] = useState(false);
     const [active, setActive] = useState("Home");
     const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+    const [open, setOpen] = useState(false);
 
     const navItems = [
         { label: "Home", url: "/" },
@@ -44,7 +46,9 @@ export default function Navbar() {
     }, []);
 
     return (
-        <header className="fixed top-6 left-0 w-full z-50 flex justify-center">
+        <>
+         <TourEnquiryPopup open={open} onClose={()=>setOpen(false)}/>
+         <header className="fixed top-6 left-0 w-full z-50 flex justify-center">
 
             <div className="relative w-[92vw] sm:w-[90vw] xl:w-[85vw]">
 
@@ -216,6 +220,6 @@ export default function Navbar() {
             </div>
 
         </header>
-        
+      </>  
     );
 }

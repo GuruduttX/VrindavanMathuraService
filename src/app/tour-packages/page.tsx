@@ -74,12 +74,10 @@ const getTourPackageData = async () => {
 
     if (!res.ok) {
       const text = await res.text();
-      console.log("ERROR RESPONSE:", text);
       throw new Error("Failed to fetch package");
     }
 
     const data = await res.json();
-    console.log("Data", data);
     return data.data;
 
   } catch (error) {

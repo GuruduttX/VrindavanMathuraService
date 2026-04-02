@@ -2,10 +2,18 @@
 
 import Image from "next/image";
 import { Car, ArrowRight } from "lucide-react";
+import { useState } from "react";
+import TourEnquiryPopup from "@/utils/TourEnquiryPopUp";
+import Link from "next/link";
+import { isHmrRefresh } from "next/dist/server/app-render/work-unit-async-storage.external";
 
 export default function TaxiCTA() {
+  const [open, setOpne] = useState(false);
   return (
-    <section className="relative py-10 md:py-28 overflow-hidden">
+    <>
+      <TourEnquiryPopup open={open} onClose={()=>setOpne(false)}/>
+      <section className="relative py-10 md:py-28 overflow-hidden">
+
       {/* layered background gradient */}
       <div className="absolute inset-0 bg-gradient-to-br from-amber-50 via-orange-50 to-yellow-100"></div>
 
@@ -55,8 +63,10 @@ export default function TaxiCTA() {
             </p>
 
             <div className="flex flex-col md:flex-row gap-4 mt-8">
+
               <button
-                className="
+               onClick={()=>setOpne(true)}
+               className="
               px-7 py-3
               rounded-full
               text-white
@@ -78,8 +88,9 @@ export default function TaxiCTA() {
                 <ArrowRight size={18} />
               </button>
 
-              <button
-                className="
+              
+
+              <Link href="taxi" className="
               px-7 py-3
               rounded-full
               border
@@ -93,7 +104,8 @@ export default function TaxiCTA() {
               "
               >
                 View Routes
-              </button>
+              </Link>
+
             </div>
           </div>
 
@@ -143,6 +155,8 @@ export default function TaxiCTA() {
           </div>
         </div>
       </div>
-    </section>
+      </section>
+    </>
+  
   );
 }

@@ -6,8 +6,6 @@ import { ChevronDown, MapPin, Clock } from "lucide-react";
 export default function ItineraryAccordion({ PackageData }: any) {
   const [active, setActive] = useState<number | null>(0);
 
-  
-
   return (
     <section className="w-full max-w-4xl p-5 space-y-6">
       <h2 className="text-2xl font-semibold text-gray-900">Itinerary</h2>
@@ -20,8 +18,8 @@ export default function ItineraryAccordion({ PackageData }: any) {
             key={index}
             className={`rounded-3xl border transition-all duration-300 ${
               isOpen
-                ? "border-pink-400 bg-pink-50"
-                : "border-gray-200 bg-white hover:border-pink-300"
+                ? "border-orange-300 bg-orange-50"
+                : "border-gray-200 bg-white hover:border-orange-300"
             }`}
           >
             {/* Header */}
@@ -33,15 +31,15 @@ export default function ItineraryAccordion({ PackageData }: any) {
 
                 {/* Vertical Day Indicator */}
                 <div className="flex flex-col items-center">
-                  <div className="h-10 w-10 rounded-full bg-pink-600 text-white flex items-center justify-center text-sm font-semibold">
+                  <div className="h-10 w-10 rounded-full bg-[#A84010] text-white flex items-center justify-center text-sm font-semibold">
                     {item.day}
                   </div>
-                  <div className="w-[2px] flex-1 bg-pink-200 mt-2" />
+                  <div className="w-[2px] flex-1 bg-orange-200 mt-2" />
                 </div>
 
                 {/* Title */}
                 <div>
-                  <p className="text-xs uppercase tracking-wide text-pink-600 font-semibold">
+                  <p className="text-xs uppercase tracking-wide text-[#A84010] font-semibold">
                     Day {item.day}
                   </p>
                   <h3 className="text-lg font-semibold text-gray-900">
@@ -51,7 +49,7 @@ export default function ItineraryAccordion({ PackageData }: any) {
               </div>
 
               <ChevronDown
-                className={`h-5 w-5 text-pink-500 transition-transform duration-300 ${
+                className={`h-5 w-5 text-[#A84010] transition-transform duration-300 ${
                   isOpen ? "rotate-180" : ""
                 }`}
               />
@@ -90,7 +88,7 @@ export default function ItineraryAccordion({ PackageData }: any) {
                 />
 
                 {/* Elegant Accent */}
-                <div className="h-[2px] w-20 bg-pink-400 rounded-full mt-4" />
+                <div className="h-[2px] w-20 bg-[#E8821A] rounded-full mt-4" />
 
               </div>
             </div>

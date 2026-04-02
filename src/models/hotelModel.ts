@@ -17,22 +17,21 @@ const hotelSchema = new Schema<IHotel>({
 
   subcontent: {
     type: String,
-    required: true
   },
 
   category: {
     type: String,
-    required: true
+    
   },
 
   duration: {
     type: String,
-    required: true
+    
   },
 
   price: {
     type: Number,
-    required: true,
+  
     min: 0
   },
 
@@ -40,33 +39,33 @@ const hotelSchema = new Schema<IHotel>({
     type: Number,
     min: 0,
     max: 5,
-    required: true
+    default : 0
   },
 
   reviews: {
     type: Number,
     default: 0,
-    required: true
+   
   },
 
   host: {
     type: String,
-    required: true
+    
   },
 
   about: {
     type: String,
-    required: true,
+   
   },
 
   image: {
     type: String,
-    required: true
+   
   },
 
   alt: {
     type: String,
-    required: true
+    
   },
 
   faqs: [
@@ -97,12 +96,12 @@ const hotelSchema = new Schema<IHotel>({
     },
 
     scores: {
-      accuracy: { type: Number, min: 0, max: 5 },
-      checkIn: { type: Number, min: 0, max: 5 },
-      communication: { type: Number, min: 0, max: 5 },
-      location: { type: Number, min: 0, max: 5 },
-      value: { type: Number, min: 0, max: 5 },
-      cleanliness: { type: Number, min: 0, max: 5 }
+      accuracy: { type: Number, min: 0, max: 5 , default : 0},
+      checkIn: { type: Number, min: 0, max: 5 , default : 0 },
+      communication: { type: Number, min: 0, max: 5 , default : 0 },
+      location: { type: Number, min: 0, max: 5 , default : 0},
+      value: { type: Number, min: 0, max: 5 , default : 0 },
+      cleanliness: { type: Number, min: 0, max: 5 , default : 0 }
     },
 
     highlights: {
@@ -133,7 +132,26 @@ const hotelSchema = new Schema<IHotel>({
     type: String,
     enum: ["draft", "published"],
     default: "draft"
+  },
+
+  quickInclusions : {
+     freeWifi: {type : Boolean, default : false }, 
+     breakfast: {type : Boolean, default : false},
+     parking: {type : Boolean, default : false}
   }
+  ,
+  inclusions : [
+     {
+       id : {type : String},
+       description : {type : String}
+     }
+  ],
+  exclusions : [
+       {
+       id : {type : String},
+       description : {type : String}
+     }
+  ]
 
 },
 

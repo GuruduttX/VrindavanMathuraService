@@ -8,15 +8,17 @@ export default function TourHero() {
   return (
     <section className="relative w-full min-h-[90vh] md:min-h-[80vh] xl:min-h-[95vh] flex items-center justify-center overflow-hidden pt-2 md:pt-10">
       
-       <div className="absolute inset-0 bg-gradient-to-br 
-      from-[#b91372] 
-      via-[#e52e71] 
-      to-[#ff6a88]" />
+      {/* THEME CHANGED ONLY */}
+      <div className="absolute inset-0 bg-gradient-to-br 
+      from-[#7A2E00] 
+      via-[#A84010] 
+      to-[#E8821A]" />
+
       {/* Premium Gradient Background */}
       <div className="absolute inset-0 
-             bg-[radial-gradient(circle_at_20%_20%,#ff4db2,transparent_45%),
-             radial-gradient(circle_at_80%_30%,#ff2e93,transparent_45%),
-             linear-gradient(135deg,#b91372,#e52e71,#ff6a88)]" />
+             bg-[radial-gradient(circle_at_20%_20%,#E8821A,transparent_45%),
+             radial-gradient(circle_at_80%_30%,#A84010,transparent_45%),
+             linear-gradient(135deg,#7A2E00,#A84010,#E8821A)]" />
 
       {/* Soft Dot Pattern */}
       <div
@@ -28,7 +30,7 @@ export default function TourHero() {
         }}
       />
 
-      <div className="absoulte left-2 w-2.5 h-full  shadow-2xl"/>
+      <div className="absoulte left-2 w-2.5 h-full shadow-2xl"/>
 
       {/* Softer Overlay */}
       <div className="absolute inset-0 bg-black/25" />
@@ -43,45 +45,45 @@ export default function TourHero() {
           />
           <path
             d="M0,80 C300,160 600,20 900,80 C1150,130 1350,50 1440,100 L1440,140 L0,140 Z"
-            fill="#fdf2f8"
+            fill="#FFF7ED"
             opacity="0.6"
           />
         </svg>
       </div>
 
-      {/* LEFT IMAGES */}
-      <div className="hidden xl:block absolute -left-8 top-32 space-y-8   sh
-        [mask-image:linear-gradient(to_right,transparent,black_40%)]"   style={{ perspective: 1200 }}>
+      {/* LEFT IMAGES (UNCHANGED) */}
+      <div className="hidden xl:block absolute -left-8 top-32 space-y-8   
+        [mask-image:linear-gradient(to_right,transparent,black_40%)]" style={{ perspective: 1200 }}>
 
         <FloatingImage src="/images/tourpackages/hero1.webp" size="w-24 h-24 opacity-40 scale-90" />
         <FloatingImage src="/images/tourpackages/hero2.webp" size="w-24 h-24 opacity-70" />
         <FloatingImage src="/images/tourpackages/hero6.webp" size="w-24 h-24 opacity-90" />
       </div>
 
-      <div className="hidden xl:block absolute left-18 top-52 space-y-8"   style={{ perspective: 1200 }}>
+      <div className="hidden xl:block absolute left-18 top-52 space-y-8" style={{ perspective: 1200 }}>
         <FloatingImage src="/images/tourpackages/hero9.webp" size="w-24 h-24 opacity-70" />
         <FloatingImage src="/images/tourpackages/hero10.webp" size="w-24 h-24 opacity-80" />
       </div>
 
-      <div className="hidden xl:block absolute left-44 top-68 space-y-8 "  style={{ perspective: 1200 }}>
+      <div className="hidden xl:block absolute left-44 top-68 space-y-8" style={{ perspective: 1200 }}>
         <FloatingImage src="/images/tourpackages/hero8.webp" size="w-24 h-24 opacity-90" />
       </div>
 
-      {/* RIGHT IMAGES MIRROR */}
+      {/* RIGHT IMAGES (UNCHANGED) */}
       <div className="hidden xl:block absolute -right-8 top-32 space-y-8 
-        [mask-image:linear-gradient(to_left,transparent,black_40%)]"   style={{ perspective: 1200 }}>
+        [mask-image:linear-gradient(to_left,transparent,black_40%)]" style={{ perspective: 1200 }}>
 
         <FloatingImage src="/images/tourpackages/hero5.webp" size="w-24 h-24 opacity-40 scale-90" />
         <FloatingImage src="/images/tourpackages/hero1.webp" size="w-24 h-24 opacity-70" />
         <FloatingImage src="/images/tourpackages/hero2.webp" size="w-24 h-24 opacity-90" />
       </div>
 
-      <div className="hidden xl:block absolute right-18 top-52 space-y-8"   style={{ perspective: 1200 }}>
+      <div className="hidden xl:block absolute right-18 top-52 space-y-8" style={{ perspective: 1200 }}>
         <FloatingImage src="/images/tourpackages/hero7.webp" size="w-24 h-24 opacity-70" />
         <FloatingImage src="/images/tourpackages/hero6.webp" size="w-24 h-24 opacity-80" />
       </div>
 
-      <div className="hidden xl:block absolute right-44 top-68 space-y-8"   style={{ perspective: 1200 }}>
+      <div className="hidden xl:block absolute right-44 top-68 space-y-8" style={{ perspective: 1200 }}>
         <FloatingImage src="/images/tourpackages/hero4.webp" size="w-24 h-24 opacity-90" />
       </div>
 
@@ -104,7 +106,7 @@ export default function TourHero() {
           className="text-3xl sm:text-4xl md:text-6xl lg:text-7xl font-serif leading-tight"
         >
           Discover the Divine Land of{" "}
-          <span className="block text-pink-200 italic font-medium">
+          <span className="block text-orange-200 italic font-medium">
             Krishna
           </span>
         </motion.h1>
@@ -126,13 +128,14 @@ export default function TourHero() {
           className="mt-6 sm:mt-10 flex flex-col sm:flex-row justify-center items-center gap-3 sm:gap-6 px-4 sm:px-2 w-full"
         >
           <Link href="#tours" className="w-full sm:w-auto">
-            <button className="w-full sm:w-auto px-6 py-3.5 sm:px-10 sm:py-4 text-sm sm:text-base rounded-full bg-gradient-to-r from-pink-600 to-rose-500 text-white cursor-pointer font-semibold shadow-xl hover:scale-105 transition duration-300">
+            <button className="w-full sm:w-auto px-6 py-3.5 sm:px-10 sm:py-4 text-sm sm:text-base rounded-full 
+            bg-gradient-to-r from-[#7A2E00] to-[#E8821A] text-white cursor-pointer font-semibold shadow-xl hover:scale-105 transition duration-300">
               Explore Packages
             </button>
           </Link>
 
           <Link href="/tour-packages" className="w-full sm:w-auto">
-            <button className="w-full sm:w-auto px-6 py-3.5 sm:px-10 sm:py-4 text-sm sm:text-base rounded-full border border-white/70 cursor-pointer text-white font-semibold hover:bg-white hover:text-black transition duration-300">
+            <button className="w-full sm:w-auto px-6 py-3.5 sm:px-10 sm:py-4 text-sm sm:text-base rounded-full border border-white/70 cursor-pointer text-white font-semibold hover:bg-white hover:text-[#7A2E00] transition duration-300">
               View All Tours
             </button>
           </Link>

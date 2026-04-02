@@ -22,12 +22,11 @@ export default function LuxuryFooter() {
     <footer className="relative mt-5">
 
       {/* BACKGROUND */}
-      <div className="relative overflow-hidden bg-gradient-to-br from-[#7a1f5c] via-[#c2185b] to-[#ff4da6] text-white">
+      <div className="relative overflow-hidden bg-gradient-to-br from-[#7A2E00] via-[#A84010] to-[#E8821A] text-white">
 
         {/* animated mesh glow */}
-        <div className="absolute w-[600px] h-[600px] bg-pink-400/30 blur-[160px] rounded-full -top-40 -left-40 animate-pulse"/>
-        <div className="absolute w-[600px] h-[600px] bg-fuchsia-300/30 blur-[160px] rounded-full -bottom-40 -right-40 animate-pulse delay-1000"/>
-
+        <div className="absolute w-[600px] h-[600px] bg-orange-300/30 blur-[160px] rounded-full -top-40 -left-40 animate-pulse"/>
+        <div className="absolute w-[600px] h-[600px] bg-amber-200/30 blur-[160px] rounded-full -bottom-40 -right-40 animate-pulse delay-1000"/>
 
         {/* subtle grid texture */}
         <div className="absolute inset-0 opacity-[0.05]"
@@ -37,7 +36,6 @@ export default function LuxuryFooter() {
             backgroundSize: "60px 60px",
           }}
         />
-
 
         <div className="relative max-w-7xl mx-auto px-6 pt-24 pb-10">
 
@@ -56,7 +54,6 @@ export default function LuxuryFooter() {
                 Luxury stays, trusted taxi services, and curated divine tours.
               </p>
 
-
               {/* SOCIAL */}
               <div className="flex gap-4 mt-6">
 
@@ -65,7 +62,7 @@ export default function LuxuryFooter() {
                     key={i}
                     className="group cursor-pointer"
                   >
-                    <div className="w-11 h-11 flex items-center justify-center rounded-full bg-white/10 backdrop-blur hover:bg-white hover:text-pink-600 transition duration-300 group-hover:scale-110">
+                    <div className="w-11 h-11 flex items-center justify-center rounded-full bg-white/10 backdrop-blur hover:bg-white hover:text-[#A84010] transition duration-300 group-hover:scale-110">
                       <Icon size={18}/>
                     </div>
                   </div>
@@ -74,8 +71,6 @@ export default function LuxuryFooter() {
               </div>
 
             </div>
-
-
 
             {/* LINKS */}
             <div className="lg:col-span-2">
@@ -107,8 +102,6 @@ export default function LuxuryFooter() {
 
             </div>
 
-
-
             {/* COMPANY */}
             <div className="lg:col-span-2">
 
@@ -138,8 +131,6 @@ export default function LuxuryFooter() {
               </ul>
 
             </div>
-
-
 
             {/* CONTACT CARD */}
             <div className="lg:col-span-3">
@@ -175,8 +166,6 @@ export default function LuxuryFooter() {
 
           </div>
 
-
-
           {/* NEWSLETTER */}
           <div className="mt-16 border border-white/20 bg-white/5 backdrop-blur-xl rounded-2xl p-8 flex flex-col md:flex-row justify-between items-center gap-6">
 
@@ -189,7 +178,6 @@ export default function LuxuryFooter() {
               </p>
             </div>
 
-
             <div className="flex w-full md:w-auto">
 
               <input
@@ -197,15 +185,13 @@ export default function LuxuryFooter() {
                 placeholder="Enter your email"
               />
 
-              <button className="px-6 py-3 rounded-r-xl bg-gradient-to-r from-pink-500 to-fuchsia-500 hover:scale-105 transition font-medium">
+              <button className="px-6 py-3 rounded-r-xl bg-gradient-to-r from-[#7A2E00] to-[#E8821A] hover:scale-105 transition font-medium">
                 Subscribe
               </button>
 
             </div>
 
           </div>
-
-
 
           {/* BOTTOM */}
           <div className="mt-10 pt-6 border-t border-white/20 flex flex-col md:flex-row justify-between items-center text-white/60 text-sm">

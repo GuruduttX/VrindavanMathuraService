@@ -80,7 +80,6 @@ const getTaxiData = async () => {
         }
 
         const data = await res.json();
-        console.log("Data", data);
         return data.data;
 
     } catch (error) {

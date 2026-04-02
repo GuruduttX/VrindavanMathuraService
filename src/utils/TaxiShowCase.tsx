@@ -10,6 +10,7 @@ export default function TaxiShowCase() {
   const [phone,setPhone] = useState("");
   const [pickup,setPickup] = useState("");
   const [drop,setDrop] = useState("");
+  const [open, setOpen] = useState(false);
 
   return (
     <section className="relative py-24 overflow-hidden">
@@ -150,7 +151,8 @@ export default function TaxiShowCase() {
 
             {/* Button */}
             <button
-              className="w-full mt-8 py-3 rounded-full text-white font-medium flex items-center justify-center gap-2 bg-gradient-to-r from-pink-500 via-fuchsia-500 to-purple-600 hover:scale-[1.02] transition shadow-lg"
+             
+              className="w-full mt-8 py-3 rounded-full cursor-pointer text-white font-medium flex items-center justify-center gap-2 bg-gradient-to-r from-pink-500 via-fuchsia-500 to-purple-600 hover:scale-[1.02] transition shadow-lg"
             >
               <CarTaxiFront size={18}/>
               Book Taxi Now

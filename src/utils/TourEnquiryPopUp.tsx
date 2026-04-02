@@ -1,14 +1,6 @@
 "use client";
 
-import {
-  X,
-  Map,
-  User,
-  Phone,
-  Calendar,
-  Users,
-  MessageSquare,
-} from "lucide-react";
+import { X, Map, User, Phone, Mail } from "lucide-react";
 import { useEffect, useState } from "react";
 
 interface Props {
@@ -23,11 +15,7 @@ export default function TourEnquiryPopup({ open, onClose }: Props) {
   const [form, setForm] = useState({
     name: "",
     phone: "",
-    arrival: "",
-    departure: "",
-    adults: "",
-    children: "",
-    message: "",
+    email: "",
   });
 
   useEffect(() => {
@@ -56,180 +44,130 @@ export default function TourEnquiryPopup({ open, onClose }: Props) {
 
       {/* MODAL */}
       <div
-        className={`relative w-full max-w-5xl rounded-3xl
+        className={`relative w-full max-w-lg rounded-3xl
         bg-white shadow-2xl border border-pink-300
         transform transition-all duration-500
-        max-h-[90vh] overflow-y-auto no-scrollbar
-        ${animate ? "translate-y-0 opacity-100" : "-translate-y-20 opacity-0"}`}
+        ${animate ? "translate-y-0 opacity-100" : "-translate-y-10 opacity-0"}`}
       >
 
         {/* CLOSE BUTTON */}
         <button
           onClick={onClose}
-          className="absolute top-6 right-6 bg-white p-2 rounded-full shadow hover:bg-gray-100"
+          aria-label="Close"
+          className="absolute top-3 right-3 z-50 cursor-pointer
+          bg-white/90 backdrop-blur-md 
+          p-2.5 rounded-full shadow-lg 
+          hover:bg-white transition 
+          border border-gray-200"
         >
-          <X size={20} />
+          <X size={20} className="text-gray-700" />
         </button>
 
         {/* HEADER */}
-        <div className="relative p-8 md:p-10 rounded-t-3xl overflow-hidden bg-gradient-to-r from-pink-600 via-pink-500 to-rose-500 text-white">
-
-          <div className="absolute -top-20 -right-20 w-64 h-64 bg-white/20 rounded-full blur-3xl" />
-          <div className="absolute -bottom-20 -left-20 w-64 h-64 bg-white/20 rounded-full blur-3xl" />
-
-          <h2 className="relative text-3xl md:text-4xl font-bold flex items-center gap-3">
-            <Map size={30} /> Plan Your Braj Tour
+        <div className="relative p-6 rounded-t-3xl bg-gradient-to-r from-pink-600 to-rose-500 text-white">
+          <h2 className="text-xl md:text-2xl font-bold flex items-center gap-2">
+            <Map size={22} /> Plan Your Vrindavan Visit
           </h2>
 
-          <p className="relative opacity-90 mt-2 max-w-lg">
-            Tell us about your travel dates and group details. Our local experts
-            will create the perfect Braj spiritual itinerary for you.
+          <p className="text-sm opacity-90 mt-1">
+            Get quick help from our local experts for routes, parking & darshan.
           </p>
         </div>
 
-        {/* TOP WHATSAPP CARD */}
-        <div className="px-6 md:px-10 pt-6">
-          <div className="bg-green-50 border border-green-200 rounded-2xl p-4 flex flex-col md:flex-row md:items-center md:justify-between gap-4">
+        {/* WHATSAPP CARD */}
+        <div className="p-4">
+          <div className="bg-green-50 border border-green-200 rounded-xl p-3 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
 
             <div>
-              <p className="text-sm text-gray-600">Need instant help?</p>
-              <p className="font-semibold text-gray-800">
-                Chat with our travel expert on WhatsApp
+              <p className="text-xs text-gray-600">Need instant help?</p>
+              <p className="text-sm font-medium text-gray-800">
+                Chat with our expert on WhatsApp
               </p>
             </div>
 
             <a
               href="https://wa.me/917302265809"
               target="_blank"
-              className="bg-green-500 hover:bg-green-600 text-white px-5 py-2 rounded-xl font-medium transition text-center"
+              rel="noopener noreferrer"
+              className="bg-green-500 hover:bg-green-600 text-white px-4 py-2 rounded-lg text-sm font-medium text-center"
             >
-              WhatsApp Now
+              Connect on WhatsApp
             </a>
 
           </div>
         </div>
 
         {/* FORM */}
-        <form className="p-6 md:p-10 grid md:grid-cols-2 gap-6">
+        <form className="px-4 pb-5 space-y-3">
 
           {/* NAME */}
           <div className="relative">
-            <User className="absolute left-4 top-3.5 text-gray-400" size={18} />
+            <User className="absolute left-3 top-3 text-gray-400" size={16} />
             <input
               name="name"
-              placeholder="Full Name"
+              placeholder="Your Name"
               required
               onChange={handleChange}
-              className="w-full pl-11 pr-4 py-3 rounded-xl border border-gray-200
+              className="w-full pl-10 pr-4 py-2.5 rounded-xl border border-gray-200
               focus:border-pink-500 focus:ring-2 focus:ring-pink-200
-              outline-none transition"
+              outline-none text-sm"
             />
           </div>
 
           {/* PHONE */}
           <div className="relative">
-            <Phone className="absolute left-4 top-3.5 text-gray-400" size={18} />
+            <Phone className="absolute left-3 top-3 text-gray-400" size={16} />
             <input
               name="phone"
               placeholder="Phone Number"
               required
               onChange={handleChange}
-              className="w-full pl-11 pr-4 py-3 rounded-xl border border-gray-200
+              className="w-full pl-10 pr-4 py-2.5 rounded-xl border border-gray-200
               focus:border-pink-500 focus:ring-2 focus:ring-pink-200
-              outline-none transition"
+              outline-none text-sm"
             />
           </div>
 
-          {/* ARRIVAL */}
+          {/* EMAIL */}
           <div className="relative">
-            <Calendar className="absolute left-4 top-3.5 text-gray-400" size={18}/>
+            <Mail className="absolute left-3 top-3 text-gray-400" size={16} />
             <input
-              type="date"
-              name="arrival"
+              type="email"
+              name="email"
+              placeholder="Email Address"
+              required
               onChange={handleChange}
-              className="w-full pl-11 pr-4 py-3 rounded-xl border border-gray-200
+              className="w-full pl-10 pr-4 py-2.5 rounded-xl border border-gray-200
               focus:border-pink-500 focus:ring-2 focus:ring-pink-200
-              outline-none transition"
-            />
-          </div>
-
-          {/* DEPARTURE */}
-          <div className="relative">
-            <Calendar className="absolute left-4 top-3.5 text-gray-400" size={18}/>
-            <input
-              type="date"
-              name="departure"
-              onChange={handleChange}
-              className="w-full pl-11 pr-4 py-3 rounded-xl border border-gray-200
-              focus:border-pink-500 focus:ring-2 focus:ring-pink-200
-              outline-none transition"
-            />
-          </div>
-
-          {/* ADULTS */}
-          <div className="relative">
-            <Users className="absolute left-4 top-3.5 text-gray-400" size={18}/>
-            <input
-              name="adults"
-              placeholder="Adults"
-              onChange={handleChange}
-              className="w-full pl-11 pr-4 py-3 rounded-xl border border-gray-200
-              focus:border-pink-500 focus:ring-2 focus:ring-pink-200
-              outline-none transition"
-            />
-          </div>
-
-          {/* CHILDREN */}
-          <div className="relative">
-            <Users className="absolute left-4 top-3.5 text-gray-400" size={18}/>
-            <input
-              name="children"
-              placeholder="Children"
-              onChange={handleChange}
-              className="w-full pl-11 pr-4 py-3 rounded-xl border border-gray-200
-              focus:border-pink-500 focus:ring-2 focus:ring-pink-200
-              outline-none transition"
-            />
-          </div>
-
-          {/* MESSAGE */}
-          <div className="md:col-span-2 relative">
-            <MessageSquare className="absolute left-4 top-4 text-gray-400" size={18}/>
-            <textarea
-              name="message"
-              placeholder="Tell us about your tour requirements..."
-              onChange={handleChange}
-              className="w-full pl-11 pr-4 py-3 rounded-xl border border-gray-200
-              focus:border-pink-500 focus:ring-2 focus:ring-pink-200
-              outline-none transition resize-none h-28"
+              outline-none text-sm"
             />
           </div>
 
           {/* BUTTONS */}
-          <div className="md:col-span-2 flex flex-col md:flex-row gap-4">
+          <div className="flex flex-col sm:flex-row gap-3 pt-2">
 
             <button
-              className="flex-1 py-3 rounded-xl font-semibold text-white
+              type="submit"
+              className="w-full sm:flex-1 py-2.5 rounded-xl font-semibold text-white
               bg-gradient-to-r from-pink-600 to-rose-500
-              hover:from-pink-700 hover:to-rose-600
-              shadow-lg transition"
+              hover:from-pink-700 hover:to-rose-600 transition text-sm"
             >
-              {loading ? "Sending..." : "Send Tour Enquiry"}
+              {loading ? "Sending..." : "Get Call Back"}
             </button>
 
             <a
               href="https://wa.me/917302265809"
               target="_blank"
-              className="flex-1 text-center py-3 rounded-xl font-semibold text-white
-              bg-green-500 hover:bg-green-600 shadow-lg transition"
+              rel="noopener noreferrer"
+              className="w-full sm:flex-1 text-center py-2.5 rounded-xl font-semibold text-white
+              bg-green-500 hover:bg-green-600 transition text-sm"
             >
-              WhatsApp
+               Instant Help
             </a>
 
           </div>
 
         </form>
-
       </div>
     </div>
   );

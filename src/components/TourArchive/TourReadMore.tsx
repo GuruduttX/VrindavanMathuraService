@@ -76,7 +76,7 @@ export default function ToursReadMore() {
           {/* Button */}
           <button
             onClick={() => setOpen(!open)}
-            className="flex items-center gap-2 mt-6 text-pink-600 font-semibold hover:text-pink-700 transition cursor-pointer"
+            className="flex items-center gap-2 mt-6 text-[#A84010] font-semibold hover:text-[#852e05] transition cursor-pointer"
           >
             {open ? "Read Less" : "Read More"}
             <ChevronDown

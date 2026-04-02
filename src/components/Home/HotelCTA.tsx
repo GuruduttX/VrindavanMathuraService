@@ -1,11 +1,18 @@
 "use client";
+import { useState } from "react";
 
 import { motion } from "framer-motion";
 import { CalendarCheck, MapPin, Sparkles } from "lucide-react";
+import TourEnquiryPopup from "@/utils/TourEnquiryPopUp";
 
 export default function HotelCTA() {
+  const [open, setOpen] = useState(false);
+
   return (
-    <section className="py-10 bg-gradient-to-b  from-amber-50 via-orange-50 to-yellow-100">
+    <>
+     <TourEnquiryPopup open={open} onClose={()=>setOpen(false)}/>
+     <section className="py-10 bg-gradient-to-b from-purple-50 via-pink-100 to-pink-50">
+
       <div className="max-w-6xl mx-auto px-6">
         <motion.div
           initial={{ opacity: 0, y: 60 }}
@@ -58,7 +65,8 @@ export default function HotelCTA() {
             <motion.button
               whileHover={{ scale: 1.07 }}
               whileTap={{ scale: 0.95 }}
-              className="mt-12 px-10 py-4 text-white font-semibold rounded-xl bg-gradient-to-r from-amber-500 via-amber-500 to-orange-600 shadow-lg"
+              onClick={()=>setOpen(true)}
+              className="mt-12 px-10 py-4 text-white font-semibold rounded-xl cursor-pointer bg-gradient-to-r from-pink-500 via-fuchsia-500 to-purple-600 shadow-lg"
             >
               Book Your Stay Now
             </motion.button>
@@ -66,5 +74,7 @@ export default function HotelCTA() {
         </motion.div>
       </div>
     </section>
+    </>
+
   );
 }

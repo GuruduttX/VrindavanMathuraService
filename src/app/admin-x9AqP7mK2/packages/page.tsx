@@ -77,7 +77,7 @@ export default function PackagesPage() {
 //     });
 
     const filteredPackages = packages
-  .filter((pkg) => {
+    .filter((pkg) => {
     const matchesSearch = pkg.title
       .toLowerCase()
       .includes(search.toLowerCase());
