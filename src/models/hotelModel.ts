@@ -1,89 +1,107 @@
 import mongoose, { Schema } from "mongoose";
-import {IHotel} from "@/types/hotelTypes"
-
+import { IHotel } from "@/types/hotelTypes";
 
 const hotelSchema = new Schema<IHotel>({
 
   title: {
     type: String,
-   
+    trim: true,
+    required: true
+  },
+
+  slug: {
+    type: String,
+    unique: true,
+    required: true
   },
 
   subcontent: {
-
     type: String,
-    
-  },
-
-  slug : {
-
-    type : String,
-    
-  },
-
-  duration : {
-
-    type : String,
-    
-  },
-
-  rating: {
-    
-    type: Number,
-    
-  },
-
-  reviews: {
-    type: Number,
-    default: 0
-  },
-
-  price: {
-    type: Number,
-   
   },
 
   category: {
     type: String,
+    
+  },
+
+  duration: {
+    type: String,
+    
+  },
+
+  price: {
+    type: Number,
+  
+    min: 0
+  },
+
+  rating: {
+    type: Number,
+    min: 0,
+    max: 5,
+    default : 0
+  },
+
+  reviews: {
+    type: Number,
+    default: 0,
    
   },
 
   host: {
     type: String,
+    
   },
 
   about: {
     type: String,
+   
   },
 
-
-  inclusion: {
-    freeWifi: { type: Boolean, default: false },
-    breakfast: { type: Boolean, default: false },
-    parking: { type: Boolean, default: false }
+  image: {
+    type: String,
+   
   },
 
-  
-  offers: [
+  alt: {
+    type: String,
+    
+  },
+
+  faqs: [
+
     {
-      title: { type: String },
-      discount: { type: Number },
-      validTill: { type: Date }
+      id: {
+        type: String,
+        required: true
+      },
+
+      question: {
+        type: String,
+        required: true
+      },
+
+      answer: {
+        type: String,
+        required: true
+      }
     }
+
   ],
+
 
   ratingSummary: {
     reviewText: {
-      type: String,
+      type: String
     },
 
     scores: {
-      accuracy: { type: Number, min: 0, max: 5 },
-      checkIn: { type: Number, min: 0, max: 5 },
-      communication: { type: Number, min: 0, max: 5 },
-      location: { type: Number, min: 0, max: 5 },
-      value: { type: Number, min: 0, max: 5 },
-      cleanliness: { type: Number, min: 0, max: 5 }
+      accuracy: { type: Number, min: 0, max: 5 , default : 0},
+      checkIn: { type: Number, min: 0, max: 5 , default : 0 },
+      communication: { type: Number, min: 0, max: 5 , default : 0 },
+      location: { type: Number, min: 0, max: 5 , default : 0},
+      value: { type: Number, min: 0, max: 5 , default : 0 },
+      cleanliness: { type: Number, min: 0, max: 5 , default : 0 }
     },
 
     highlights: {
@@ -91,18 +109,57 @@ const hotelSchema = new Schema<IHotel>({
       greatLocation: { type: Number, default: 0 },
       comfortStay: { type: Number, default: 0 }
     }
+
   },
 
-  status : {
-    type : String,
-    required : true
+  metaTitle: {
+    type: String
+  },
+
+  metaDescription: {
+    type: String
+  },
+
+  schemaTitle: {
+    type: String
+  },
+
+  schemaDescription: {
+    type: String
+  },
+
+  status: {
+    type: String,
+    enum: ["draft", "published"],
+    default: "draft"
+  },
+
+  quickInclusions : {
+     freeWifi: {type : Boolean, default : false }, 
+     breakfast: {type : Boolean, default : false},
+     parking: {type : Boolean, default : false}
   }
+  ,
+  inclusions : [
+     {
+       id : {type : String},
+       description : {type : String}
+     }
+  ],
+  exclusions : [
+       {
+       id : {type : String},
+       description : {type : String}
+     }
+  ]
 
-}, {
-  timestamps: true
-});
+},
 
-
+  {
+    timestamps: true
+  }
+  
+);
 
 const Hotel = mongoose.models.Hotel || mongoose.model<IHotel>("Hotel", hotelSchema);
 

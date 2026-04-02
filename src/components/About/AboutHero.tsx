@@ -1,10 +1,11 @@
 "use client";
 
 import { motion } from "framer-motion";
-import Image from "next/image";
 
 export default function AboutHero() {
+
   return (
+    
     <section className="relative w-full overflow-hidden bg-gradient-to-br from-rose-50 via-pink-100 to-amber-50 py-32">
 
       {/* Floating Images LEFT */}

@@ -5,14 +5,15 @@ import CMSMediaSection from '@/components/Admin/CMS/CMSMediaSection';
 import CMSMetaSection from '@/components/Admin/CMS/CMSMetaSection';
 import CMSSeoSection from '@/components/Admin/CMS/CMSSeoSection';
 import FaqHandler from '@/components/Admin/CMS/FaqHandler';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import toast from 'react-hot-toast';
 import PackageDetails from '@/components/Admin/PackageEditor/PackageDetails';
 import Inclusion from '@/components/Admin/PackageEditor/Inclusion';
 import Exclusion from '@/components/Admin/PackageEditor/Exclusion';
 import CMSSchema from '@/components/Admin/CMS/CMSSchema';
+import { useParams } from 'next/navigation';
+import { getHotelByIdService } from '@/services/hotelServices';
 import QuickInclusion from '@/components/Admin/HotelEditor/QuickInclusion';
-import CMSRichText from '@/components/Admin/HotelEditor/CMSReachText';
 import RatingSummary from '@/components/Admin/HotelEditor/SummaryPackage';
 import CMSHostField from '@/components/Admin/HotelEditor/CMSHostField';
 
@@ -21,7 +22,6 @@ type HotelForm = {
   category: string;
   slug: string;
   price: string;
-  about : string;
   duration : string,
   subcontent : string;
   host : string,
@@ -31,6 +31,7 @@ type HotelForm = {
   schemaDescription: string;
   image: string;
   alt: string;
+  destination: string;
   reviews: string;
   rating: string;
   status: string;
@@ -39,11 +40,15 @@ type HotelForm = {
 type FAQ         = { id: string; question: string; answer: string };
 type Inclusions  = { id: string; description: string };
 type Exclusions  = { id: string; description: string };
+
 type QuickInclusions = {freeWifi: boolean;
   breakfast: boolean;
   parking: boolean;}
 
 export default function CreateNewPackage() {
+
+    const {id} = useParams();
+
 
   const [form, setForm] = useState<HotelForm>({
     title: "", 
@@ -52,8 +57,8 @@ export default function CreateNewPackage() {
     price: "",
     subcontent : "", 
     duration : "",
-    about : "",
     host : "",
+    destination: "", 
     metaTitle: "", 
     metaDescription: "",
     schemaTitle: "", 
@@ -62,8 +67,7 @@ export default function CreateNewPackage() {
     alt: "",
     reviews: "", 
     rating: "",
-    status: "",
-    
+    status: ""
   });
 
   const [loading, setLoading] = useState(false);
@@ -72,23 +76,91 @@ export default function CreateNewPackage() {
   const [exclusions,   setExclusions]   = useState<Exclusions[]>([{ id: crypto.randomUUID(), description: "" }]);
   const [quickInclusions, setQuickInclusions] = useState<QuickInclusions>({freeWifi: false,
   breakfast: false,
-  parking: false})
-  const [ratingSummary, setRatingSummary] = useState({
-  reviewText: "",
-  scores: {
-    accuracy: 0,
-    checkIn: 0,
-    communication: 0,
-    location: 0,
-    value: 0,
-    cleanliness: 0,
-  },
-  highlights: {
-    hospitality: 0,
-    greatLocation: 0,
-    comfortStay: 0,
-  },
-});
+  parking: false});
+
+   const [ratingSummary, setRatingSummary] = useState({
+    reviewText: "",
+    scores: {
+      accuracy: 0,
+      checkIn: 0,
+      communication: 0,
+      location: 0,
+      value: 0,
+      cleanliness: 0,
+    },
+    highlights: {
+      hospitality: 0,
+      greatLocation: 0,
+      comfortStay: 0,
+    },
+  });
+
+   const getHotel = async()=>{
+    try {
+
+        const res = await fetch(`/api/hotels/${id}`);
+
+        if(!res.ok){
+           throw new Error("Get Error In Updating fields");
+        }
+
+        const response = await res.json();
+
+        const data = response.data;
+
+        setForm({
+            title: data.title, 
+            category: data.category, 
+            slug: data.slug, 
+            price: data.price,
+            subcontent : data.subContent, 
+            duration : data.duration,
+            host : data.host,
+            destination: data.destination, 
+            metaTitle: data.metaTitle, 
+            metaDescription: data.metaDescription,
+            schemaTitle: data.schemaTitle, 
+            schemaDescription: data.schemaDescription, 
+            image: data.image, 
+            alt: data.alt,
+            reviews: data.reviews, 
+            rating: data.rating,
+            status: data.status
+        });
+
+        setFaqs(data.faqs ?? []);
+        setInclusions(data.inclusions ?? []);
+        setExclusions(data.exclusions ?? []);
+        setQuickInclusions(data.quickInclusions ?? {freeWifi: false,
+        breakfast: false,
+        parking: false});
+
+        setRatingSummary(data.ratingSummary ?? {
+        reviewText: "",
+        scores: {
+          accuracy: 0,
+          checkIn: 0,
+          communication: 0,
+          location: 0,
+          value: 0,
+          cleanliness: 0,
+        },
+        highlights: {
+          hospitality: 0,
+          greatLocation: 0,
+          comfortStay: 0,
+        },
+      })
+
+        
+    } catch (error) {
+        
+    }
+   }
+
+  useEffect(()=>{
+     getHotel();
+  },[id]);
   
   
 
@@ -112,7 +184,6 @@ export default function CreateNewPackage() {
       metaDescription: form.metaDescription,
       schemaTitle: form.schemaTitle,
       schemaDescription: form.schemaDescription,
-      about : form.about,
       faqs,
       inclusions,
       exclusions,
@@ -160,7 +231,6 @@ export default function CreateNewPackage() {
       await postPayload(buildPayload("published"));
       toast.success("Hotel Package published successfully!");
     } catch (err: any) {
-      console.log(err.message);
       toast.error(err.message || "Failed to publish hotel package");
     } finally {
       setLoading(false);
@@ -204,32 +274,26 @@ export default function CreateNewPackage() {
       <form className="relative z-10 space-y-6" onSubmit={handleSave}>
         <CMSHeader editorType="Hotel" />
         <CMSMetaSection title={form.title} category={form.category} slug={form.slug} onChange={updateForm} editorType="Hotel" />
-        <CMSHostField
-          value={form.host}
-          onChange={updateForm}
-        />  
-         <PackageDetails reviews={form.reviews} rating={form.rating} price={form.price} duration={form.duration} onChange={updateForm} editorType="Package"/>
+          <CMSHostField
+            value={form.host}
+            onChange={updateForm}
+          />
+        <PackageDetails reviews={form.reviews} rating={form.rating} price={form.price} duration={form.duration} onChange={updateForm} editorType="Package"/>
         <CMSSeoSection metaTitle={form.metaTitle} metaDescription={form.metaDescription} onChange={updateForm} editorType="Hotel" />
         <CMSSchema schemaTitle={form.schemaTitle} schemaDescription={form.schemaDescription} onChange={updateForm} editorType="Hotel" />
+        
         <QuickInclusion
-        quickInclusions={quickInclusions}
-        setQuickInclusions={setQuickInclusions}
-        />
-        <CMSRichText
-          label="Main Content"
-          value={form.about}
-          field="about"
-          onChange={updateForm}
+          quickInclusions={quickInclusions}
+          setQuickInclusions={setQuickInclusions}
         />
          <RatingSummary
           ratingSummary={ratingSummary}
           setRatingSummary={setRatingSummary}
         />
-        
-
         <Inclusion inclusions={inclusions} setInclusions={setInclusions} editorType="Hotel" />
         <Exclusion exclusions={exclusions} setExclusions={setExclusions} editorType="Hotel" />
         <FaqHandler faqs={faqs} setFaqs={setFaqs} editorType="Package" />
+
         <CMSMediaSection image={form.image} alt={form.alt} onChange={updateForm} editorType="Hotel" />
         <CMSActions actionType="create" editorType="Hotel" onSaveDraft={handleSaveDraft} loading={loading}
         />

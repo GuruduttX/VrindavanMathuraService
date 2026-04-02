@@ -93,20 +93,20 @@ const data: ProductData = {
 
   puja: [
     {
-      title: "Luxury Hotel Vrindavan",
-      price: "₹2,200 / night",
+      title: "Temple Puja Booking",
+      price: "₹999",
       image: "/images/Home/hotel.webp",
       location: "Vrindavan",
     },
     {
-      title: "Luxury Hotel Vrindavan",
-      price: "₹2,200 / night",
+      title: "Temple Puja Booking",
+      price: "₹999",
       image: "/images/Home/hotel.webp",
       location: "Vrindavan",
     },
     {
-      title: "Luxury Hotel Vrindavan",
-      price: "₹2,200 / night",
+      title: "Temple Puja Booking",
+      price: "₹999",
       image: "/images/Home/hotel.webp",
       location: "Vrindavan",
     },
@@ -130,14 +130,14 @@ export default function ProductsShowcase() {
   }, [active]);
 
   return (
-    <section className="py-10 md:py-24 relative bg-gradient-to-b from-white via-pink-50 to-white">
+    <section className="py-10 md:py-24 relative bg-gradient-to-b from-white via-amber-50 to-white">
 
       <div className="max-w-7xl mx-auto px-6">
 
         {/* heading */}
         <div className="text-center mb-12">
 
-          <h2 className="text-3xl md:text-5xl font-bold bg-gradient-to-r from-pink-600 via-fuchsia-600 to-purple-600 bg-clip-text text-transparent">
+          <h2 className="text-3xl md:text-5xl font-bold bg-gradient-to-r from-orange-600 via-amber-600 to-yellow-500 bg-clip-text text-transparent">
             Explore Our Services
           </h2>
 
@@ -151,13 +151,13 @@ export default function ProductsShowcase() {
         {/* FILTER */}
         <div className="flex justify-center mb-10">
 
-          <div className="relative flex gap-0 md:gap-2 bg-white shadow-lg p-2 rounded-full border-2 border-purple-500 cursor-pointer">
+          <div className="relative flex gap-0 md:gap-2 bg-white shadow-lg p-2 rounded-full border-2 border-amber-400 cursor-pointer">
 
             <div
               ref={indicatorRef}
               className="
               absolute top-2 bottom-2
-              bg-gradient-to-r from-pink-500 via-fuchsia-500 to-purple-500
+              bg-gradient-to-r from-orange-500 via-amber-500 to-yellow-500
               rounded-full
               transition-all duration-300
               opacity-20
@@ -170,8 +170,8 @@ export default function ProductsShowcase() {
                 data-filter={filter.id}
                 onClick={() => setActive(filter.id)}
                 className={`relative z-10 text-xs md:text-lg px-3 whitespace-nowrap md:px-10 py-2 md:py-4 rounded-full font-medium transition cursor-pointer ${active === filter.id
-                  ? "text-pink-600"
-                  : "text-gray-600 hover:text-pink-600"
+                    ? "text-amber-700"
+                    : "text-gray-600 hover:text-amber-600"
                   }`}
               >
                 {filter.label}
@@ -206,13 +206,11 @@ export default function ProductsShowcase() {
                       className="object-cover"
                     />
 
-                    <div className="absolute inset-0 bg-gradient-to-t from-pink-500/40 via-pink-500/20 to-transparent"></div>
+                    <div className="absolute inset-0 bg-gradient-to-t from-orange-500/40 via-orange-500/20 to-transparent"></div>
 
                     <div className="absolute bottom-4 left-4 text-white">
 
-
-
-                      <div className="mt-2 bg-white text-pink-600 px-3 py-1 rounded-full text-sm font-semibold inline-block">
+                      <div className="mt-2 bg-white text-amber-600 px-3 py-1 rounded-full text-sm font-semibold inline-block">
                         {product.price}
                       </div>
 
@@ -224,6 +222,7 @@ export default function ProductsShowcase() {
                     <h3 className="font-semibold text-lg">
                       {product.title}
                     </h3>
+
                     <div className="flex items-center gap-2 text-gray-500">
                       <MapPin size={16} />
                       {product.location}
@@ -253,7 +252,7 @@ export default function ProductsShowcase() {
 
                     </div>
 
-                    <button className="mt-6 bg-gradient-to-r from-pink-500 to-fuchsia-600 text-white py-3 rounded-xl cursor-pointer">
+                    <button className="mt-6 bg-gradient-to-r from-orange-500 to-amber-600 text-white py-3 rounded-xl cursor-pointer">
                       View Details
                     </button>
 
@@ -266,9 +265,9 @@ export default function ProductsShowcase() {
               {/* ================= TAXI CARD ================= */}
               {active === "taxi" && (
                 <>
-                  <div className="flex items-center justify-center h-[220px] bg-gradient-to-br from-pink-100 to-fuchsia-100">
+                  <div className="flex items-center justify-center h-[220px] bg-gradient-to-br from-amber-100 to-orange-100">
 
-                    <Car size={60} className="text-pink-600" />
+                    <Car size={60} className="text-amber-600" />
 
                   </div>
 
@@ -288,11 +287,11 @@ export default function ProductsShowcase() {
 
                     <div>
 
-                      <div className="text-pink-600 font-semibold mb-4">
+                      <div className="text-amber-600 font-semibold mb-4">
                         {product.price}
                       </div>
 
-                      <button className="w-full bg-gradient-to-r from-pink-500 to-fuchsia-600 text-white py-3 rounded-xl">
+                      <button className="w-full bg-gradient-to-r from-orange-500 to-amber-600 text-white py-3 rounded-xl">
                         Book Taxi
                       </button>
 
@@ -329,7 +328,7 @@ export default function ProductsShowcase() {
                     <div>
 
                       <div className="flex items-center gap-2 mb-2">
-                        <Hotel size={18} className="text-pink-600" />
+                        <Hotel size={18} className="text-amber-600" />
                         <span className="text-sm text-gray-500">
                           Premium Stay
                         </span>
@@ -347,68 +346,11 @@ export default function ProductsShowcase() {
 
                     <div>
 
-                      <div className="text-pink-600 font-semibold mb-4">
+                      <div className="text-amber-600 font-semibold mb-4">
                         {product.price}
                       </div>
 
-                      <button className="w-full border border-pink-500 text-pink-600 py-3 rounded-xl hover:bg-pink-50">
-                        View Hotel
-                      </button>
-
-                    </div>
-
-                  </div>
-                </>
-              )}
-
-
-              {active === "puja" && (
-                <>
-                  <div className="relative h-[220px]">
-
-                    <Image
-                      src={product.image}
-                      alt={product.title}
-                      fill
-                      loading="lazy"
-                      className="object-cover"
-                    />
-
-                    <div className="absolute top-3 right-3 bg-white px-3 py-1 rounded-lg flex items-center gap-1 shadow text-sm">
-                      <Star size={14} className="text-yellow-500" />
-                      4.6
-                    </div>
-
-                  </div>
-
-                  <div className="p-6 flex flex-col flex-1 justify-between">
-
-                    <div>
-
-                      <div className="flex items-center gap-2 mb-2">
-                        <Hotel size={18} className="text-pink-600" />
-                        <span className="text-sm text-gray-500">
-                          Premium Stay
-                        </span>
-                      </div>
-
-                      <h3 className="text-xl font-semibold">
-                        {product.title}
-                      </h3>
-
-                      <p className="text-gray-500 mt-2">
-                        Comfortable stay with modern amenities in Vrindavan.
-                      </p>
-
-                    </div>
-
-                    <div>
-
-                      <div className="text-pink-600 font-semibold mb-4">
-                        {product.price}
-                      </div>
-
-                      <button className="w-full border border-pink-500 text-pink-600 py-3 rounded-xl hover:bg-pink-50">
+                      <button className="w-full border border-amber-500 text-amber-600 py-3 rounded-xl hover:bg-amber-50">
                         View Hotel
                       </button>
 
@@ -420,9 +362,6 @@ export default function ProductsShowcase() {
 
             </div>
           ))}
-
-
-
 
         </div>
 

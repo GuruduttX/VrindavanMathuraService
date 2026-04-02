@@ -1,19 +1,20 @@
 "use client"
-
 import TourEnquiryPopup from "@/utils/TourEnquiryPopUp";
 import { motion } from "framer-motion";
 import { ArrowRight } from "lucide-react";
 import { useState } from "react";
 
 export default function TravelCTA() {
-  const [tourOpen,setTourOpen] = useState(false);
+  const [tourOpen, setTourOpen] = useState(false);
+
   return (
     <>
-    <TourEnquiryPopup open={tourOpen} onClose={()=>setTourOpen(false)}/>
+      <TourEnquiryPopup open={tourOpen} onClose={() => setTourOpen(false)} />
+
       <section className="py-10 md:py-28 relative overflow-hidden">
 
         {/* background gradient */}
-        <div className="absolute inset-0 bg-gradient-to-r from-pink-500 via-fuchsia-400 to-purple-300"></div>
+        <div className="absolute inset-0 bg-gradient-to-r from-orange-500 via-amber-500 to-yellow-400"></div>
 
         {/* glow effects */}
         <div className="absolute top-[-150px] left-[-100px] w-[400px] h-[400px] bg-white/20 blur-[150px] rounded-full"></div>
@@ -44,21 +45,23 @@ export default function TravelCTA() {
             {/* buttons */}
             <div className="mt-10 flex flex-col sm:flex-row gap-6 justify-center">
 
+              {/* Primary Button */}
               <motion.button
                 whileHover={{ scale: 1.07 }}
                 whileTap={{ scale: 0.95 }}
-                className="px-8 py-4 rounded-full bg-white text-pink-600 font-semibold shadow-lg flex items-center gap-2 justify-center cursor-pointer"
-                onClick={()=> {setTourOpen(true)}}
+                className="px-8 py-4 rounded-full bg-white text-amber-600 font-semibold shadow-lg flex items-center gap-2 justify-center cursor-pointer"
+                onClick={() => { setTourOpen(true) }}
               >
                 Book Tour Package
                 <ArrowRight size={18} />
               </motion.button>
 
+              {/* Secondary Button */}
               <motion.button
                 whileHover={{ scale: 1.07 }}
                 whileTap={{ scale: 0.95 }}
-                className="px-8 py-4 rounded-full border border-white text-white font-semibold hover:bg-white hover:text-pink-600 transition cursor-pointer"
-                onClick={()=> {setTourOpen(true)}}
+                className="px-8 py-4 rounded-full border border-white text-white font-semibold hover:bg-white hover:text-amber-600 transition cursor-pointer"
+                onClick={() => { setTourOpen(true) }}
               >
                 Enquire Now
               </motion.button>
@@ -68,6 +71,7 @@ export default function TravelCTA() {
           </motion.div>
 
         </div>
+
       </section>
     </>
   );

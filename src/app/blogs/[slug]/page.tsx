@@ -51,8 +51,6 @@ export default async function page({ params }: { params: Promise<{ slug: string 
     }
 
 
-
-
     return <div className="">
         <Navbar />
 
@@ -107,7 +105,7 @@ export default async function page({ params }: { params: Promise<{ slug: string 
         />
 
         <BlogCTA />
-        <FAQSection faqs={Blog.faqs} />
+        {/* <FAQSection faqs={Blog.faqs} /> */}
 
         <LuxuryFooter />
 

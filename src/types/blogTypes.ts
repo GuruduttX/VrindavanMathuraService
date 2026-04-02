@@ -18,6 +18,7 @@ export interface ISchema {
 
 
 export interface IBlog extends Document {
+  
   title: string;
   category: string;
   slug: string;
@@ -28,11 +29,9 @@ export interface IBlog extends Document {
   alt : string,
   meta: IMETA;
   structuredData: ISchema;
-
   faqs: IFAQ[];
-
   status: string;
-
   createdAt?: Date;
   updatedAt?: Date;
+
 }

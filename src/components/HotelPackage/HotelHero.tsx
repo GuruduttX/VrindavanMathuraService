@@ -4,16 +4,16 @@ import Image from "next/image";
 import { motion } from "framer-motion";
 import { Star, Wifi, Coffee, Car, MapPin } from "lucide-react";
 
-export default function HotelDetailsHero() {
+export default function HotelDetailsHero({HotelData } : {HotelData : any}) {
 
   return (
-    <section className="relative bg-gradient-to-b from-pink-50 to-white pt-20 pb-5">
+    <section className="relative bg-gradient-to-b from-pink-50 to-white pt-30 pb-5">
 
       <div className="max-w-[1200px] mx-auto px-6">
 
         {/* Breadcrumb */}
         <p className="text-sm text-gray-400 mb-4">
-          Home / Hotels / <span className="text-pink-600 font-medium">Radha Palace Hotel</span>
+          Home / Hotels / <span className="text-pink-600 font-medium">{HotelData.title}</span>
         </p>
 
         {/* Hero Image */}
@@ -25,8 +25,8 @@ export default function HotelDetailsHero() {
         >
 
           <Image
-            src="https://images.unsplash.com/photo-1566073771259-6a8506099945"
-            alt="Radha Palace Hotel"
+            src={HotelData.image}
+            alt={HotelData.alt}
             width={1200}
             height={500}
             className="w-full h-[420px] object-cover"
@@ -35,7 +35,7 @@ export default function HotelDetailsHero() {
           {/* Rating badge */}
           <div className="absolute top-5 left-5 bg-white/90 backdrop-blur px-4 py-2 rounded-full shadow flex items-center gap-2 text-sm font-medium">
             <Star className="text-yellow-500 w-4 h-4 fill-yellow-500" />
-            4.6 Rating
+            {HotelData.Rating} Rating
           </div>
 
         </motion.div>
@@ -51,12 +51,11 @@ export default function HotelDetailsHero() {
 
           {/* Title */}
           <h1 className="text-2xl font-bold text-gray-800">
-            Radha Palace Hotel
+            {HotelData.title}
           </h1>
 
           <p className="text-gray-500 mt-2 max-w-[700px]">
-            Peaceful and comfortable stay near Prem Mandir and ISKCON Temple
-            with modern amenities and spiritual atmosphere.
+           {HotelData.subcontent}
           </p>
 
 
@@ -64,11 +63,11 @@ export default function HotelDetailsHero() {
           <div className="flex items-center gap-4 mt-4">
 
             <span className="flex items-center gap-1 text-pink-600 font-medium text-sm">
-              ⭐ 4.6
+              ⭐ {HotelData.Rating}
             </span>
 
             <span className="text-gray-400 text-sm">
-              214 reviews
+              {HotelData.reviews} reviews
             </span>
 
             <span className="bg-green-100 text-green-600 px-2 py-1 text-xs rounded-full font-medium">

@@ -1,10 +1,12 @@
 import mongoose, { Schema, Document, Model } from "mongoose";
 
 interface Itinerary {
+  
   id: string;
   day: number;
   title: string;
   description: string;
+
 }
 
 interface FAQ {

@@ -15,6 +15,7 @@ export const createHotel = async (req: Request) => {
         }, { status: 201 })
 
     } catch (error: any) {
+         console.log(error);
 
         return NextResponse.json({
             success: false,
