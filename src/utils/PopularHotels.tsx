@@ -4,6 +4,7 @@ import Image from "next/image";
 import { motion, useAnimation } from "framer-motion";
 import { MapPin, Star, Heart, ChevronLeft, ChevronRight } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
+import Link from "next/link";
 
 const hotels = [
   {
@@ -44,6 +45,7 @@ export default function PopularHotels() {
   const controls = useAnimation();
   const scrollRef = useRef<HTMLDivElement>(null);
   const [favorites, setFavorites] = useState<number[]>([]);
+  
 
   useEffect(() => {
     controls.start({
@@ -205,7 +207,7 @@ export default function PopularHotels() {
                         {hotel.price}
                       </span>
 
-                      <button className="
+                      <Link href={"/"}  className="
                         px-4 py-2
                         rounded-full
                         text-white
@@ -218,7 +220,7 @@ export default function PopularHotels() {
                         transition
                       ">
                         View Hotel
-                      </button>
+                      </Link>
 
                     </div>
 
@@ -236,7 +238,9 @@ export default function PopularHotels() {
         {/* CTA */}
         <div className="text-center mt-14">
 
-          <button className="
+          <Link
+            href={'/hotels'}
+           className="
             px-8 py-3
             rounded-full
             text-white
@@ -251,7 +255,7 @@ export default function PopularHotels() {
             cursor-pointer
           ">
             View All Hotels
-          </button>
+          </Link>
 
         </div>
 

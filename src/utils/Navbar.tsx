@@ -4,11 +4,13 @@ import Image from "next/image";
 import Link from "next/link";
 import { useState, useEffect, useRef } from "react";
 import { Menu, X } from "lucide-react";
+import TourEnquiryPopup from "./TourEnquiryPopUp";
 
 export default function Navbar() {
     const [scrolled, setScrolled] = useState(false);
     const [active, setActive] = useState("Home");
     const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+    const [open, setOpen] = useState(false);
 
     const navItems = [{label : "Home", url : "/"}, {label : "Tours" ,url : "/tour-packages"}, {label : "Taxi" , url : '/taxi'}, {label : "Hotels", url : '/hotels'}, {label :"Puja" , url : "/pooja"}, {label : "About" , url : '/about'}];
 
@@ -39,7 +41,9 @@ export default function Navbar() {
     }, []);
 
     return (
-        <header className="fixed top-6 left-0 w-full z-50 flex justify-center">
+        <>
+         <TourEnquiryPopup open={open} onClose={()=>setOpen(false)}/>
+         <header className="fixed top-6 left-0 w-full z-50 flex justify-center">
 
             {/* OUTER GLOW */}
             <div className="relative w-[92vw] sm:w-[90vw] xl:w-[85vw]">
@@ -135,33 +139,34 @@ export default function Navbar() {
                     <div className="flex items-center gap-3 flex-shrink-0">
 
                         {/* CTA Button */}
-                        <Link href="/taxi">
-                            <button
-                                className="
-              relative
-              px-3 xl:px-7 py-3
-              text-sm xl:text-lg
-              rounded-full
-              font-medium
-              text-white
-              bg-gradient-to-r from-pink-500 to-fuchsia-600
-              shadow-lg
-              hover:scale-105
-              transition
-              overflow-hidden
-              cursor-pointer
-              "
-                            >
-                                Enquire Now
+                       
+                        <button
+                            onClick={()=>setOpen(true)}
+                            className="
+                            relative
+                            px-3 xl:px-7 py-3
+                            text-sm xl:text-lg
+                            rounded-full
+                            font-medium
+                            text-white
+                            bg-gradient-to-r from-pink-500 to-fuchsia-600
+                            shadow-lg
+                            hover:scale-105
+                            transition
+                            overflow-hidden
+                            cursor-pointer
+                            "
+                        >
+                            Enquire Now
 
-                                {/* shine effect */}
-                                <span className="
-                absolute inset-0
-                bg-white opacity-0 hover:opacity-20
-                transition
-              "></span>
-                            </button>
-                        </Link>
+                            {/* shine effect */}
+                            <span className="
+            absolute inset-0
+            bg-white opacity-0 hover:opacity-20
+            transition
+            "></span>
+                        </button>
+                      
 
                         {/* Hamburger Menu Button — visible below lg (1024px) */}
                         <button
@@ -205,5 +210,7 @@ export default function Navbar() {
             </div>
 
         </header>
+        </>
+       
     );
 }

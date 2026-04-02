@@ -4,37 +4,28 @@ import Image from "next/image";
 import Link from "next/link";
 import { Star, MapPin, Users, Clock } from "lucide-react";
 
-interface Tour {
-  id: number;
-  title: string;
-  image: string;
-  price: number;
-  oldPrice?: number;
-  duration: string;
-  rating: number;
-  reviews: number;
-}
-
-interface Props {
-  tour: Tour;
-}
-
 export default function TourCard({ tour }: any) {
   return (
-    <div className="bg-white rounded-3xl shadow-lg hover:shadow-xl transition duration-300 overflow-hidden border border-gray-100">
+    <div className="bg-white rounded-3xl shadow-lg hover:shadow-xl transition duration-300 overflow-hidden border border-orange-100">
 
       {/* Image Section */}
       <div className="relative h-60 w-full overflow-hidden">
 
-        <Image src={"/images/Home/holy-image.webp"} alt={"The name is something called"} fill className="object-cover transition-transform duration-500 hover:scale-105 w-full h-full" loading="lazy"/>
+        <Image
+          src={"/images/Home/holy-image.webp"}
+          alt={"The name is something called"}
+          fill
+          className="object-cover transition-transform duration-500 hover:scale-105 w-full h-full"
+          loading="lazy"
+        />
 
         {/* Festival Badge */}
         <div className="absolute top-4 left-4 flex gap-2">
-          <span className="bg-pink-100 text-pink-600 text-xs px-3 py-1 rounded-full font-medium">
+          <span className="bg-orange-100 text-[#A84010] text-xs px-3 py-1 rounded-full font-medium">
             Festival
           </span>
 
-          <span className="bg-pink-600 text-white text-xs px-3 py-1 rounded-full font-medium">
+          <span className="bg-[#A84010] text-white text-xs px-3 py-1 rounded-full font-medium">
             31% OFF
           </span>
         </div>
@@ -66,7 +57,7 @@ export default function TourCard({ tour }: any) {
             (tag) => (
               <span
                 key={tag}
-                className="flex items-center gap-1 text-xs bg-gray-100 text-gray-600 px-3 py-1 rounded-full"
+                className="flex items-center gap-1 text-xs bg-orange-50 text-[#A84010] px-3 py-1 rounded-full"
               >
                 <MapPin size={12} />
                 {tag}
@@ -90,7 +81,7 @@ export default function TourCard({ tour }: any) {
         </div>
 
         {/* Divider */}
-        <div className="border-t border-gray-200 pt-4 flex items-end justify-between">
+        <div className="border-t border-orange-100 pt-4 flex items-end justify-between">
 
           {/* Price */}
           <div>
@@ -100,7 +91,7 @@ export default function TourCard({ tour }: any) {
               </p>
             )}
 
-            <p className="text-2xl font-bold text-pink-600">
+            <p className="text-2xl font-bold text-[#A84010]">
               ₹{tour.price.toLocaleString()}
             </p>
 
@@ -109,7 +100,9 @@ export default function TourCard({ tour }: any) {
 
           {/* Button */}
           <Link href={`/tour-packages/${tour.id}`}>
-            <button className="px-6 py-3 cursor-pointer rounded-full bg-gradient-to-r from-pink-600 to-rose-500 text-white font-medium shadow-md hover:scale-105 transition duration-300">
+            <button className="px-6 py-3 cursor-pointer rounded-full 
+            bg-[linear-gradient(145deg,#7A2E00,#A84010,#E8821A)] 
+            text-white font-medium shadow-md hover:scale-105 transition duration-300">
               Book Now
             </button>
           </Link>

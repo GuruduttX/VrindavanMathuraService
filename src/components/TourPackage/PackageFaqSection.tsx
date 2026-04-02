@@ -29,7 +29,7 @@ export default function PackageFaqSection({
         </div>
 
         {/* FAQ LIST */}
-        <div className="divide-y divide-pink-100">
+        <div className="divide-y divide-orange-100">
 
           {PackageData.faqs.map((faq, index) => (
             <details
@@ -43,11 +43,11 @@ export default function PackageFaqSection({
                 </h3>
 
                 <ChevronDown
-                  className="w-5 h-5 text-pink-600 transition-transform duration-300 group-open:rotate-180"
+                  className="w-5 h-5 text-[#A84010] transition-transform duration-300 group-open:rotate-180"
                 />
               </summary>
 
-              <div className="mt-6 pl-6 border-l-2 border-pink-200">
+              <div className="mt-6 pl-6 border-l-2 border-orange-200">
                 <p className="text-gray-700 leading-relaxed text-sm md:text-base">
                   {faq.answer}
                 </p>

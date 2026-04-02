@@ -18,14 +18,14 @@ export default function TourArchiveCTA() {
         />
         <defs>
           <linearGradient id="zigzagGradient" x1="0" y1="0" x2="1440" y2="0">
-            <stop offset="0%" stopColor="#ec4899" />
-            <stop offset="100%" stopColor="#f43f5e" />
+            <stop offset="0%" stopColor="#7A2E00" />
+            <stop offset="100%" stopColor="#E8821A" />
           </linearGradient>
         </defs>
       </svg>
 
       {/* MAIN CTA */}
-      <div className="bg-gradient-to-br from-rose-50 to-amber-50 py-12 px-4 sm:py-16 sm:px-6 md:py-20 md:px-10 lg:py-28 lg:px-20">
+      <div className="bg-gradient-to-br from-[#FFF7ED] to-white py-12 px-4 sm:py-16 sm:px-6 md:py-20 md:px-10 lg:py-28 lg:px-20">
         <div className="max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-2 items-center gap-12 lg:gap-20">
 
           {/* LEFT TEXT */}
@@ -38,7 +38,7 @@ export default function TourArchiveCTA() {
               className="text-2xl sm:text-3xl md:text-4xl font-serif text-gray-900 leading-snug"
             >
               Let Us Design Your
-              <span className="block italic text-pink-600">
+              <span className="block italic text-[#A84010]">
                 Personalized Spiritual Journey
               </span>
             </motion.h2>
@@ -56,7 +56,9 @@ export default function TourArchiveCTA() {
             </motion.p>
 
             <Link href="/contact">
-              <button className="px-6 py-3 sm:px-8 sm:py-3.5 lg:px-10 lg:py-4 text-sm sm:text-base rounded-full bg-pink-600 text-white font-medium tracking-wide hover:bg-pink-700 transition duration-300 shadow-md cursor-pointer">
+              <button className="px-6 py-3 sm:px-8 sm:py-3.5 lg:px-10 lg:py-4 text-sm sm:text-base rounded-full 
+              bg-[linear-gradient(145deg,#7A2E00,#A84010,#E8821A)] 
+              text-white font-medium tracking-wide hover:opacity-90 transition duration-300 shadow-md cursor-pointer">
                 Speak With Our Travel Expert
               </button>
             </Link>
@@ -70,16 +72,16 @@ export default function TourArchiveCTA() {
             viewport={{ once: true }}
             className="relative flex justify-center"
           >
-            {/* Decorative line — hidden on mobile */}
+            {/* Decorative line */}
             <svg
               className="absolute -left-6 top-10 h-60 w-6 hidden lg:block"
               viewBox="0 0 20 200"
               fill="none"
             >
-              <path d="M10 0 L10 200" stroke="#ec4899" strokeWidth="2" />
-              <circle cx="10" cy="40" r="3" fill="#f43f5e" />
-              <circle cx="10" cy="100" r="3" fill="#f43f5e" />
-              <circle cx="10" cy="160" r="3" fill="#f43f5e" />
+              <path d="M10 0 L10 200" stroke="#7A2E00" strokeWidth="2" />
+              <circle cx="10" cy="40" r="3" fill="#E8821A" />
+              <circle cx="10" cy="100" r="3" fill="#E8821A" />
+              <circle cx="10" cy="160" r="3" fill="#E8821A" />
             </svg>
 
             <div className="relative w-full max-w-sm sm:max-w-md lg:w-[420px] h-[220px] sm:h-[260px] lg:h-[300px] rounded-3xl overflow-hidden shadow-2xl">
@@ -112,8 +114,8 @@ export default function TourArchiveCTA() {
         />
         <defs>
           <linearGradient id="zigzagGradient2" x1="0" y1="0" x2="1440" y2="0">
-            <stop offset="0%" stopColor="#ec4899" />
-            <stop offset="100%" stopColor="#f43f5e" />
+            <stop offset="0%" stopColor="#7A2E00" />
+            <stop offset="100%" stopColor="#E8821A" />
           </linearGradient>
         </defs>
       </svg>

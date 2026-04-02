@@ -3,25 +3,32 @@
 import Image from "next/image";
 import { motion } from "framer-motion";
 import { ArrowRight, Phone } from "lucide-react";
+import TourEnquiryPopup from "@/utils/TourEnquiryPopUp";
+import { useState } from "react";
+import Link from "next/link";
 
 export default function FinalCTA() {
+  const [open, setOpen] = useState(false);
+
   return (
-    <section className="py-5">
+    <>
+      <TourEnquiryPopup open={open} onClose={()=>setOpen(false)}/>
+      <section className="py-5">
 
       <div className="max-w-7xl mx-auto px-6">
 
         <div className="
-        relative
-        grid
-        lg:grid-cols-2
-        gap-14
-        items-center
-        rounded-3xl
-        p-10
-        bg-white
-        shadow-2xl
-        border border-gray-100
-        overflow-hidden
+          relative
+          grid
+          lg:grid-cols-2
+          gap-14
+          items-center
+          rounded-3xl
+          p-10
+          bg-white
+          shadow-2xl
+          border border-gray-100
+          overflow-hidden
         ">
 
           {/* glow accents */}
@@ -129,9 +136,15 @@ export default function FinalCTA() {
                 "
               >
 
-                Explore Tours
+                <Link href={'/tour-packages'} className="flex items-center gap-2">
+                    Explore Tours
 
-                <ArrowRight size={18} />
+                  <ArrowRight size={18} />
+                </Link>
+
+                
+
+              
 
               </motion.button>
 
@@ -150,7 +163,9 @@ export default function FinalCTA() {
                 justify-center
                 hover:bg-pink-50
                 transition
+                cursor-pointer
                 "
+                onClick={()=>setOpen(true)}
               >
 
                 Talk to Guide
@@ -167,6 +182,8 @@ export default function FinalCTA() {
 
       </div>
 
-    </section>
+      </section>
+    </>
+   
   );
 }
