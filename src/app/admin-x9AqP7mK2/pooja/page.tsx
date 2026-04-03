@@ -22,7 +22,7 @@ export default function PoojaPage() {
   useEffect(() => {
     const getData = async () => {
       try {
-        const res = await fetch("/api/pooja");
+        const res = await fetch("/api/admin/pooja");
         const data = await res.json();
         if (!data.success) throw new Error("Failed");
         console.log("data", data.data);
@@ -41,7 +41,7 @@ export default function PoojaPage() {
     if (!selectedId) return;
 
     try {
-      const res = await fetch(`/api/pooja/${selectedId}`, {
+      const res = await fetch(`/api/admin/pooja/${selectedId}`, {
         method: "DELETE",
       });
 

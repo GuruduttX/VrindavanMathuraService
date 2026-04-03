@@ -108,7 +108,7 @@ export default function CreatePoojaPage() {
 
   /* ---------------- API ---------------- */
   const postData = async (payload: any) => {
-    const res = await fetch("/api/pooja", {
+    const res = await fetch("/api/admin/pooja", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(payload),

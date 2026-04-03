@@ -3,7 +3,7 @@ import Hotel from "@/models/hotelModel";
 import { IHotel } from "@/types/hotelTypes";
 
 
-export const createHotelService = async (data: Partial<IHotel>) => {
+export const createAdminHotelService = async (data: Partial<IHotel>) => {
 
   try {
     const hotel = await Hotel.create(data);
@@ -14,7 +14,7 @@ export const createHotelService = async (data: Partial<IHotel>) => {
 
 };
 
-export const getAllHotelsService = async () => {
+export const getAllAdminHotelsService = async () => {
   try {
      await connectDB();
     const hotels = await Hotel.find();
@@ -29,7 +29,7 @@ export const getAllHotelsService = async () => {
 }
 
 
-export const getHotelByIdService = async (id: string) => {
+export const getAdminHotelByIdService = async (id: string) => {
 
   try {
 
@@ -43,7 +43,7 @@ export const getHotelByIdService = async (id: string) => {
 };
 
 
-export const updateHotelService = async (id: string, data: Partial<IHotel>) => {
+export const updateAdminHotelService = async (id: string, data: Partial<IHotel>) => {
 
   try {
     const updatedHotel = await Hotel.findByIdAndUpdate(id, data, {
@@ -61,7 +61,7 @@ export const updateHotelService = async (id: string, data: Partial<IHotel>) => {
 };
 
 
-export const deleteHotelService = async (id: string) => {
+export const deleteAdminHotelService = async (id: string) => {
 
   try {
     const deletedHotel = await Hotel.findByIdAndDelete(id);

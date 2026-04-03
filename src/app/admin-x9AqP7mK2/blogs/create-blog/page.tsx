@@ -131,7 +131,7 @@ export default function CreateNewBlog() {
 
     try {
 
-      const res = await fetch("/api/blog", {
+      const res = await fetch("/api/admin/blog", {
         method: "POST",
         headers: {
           "Content-Type": "application/json"
@@ -198,7 +198,7 @@ export default function CreateNewBlog() {
 
     try {
 
-      const res = await fetch("/api/blog", {
+      const res = await fetch("/api/admin/blog", {
         method: "POST",
         headers: {
           "Content-Type": "application/json"

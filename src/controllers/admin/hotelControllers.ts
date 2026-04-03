@@ -1,4 +1,4 @@
-import { createHotelService, deleteHotelService, getAllHotelsService, getHotelByIdService, updateHotelService } from "@/services/hotelServices";
+import { createAdminHotelService, deleteAdminHotelService, getAllAdminHotelsService, getAdminHotelByIdService, updateAdminHotelService } from "@/services/admin/hotelServices";
 import { NextResponse } from "next/server";
 
 export const createHotel = async (req: Request) => {
@@ -7,7 +7,7 @@ export const createHotel = async (req: Request) => {
 
         const hotelData = await req.json();
 
-        const hotel = await createHotelService(hotelData);
+        const hotel = await createAdminHotelService(hotelData);
 
         return NextResponse.json({
             success: true,
@@ -30,7 +30,7 @@ export const getAllHotels = async () => {
 
     try {
 
-        const hotels = await getAllHotelsService();
+        const hotels = await getAllAdminHotelsService();
 
         return NextResponse.json({
             success : true,
@@ -52,7 +52,7 @@ export const getHotelById = async (id: string) => {
     
     try {
 
-        const hotel = await getHotelByIdService(id);
+        const hotel = await getAdminHotelByIdService(id);
 
         if (!hotel) {
 
@@ -85,7 +85,7 @@ export const updateHotel = async (req: Request, id: string) => {
     try {
 
         const hotelData = await req.json();
-        const hotel = await updateHotelService(id, hotelData);
+        const hotel = await updateAdminHotelService(id, hotelData);
 
         return NextResponse.json({
             success: true,
@@ -108,7 +108,7 @@ export const updateHotel = async (req: Request, id: string) => {
 export const deletedHotel = async (id: string) => {
     try {
 
-        await deleteHotelService(id);
+        await deleteAdminHotelService(id);
 
         return NextResponse.json({
             success: true,
