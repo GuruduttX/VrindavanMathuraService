@@ -4,7 +4,7 @@ import { connectDB } from "@/lib/mongodb";
 
 
 // Get All
-export async function getAllToursController() {
+export async function getAdminToursController() {
   try {
     const tours = await getAdminPackagesService();
 
@@ -23,10 +23,9 @@ export async function getAllToursController() {
 
 
 // Create
-export async function createTourController(req: Request) {
+export async function createAdminTourController(req: Request) {
   try {
     const body = await req.json();
-
 
     const tour = await createAdminPackageService(body) ;
 
@@ -46,7 +45,7 @@ export async function createTourController(req: Request) {
 }
 
 
-export async function updateTourController(
+export async function updateAdminTourController(
   req: Request,
   params: { id: string }
 ) {
@@ -74,7 +73,7 @@ export async function updateTourController(
   }
 }
 
-export async function deleteTourController(
+export async function deleteAdminTourController(
   req : Request,
   params : {id : string}){
     try {
@@ -98,7 +97,7 @@ export async function deleteTourController(
 }
 
 
-export async function getTourByIdController(params: { id: string }) {
+export async function getAdminTourByIdController(params: { id: string }) {
   try {
     const { id } = params;
 
@@ -124,5 +123,3 @@ export async function getTourByIdController(params: { id: string }) {
     );
   }
 }
-
-

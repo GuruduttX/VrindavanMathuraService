@@ -1,4 +1,4 @@
-import { deletedHotel, getHotelById, updateHotel } from "@/controllers/hotelControllers";
+import { deleteAdminHotelController, getAdminHotelByIdController, updateAdminHotelController } from "@/controllers/admin/hotelControllers";
 import { connectDB } from "@/lib/mongodb";
 
 
@@ -8,7 +8,7 @@ export async function GET(req : Request, { params }: { params: Promise<{ id : st
 
     const {id} = await params;
 
-    return getHotelById(id);
+    return getAdminHotelByIdController(id);
 }
 
 export async function PUT(req : Request , {params} : {params : Promise<{id : string}>}){
@@ -16,7 +16,7 @@ export async function PUT(req : Request , {params} : {params : Promise<{id : str
     await connectDB();
     const {id} = await params;
 
-    return updateHotel(req , id);
+    return updateAdminHotelController(req , id);
 }
 
 export async function DELETE(req : Request , {params }: {params : Promise<{id : string}>}){
@@ -24,7 +24,5 @@ export async function DELETE(req : Request , {params }: {params : Promise<{id : 
     await connectDB();
     const {id} = await params;
 
-    return deletedHotel(id);
+    return deleteAdminHotelController(id);
 }
-
-

@@ -1,12 +1,9 @@
-import { createTourController, getAllToursController, getTourBySlugAndDuration } from "@/controllers/packageControllers";
+import { createAdminTourController, getAdminToursController } from "@/controllers/admin/packageControllers";
 
 export async function GET(req : Request) {
-  return await getAllToursController();
+  return await getAdminToursController();
 }
 
 export async function POST(req:Request) {
-    return await createTourController(req);
+    return await createAdminTourController(req);
 }
-
-
-

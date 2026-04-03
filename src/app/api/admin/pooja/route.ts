@@ -1,10 +1,10 @@
-import { createPoojaController, getPoojasController } from "@/controllers/poojaController";
+import { createAdminPoojaController, getAdminPoojasController } from "@/controllers/admin/poojaController";
 
 export async function GET() {
-    return await getPoojasController();
+    return await getAdminPoojasController();
 }
 
 export async function POST(req : Request){
-    return await createPoojaController(req);
+    return await createAdminPoojaController(req);
 }
 

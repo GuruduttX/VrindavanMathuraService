@@ -4,7 +4,7 @@ import { createAdminTaxiService, deleteAdminTaxiService, getAllAdminTaxisService
 import { NextResponse } from "next/server";
 
 
-export const createTaxi = async (req: Request) => {
+export const createAdminTaxiController = async (req: Request) => {
     try {
         const taxi = await createAdminTaxiService(req);
 
@@ -27,7 +27,7 @@ export const createTaxi = async (req: Request) => {
 };
 
 
-export const getAllTaxis = async () => {
+export const getAdminTaxisController = async () => {
     try {
         const taxis = await getAllAdminTaxisService();
 
@@ -50,7 +50,7 @@ export const getAllTaxis = async () => {
 };
 
 
-export const getTaxiById = async (id: string) => {
+export const getAdminTaxiByIdController = async (id: string) => {
     try {
         const taxi = await getAdminTaxiByIdService(id);
 
@@ -80,7 +80,7 @@ export const getTaxiById = async (id: string) => {
 };
 
 
-export const updateTaxi = async (req: Request, id: string) => {
+export const updateAdminTaxiController = async (req: Request, id: string) => {
     try {
         const taxi = await updateAdminTaxiService(req, id);
 
@@ -100,7 +100,7 @@ export const updateTaxi = async (req: Request, id: string) => {
 };
 
 
-export const deleteTaxi = async (id: string) => {
+export const deleteAdminTaxiController = async (id: string) => {
     try {
         await deleteAdminTaxiService(id);
 

@@ -1,4 +1,4 @@
-import { createTaxi, getAllTaxis} from "@/controllers/admin/taxiControllers";
+import { createAdminTaxiController,getAdminTaxisController } from "@/controllers/admin/taxiControllers";
 import { connectDB } from "@/lib/mongodb";
 import { NextResponse } from "next/server";
 
@@ -6,7 +6,7 @@ import { NextResponse } from "next/server";
 export async function GET(req: Request) {
   try {
     await connectDB();    
-    return await getAllTaxis();
+    return await getAdminTaxisController();
 
   } catch (error: any) {
     return NextResponse.json(
@@ -20,7 +20,7 @@ export async function POST(req: Request) {
   try {
     
     await connectDB();
-    return await createTaxi(req);
+    return await createAdminTaxiController(req);
 
   } catch (error: any) {
     return NextResponse.json(

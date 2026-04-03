@@ -1,7 +1,7 @@
 import { createAdminHotelService, deleteAdminHotelService, getAllAdminHotelsService, getAdminHotelByIdService, updateAdminHotelService } from "@/services/admin/hotelServices";
 import { NextResponse } from "next/server";
 
-export const createHotel = async (req: Request) => {
+export const createAdminHotelController = async (req: Request) => {
 
     try {
 
@@ -26,7 +26,7 @@ export const createHotel = async (req: Request) => {
     
 }
 
-export const getAllHotels = async () => {
+export const getAdminHotelsController = async () => {
 
     try {
 
@@ -48,7 +48,7 @@ export const getAllHotels = async () => {
 
 }
 
-export const getHotelById = async (id: string) => {
+export const getAdminHotelByIdController = async (id: string) => {
     
     try {
 
@@ -80,7 +80,7 @@ export const getHotelById = async (id: string) => {
 
 
 
-export const updateHotel = async (req: Request, id: string) => {
+export const updateAdminHotelController = async (req: Request, id: string) => {
 
     try {
 
@@ -105,7 +105,7 @@ export const updateHotel = async (req: Request, id: string) => {
 }
 
 
-export const deletedHotel = async (id: string) => {
+export const deleteAdminHotelController = async (id: string) => {
     try {
 
         await deleteAdminHotelService(id);

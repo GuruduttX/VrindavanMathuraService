@@ -1,7 +1,7 @@
 import {
-    deleteTaxi,
-    getTaxiById,
-    updateTaxi,
+    deleteAdminTaxiController,
+    getAdminTaxiByIdController,
+    updateAdminTaxiController,
 } from "@/controllers/admin/taxiControllers";
 import { connectDB } from "@/lib/mongodb";
 
@@ -11,7 +11,7 @@ export async function GET( req : Request,
 ) {
     await connectDB();
     const {id} = await context.params;
-    return getTaxiById(id);
+    return getAdminTaxiByIdController(id);
 }
 
 
@@ -21,13 +21,15 @@ export async function PUT(
 ) {
     await connectDB();
     const {id} = await params
-    return updateTaxi(req, id);
+    return updateAdminTaxiController(req, id);
 }
+
+
 
 export async function DELETE( req : Request, 
     { params }: { params: Promise<{ id: string }>}
 ) {
     await connectDB();
     const {id} = await params;
-    return deleteTaxi(id);
+    return deleteAdminTaxiController(id);
 }

@@ -1,16 +1,16 @@
-import { deletePoojaController, getPoojaByIdController, updatePoojaController } from "@/controllers/admin/poojaController";
+import { deleteAdminPoojaController, getAdminPoojaByIdController, updateAdminPoojaController } from "@/controllers/admin/poojaController";
 
 export async function PUT(req:Request, context : { params : Promise<{id : string}>}) {
     const params = await context.params;
-    return await updatePoojaController(req,params);
+    return await updateAdminPoojaController(req,params);
 }
 
 export async function DELETE(req : Request, context : {params : Promise<{id : string}>}) {
     const params = await context.params;
-    return await deletePoojaController(params);
+    return await deleteAdminPoojaController(params);
 }
 
 export async function GET(req:Request , context : {params : Promise<{id : string}>}) {
     const params = await context.params;
-    return await getPoojaByIdController(params)
+    return await getAdminPoojaByIdController(params)
 }
