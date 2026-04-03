@@ -16,11 +16,11 @@ export default function TaxiShowCase() {
     <section className="relative py-24 overflow-hidden">
 
       {/* Background Gradient */}
-      <div className="absolute inset-0 bg-gradient-to-br from-pink-50 via-white to-purple-50"></div>
+      <div className="absolute inset-0 bg-gradient-to-br from-amber-50 via-white to-orange-50"></div>
 
       {/* Glow Effects */}
-      <div className="absolute top-0 left-0 w-[350px] h-[350px] bg-pink-400/20 blur-[120px] rounded-full"></div>
-      <div className="absolute bottom-0 right-0 w-[350px] h-[350px] bg-purple-400/20 blur-[120px] rounded-full"></div>
+      <div className="absolute top-0 left-0 w-[350px] h-[350px] bg-amber-400/20 blur-[120px] rounded-full"></div>
+      <div className="absolute bottom-0 right-0 w-[350px] h-[350px] bg-orange-400/20 blur-[120px] rounded-full"></div>
 
       <div className="relative max-w-7xl mx-auto px-6 grid lg:grid-cols-2 gap-14 items-center">
 
@@ -28,7 +28,7 @@ export default function TaxiShowCase() {
         <div className="relative h-[420px] rounded-3xl overflow-hidden shadow-xl group">
 
           <Image
-            src="/images/Home/Book-Taxi.png"
+            src="/images/Home/taxi-home.webp"
             alt="Taxi Service"
             fill
             loading="lazy"
@@ -49,11 +49,11 @@ export default function TaxiShowCase() {
         {/* Booking Card */}
         <div className="relative">
 
-          <div className="absolute -inset-1 bg-gradient-to-r from-pink-500 via-fuchsia-500 to-purple-600 rounded-3xl blur opacity-20"></div>
+          <div className="absolute -inset-1 bg-gradient-to-r from-amber-500 via-amber-500 to-orange-600 rounded-3xl blur opacity-20"></div>
 
           <div className="relative bg-white/80 backdrop-blur-xl rounded-3xl shadow-xl p-8">
 
-            <h2 className="text-3xl font-bold mb-8 bg-gradient-to-r from-pink-600 via-fuchsia-600 to-purple-600 bg-clip-text text-transparent">
+            <h2 className="text-3xl font-bold mb-8 bg-gradient-to-r from-amber-600 via-amber-600 to-orange-600 bg-clip-text text-transparent">
               Book Your Taxi
             </h2>
 
@@ -64,7 +64,7 @@ export default function TaxiShowCase() {
 
                 <User
                   size={18}
-                  className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400 group-focus-within:text-pink-500 transition"
+                  className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400 group-focus-within:text-amber-500 transition"
                 />
 
                 <input
@@ -72,10 +72,10 @@ export default function TaxiShowCase() {
                   value={name}
                   onChange={(e)=>setName(e.target.value)}
                   placeholder=" "
-                  className="peer w-full pl-11 pr-4 py-3 rounded-xl border border-gray-200 bg-white/70 backdrop-blur outline-none text-sm transition focus:border-pink-500 focus:ring-2 focus:ring-pink-200"
+                  className="peer w-full pl-11 pr-4 py-3 rounded-xl border border-gray-200 bg-white/70 backdrop-blur outline-none text-sm transition focus:border-amber-500 focus:ring-2 focus:ring-amber-200"
                 />
 
-                <label className="absolute left-11 top-3 text-gray-500 text-sm transition-all peer-focus:-top-2 peer-focus:text-xs peer-focus:text-pink-600 peer-focus:bg-white peer-focus:px-1 peer-placeholder-shown:top-3 peer-placeholder-shown:text-sm">
+                <label className="absolute left-11 top-3 text-gray-500 text-sm transition-all peer-focus:-top-2 peer-focus:text-xs peer-focus:text-amber-600 peer-focus:bg-white peer-focus:px-1 peer-placeholder-shown:top-3 peer-placeholder-shown:text-sm">
                   Your Name
                 </label>
 
@@ -86,7 +86,7 @@ export default function TaxiShowCase() {
 
                 <Phone
                   size={18}
-                  className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400 group-focus-within:text-pink-500 transition"
+                  className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400 group-focus-within:text-amber-500 transition"
                 />
 
                 <input
@@ -94,10 +94,10 @@ export default function TaxiShowCase() {
                   value={phone}
                   onChange={(e)=>setPhone(e.target.value)}
                   placeholder=" "
-                  className="peer w-full pl-11 pr-4 py-3 rounded-xl border border-gray-200 bg-white/70 backdrop-blur outline-none text-sm transition focus:border-pink-500 focus:ring-2 focus:ring-pink-200"
+                  className="peer w-full pl-11 pr-4 py-3 rounded-xl border border-gray-200 bg-white/70 backdrop-blur outline-none text-sm transition focus:border-amber-500 focus:ring-2 focus:ring-amber-200"
                 />
 
-                <label className="absolute left-11 top-3 text-gray-500 text-sm transition-all peer-focus:-top-2 peer-focus:text-xs peer-focus:text-pink-600 peer-focus:bg-white peer-focus:px-1 peer-placeholder-shown:top-3 peer-placeholder-shown:text-sm">
+                <label className="absolute left-11 top-3 text-gray-500 text-sm transition-all peer-focus:-top-2 peer-focus:text-xs peer-focus:text-amber-600 peer-focus:bg-white peer-focus:px-1 peer-placeholder-shown:top-3 peer-placeholder-shown:text-sm">
                   Phone Number
                 </label>
 
@@ -108,7 +108,7 @@ export default function TaxiShowCase() {
 
                 <MapPin
                   size={18}
-                  className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400 group-focus-within:text-pink-500 transition"
+                  className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400 group-focus-within:text-amber-500 transition"
                 />
 
                 <input
@@ -116,10 +116,10 @@ export default function TaxiShowCase() {
                   value={pickup}
                   onChange={(e)=>setPickup(e.target.value)}
                   placeholder=" "
-                  className="peer w-full pl-11 pr-4 py-3 rounded-xl border border-gray-200 bg-white/70 backdrop-blur outline-none text-sm transition focus:border-pink-500 focus:ring-2 focus:ring-pink-200"
+                  className="peer w-full pl-11 pr-4 py-3 rounded-xl border border-gray-200 bg-white/70 backdrop-blur outline-none text-sm transition focus:border-amber-500 focus:ring-2 focus:ring-amber-200"
                 />
 
-                <label className="absolute left-11 top-3 text-gray-500 text-sm transition-all peer-focus:-top-2 peer-focus:text-xs peer-focus:text-pink-600 peer-focus:bg-white peer-focus:px-1 peer-placeholder-shown:top-3 peer-placeholder-shown:text-sm">
+                <label className="absolute left-11 top-3 text-gray-500 text-sm transition-all peer-focus:-top-2 peer-focus:text-xs peer-focus:text-amber-600 peer-focus:bg-white peer-focus:px-1 peer-placeholder-shown:top-3 peer-placeholder-shown:text-sm">
                   Pickup Location
                 </label>
 
@@ -130,7 +130,7 @@ export default function TaxiShowCase() {
 
                 <MapPin
                   size={18}
-                  className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400 group-focus-within:text-purple-500 transition"
+                  className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400 group-focus-within:text-orange-500 transition"
                 />
 
                 <input
@@ -138,10 +138,10 @@ export default function TaxiShowCase() {
                   value={drop}
                   onChange={(e)=>setDrop(e.target.value)}
                   placeholder=" "
-                  className="peer w-full pl-11 pr-4 py-3 rounded-xl border border-gray-200 bg-white/70 backdrop-blur outline-none text-sm transition focus:border-purple-500 focus:ring-2 focus:ring-purple-200"
+                  className="peer w-full pl-11 pr-4 py-3 rounded-xl border border-gray-200 bg-white/70 backdrop-blur outline-none text-sm transition focus:border-orange-500 focus:ring-2 focus:ring-orange-200"
                 />
 
-                <label className="absolute left-11 top-3 text-gray-500 text-sm transition-all peer-focus:-top-2 peer-focus:text-xs peer-focus:text-purple-600 peer-focus:bg-white peer-focus:px-1 peer-placeholder-shown:top-3 peer-placeholder-shown:text-sm">
+                <label className="absolute left-11 top-3 text-gray-500 text-sm transition-all peer-focus:-top-2 peer-focus:text-xs peer-focus:text-orange-600 peer-focus:bg-white peer-focus:px-1 peer-placeholder-shown:top-3 peer-placeholder-shown:text-sm">
                   Drop Location
                 </label>
 
@@ -152,7 +152,7 @@ export default function TaxiShowCase() {
             {/* Button */}
             <button
              
-              className="w-full mt-8 py-3 rounded-full cursor-pointer text-white font-medium flex items-center justify-center gap-2 bg-gradient-to-r from-pink-500 via-fuchsia-500 to-purple-600 hover:scale-[1.02] transition shadow-lg"
+              className="w-full mt-8 py-3 rounded-full cursor-pointer text-white font-medium flex items-center justify-center gap-2 bg-gradient-to-r from-amber-500 via-amber-500 to-orange-600 hover:scale-[1.02] transition shadow-lg"
             >
               <CarTaxiFront size={18}/>
               Book Taxi Now

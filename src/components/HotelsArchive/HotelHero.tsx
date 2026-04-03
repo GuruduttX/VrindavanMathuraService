@@ -3,30 +3,30 @@
 import { useState } from "react";
 import Image from "next/image";
 import { motion } from "framer-motion";
-
+import { Phone } from "lucide-react";
+import CommonEnquiryForm from "@/utils/CommanEnquiryForm";
 export default function HotelsHero() {
 
   const [location, setLocation] = useState("");
   const [checkin, setCheckin] = useState("");
   const [checkout, setCheckout] = useState("");
   const [guests, setGuests] = useState("");
+  const [isFormOpen, setIsFormOpen] = useState(false);
+
 
   return (
     <section className="relative overflow-hidden bg-gradient-to-br from-orange-50 via-amber-50 to-amber-100 pt-12">
-
       {/* Background blobs */}
-      <div className="absolute -top-40 -left-40 w-[500px] h-[500px] bg-amber-200/40 rounded-full blur-[90px]"/>
+      <div className="absolute -top-40 -left-40 w-[500px] h-[500px] bg-amber-200/40 rounded-full blur-[90px]" />
       <div className="absolute bottom-0 right-0 w-[500px] h-[500px] bg-fuchsia-200/40 rounded-full blur-[100px]" />
 
       <div className="max-w-[1300px] mx-auto px-6 lg:px-20 py-20 grid lg:grid-cols-2 gap-16 items-center">
-
         {/* LEFT CONTENT */}
         <motion.div
           initial={{ opacity: 0, y: 40 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
         >
-
           {/* Badge */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -72,7 +72,7 @@ export default function HotelsHero() {
               "Budget Hotels",
               "Ashrams",
               "Family Stays",
-              "Riverside Hotels"
+              "Riverside Hotels",
             ].map((item) => (
               <motion.button
                 key={item}
@@ -86,7 +86,7 @@ export default function HotelsHero() {
           </motion.div>
 
           {/* SEARCH BAR */}
-          <motion.div
+          {/* <motion.div
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.7 }}
@@ -131,7 +131,7 @@ export default function HotelsHero() {
               Search
             </motion.button>
 
-          </motion.div>
+          </motion.div> */}
 
           {/* Quick Filters */}
           <motion.div
@@ -140,7 +140,12 @@ export default function HotelsHero() {
             transition={{ delay: 0.9 }}
             className="flex flex-wrap gap-3 mt-6 text-sm"
           >
-            {["⭐ Top Rated", "💰 Budget Friendly", "🛎 Premium", "🌅 Yamuna View"].map((f) => (
+            {[
+              "⭐ Top Rated",
+              "💰 Budget Friendly",
+              "🛎 Premium",
+              "🌅 Yamuna View",
+            ].map((f) => (
               <motion.button
                 key={f}
                 whileHover={{ scale: 1.05 }}
@@ -161,10 +166,29 @@ export default function HotelsHero() {
             <Stat number="200+" label="Hotels" />
             <Stat number="5K+" label="Guests" />
             <Stat number="₹999" label="Starting From" />
+
+            {/* Enquire button */}
+            <button
+              className="
+                px-7
+                py-3
+                rounded-full
+                border
+                border-amber-500
+                text-amber-600
+                hover:bg-amber-50
+                transition
+                flex items-center gap-2
+                relative
+                 z-10
+                "
+              onClick={() => setIsFormOpen(true)}
+            >
+              Enquire Now
+              <Phone size={18} />
+            </button>
           </motion.div>
-
         </motion.div>
-
 
         {/* RIGHT SIDE FLOATING CARDS */}
         <motion.div
@@ -173,21 +197,33 @@ export default function HotelsHero() {
           transition={{ duration: 0.8 }}
           className="relative h-[500px] hidden lg:block"
         >
-
           <div className="absolute top-0 left-24 float-slow">
-            <HotelCard image="https://images.unsplash.com/photo-1566073771259-6a8506099945" name="Radha Palace" rating="4.9" price="3499" />
+            <HotelCard
+              image="https://images.unsplash.com/photo-1566073771259-6a8506099945"
+              name="Radha Palace"
+              rating="4.9"
+              price="3499"
+            />
           </div>
 
           <div className="absolute top-40 left-0 float-medium">
-            <HotelCard image="https://images.unsplash.com/photo-1551882547-ff40c63fe5fa" name="Nidhivan Resort" rating="4.7" price="2199" />
+            <HotelCard
+              image="https://images.unsplash.com/photo-1551882547-ff40c63fe5fa"
+              name="Nidhivan Resort"
+              rating="4.7"
+              price="2199"
+            />
           </div>
 
           <div className="absolute bottom-0 right-10 float-fast">
-            <HotelCard image="https://images.unsplash.com/photo-1520250497591-112f2f40a3f4" name="Yamuna Riverside" rating="4.8" price="4299" />
+            <HotelCard
+              image="https://images.unsplash.com/photo-1520250497591-112f2f40a3f4"
+              name="Yamuna Riverside"
+              rating="4.8"
+              price="4299"
+            />
           </div>
-
         </motion.div>
-
       </div>
 
       {/* Wavy Divider */}
@@ -204,11 +240,16 @@ export default function HotelsHero() {
           ></path>
         </svg>
       </div>
+
+      {/* 3. The Form Component */}
+      <CommonEnquiryForm
+        open={isFormOpen}
+        onClose={() => setIsFormOpen(false)}
+        defaultService="Hotel Booking" 
+      />
     </section>
   );
 }
-
-
 
 function HotelCard({ image, name, rating, price }: any) {
   return (
@@ -231,8 +272,6 @@ function HotelCard({ image, name, rating, price }: any) {
     </motion.div>
   );
 }
-
-
 
 function Stat({ number, label }: any) {
   return (

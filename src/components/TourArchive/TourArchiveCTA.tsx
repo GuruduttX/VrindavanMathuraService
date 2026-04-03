@@ -86,7 +86,7 @@ export default function TourArchiveCTA() {
 
             <div className="relative w-full max-w-sm sm:max-w-md lg:w-[420px] h-[220px] sm:h-[260px] lg:h-[300px] rounded-3xl overflow-hidden shadow-2xl">
               <Image
-                src="/images/tourpackages/TourPackage-CTA.webp"
+                src="/images/tourpackages/TourPackage-CTA-Amber.webp"
                 alt="Custom Mathura Vrindavan Tour"
                 fill
                 loading="lazy"
@@ -96,7 +96,6 @@ export default function TourArchiveCTA() {
               />
             </div>
           </motion.div>
-
         </div>
       </div>
 
