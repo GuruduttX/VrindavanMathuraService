@@ -35,19 +35,19 @@ export default function HomeTrustBuildingSection() {
     <section className="relative py-10 md:py-28 overflow-hidden">
 
       {/* animated gradient background */}
-      <div className="absolute inset-0 bg-gradient-to-br from-white via-pink-50 to-purple-50" />
+      <div className="absolute inset-0 bg-gradient-to-br from-white via-amber-50 to-orange-50" />
 
       {/* floating glow blobs */}
       <motion.div
         animate={{ y: [0, -40, 0] }}
         transition={{ duration: 8, repeat: Infinity }}
-        className="absolute top-10 left-10 w-[400px] h-[400px] bg-pink-400/20 blur-[140px] rounded-full"
+        className="absolute top-10 left-10 w-[400px] h-[400px] bg-amber-400/20 blur-[140px] rounded-full"
       />
 
       <motion.div
         animate={{ y: [0, 40, 0] }}
         transition={{ duration: 10, repeat: Infinity }}
-        className="absolute bottom-10 right-10 w-[400px] h-[400px] bg-purple-400/20 blur-[140px] rounded-full"
+        className="absolute bottom-10 right-10 w-[400px] h-[400px] bg-orange-400/20 blur-[140px] rounded-full"
       />
 
       <div className="relative max-w-7xl mx-auto px-6">
@@ -60,7 +60,7 @@ export default function HomeTrustBuildingSection() {
           viewport={{ once: true }}
           className="text-center mb-20"
         >
-          <h2 className="text-3xl md:text-5xl font-bold bg-gradient-to-r from-pink-600 via-fuchsia-600 to-purple-600 bg-clip-text text-transparent">
+          <h2 className="text-3xl md:text-5xl font-bold bg-gradient-to-r from-amber-600 via-amber-600 to-orange-600 bg-clip-text text-transparent">
             Why Travelers Trust Us
           </h2>
 
@@ -74,7 +74,7 @@ export default function HomeTrustBuildingSection() {
             initial={{ width: 0 }}
             whileInView={{ width: 120 }}
             transition={{ duration: 0.8 }}
-            className="h-1 bg-gradient-to-r from-pink-500 to-purple-500 mx-auto mt-6 rounded-full"
+            className="h-1 bg-gradient-to-r from-amber-500 to-orange-500 mx-auto mt-6 rounded-full"
           />
         </motion.div>
 
@@ -98,9 +98,9 @@ export default function HomeTrustBuildingSection() {
                 p-[1px]
                 rounded-3xl
                 bg-gradient-to-r
-                from-pink-500
-                via-fuchsia-500
-                to-purple-600
+                from-amber-500
+                via-amber-500
+                to-orange-600
                 "
               >
                 {/* inner glass card */}
@@ -147,9 +147,9 @@ export default function HomeTrustBuildingSection() {
                     justify-center
                     rounded-2xl
                     bg-gradient-to-r
-                    from-pink-500
-                    via-fuchsia-500
-                    to-purple-600
+                    from-amber-500
+                    via-amber-500
+                    to-orange-600
                     text-white
                     mb-6
                     shadow-lg
@@ -176,7 +176,7 @@ export default function HomeTrustBuildingSection() {
                     bottom-0
                     h-20
                     bg-gradient-to-t
-                    from-pink-500/10
+                    from-amber-500/10
                     to-transparent
                     opacity-0
                     group-hover:opacity-100

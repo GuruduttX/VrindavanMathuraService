@@ -76,7 +76,7 @@ interface Hotel {
   rating: number;
   reviews: number;
   status: "published" | "draft" | "archived" | string; // Typed as a union for strictness, falling back to string
-  inclusion: HotelInclusion;
+  quickInclusions: HotelInclusion;
   ratingSummary: RatingSummary;
   faqs: any[]; // Update 'any' to a specific FAQ interface if you have one
   offers: any[]; // Update 'any' to a specific Offer interface if you have one
@@ -88,7 +88,7 @@ export default function HotelsArchive() {
 
 
   const [rating, setRating] = useState(0);
-  const [price, setPrice] = useState(10000);
+  const [price, setPrice] = useState(20000);
   const [wifi, setWifi] = useState(false);
   const [parking, setParking] = useState(false);
   const [restaurant, setRestaurant] = useState(false);
@@ -121,12 +121,12 @@ export default function HotelsArchive() {
 
    // 2. Boolean Inclusion Checks (Replacing the old .includes() array method)
    // If the user hasn't toggled 'wifi' (!wifi), it passes. If they have, the hotel MUST have freeWifi.
-   const matchesWifi = !wifi || hotel.inclusion?.freeWifi === true;
-   const matchesParking = !parking || hotel.inclusion?.parking === true;
+   const matchesWifi = !wifi || hotel.quickInclusions?.freeWifi === true;
+   const matchesParking = !parking || hotel.quickInclusions?.parking === true;
 
    // Note: Your dummy data checked for "restaurant", but the real data has "breakfast".
    // I have mapped your restaurant state to check the breakfast boolean here.
-   const matchesRestaurant = !restaurant || hotel.inclusion?.breakfast === true;
+   const matchesRestaurant = !restaurant || hotel.quickInclusions?.breakfast === true;
 
    // 3. Final Evaluation
    return (
@@ -138,7 +138,7 @@ export default function HotelsArchive() {
    );
  });
 
-console.log(filteredHotels);
+console.log(filteredHotels, "filtered hotels");
 
   return (
     <section className="py-24">
@@ -193,7 +193,7 @@ console.log(filteredHotels);
               <input
                 type="range"
                 min={500}
-                max={5000}
+                max={20000}
                 value={price}
                 onChange={(e) => setPrice(Number(e.target.value))}
                 className="w-full accent-amber-500"
@@ -314,19 +314,19 @@ console.log(filteredHotels);
                   </div>
                   {/* AMENITIES -> INCLUSIONS */}
                   <div className="flex gap-4 mt-4 text-sm text-gray-600">
-                    {hotel.inclusion?.freeWifi && ( // Checks boolean directly
+                    {hotel.quickInclusions?.freeWifi && ( // Checks boolean directly
                       <span className="flex items-center gap-1">
                         <Wifi size={14} /> WiFi
                       </span>
                     )}
 
-                    {hotel.inclusion?.parking && ( // Checks boolean directly
+                    {hotel.quickInclusions?.parking && ( // Checks boolean directly
                       <span className="flex items-center gap-1">
                         <Car size={14} /> Parking
                       </span>
                     )}
 
-                    {hotel.inclusion?.breakfast && ( // Checks boolean directly
+                    {hotel.quickInclusions?.breakfast && ( // Checks boolean directly
                       <span className="flex items-center gap-1">
                         <Utensils size={14} /> Breakfast{" "}
                         {/* Changed label to Breakfast */}

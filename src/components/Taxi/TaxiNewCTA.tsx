@@ -1,10 +1,13 @@
 "use client";
 
 import { motion } from "framer-motion";
+import { useState } from "react";
 import Image from "next/image";
 import { Phone, CarTaxiFront, ShieldCheck, Clock, Star } from "lucide-react";
+import CommonEnquiryForm from "@/utils/CommanEnquiryForm";
 
 export default function TaxiNewCTA() {
+   const [isFormOpen, setIsFormOpen] = useState(false);
   return (
     <section className="relative py-10 md:py-28 overflow-hidden">
 
@@ -97,6 +100,7 @@ export default function TaxiNewCTA() {
                 shadow-lg
                 whitespace-nowrap
                 "
+                onClick={()=> setIsFormOpen(true)}
               >
                 <CarTaxiFront size={18}/>
                 Book Your Ride
@@ -125,6 +129,13 @@ export default function TaxiNewCTA() {
             </div>
 
           </div>
+
+          {/* 3. common Form Component */}
+          <CommonEnquiryForm
+            open={isFormOpen}
+            onClose={() => setIsFormOpen(false)}
+            defaultService="Taxi Booking"
+          />
 
 
           {/* RIGHT VISUAL */}
