@@ -14,14 +14,14 @@ import { notFound } from "next/navigation";
 const getBlogs = async (slug: string) => {
 
     try {
-        const response = await fetch(`http://localhost:3000/api/blog/${slug}`, { cache: "no-store" });
+        const response = await fetch(`http://localhost:3000/api/users/blog/${slug}`, { cache: "no-store" });
 
         if(response.status == 404) {
             return null;
         }
 
         if(!response.ok) {
-            throw new Error("Failed to fetch the blog : ");
+            throw new Error("Failed to fetch the User blog : ");
         }
 
         const { data } = await response.json();
@@ -100,12 +100,12 @@ export default async function page({ params }: { params: Promise<{ slug: string 
         />
 
         <BlogShare
-            url={`https://vrindavanmathuraguide.com/blogs/temple-guide`}
+            url={`https://vrindavantoursandpackages.com/blogs/temple-guide`}
             title={Blog.title}
         />
 
         <BlogCTA />
-        {/* <FAQSection faqs={Blog.faqs} /> */}
+        <FAQSection faqs={Blog.faqs} />
 
         <LuxuryFooter />
 
