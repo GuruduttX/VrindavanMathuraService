@@ -73,7 +73,7 @@ export default function CreatePoojaPage() {
 
   async function getPooja(){
     try {
-      const res = await fetch(`/api/pooja/${id}`);
+      const res = await fetch(`/api/admin/pooja/${id}`);
       const parseData = await res.json();
       
 
@@ -172,7 +172,7 @@ export default function CreatePoojaPage() {
 
   /* ---------------- API ---------------- */
   const updateData = async (payload: any) => {
-    const res = await fetch(`/api/pooja/${id}`, {
+    const res = await fetch(`/api/admin/pooja/${id}`, {
       method: "PUT",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(payload),

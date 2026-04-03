@@ -118,10 +118,11 @@ export default function CreateNewPackage() {
       exclusions,
       quickInclusions,
       status,
+      ratingSummary
   });
 
   const postPayload = async (payload: object) => {
-    const res = await fetch("/api/hotels", {
+    const res = await fetch("/api/admin/hotels", {
       method:  "POST",
       headers: { "Content-Type": "application/json" },
       body:    JSON.stringify(payload),

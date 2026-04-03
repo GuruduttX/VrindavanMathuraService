@@ -71,7 +71,7 @@ export default function EditBlog() {
 
       try {
 
-        const res = await fetch(`/api/blog/${id}`);
+        const res = await fetch(`/api/admin/blog/${id}`);
         const data = await res.json();
 
         console.log("THE DATA COME IS : ");
@@ -252,7 +252,7 @@ export default function EditBlog() {
           <CMSActions
             actionType="update"
             editorType="Blog"
-            onPublish={handlePublish}
+            onSaveDraft={handlePublish}
           />
         </form>
       </div>

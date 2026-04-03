@@ -145,7 +145,7 @@ export default function CreateNewPackage() {
   });
 
   const postPayload = async (payload: object) => {
-    const res = await fetch("/api/tour-packages", {
+    const res = await fetch("/api/admin/tour-packages", {
       method:  "POST",
       headers: { "Content-Type": "application/json" },
       body:    JSON.stringify(payload),

@@ -98,7 +98,7 @@ export default function CreateNewPackage() {
    const getHotel = async()=>{
     try {
 
-        const res = await fetch(`/api/hotels/${id}`);
+        const res = await fetch(`/api/admin/hotels/${id}`);
 
         if(!res.ok){
            throw new Error("Get Error In Updating fields");
@@ -107,6 +107,7 @@ export default function CreateNewPackage() {
         const response = await res.json();
 
         const data = response.data;
+        console.log("data", data);
 
         setForm({
             title: data.title, 
@@ -189,11 +190,12 @@ export default function CreateNewPackage() {
       exclusions,
       quickInclusions,
       status,
+      ratingSummary
   });
 
   const postPayload = async (payload: object) => {
-    const res = await fetch("/api/hotels", {
-      method:  "POST",
+    const res = await fetch(`/api/admin/hotels/${id}`, {
+      method:  "PUT",
       headers: { "Content-Type": "application/json" },
       body:    JSON.stringify(payload),
     });
@@ -201,7 +203,6 @@ export default function CreateNewPackage() {
     const data = await res.json();
 
     console.log("THE DATA OF THE HOTELS COME FROM THE DATABASE IS : ")
-    console.log(data);
     
     if (!res.ok || !data.success) throw new Error(data.message || "Something went wrong");
     return data;

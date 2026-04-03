@@ -36,7 +36,7 @@ type Props = {
   price: string
   cabtype: string
   fueltype: string
-  onChange: (field: keyof CarForm, value: string) => void
+  onChange: any
   editorType: "Taxi"
 }
 
