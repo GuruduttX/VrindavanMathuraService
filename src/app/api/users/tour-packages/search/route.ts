@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
-import { getTourBySlugAndDuration } from "@/controllers/packageControllers";
+import { getTourBySlugAndDuration } from "@/controllers/users/packageControllers";
 
 export async function GET(req: NextRequest) {
   try {

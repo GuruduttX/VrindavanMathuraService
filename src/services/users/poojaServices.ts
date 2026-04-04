@@ -1,52 +1,39 @@
 import { connectDB } from "@/lib/mongodb";
 import PoojaModel from "@/models/poojaModel";
-export async function getPoojas(){
+
+
+export async function getUserPoojasService() {
+
     await connectDB();
-    const poojas = await PoojaModel.find();
-    return poojas
+
+    try {
+
+        const poojas = await PoojaModel.find({status : {$eq : "published"}});
+        return poojas
+
+    } catch (error) {
+
+        console.log(error)
+
+    }
 }
 
-export async function createPooja(data:any) {
-    await connectDB();
-    const pooja = await PoojaModel.create(data);
-    return pooja;
-}
 
-export async function updatePooja(data:any, id : string) {
-    await connectDB();
-    const pooja = await PoojaModel.findByIdAndUpdate(id,data, {new : true});
-    return pooja;
-}
+export const getUserPoojaBySlugService = async (slug: string) => {
 
-export async function getPoojaById(id : string){
     await connectDB();
-    const pooja = await PoojaModel.findById(id);
+
+    const pooja = await PoojaModel.findOne({ slug });
+
+    if(pooja?.status == "draft"){
+        return
+    }
 
     if (!pooja) {
+
         throw new Error("Pooja not found");
+        
     }
 
     return pooja;
-}
-
-export async function deletePooja(id : string) {
-    await connectDB();
-    const pooja = await PoojaModel.findByIdAndDelete(id);
-    
-    if(!pooja){
-        throw new Error("Not Found")
-    }
-    return pooja;
-}
-
-export const getPoojaBySlug = async (slug: string) => {
-  await connectDB();
-
-  const pooja = await PoojaModel.findOne({ slug });
-
-  if (!pooja) {
-    throw new Error("Pooja not found");
-  }
-
-  return pooja;
 };

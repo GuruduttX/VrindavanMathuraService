@@ -1,4 +1,4 @@
-import { createTourController, getAllToursController, getTourBySlugAndDuration } from "@/controllers/packageControllers";
+import { createTourController, getAllToursController } from "@/controllers/admin/packageControllers";
 
 export async function GET(req : Request) {
   return await getAllToursController();
