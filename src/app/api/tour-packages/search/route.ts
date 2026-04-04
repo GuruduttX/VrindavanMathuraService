@@ -21,6 +21,5 @@ export async function GET(req: NextRequest) {
       { success: false, message: "Something went wrong" },
       { status: 500 }
     );
-    
   }
 }

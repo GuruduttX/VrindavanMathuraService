@@ -3,8 +3,11 @@
 import Link from "next/link";
 import Image from "next/image";
 import { motion } from "framer-motion";
+import { useState } from "react";
+import CommonEnquiryForm from "@/utils/CommanEnquiryForm";
 
 export default function TourArchiveCTA() {
+  const [isFormOpen, setIsFromOpen] = useState(false);
   return (
     <section className="relative bg-white">
 
@@ -55,14 +58,21 @@ export default function TourArchiveCTA() {
               thoughtfully planned for a meaningful visit.
             </motion.p>
 
-            <Link href="/contact">
-              <button className="px-6 py-3 sm:px-8 sm:py-3.5 lg:px-10 lg:py-4 text-sm sm:text-base rounded-full 
-              bg-[linear-gradient(145deg,#7A2E00,#A84010,#E8821A)] 
-              text-white font-medium tracking-wide hover:opacity-90 transition duration-300 shadow-md cursor-pointer">
-                Speak With Our Travel Expert
-              </button>
-            </Link>
+
+            <button className="px-6 py-3 sm:px-8 sm:py-3.5 lg:px-10 lg:py-4 text-sm sm:text-base rounded-full 
+            bg-[linear-gradient(145deg,#7A2E00,#A84010,#E8821A)] 
+            text-white font-medium tracking-wide hover:opacity-90 transition duration-300 shadow-md cursor-pointer"
+             onClick={()=> setIsFromOpen(true)}>
+              Speak With Our Travel Expert
+            </button>
           </div>
+
+          {/* 3. common Form Component */}
+                    <CommonEnquiryForm
+                      open={isFormOpen}
+                      onClose={() => setIsFromOpen(false)}
+                      defaultService="Taxi Booking"
+                    />
 
           {/* RIGHT IMAGE */}
           <motion.div

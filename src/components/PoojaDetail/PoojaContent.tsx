@@ -34,7 +34,6 @@ export default function PoojaContent({ html }: PoojaContentProps) {
 
       <section className="w-full py-12 px-4" style={{ background: "#fff" }}>
         <div className="max-w-3xl mx-auto">
-
           {/* Section label */}
           <div className="flex items-center gap-3 mb-8">
             <span className="text-xl">🪔</span>
@@ -44,7 +43,12 @@ export default function PoojaContent({ html }: PoojaContentProps) {
             >
               About this Pooja
             </h2>
-            <div className="flex-1 h-px" style={{ background: "linear-gradient(to right, #f48fb1, transparent)" }} />
+            <div
+              className="flex-1 h-px"
+              style={{
+                background: "linear-gradient(to right, #EB8D1B, transparent)",
+              }}
+            />
           </div>
 
           {/* HTML content from backend */}
@@ -52,7 +56,6 @@ export default function PoojaContent({ html }: PoojaContentProps) {
             className="pooja-content"
             dangerouslySetInnerHTML={{ __html: html }}
           />
-
         </div>
       </section>
     </>

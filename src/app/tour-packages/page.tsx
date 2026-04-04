@@ -193,7 +193,7 @@ export default async function page() {
 
 
   return (
-    <>
+    <div className="overflow-hidden">
 
       <script
         type="application/ld+json"
@@ -220,6 +220,6 @@ export default async function page() {
 
       <TourFAQSection />
       <LuxuryFooter />
-    </>
+    </div>
   )
 }

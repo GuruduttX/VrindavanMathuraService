@@ -7,7 +7,7 @@ export default function ToursReadMore() {
   const [open, setOpen] = useState(false);
 
   return (
-    <section className="py-20 bg-gradient-to-b from-pink-50 to-white">
+    <section className="py-20 bg-gradient-to-b from-amber-50 to-white">
 
       <div className="max-w-5xl mx-auto px-6">
 
@@ -22,7 +22,7 @@ export default function ToursReadMore() {
         </p>
 
         {/* Content Card */}
-        <div className="mt-10 bg-white border border-pink-100 rounded-3xl shadow-lg p-8 md:p-10 leading-relaxed text-gray-600">
+        <div className="mt-10 bg-white border border-amber-100 rounded-3xl shadow-lg p-8 md:p-10 leading-relaxed text-gray-600">
 
           <p>
             Mathura and Vrindavan are among the most sacred destinations in

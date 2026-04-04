@@ -99,6 +99,7 @@ export default function TaxiNewCTA() {
                 to-amber-600
                 shadow-lg
                 whitespace-nowrap
+                cursor-pointer
                 "
                 onClick={()=> setIsFormOpen(true)}
               >
@@ -120,6 +121,7 @@ export default function TaxiNewCTA() {
                 justify-center
                 gap-2
                 hover:bg-orange-50
+                cursor-pointer
                 "
               >
                 <Phone size={18}/>

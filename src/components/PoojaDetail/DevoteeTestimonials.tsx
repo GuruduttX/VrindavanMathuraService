@@ -27,13 +27,13 @@ export default function DevoteeTestimonials() {
   ];
 
   return (
-    <section className="py-24 px-6 relative overflow-hidden bg-gradient-to-br from-amber-700 via-orange-600 to-amber-600">
-
+    <section className="py-24 px-6 relative overflow-hidden bg-gradient-to-br from-amber-400  via-orange-500 to-amber-500">
       {/* Dot pattern */}
       <div
         className="absolute inset-0 opacity-[0.06] pointer-events-none"
         style={{
-          backgroundImage: "radial-gradient(circle, white 1px, transparent 1px)",
+          backgroundImage:
+            "radial-gradient(circle, white 1px, transparent 1px)",
           backgroundSize: "24px 24px",
         }}
       />
@@ -43,17 +43,17 @@ export default function DevoteeTestimonials() {
       <div className="absolute -bottom-20 -right-20 w-80 h-80 bg-white/10 rounded-full blur-3xl pointer-events-none" />
 
       <div className="relative max-w-6xl mx-auto">
-
         {/* Section header */}
         <div className="text-center mb-16">
           <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white/15 border border-white/25 mb-5">
             <span className="w-1.5 h-1.5 rounded-full bg-amber-200 inline-block" />
-            <span className="text-white/90 text-xs font-semibold uppercase tracking-widest">Devotee Stories</span>
+            <span className="text-white/90 text-xs font-semibold uppercase tracking-widest">
+              Devotee Stories
+            </span>
           </div>
 
           <h2 className="text-3xl md:text-4xl font-extrabold text-white leading-tight">
-            What Our{" "}
-            <span className="text-amber-200">Devotees Say</span>
+            What Our <span className="text-amber-200">Devotees Say</span>
           </h2>
 
           <div className="flex items-center justify-center gap-2 mt-4 mb-5">
@@ -63,8 +63,8 @@ export default function DevoteeTestimonials() {
           </div>
 
           <p className="text-white/70 max-w-xl mx-auto text-[15px] leading-relaxed">
-            Hear what devotees say about their spiritual experience in
-            Mathura and Vrindavan.
+            Hear what devotees say about their spiritual experience in Mathura
+            and Vrindavan.
           </p>
         </div>
 
@@ -81,17 +81,20 @@ export default function DevoteeTestimonials() {
               <div className="absolute inset-0 bg-gradient-to-br from-white/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-2xl" />
 
               <div className="relative z-10 flex flex-col gap-5">
-
                 {/* Quote icon */}
-                <div className="w-10 h-10 rounded-xl bg-white/15 border border-white/20 flex items-center justify-center
-                  text-amber-200 text-xl font-serif leading-none">
+                <div
+                  className="w-10 h-10 rounded-xl bg-white/15 border border-white/20 flex items-center justify-center
+                  text-amber-200 text-xl font-serif leading-none"
+                >
                   "
                 </div>
 
                 {/* Star rating */}
                 <div className="flex gap-0.5">
                   {[...Array(item.rating)].map((_, i) => (
-                    <span key={i} className="text-yellow-300 text-sm">★</span>
+                    <span key={i} className="text-yellow-300 text-sm">
+                      ★
+                    </span>
                   ))}
                 </div>
 
@@ -101,10 +104,14 @@ export default function DevoteeTestimonials() {
                 </p>
 
                 {/* Pooja tag */}
-                <div className="inline-flex items-center gap-1.5 w-fit px-3 py-1 rounded-full
-                  bg-white/15 border border-white/20">
+                <div
+                  className="inline-flex items-center gap-1.5 w-fit px-3 py-1 rounded-full
+                  bg-white/15 border border-white/20"
+                >
                   <span className="text-[10px]">🛕</span>
-                  <span className="text-white/70 text-[11px] font-medium tracking-wide">{item.pooja}</span>
+                  <span className="text-white/70 text-[11px] font-medium tracking-wide">
+                    {item.pooja}
+                  </span>
                 </div>
 
                 {/* Divider */}
@@ -114,23 +121,30 @@ export default function DevoteeTestimonials() {
                 <div className="flex items-center justify-between">
                   <div className="flex items-center gap-3">
                     {/* Avatar */}
-                    <div className="w-10 h-10 rounded-full bg-gradient-to-br from-amber-300 to-orange-400
-                      flex items-center justify-center text-white font-bold text-sm shadow-md">
+                    <div
+                      className="w-10 h-10 rounded-full bg-gradient-to-br from-amber-300 to-orange-400
+                      flex items-center justify-center text-white font-bold text-sm shadow-md"
+                    >
                       {item.initials}
                     </div>
                     <div>
-                      <p className="text-white font-semibold text-sm leading-none">{item.name}</p>
-                      <p className="text-white/55 text-xs mt-1 leading-none">📍 {item.location}</p>
+                      <p className="text-white font-semibold text-sm leading-none">
+                        {item.name}
+                      </p>
+                      <p className="text-white/55 text-xs mt-1 leading-none">
+                        📍 {item.location}
+                      </p>
                     </div>
                   </div>
 
                   {/* Verified badge */}
                   <div className="flex items-center gap-1 px-2.5 py-1 rounded-full bg-green-400/20 border border-green-300/30">
                     <span className="text-green-300 text-[10px]">✓</span>
-                    <span className="text-green-300 text-[10px] font-semibold">Verified</span>
+                    <span className="text-green-300 text-[10px] font-semibold">
+                      Verified
+                    </span>
                   </div>
                 </div>
-
               </div>
             </div>
           ))}
@@ -144,12 +158,15 @@ export default function DevoteeTestimonials() {
             { value: "50+", label: "Temples Covered" },
           ].map((stat) => (
             <div key={stat.label} className="flex flex-col items-center gap-1">
-              <p className="text-white font-extrabold text-2xl leading-none">{stat.value}</p>
-              <p className="text-white/60 text-xs uppercase tracking-widest">{stat.label}</p>
+              <p className="text-white font-extrabold text-2xl leading-none">
+                {stat.value}
+              </p>
+              <p className="text-white/60 text-xs uppercase tracking-widest">
+                {stat.label}
+              </p>
             </div>
           ))}
         </div>
-
       </div>
     </section>
   );

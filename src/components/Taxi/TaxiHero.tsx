@@ -11,7 +11,67 @@ export default function TaxiHero() {
     pickup: "",
     drop: ""
   })
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>,)=>{
+    setForm({ ...form, [e.target.name]: e.target.value });
+  } 
 
+  const handleSubmit = async (e:React.FormEvent)=> {
+    e.preventDefault()
+
+    const phoneRegex = /^[0-9]{10}$/;
+    if (!phoneRegex.test(form.phone)) {
+      alert("Please enter a valid 10-digit phone number.");
+      return;
+    }
+
+    if (!form.name.trim()) {
+      alert("Name is required.");
+      return;
+    }
+
+    if (!form.phone.trim()) {
+      alert("phone is required.");
+      return;
+    }
+
+    if (!form.pickup.trim()) {
+      alert("pickup is required.");
+      return;
+    }
+
+    if (!form.drop.trim()) {
+      alert("drop is required.");
+      return;
+    }
+
+    try {
+      const response = await fetch("api/simbark", {
+        method: "POST",
+        body: JSON.stringify({
+          name: form.name,
+          phone_number: form.phone,
+          comments: `service Type - Taxi booking, PickUp - ${form.pickup} Drop - ${form.drop}`,
+        }),
+      });
+
+      const formsubmitData = await response.json();
+
+      if (!response.ok) {
+        throw new Error(formsubmitData.message || "Submission failed");
+      }
+
+      console.log("Success:", formsubmitData);
+    } catch (error) {
+      console.log("ERROR: submitting form", error);
+    } finally {
+      setForm({
+        name: "",
+        phone: "",
+        pickup: "",
+        drop: ""
+      });
+    }
+  }
   return (
     <section className="relative overflow-hidden bg-gradient-to-br from-amber-50 via-amber-100 to-white py-10">
       {/* Divine amber Glow */}
@@ -113,35 +173,50 @@ export default function TaxiHero() {
               Book Your Taxi
             </h3>
 
-            <div className="space-y-4">
+            <form className="space-y-4" onSubmit={handleSubmit}>
               <input
                 type="text"
+                name="name"
+                value={form.name}
                 placeholder="Your Name"
                 className="w-full border border-amber-200 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-amber-500"
+                onChange={handleChange}
               />
 
               <input
                 type="tel"
                 placeholder="Phone Number"
+                value={form.phone}
+                name="phone"
                 className="w-full border border-amber-200 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-amber-500"
+                onChange={handleChange}
               />
 
               <input
                 type="text"
                 placeholder="Pickup Location"
+                value={form.pickup}
+                name="pickup"
                 className="w-full border border-amber-200 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-amber-500"
+                onChange={handleChange}
               />
 
               <input
                 type="text"
                 placeholder="Drop Location"
+                name="drop"
+                value={form.drop}
                 className="w-full border border-amber-200 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-amber-500"
+                onChange={handleChange}
               />
 
-              <button className="w-full bg-amber-600 hover:bg-amber-700 text-white py-3 rounded-lg font-medium transition shadow-lg shadow-amber-400/40 cursor-pointer">
+              <button
+                className="w-full bg-amber-600 hover:bg-amber-700 text-white py-3 rounded-lg font-medium transition shadow-lg shadow-amber-400/40 cursor-pointer"
+                type="submit"
+              >
                 Get Taxi Now
               </button>
-            </div>
+            </form>
           </div>
         </div>
       </div>

@@ -37,7 +37,7 @@ export default function WhyChooseUs() {
 
         {/* Section Heading */}
         <div className="text-center mb-16">
-          <h2 className="text-4xl font-bold text-amber-700">
+          <h2 className="text-3xl md:text-4xl font-bold text-amber-700">
             Why Choose <span className="text-orange-500">MathuraVrindavanService</span>?
           </h2>
 

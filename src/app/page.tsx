@@ -238,7 +238,7 @@ const page = () => {
   };
 
   return (
-    <>
+    <div>
 
       <script
         type="application/ld+json"
@@ -269,7 +269,7 @@ const page = () => {
       <TaxiShowcase />
       <HomeFinalCTA />
       <Footer />
-    </>
+    </div>
   )
 
 }

@@ -1,8 +1,8 @@
 "use client";
 
 import Link from "next/link";
-import { useEffect, useRef } from "react";
-
+import { useEffect, useRef, useState } from "react";
+import CommonEnquiryForm from "@/utils/CommanEnquiryForm";
 
 
 const STATS = [
@@ -13,6 +13,7 @@ const STATS = [
 
 export default function PoojaHero() {
   const ref = useRef<HTMLDivElement>(null);
+  const[isFormOpen, setIsFromOpen] = useState(false)
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -153,17 +154,17 @@ export default function PoojaHero() {
 
           {/* CTAs */}
           <div className="ph-anim ph-d5 mt-8 flex flex-wrap justify-center gap-4">
-            <Link href="#poojas">
-              <button
-                className="btn-book px-9 py-3.5 rounded-full text-white font-semibold cursor-pointer"
-                style={{
-                  background: "linear-gradient(135deg, #FF8824, #EA8D19)",
-                  boxShadow: "0 8px 28px rgba(235, 141, 27, 0.8)",
-                }}
-              >
-                🙏 Book a Pooja
-              </button>
-            </Link>
+            <button
+              className="btn-book px-9 py-3.5 rounded-full text-white font-semibold cursor-pointer"
+              style={{
+                background: "linear-gradient(135deg, #FF8824, #EA8D19)",
+                boxShadow: "0 8px 28px rgba(235, 141, 27, 0.8)",
+              }}
+              onClick={()=> setIsFromOpen(true)}
+            >
+              🙏 Book a Pooja
+            </button>
+
             <Link href="/pooja-packages">
               <button
                 className="btn-outline px-9 py-3.5 rounded-full font-semibold cursor-pointer"
@@ -199,6 +200,11 @@ export default function PoojaHero() {
             ))}
           </div>
         </div>
+        <CommonEnquiryForm
+          open={isFormOpen}
+          onClose={() => setIsFromOpen(false)}
+          defaultService="Pooja"
+        />
       </section>
     </>
   );

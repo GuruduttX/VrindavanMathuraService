@@ -5,6 +5,7 @@ import Image from "next/image";
 import { motion } from "framer-motion";
 import { Phone } from "lucide-react";
 import CommonEnquiryForm from "@/utils/CommanEnquiryForm";
+import QuickEnquiry from "@/utils/QuickQuery";
 export default function HotelsHero() {
 
   const [location, setLocation] = useState("");
@@ -61,7 +62,7 @@ export default function HotelsHero() {
           </motion.p>
 
           {/* Category Pills */}
-          <motion.div
+          {/* <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 0.55 }}
@@ -83,7 +84,7 @@ export default function HotelsHero() {
                 {item}
               </motion.button>
             ))}
-          </motion.div>
+          </motion.div> */}
 
           {/* SEARCH BAR */}
           {/* <motion.div
@@ -132,9 +133,11 @@ export default function HotelsHero() {
             </motion.button>
 
           </motion.div> */}
+          <QuickEnquiry/>
+          
 
           {/* Quick Filters */}
-          <motion.div
+          {/* <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 0.9 }}
@@ -154,7 +157,7 @@ export default function HotelsHero() {
                 {f}
               </motion.button>
             ))}
-          </motion.div>
+          </motion.div> */}
 
           {/* Stats */}
           <motion.div

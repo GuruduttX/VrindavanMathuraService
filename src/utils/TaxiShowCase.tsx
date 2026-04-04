@@ -12,6 +12,59 @@ export default function TaxiShowCase() {
   const [drop,setDrop] = useState("");
   const [open, setOpen] = useState(false);
 
+  const handleSubmit = async ()=> {
+    const phoneRegex = /^[0-9]{10}$/;
+    if (!phoneRegex.test(phone)) {
+      alert("Please enter a valid 10-digit phone number.");
+      return;
+    }
+
+    if (!name.trim()) {
+      alert("Name is required.");
+      return;
+    }
+
+    if (!phone.trim()) {
+      alert("phone is required.");
+      return;
+    }
+
+    if (!pickup.trim()) {
+      alert("pickup is required.");
+      return;
+    }
+
+    if (!drop.trim()) {
+      alert("drop is required.");
+      return;
+    }
+
+    try {
+      const response = await fetch("api/simbark", {
+        method: "POST",
+        body: JSON.stringify({
+          name: name,
+          phone_number: phone,
+          comments: `service Type - Taxi booking, PickUp - ${pickup} Drop - ${drop}`,
+        }),
+      });
+
+      const formsubmitData = await response.json();
+
+      if (!response.ok) {
+        throw new Error(formsubmitData.message || "Submission failed");
+      }
+
+      console.log("Success:", formsubmitData);
+    } catch (error) {
+      console.log("ERROR: submitting form", error);
+    } finally {
+      setName("")
+      setPhone("")
+      setPickup("")
+      setDrop("")
+    }
+  }
   return (
     <section className="relative py-24 overflow-hidden">
 
@@ -153,7 +206,7 @@ export default function TaxiShowCase() {
             <button
              
               className="w-full mt-8 py-3 rounded-full cursor-pointer text-white font-medium flex items-center justify-center gap-2 bg-gradient-to-r from-amber-500 via-amber-500 to-orange-600 hover:scale-[1.02] transition shadow-lg"
-            >
+             onClick={handleSubmit}>
               <CarTaxiFront size={18}/>
               Book Taxi Now
             </button>

@@ -15,7 +15,5 @@ export async function GET(
            { status: 400 }
          );
        }
-
-  
   return await getPoojaBySlugController(slug);
 }

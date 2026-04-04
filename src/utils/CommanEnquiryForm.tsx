@@ -23,8 +23,6 @@ export default function CommonEnquiryForm({
     phone: "",
     email: "",
     serviceType: defaultService,
-    message: "",
-
   });
 
   const services = [
@@ -54,20 +52,60 @@ export default function CommonEnquiryForm({
     >,
   ) => setForm({ ...form, [e.target.name]: e.target.value });
 
-  /* const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    setLoading(true);
-    // Add your EmailJS or API submission logic here
-    setLoading(false);
-  }; 
-  */
+   const handleSubmit = async (e: React.FormEvent) => {
+     e.preventDefault();
+     const phoneRegex = /^[0-9]{10}$/;
+     if (!phoneRegex.test(form.phone)) {
+       alert("Please enter a valid 10-digit phone number.");
+       return;
+     }
+
+     // 2. Email Validation (Standard RFC regex)
+     const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+     if (!emailRegex.test(form.email)) {
+       alert("Please enter a valid email address.");
+       return;
+     }
+
+    //  3. Basic Required Check
+     if (!form.name.trim()) {
+       alert("Name is required.");
+       return;
+     }
+     setLoading(true);
+     try {
+       const response = await fetch("api/simbark", {
+         method: "POST",
+         body: JSON.stringify(form),
+       });
+
+       const formsubmitData = await response.json();
+
+       if (!response.ok) {
+         throw new Error(formsubmitData.message || "Submission failed");
+       }
+
+       console.log("Success:", formsubmitData);
+     } catch (error) {
+       console.log("ERROR: submitting form", error);
+     } finally {
+       setLoading(false);
+       setForm({
+         name: "",
+         phone: "",
+         email: "",
+         serviceType: defaultService,
+       });
+     }
+   };; 
+  
 
   return (
-    <div className="fixed inset-0 z-[999] flex items-start justify-center gap-4">
-      <div
+    <div className="fixed inset-0 m-auto z-[999] flex items-start justify-center gap-4 max-w-[450px] text-black text-left">
+      {/* <div
         className="absolute inset-0 bg-black/60 backdrop-blur-sm"
         onClick={onClose}
-      />
+      /> */}
 
       <div
         className={`relative bg-white w-full max-w-4xl mx-4 rounded-3xl shadow-xl
@@ -84,7 +122,7 @@ export default function CommonEnquiryForm({
         {/* Generic Header */}
         <div className="p-8 border-b bg-amber-600 text-white rounded-t-3xl relative flex ">
           <div>
-            <h2 className="text-3xl font-bold flex items-center gap-3">
+            <h2 className="text-2xl md:text-3xl font-bold flex items-center gap-3">
               <MessageSquare size={28} /> Service Enquiry
             </h2>
             <p className="text-amber-100 mt-2 text-sm">
@@ -93,7 +131,7 @@ export default function CommonEnquiryForm({
           </div>
         </div>
 
-        <form className="p-8 grid md:grid-cols-2 gap-4">
+        <form className="p-8 grid grid-cols-1 gap-4" onSubmit={handleSubmit}>
           <div className="flex flex-col">
             <label htmlFor="name" className="text-sm text-gray-500">
               Your Full Name*
@@ -135,10 +173,12 @@ export default function CommonEnquiryForm({
             />
           </div>
 
+          <div className="flex flex-col">
+
           {/* New Service Type Dropdown */}
           <select
             name="serviceType"
-            className="input md:col-span-2 bg-white border border-gray-500/40 p-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-amber-500 focus:border-amber-500"
+            className="input bg-white border border-gray-500/40 p-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-amber-500 focus:border-amber-500"
             required
             value={form.serviceType}
             onChange={handleChange}
@@ -152,17 +192,9 @@ export default function CommonEnquiryForm({
               </option>
             ))}
           </select>
+          </div>
 
-          {/* Renamed to message */}
-          <textarea
-            name="message"
-            className="input md:col-span-2 h-28 resize-none pt-3 border border-gray-500 rounded-lg focus:outline-none focus:ring focus:ring-amber-500 focus:border-amber-500"
-            placeholder="Any specific message or requirements?"
-            value={form.message}
-            onChange={handleChange}
-          />
-
-          <div className="flex gap-1 md:col-span-2 ">
+          <div className="flex gap-1 flex-col ">
             <button
               type="submit"
               className="bg-amber-600 hover:bg-amber-700 transition text-white py-3 font-semibold rounded-xl md:col-span-2 mt-2 flex-1"

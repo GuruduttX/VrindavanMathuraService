@@ -1,6 +1,6 @@
 import Image from "next/image";
 import SearchBar from "./SearchBar";
-
+import QuickQuery from "@/utils/QuickQuery";
 export default function HomeHero() {
 
     return (
@@ -32,7 +32,7 @@ export default function HomeHero() {
                     <div className="z-10">
 
                         {/* badge */}
-                        <div className="inline-flex items-center gap-2 bg-white/70 backdrop-blur text-xs md:text-sm px-4 py-2 rounded-full shadow text-amber-700 font-medium mb-6 cursor-pointer hover:shadow-xl hover:shadow-amber-200 transition ml-15 md:ml-0">
+                        <div className="inline-flex items-center gap-2 bg-white/70 backdrop-blur text-xs md:text-sm px-4 py-2 rounded-full shadow text-amber-700 font-medium mb-6 cursor-pointer hover:shadow-xl hover:shadow-amber-200 transition ml-21 md:ml-0">
                             🪷 Explore Divine Vrindavan
                         </div>
 
@@ -51,9 +51,10 @@ export default function HomeHero() {
                             Vrindavan with trusted local service.
                         </p>
 
-                        <div className="max-w-xl">
+                        {/* <div className="max-w-xl">
                             <SearchBar />
-                        </div>
+                        </div> */}
+                        <QuickQuery/>
 
                         {/* trust indicators */}
                         <div className="flex gap-20 mt-10 text-sm text-gray-600">

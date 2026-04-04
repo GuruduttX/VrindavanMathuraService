@@ -53,18 +53,15 @@ export default function Navbar() {
         <div className="relative w-[92vw] sm:w-[90vw] xl:w-[85vw]">
           {/* Glow Background */}
           <div
-            className="
-                    absolute inset-0
+            className="absolute inset-0
                     bg-gradient-to-r from-orange-400 via-amber-500 to-yellow-500
-                    blur-xl opacity-30 rounded-full
-                "
+                    blur-xl opacity-30 rounded-full"
           ></div>
 
           {/* Navbar */}
           <nav
             ref={containerRef}
-            className={`
-                        relative
+            className={`relative
                         flex items-center justify-between
                         px-3 xl:px-12 py-3
                         rounded-full
@@ -94,8 +91,7 @@ export default function Navbar() {
               {/* Sliding Indicator */}
               <div
                 ref={indicatorRef}
-                className="
-                            absolute top-0 bottom-0
+                className=" absolute top-0 bottom-0
                             bg-gradient-to-r from-orange-400 to-amber-600
                             rounded-full
                             transition-all duration-300

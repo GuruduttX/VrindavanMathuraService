@@ -49,7 +49,7 @@ export default function TravelCTA() {
                 <motion.button
                   whileHover={{ scale: 1.07 }}
                   whileTap={{ scale: 0.95 }}
-                  className="px-8 py-4 rounded-full bg-white text-amber-600 font-semibold shadow-lg flex items-center gap-2 justify-center cursor-pointer"
+                  className="px-8 py-4 rounded-full bg-white text-amber-600 font-semibold shadow-lg flex items-center gap-2 justify-center cursor-pointer w-full"
                 >
                   Book Tour Package
                   <ArrowRight size={18} />

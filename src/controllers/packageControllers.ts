@@ -27,7 +27,6 @@ export async function createTourController(req: Request) {
   try {
     const body = await req.json();
 
-
     const tour = await createPackage(body) ;
 
     return NextResponse.json({
