@@ -78,17 +78,17 @@ export default function PopularHotels() {
     <section className="relative py-10 md:py-28 overflow-hidden">
 
       {/* background gradient */}
-      <div className="absolute inset-0 bg-gradient-to-br from-pink-100 via-pink-50 to-purple-50"></div>
+      <div className="absolute inset-0 bg-gradient-to-br from-amber-100 via-amber-50 to-orange-50"></div>
 
       {/* glow */}
-      <div className="absolute top-0 left-0 w-[350px] h-[350px] bg-pink-400/20 blur-[120px] rounded-full"></div>
-      <div className="absolute bottom-0 right-0 w-[350px] h-[350px] bg-purple-400/20 blur-[120px] rounded-full"></div>
+      <div className="absolute top-0 left-0 w-[350px] h-[350px] bg-amber-400/20 blur-[120px] rounded-full"></div>
+      <div className="absolute bottom-0 right-0 w-[350px] h-[350px] bg-orange-400/20 blur-[120px] rounded-full"></div>
 
       <div className="relative max-w-7xl mx-auto px-6">
 
         {/* heading */}
         <div className="text-center mb-14">
-          <h2 className="text-3xl md:text-5xl font-bold bg-gradient-to-r from-pink-600 via-fuchsia-600 to-purple-600 bg-clip-text text-transparent">
+          <h2 className="text-3xl md:text-5xl font-bold bg-gradient-to-r from-amber-600 via-amber-600 to-orange-600 bg-clip-text text-transparent">
             Popular Hotels in Vrindavan
           </h2>
 
@@ -102,14 +102,14 @@ export default function PopularHotels() {
 
           <button
             onClick={scrollLeft}
-            className="p-2 rounded-full bg-white shadow hover:bg-pink-50 transition"
+            className="p-2 rounded-full bg-white shadow hover:bg-amber-50 transition"
           >
             <ChevronLeft />
           </button>
 
           <button
             onClick={scrollRight}
-            className="p-2 rounded-full bg-white shadow hover:bg-pink-50 transition"
+            className="p-2 rounded-full bg-white shadow hover:bg-amber-50 transition"
           >
             <ChevronRight />
           </button>
@@ -144,7 +144,7 @@ export default function PopularHotels() {
               <div key={index} className="min-w-[320px] group relative">
 
                 {/* glow */}
-                <div className="absolute inset-0 rounded-3xl blur-xl opacity-0 group-hover:opacity-100 transition bg-gradient-to-r from-pink-500/30 via-fuchsia-500/30 to-purple-500/30"></div>
+                <div className="absolute inset-0 rounded-3xl blur-xl opacity-0 group-hover:opacity-100 transition bg-gradient-to-r from-amber-500/30 via-amber-500/30 to-orange-500/30"></div>
 
                 <div className="relative bg-white rounded-3xl shadow-xl overflow-hidden">
 
@@ -162,7 +162,7 @@ export default function PopularHotels() {
                     <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent"></div>
 
                     {/* badge */}
-                    <div className="absolute top-4 left-4 bg-gradient-to-r from-pink-500 to-fuchsia-500 text-white px-3 py-1 rounded-full text-xs font-semibold">
+                    <div className="absolute top-4 left-4 bg-gradient-to-r from-amber-500 to-amber-500 text-white px-3 py-1 rounded-full text-xs font-semibold">
                       {hotel.badge}
                     </div>
 
@@ -181,7 +181,7 @@ export default function PopularHotels() {
                         size={16}
                         className={
                           favorites.includes(index)
-                            ? "text-pink-600 fill-pink-600"
+                            ? "text-amber-600 fill-amber-600"
                             : "text-gray-500"
                         }
                       />
@@ -203,7 +203,7 @@ export default function PopularHotels() {
 
                     <div className="flex items-center justify-between mt-4">
 
-                      <span className="text-pink-600 font-semibold">
+                      <span className="text-amber-600 font-semibold">
                         {hotel.price}
                       </span>
 
@@ -213,9 +213,9 @@ export default function PopularHotels() {
                         text-white
                         text-sm
                         bg-gradient-to-r
-                        from-pink-500
-                        via-fuchsia-500
-                        to-purple-600
+                        from-amber-500
+                        via-amber-500
+                        to-orange-600
                         hover:scale-105
                         transition
                       ">
@@ -246,9 +246,9 @@ export default function PopularHotels() {
             text-white
             font-medium
             bg-gradient-to-r
-            from-pink-500
-            via-fuchsia-500
-            to-purple-600
+            from-amber-500
+            via-amber-500
+            to-orange-600
             shadow-lg
             hover:scale-105
             transition

@@ -1,56 +1,61 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Link from "next/link";
 import { LayoutGrid, Table } from "lucide-react";
 
-/* ------------------ Dummy Data ------------------ */
-const DUMMY_TAXI = [
-  {
-    _id: "1",
-    title: "Innova Crysta",
-    basePrice: 3200,
-    seats: 6,
-    cabType: "SUV",
-    fuelType: "Diesel",
-    image: "https://images.unsplash.com/photo-1605559424843-9e4c228bf1c2",
-    status: "available",
-    createdAt: new Date("2026-03-20"),
-  },
-  {
-    _id: "2",
-    title: "Swift Dzire",
-    basePrice: 1800,
-    seats: 4,
-    cabType: "Sedan",
-    fuelType: "Petrol",
-    image: "https://images.unsplash.com/photo-1549924231-f129b911e442",
-    status: "unavailable",
-    createdAt: new Date("2026-03-18"),
-  },
-  {
-    _id: "3",
-    title: "Tempo Traveller",
-    basePrice: 5500,
-    seats: 12,
-    cabType: "TempoTraveller",
-    fuelType: "Diesel",
-    image: "https://images.unsplash.com/photo-1570129477492-45c003edd2be",
-    status: "available",
-    createdAt: new Date("2026-03-15"),
-  },
-];
+/* ------------------ Types ------------------ */
+interface Taxi {
+  _id: string;
+  title: string;
+  basePrice: number;
+  seats: number;
+  cabType: string;
+  fuelType: string;
+  image: string;
+  status: "available" | "unavailable";
+  createdAt: string;
+}
 
+/* ------------------ Main Page ------------------ */
 export default function TaxiPage() {
   const [view, setView] = useState<"card" | "table">("card");
   const [search, setSearch] = useState("");
   const [typeFilter, setTypeFilter] = useState("all");
   const [fuelFilter, setFuelFilter] = useState("all");
+  const [taxis, setTaxis] = useState<Taxi[]>([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState("");
+
+  const getTaxis = async () => {
+    try {
+      setLoading(true);
+
+      const res = await fetch("/api/admin/taxi");
+
+      if (!res.ok) {
+        throw new Error("Failed to fetch taxis");
+      }
+
+      const response = await res.json();
+
+      setTaxis(response?.data || []);
+    } catch (err: any) {
+      console.error(err);
+      setError(err.message || "Something went wrong");
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  useEffect(() => {
+    getTaxis();
+  }, []);
 
   /* ------------------ Filtering ------------------ */
-  const filteredTaxi = DUMMY_TAXI.filter((taxi) => {
+  const filteredTaxi = taxis.filter((taxi) => {
     const matchSearch = taxi.title
-      .toLowerCase()
+      ?.toLowerCase()
       .includes(search.toLowerCase());
 
     const matchType =
@@ -63,9 +68,11 @@ export default function TaxiPage() {
   });
 
   /* ------------------ Stats ------------------ */
-  const total = DUMMY_TAXI.length;
-  const available = DUMMY_TAXI.filter(t => t.status === "available").length;
-  const unavailable = DUMMY_TAXI.filter(t => t.status === "unavailable").length;
+  const total = taxis.length;
+  const available = taxis.filter((t) => t.status === "available").length;
+  const unavailable = taxis.filter(
+    (t) => t.status === "unavailable"
+  ).length;
 
   return (
     <section className="min-h-screen">
@@ -140,32 +147,42 @@ export default function TaxiPage() {
         </Link>
       </div>
 
+      {/* STATES */}
+      {loading && <p className="text-pink-300">Loading...</p>}
+      {error && <p className="text-red-400">{error}</p>}
+
       {/* CONTENT */}
-      {view === "card" ? (
-        <TaxiCards taxis={filteredTaxi} />
-      ) : (
-        <TaxiTable taxis={filteredTaxi} />
+      {!loading && !error && (
+        view === "card" ? (
+          <TaxiCards taxis={filteredTaxi} />
+        ) : (
+          <TaxiTable taxis={filteredTaxi} />
+        )
       )}
     </section>
   );
 }
 
 /* ------------------ CARD VIEW ------------------ */
-function TaxiCards({ taxis }: { taxis: any[] }) {
+function TaxiCards({ taxis }: { taxis: Taxi[] }) {
   return (
-    <div className="grid gap-6"
+    <div
+      className="grid gap-6"
       style={{ gridTemplateColumns: "repeat(auto-fill, minmax(280px, 1fr))" }}
     >
       {taxis.map((taxi) => (
-        <div key={taxi._id}
+        <div
+          key={taxi._id}
           className="rounded-xl overflow-hidden bg-[#1e0d14]
-          border border-pink-900/40 hover:-translate-y-1 transition">
-
-          <img src={taxi.image}
-            className="w-full h-44 object-cover" />
+          border border-pink-900/40 hover:-translate-y-1 transition"
+        >
+          <img
+            src={taxi.image}
+            alt={taxi.title}
+            className="w-full h-44 object-cover"
+          />
 
           <div className="p-4">
-
             <h3 className="text-pink-100 font-semibold">
               {taxi.title}
             </h3>
@@ -184,7 +201,7 @@ function TaxiCards({ taxis }: { taxis: any[] }) {
 
             <div className="flex gap-2 mt-4">
               <Link
-                href={`/admin-x9AqP7mK2/taxi/edit/${taxi._id}`}
+                href={`/admin-x9AqP7mK2/taxi/edit-taxi/${taxi._id}`}
                 className="flex-1 text-center py-2 bg-pink-600/20 rounded text-pink-300"
               >
                 Edit
@@ -202,11 +219,10 @@ function TaxiCards({ taxis }: { taxis: any[] }) {
 }
 
 /* ------------------ TABLE VIEW ------------------ */
-function TaxiTable({ taxis }: { taxis: any[] }) {
+function TaxiTable({ taxis }: { taxis: Taxi[] }) {
   return (
     <div className="overflow-x-auto border border-pink-900/40 rounded-xl">
       <table className="w-full text-sm text-pink-200">
-
         <thead className="bg-pink-950/40 text-pink-300 text-xs uppercase">
           <tr>
             <th className="px-4 py-3">Taxi</th>
@@ -220,9 +236,10 @@ function TaxiTable({ taxis }: { taxis: any[] }) {
 
         <tbody>
           {taxis.map((taxi) => (
-            <tr key={taxi._id}
-              className="border-t border-pink-900/30 hover:bg-pink-900/20">
-
+            <tr
+              key={taxi._id}
+              className="border-t border-pink-900/30 hover:bg-pink-900/20"
+            >
               <td className="px-4 py-3">{taxi.title}</td>
               <td className="px-4 py-3">{taxi.cabType}</td>
               <td className="px-4 py-3">{taxi.fuelType}</td>
@@ -231,7 +248,7 @@ function TaxiTable({ taxis }: { taxis: any[] }) {
 
               <td className="px-4 py-3 flex gap-2 justify-center">
                 <Link
-                  href={`/admin-x9AqP7mK2/taxi/edit/${taxi._id}`}
+                  href={`/admin-x9AqP7mK2/taxi/edit-taxi/${taxi._id}`}
                   className="px-3 py-1 bg-pink-600/20 rounded text-pink-300"
                 >
                   Edit
@@ -241,7 +258,6 @@ function TaxiTable({ taxis }: { taxis: any[] }) {
                   Delete
                 </button>
               </td>
-
             </tr>
           ))}
         </tbody>
@@ -251,7 +267,7 @@ function TaxiTable({ taxis }: { taxis: any[] }) {
 }
 
 /* ------------------ STAT CARD ------------------ */
-function StatCard({ title, value }: any) {
+function StatCard({ title, value }: { title: string; value: number }) {
   return (
     <div className="bg-[#1e0d14] border border-pink-900/40 rounded-xl p-4">
       <p className="text-pink-400 text-sm">{title}</p>

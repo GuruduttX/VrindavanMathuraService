@@ -3,7 +3,8 @@ import TourPackageModel from "@/models/packageModel";
 
 export async function getUserAllPackageService() {
     await connectDB();
-    const tours = await TourPackageModel.find({status : {$eq : "published"}});
+    const tours = await TourPackageModel.find({status : {$eq : "published"}}).sort({createdAt : -1});
+    
     return tours;
 }
 

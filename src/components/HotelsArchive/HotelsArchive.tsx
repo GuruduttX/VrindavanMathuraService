@@ -6,49 +6,6 @@ import { motion } from "framer-motion";
 import { Star, Wifi, Car, Utensils, MapPin, Hotel } from "lucide-react";
 import Link from "next/link";
 
-const hotels = [
-  {
-    id: 1,
-    name: "Radha Palace Hotel",
-    location: "Near Prem Mandir",
-    rating: 4.6,
-    price: 1299,
-    type: "luxury",
-    amenities: ["wifi", "parking"],
-    image: "/images/Home/hotel.webp",
-  },
-  {
-    id: 2,
-    name: "Vrindavan Residency",
-    location: "Banke Bihari Temple Road",
-    rating: 4.4,
-    price: 1099,
-    type: "budget",
-    amenities: ["wifi"],
-    image: "/images/Home/hotel.webp",
-  },
-  {
-    id: 3,
-    name: "Divine Stay Vrindavan",
-    location: "Iskcon Temple Area",
-    rating: 4.7,
-    price: 1499,
-    type: "luxury",
-    amenities: ["wifi", "restaurant"],
-    image: "/images/Home/hotel.webp",
-  },
-  {
-    id: 4,
-    name: "Temple View Hotel",
-    location: "Govardhan Road",
-    rating: 4.3,
-    price: 999,
-    type: "budget",
-    amenities: ["wifi"],
-    image: "/images/Home/hotel.webp",
-  },
-];
-
 
 interface HotelInclusion {
   freeWifi: boolean;
@@ -75,11 +32,11 @@ interface Hotel {
   price: number;
   rating: number;
   reviews: number;
-  status: "published" | "draft" | "archived" | string; // Typed as a union for strictness, falling back to string
-  inclusion: HotelInclusion;
+  status: "published" | "draft" | "archived" | string; 
+  quickInclusions: HotelInclusion;
   ratingSummary: RatingSummary;
-  faqs: any[]; // Update 'any' to a specific FAQ interface if you have one
-  offers: any[]; // Update 'any' to a specific Offer interface if you have one
+  faqs: any[];
+  offers: any[]; 
   createdAt: string;
   updatedAt: string;
 }
@@ -88,7 +45,7 @@ export default function HotelsArchive() {
 
 
   const [rating, setRating] = useState(0);
-  const [price, setPrice] = useState(10000);
+  const [price, setPrice] = useState(20000);
   const [wifi, setWifi] = useState(false);
   const [parking, setParking] = useState(false);
   const [restaurant, setRestaurant] = useState(false);
@@ -98,15 +55,15 @@ export default function HotelsArchive() {
   useEffect(() => {
     const fetchHotels = async () => {
       try {
-        const res = await fetch("api/hotels");
+        const res = await fetch("api/users/hotels");
 
         if (!res.ok) {
           throw new Error(`HTTP error! status: ${res.status}`);
         }
         const data = await res.json();
-        // console.log(data.data)
+      
         setHotels(data.data);
-        // console.log(hotels, "this is hotels");
+      
       } catch (error) {
         console.error("Failed to fetch hotels:", error);
       }
@@ -121,14 +78,16 @@ export default function HotelsArchive() {
 
    // 2. Boolean Inclusion Checks (Replacing the old .includes() array method)
    // If the user hasn't toggled 'wifi' (!wifi), it passes. If they have, the hotel MUST have freeWifi.
-   const matchesWifi = !wifi || hotel.inclusion?.freeWifi === true;
-   const matchesParking = !parking || hotel.inclusion?.parking === true;
+   const matchesWifi = !wifi || hotel.quickInclusions?.freeWifi === true;
+   const matchesParking = !parking || hotel.quickInclusions?.parking === true;
 
    // Note: Your dummy data checked for "restaurant", but the real data has "breakfast".
    // I have mapped your restaurant state to check the breakfast boolean here.
-   const matchesRestaurant = !restaurant || hotel.inclusion?.breakfast === true;
+
+   const matchesRestaurant = !restaurant || hotel.quickInclusions?.breakfast === true;
 
    // 3. Final Evaluation
+
    return (
      matchesRating &&
      matchesPrice &&
@@ -138,7 +97,7 @@ export default function HotelsArchive() {
    );
  });
 
-console.log(filteredHotels);
+console.log(filteredHotels, "filtered hotels");
 
   return (
     <section className="py-24">
@@ -193,7 +152,7 @@ console.log(filteredHotels);
               <input
                 type="range"
                 min={500}
-                max={5000}
+                max={20000}
                 value={price}
                 onChange={(e) => setPrice(Number(e.target.value))}
                 className="w-full accent-amber-500"
@@ -314,19 +273,19 @@ console.log(filteredHotels);
                   </div>
                   {/* AMENITIES -> INCLUSIONS */}
                   <div className="flex gap-4 mt-4 text-sm text-gray-600">
-                    {hotel.inclusion?.freeWifi && ( // Checks boolean directly
+                    {hotel.quickInclusions?.freeWifi && ( // Checks boolean directly
                       <span className="flex items-center gap-1">
                         <Wifi size={14} /> WiFi
                       </span>
                     )}
 
-                    {hotel.inclusion?.parking && ( // Checks boolean directly
+                    {hotel.quickInclusions?.parking && ( // Checks boolean directly
                       <span className="flex items-center gap-1">
                         <Car size={14} /> Parking
                       </span>
                     )}
 
-                    {hotel.inclusion?.breakfast && ( // Checks boolean directly
+                    {hotel.quickInclusions?.breakfast && ( // Checks boolean directly
                       <span className="flex items-center gap-1">
                         <Utensils size={14} /> Breakfast{" "}
                         {/* Changed label to Breakfast */}

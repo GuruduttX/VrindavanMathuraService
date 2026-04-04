@@ -7,7 +7,7 @@ export const getUserAllTaxiService = async () => {
 
     await connectDB();
 
-    const taxis = await Taxi.find({status : {$eq : "published"}});
+    const taxis = await Taxi.find({status : {$eq : "published"}}).sort({createAt : -1});
 
     return taxis;
 

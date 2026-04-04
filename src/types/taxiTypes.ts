@@ -24,6 +24,7 @@ export interface ITaxi extends Document {
   seats: number;
   cabType: CabType;
   fuelType: FuelType;
+  status : String;
 
   inclusions: ITaxiInclusion[];
   exclusions: ITaxiExclusion[];

@@ -24,6 +24,14 @@ const taxiSchema = new Schema<ITaxi>(
       required: true,
     },
 
+    status : {
+       type : String,
+       enum : ["published", "draft"],
+       required : true
+    }
+,
+ 
+
     fuelType: {
       type: String,
       enum: ["Petrol", "Diesel", "Electric", "CNG"], 

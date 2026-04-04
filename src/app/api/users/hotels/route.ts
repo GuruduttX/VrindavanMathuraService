@@ -1,4 +1,4 @@
-import { createHotel, getAllHotels, getHotelById } from "@/controllers/hotelControllers";
+import { getUserAllHotelsController } from "@/controllers/users/hotelControllers";
 import { connectDB } from "@/lib/mongodb";
 import { NextResponse } from "next/server";
 
@@ -9,20 +9,12 @@ export async function GET() {
 
         await connectDB();
 
-        return getAllHotels();
+        return getUserAllHotelsController();
 
     } catch (error) {
 
         NextResponse.json({ success: false })
 
     }
-
-}
-
-export async function POST(req: Request) {
-
-    await connectDB();
-
-    return createHotel(req);
 
 }

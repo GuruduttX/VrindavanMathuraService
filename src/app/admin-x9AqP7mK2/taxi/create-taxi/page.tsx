@@ -86,7 +86,8 @@ export default function CreateNewTaxi() {
       image: form.image,
       alt: form.alt,
       inclusions: inclusions,
-      exclusions: exclusions
+      exclusions: exclusions,
+      status : "published"
     }
 
     try {
@@ -144,7 +145,8 @@ export default function CreateNewTaxi() {
       image: form.image,
       alt: form.alt,
       inclusions: inclusions,
-      exclusions: exclusions
+      exclusions: exclusions,
+      status : "draft"
     }
 
     try {
@@ -160,9 +162,11 @@ export default function CreateNewTaxi() {
       const data = await res.json();
 
       if (!data.success) {
+        console.log(data.error);
         toast.error(data.error || "Failed to Draft Taxi");
         return;
       }
+      
 
       toast.success("Taxi Drafted Successfully");
 

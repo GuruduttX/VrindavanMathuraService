@@ -1,4 +1,4 @@
-import { createHotel, getAllHotels, getHotelById } from "@/controllers/hotelControllers";
+import { createAdminHotelController, getAdminHotelsController } from "@/controllers/admin/hotelControllers";
 import { connectDB } from "@/lib/mongodb";
 import { NextResponse } from "next/server";
 
@@ -8,7 +8,7 @@ export async function GET() {
     try {
 
         console.log("route")
-        return getAllHotels();
+        return getAdminHotelsController();
 
     } catch (error) {
 
@@ -22,6 +22,6 @@ export async function POST(req: Request) {
 
     await connectDB();
 
-    return createHotel(req);
+    return createAdminHotelController(req);
 
 }

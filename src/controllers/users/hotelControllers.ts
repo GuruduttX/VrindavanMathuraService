@@ -1,36 +1,11 @@
-import { createHotelService, deleteHotelService, getAllHotelsService, getHotelByIdService, updateHotelService } from "@/services/hotelServices";
+import {  getUserAllHotelsService, getUserHotelBySlugService } from "@/services/users/hotelServices";
 import { NextResponse } from "next/server";
 
-export const createHotel = async (req: Request) => {
+export const getUserAllHotelsController = async () => {
 
     try {
 
-        const hotelData = await req.json();
-
-        const hotel = await createHotelService(hotelData);
-
-        return NextResponse.json({
-            success: true,
-            data: hotel
-        }, { status: 201 })
-
-    } catch (error: any) {
-         console.log(error);
-
-        return NextResponse.json({
-            success: false,
-            error: error.message
-        }, { status: 500 })
-
-    }
-    
-}
-
-export const getAllHotels = async () => {
-
-    try {
-
-        const hotels = await getAllHotelsService();
+        const hotels = await getUserAllHotelsService();
 
         return NextResponse.json({
             success : true,
@@ -48,16 +23,16 @@ export const getAllHotels = async () => {
 
 }
 
-export const getHotelById = async (id: string) => {
+export const getUserHotelBySlugController = async (slug: string) => {
     
     try {
 
-        const hotel = await getHotelByIdService(id);
+        const hotel = await getUserHotelBySlugService(slug);
 
         if (!hotel) {
 
             return NextResponse.json({
-                success: false, message: "Not Found"
+                success: false, message: "Not Found User Hotel"
             }, { status: 404 })
 
         }
@@ -76,46 +51,4 @@ export const getHotelById = async (id: string) => {
 
 
 
-export const updateHotel = async (req: Request, id: string) => {
 
-    try {
-
-        const hotelData = await req.json();
-        const hotel = await updateHotelService(id, hotelData);
-
-        return NextResponse.json({
-            success: true,
-            data: hotel
-        })
-
-    } catch (error: any) {
-
-        return NextResponse.json({
-            success: false,
-            error: error.message
-
-        }, { status: 500 })
-
-    }
-}
-
-
-export const deletedHotel = async (id: string) => {
-    try {
-
-        await deleteHotelService(id);
-
-        return NextResponse.json({
-            success: true,
-            message: "Data Deleted Succesfully"
-        })
-
-    } catch (error: any) {
-
-        return NextResponse.json({
-            success: false,
-            error: error.message
-        })
-
-    }
-}

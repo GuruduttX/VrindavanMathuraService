@@ -4,12 +4,13 @@ import PoojaCTASection from "@/components/Pooja/PoojaCTASection";
 import PoojaSection from "@/components/Pooja/PoojaSection";
 import LuxuryFooter from "@/utils/Footer";
 import Navbar from "@/utils/Navbar";
+import CommonEnquiryForm from "@/utils/CommanEnquiryForm";
 
 const getPoojaData = async () => {
     try {
 
         const res = await fetch(
-            `http://localhost:3000/api/pooja`
+            `http://localhost:3000/api/users/pooja`
         );
 
         if (!res.ok) {
@@ -37,8 +38,9 @@ export default async function page() {
             <PoojaArchiveHero />
             <PoojaSection poojaData={poojaData}/>
             <PoojaCTASection />
-            <FAQSection />
+            {/* <FAQSection /> */}
             <LuxuryFooter />
+
         </>
     )
 }

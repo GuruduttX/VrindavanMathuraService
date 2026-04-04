@@ -30,18 +30,18 @@ export default function SpiritualJourney() {
     <section className="relative py-10 md:py-28 overflow-hidden">
 
       {/* background */}
-      <div className="absolute inset-0 bg-gradient-to-br from-orange-50 via-white to-purple-50"></div>
+      <div className="absolute inset-0 bg-gradient-to-br from-orange-50 via-white to-orange-50"></div>
 
       {/* glow */}
       <div className="absolute top-0 left-0 w-[400px] h-[400px] bg-orange-400/20 blur-[140px] rounded-full"></div>
-      <div className="absolute bottom-0 right-0 w-[400px] h-[400px] bg-purple-400/20 blur-[140px] rounded-full"></div>
+      <div className="absolute bottom-0 right-0 w-[400px] h-[400px] bg-orange-400/20 blur-[140px] rounded-full"></div>
 
       <div className="relative max-w-7xl mx-auto px-6">
 
         {/* heading */}
         <div className="text-center mb-20">
 
-          <h2 className="text-3xl md:text-5xl font-bold bg-gradient-to-r from-orange-600 via-amber-600 to-purple-600 bg-clip-text text-transparent">
+          <h2 className="text-3xl md:text-5xl font-bold bg-gradient-to-r from-orange-600 via-amber-600 to-orange-600 bg-clip-text text-transparent">
             Your Spiritual Journey
           </h2>
 
@@ -55,7 +55,7 @@ export default function SpiritualJourney() {
         <div className="relative">
 
           {/* vertical line */}
-          <div className="absolute left-1/2 top-0 bottom-0 w-[2px] bg-gradient-to-b from-orange-400 to-purple-500 hidden md:block"></div>
+          <div className="absolute left-1/2 top-0 bottom-0 w-[2px] bg-gradient-to-b from-orange-400 to-orange-500 hidden md:block"></div>
 
           <div className="space-y-24">
 
@@ -115,7 +115,7 @@ export default function SpiritualJourney() {
                     bg-gradient-to-r
                     from-orange-500
                     via-amber-500
-                    to-purple-600
+                    to-orange-600
                     hover:scale-105
                     transition
                   ">

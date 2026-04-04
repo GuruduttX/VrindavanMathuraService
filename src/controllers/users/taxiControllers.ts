@@ -2,8 +2,8 @@ import { getUserAllTaxiService } from "@/services/users/taxiServices";
 
 import { NextResponse } from "next/server";
 
-
 export const getUserAllTaxiController = async () => {
+
     try {
 
         const taxis = await getUserAllTaxiService();
@@ -16,6 +16,7 @@ export const getUserAllTaxiController = async () => {
             },
 
             { status: 200 }
+
         );
 
     } catch (error: any) {

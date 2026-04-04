@@ -1,5 +1,4 @@
 import dynamic from "next/dynamic"
-
 import Navbar from "@/utils/Navbar"
 import LuxuryFooter from "@/utils/Footer"
 import TaxiHero from "@/components/Taxi/TaxiHero"
@@ -70,7 +69,7 @@ const getTaxiData = async () => {
     try {
 
         const res = await fetch(
-            `http://localhost:3000/api/taxi`
+            `http://localhost:3000/api/users/taxi`
         );
 
         if (!res.ok) {

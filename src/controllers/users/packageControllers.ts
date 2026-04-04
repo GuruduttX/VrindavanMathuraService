@@ -3,7 +3,9 @@ import { getUserAllPackageService, getUserTourBySlugAndDurationService} from "@/
 import { connectDB } from "@/lib/mongodb";
 
 export async function getUserAllToursController() {
+
   try {
+    
     const tours = await getUserAllPackageService();
 
     return NextResponse.json({
@@ -17,10 +19,12 @@ export async function getUserAllToursController() {
       { status: 500 }
     );
   }
+
 }
 
 
 export async function getTourBySlugAndDuration( slug: string, duration: string) {
+
   try {
     await connectDB();
 
@@ -43,6 +47,7 @@ export async function getTourBySlugAndDuration( slug: string, duration: string) 
       { status: 500 }
     );
   }
+
 }
 
 

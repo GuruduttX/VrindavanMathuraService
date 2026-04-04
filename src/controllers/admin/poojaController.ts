@@ -3,7 +3,7 @@ import { createPooja } from "@/services/poojaServices";
 import { NextResponse } from "next/server";
 
 
-export async function getPoojasController(){
+export async function getAdminPoojasController(){
     try {
         const Pooja =  await getAdminPoojasService();
         return Response.json({success : true, data :Pooja})
@@ -14,7 +14,7 @@ export async function getPoojasController(){
     }
 }
 
-export async function createPoojaController(req: Request) {
+export async function createAdminPoojaController(req: Request) {
   try {
     const body = await req.json(); 
 
@@ -36,7 +36,7 @@ export async function createPoojaController(req: Request) {
 }
 
 
-export async function updatePoojaController(
+export async function updateAdminPoojaController(
   req: Request,
   params: { id: string }
 ) {
@@ -61,7 +61,7 @@ export async function updatePoojaController(
   }
 }
 
-export async function getPoojaByIdController(params: { id: string }) {
+export async function getAdminPoojaByIdController(params: { id: string }) {
   try {
     const { id } = params;
 
@@ -80,7 +80,7 @@ export async function getPoojaByIdController(params: { id: string }) {
   }
 }
 
-export async function deletePoojaController(params: { id: string }) {
+export async function deleteAdminPoojaController(params: { id: string }) {
   try {
     const { id } = params;
 
@@ -98,4 +98,3 @@ export async function deletePoojaController(params: { id: string }) {
     );
   }
 }
-

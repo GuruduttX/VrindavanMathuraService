@@ -8,7 +8,7 @@ export async function getUserPoojasService() {
 
     try {
 
-        const poojas = await PoojaModel.find({status : {$eq : "published"}});
+        const poojas = await PoojaModel.find({status : {$eq : "published"}}).sort({createdAt : -1});
         return poojas
 
     } catch (error) {
