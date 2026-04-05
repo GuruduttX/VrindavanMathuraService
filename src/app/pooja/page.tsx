@@ -10,7 +10,7 @@ const getPoojaData = async () => {
     try {
 
         const res = await fetch(
-            `http://localhost:3000/api/pooja`
+            `http://localhost:3000/api/users/pooja`
         );
 
         if (!res.ok) {
@@ -38,7 +38,7 @@ export default async function page() {
             <PoojaArchiveHero />
             <PoojaSection poojaData={poojaData}/>
             <PoojaCTASection />
-            <FAQSection />
+            {/* <FAQSection /> */}
             <LuxuryFooter />
 
         </>

@@ -6,49 +6,6 @@ import { motion } from "framer-motion";
 import { Star, Wifi, Car, Utensils, MapPin, Hotel } from "lucide-react";
 import Link from "next/link";
 
-const hotels = [
-  {
-    id: 1,
-    name: "Radha Palace Hotel",
-    location: "Near Prem Mandir",
-    rating: 4.6,
-    price: 1299,
-    type: "luxury",
-    amenities: ["wifi", "parking"],
-    image: "/images/Home/hotel.webp",
-  },
-  {
-    id: 2,
-    name: "Vrindavan Residency",
-    location: "Banke Bihari Temple Road",
-    rating: 4.4,
-    price: 1099,
-    type: "budget",
-    amenities: ["wifi"],
-    image: "/images/Home/hotel.webp",
-  },
-  {
-    id: 3,
-    name: "Divine Stay Vrindavan",
-    location: "Iskcon Temple Area",
-    rating: 4.7,
-    price: 1499,
-    type: "luxury",
-    amenities: ["wifi", "restaurant"],
-    image: "/images/Home/hotel.webp",
-  },
-  {
-    id: 4,
-    name: "Temple View Hotel",
-    location: "Govardhan Road",
-    rating: 4.3,
-    price: 999,
-    type: "budget",
-    amenities: ["wifi"],
-    image: "/images/Home/hotel.webp",
-  },
-];
-
 
 interface HotelInclusion {
   freeWifi: boolean;
@@ -75,11 +32,11 @@ interface Hotel {
   price: number;
   rating: number;
   reviews: number;
-  status: "published" | "draft" | "archived" | string; // Typed as a union for strictness, falling back to string
+  status: "published" | "draft" | "archived" | string; 
   quickInclusions: HotelInclusion;
   ratingSummary: RatingSummary;
-  faqs: any[]; // Update 'any' to a specific FAQ interface if you have one
-  offers: any[]; // Update 'any' to a specific Offer interface if you have one
+  faqs: any[];
+  offers: any[]; 
   createdAt: string;
   updatedAt: string;
 }
@@ -98,15 +55,15 @@ export default function HotelsArchive() {
   useEffect(() => {
     const fetchHotels = async () => {
       try {
-        const res = await fetch("api/hotels");
+        const res = await fetch("api/users/hotels");
 
         if (!res.ok) {
           throw new Error(`HTTP error! status: ${res.status}`);
         }
         const data = await res.json();
-        // console.log(data.data)
+      
         setHotels(data.data);
-        // console.log(hotels, "this is hotels");
+      
       } catch (error) {
         console.error("Failed to fetch hotels:", error);
       }
@@ -126,9 +83,11 @@ export default function HotelsArchive() {
 
    // Note: Your dummy data checked for "restaurant", but the real data has "breakfast".
    // I have mapped your restaurant state to check the breakfast boolean here.
+
    const matchesRestaurant = !restaurant || hotel.quickInclusions?.breakfast === true;
 
    // 3. Final Evaluation
+
    return (
      matchesRating &&
      matchesPrice &&

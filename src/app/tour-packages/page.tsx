@@ -69,7 +69,7 @@ const getTourPackageData = async () => {
   try {
 
     const res = await fetch(
-      `http://localhost:3000/api/tour-packages/`
+      `http://localhost:3000/api/users/tour-packages/`
     );
 
     if (!res.ok) {

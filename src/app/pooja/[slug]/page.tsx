@@ -1,6 +1,3 @@
-// app/pooja/[slug]/page.tsx
-
-
 import PoojaHero from "@/components/PoojaDetail/PoojaHero";
 import PoojaOverview from "@/components/PoojaDetail/PoojaOverview";
 import PoojaBenefits from "@/components/PoojaDetail/PoojaBenefits";
@@ -18,16 +15,23 @@ import PoojaContent from "@/components/PoojaDetail/PoojaContent";
 
 const getPooja = async (slug: string) => {
  const res = await fetch(
-  `http://localhost:3000/api/pooja/search?slug=${slug}`
+  `http://localhost:3000/api/users/pooja/${slug}`
 );
   if (!res.ok) throw new Error("Failed");
 
-  return res.json();
+  const data = await res.json();
+
+  console.log("THE DATA COME FORM THE DATA BASE IS : ");
+  console.log(data);
+
+  return data;
+
 };
 
 export default async function PoojaPage({ params }: { params: Promise<{ slug: string }> }) {
   const {slug} = await params;
   const pooja = await getPooja(slug);
+  console.log("THE DATA OF THE POOJA IS : ");
   console.log(pooja);
 
   return (

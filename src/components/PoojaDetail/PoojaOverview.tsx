@@ -8,7 +8,9 @@ interface PoojaOverviewProps {
 }
 
 export default function PoojaOverview({ imageData, description }: PoojaOverviewProps) {
+
   return (
+    
     <section className="py-24 px-6 bg-white relative overflow-hidden">
       {/* Subtle background accent */}
       <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-amber-50 rounded-full -translate-y-1/2 translate-x-1/3 pointer-events-none" />

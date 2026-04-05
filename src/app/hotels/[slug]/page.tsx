@@ -12,10 +12,7 @@ const getHotelData = async (slug: string) => {
 
     try {
 
-        const response = await fetch(`http://localhost:3000/api/hotels/${slug}`, { cache: "no-store" });
-
-        console.log("THE RESPONSE COME FROM THE DATA IS : ");
-        console.log(response);
+        const response = await fetch(`http://localhost:3000/api/users/hotels/${slug}`, { cache: "no-store" });
 
         if(response.status == 404) {
             return null;
