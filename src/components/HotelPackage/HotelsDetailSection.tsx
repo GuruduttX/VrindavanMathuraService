@@ -1,5 +1,6 @@
 "use client";
 import { motion } from "framer-motion";
+import { useState } from "react";
 import {
   Star,
   Trophy,
@@ -12,10 +13,82 @@ import {
   Bath,
   Hotel,
 } from "lucide-react";
+import { clear } from "console";
 
-export default function HotelDetailsSection({HotelData} : {HotelData : any}) {
-  console.log(HotelData)
-  
+export default function HotelDetailsSection({ HotelData }: { HotelData: any }) {
+  const [status, setStatus] = useState<"idle" | "loading" | "success" | "error">("idle");
+  const [feedbackMsg, setFeedbackMsg] = useState("");
+
+  const [form, setForm] = useState({
+    name: "",
+    email: "",
+    phone: "",
+    comments: "",
+  });
+
+  const clearStatus = async () => {
+    setTimeout(() => setStatus("idle"), 5000);
+  };
+
+  const handleChange = ( e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>,) => setForm({ ...form, [e.target.name]: e.target.value });
+
+
+  const handleSubmit = async (e: React.FormEvent)=> {
+    e.preventDefault();
+    const phoneRegex = /^[0-9]{10}$/;
+    if (!phoneRegex.test(form.phone)) {
+      alert("Please enter a valid 10-digit phone number.");
+      return;
+    }
+
+    // 2. Email Validation (Standard RFC regex)
+    const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+    if (!emailRegex.test(form.email)) {
+      alert("Please enter a valid email address.");
+      return;
+    }
+
+    //  3. Basic Required Check
+    if (!form.name.trim()) {
+      alert("Name is required.");
+      return;
+    }
+
+    try {
+      const response = await fetch("/api/simbark", {
+        method: "POST",
+        body: JSON.stringify({
+          name: form.name,
+          email: form.email,
+          phone: form.phone,
+          serviceType: form.comments,
+        }),
+      });
+
+      const formsubmitData = await response.json();
+
+      if (!response.ok) {
+        throw new Error(formsubmitData.message || "Submission failed");
+      }
+      setStatus("success");
+      setFeedbackMsg("Enquiry has been sent successfully.");
+      clearStatus();
+      console.log("Success:", formsubmitData);
+    } catch (error) {
+      setStatus("error");
+      setFeedbackMsg("Something went wrong. Try again");
+      clearStatus();
+      console.log("ERROR: submitting form", error);
+    } finally {
+      setForm({
+        name: "",
+        phone: "",
+        email: "",
+        comments: "",
+      });
+    }
+  }
+
   return (
     <section className="py-24 bg-gradient-to-b from-white via-amber-50 to-white">
       <div className="max-w-7xl mx-auto px-6 grid lg:grid-cols-[1.6fr_1fr] gap-16 items-start">
@@ -138,27 +211,29 @@ export default function HotelDetailsSection({HotelData} : {HotelData : any}) {
         {/* RIGHT BOOKING CARD */}
 
         {/* HOTEL ENQUIRY FORM */}
-        <div className="hidden md:block bg-white border border-gray-200 rounded-3xl p-6 md:p-8 shadow-sm h-fit">
+        <div className="hidden sticky top-30 md:block bg-white border border-gray-200 rounded-3xl p-6 md:p-8 shadow-sm h-fit">
           <h3 className="text-xl font-bold text-gray-900 mb-6">
             Enquire About This Hotel
           </h3>
 
-          <form className="flex flex-col gap-5">
+          <form className="flex flex-col gap-5" onSubmit={handleSubmit}>
             {/* FULL NAME (Floating Label) */}
             <div className="relative">
               <input
                 type="text"
                 id="name"
                 name="name"
+                value={form.name}
                 placeholder="Full Name *"
+                onChange={handleChange}
                 required
                 className="peer w-full border border-gray-300 rounded-xl px-4 pt-6 pb-2 focus:outline-none focus:ring-1 focus:ring-orange-500 focus:border-orange-500 transition placeholder-transparent bg-transparent"
               />
               <label
                 htmlFor="name"
                 className="absolute left-4 top-1.5 text-xs text-gray-500 transition-all pointer-events-none 
-        peer-placeholder-shown:text-base peer-placeholder-shown:top-3.5 
-        peer-focus:top-1.5 peer-focus:text-xs peer-focus:text-orange-500"
+                peer-placeholder-shown:text-base peer-placeholder-shown:top-3.5 
+                peer-focus:top-1.5 peer-focus:text-xs peer-focus:text-orange-500"
               >
                 Full Name *
               </label>
@@ -170,16 +245,19 @@ export default function HotelDetailsSection({HotelData} : {HotelData : any}) {
                 type="email"
                 id="email"
                 name="email"
-                placeholder="Email"
+                value={form.email}
+                placeholder="Email *"
+                onChange={handleChange}
+                required
                 className="peer w-full border border-gray-300 rounded-xl px-4 pt-6 pb-2 focus:outline-none focus:ring-1 focus:ring-orange-500 focus:border-orange-500 transition placeholder-transparent bg-transparent"
               />
               <label
                 htmlFor="email"
                 className="absolute left-4 top-1.5 text-xs text-gray-500 transition-all pointer-events-none 
-        peer-placeholder-shown:text-base peer-placeholder-shown:top-3.5 
-        peer-focus:top-1.5 peer-focus:text-xs peer-focus:text-orange-500"
+                peer-placeholder-shown:text-base peer-placeholder-shown:top-3.5 
+                peer-focus:top-1.5 peer-focus:text-xs peer-focus:text-orange-500"
               >
-                Email
+                Email *
               </label>
             </div>
 
@@ -196,15 +274,17 @@ export default function HotelDetailsSection({HotelData} : {HotelData : any}) {
                   type="tel"
                   id="phone"
                   name="phone"
+                  value={form.phone}
                   placeholder="Phone Number *"
+                  onChange={handleChange}
                   required
                   className="peer w-full border border-gray-300 rounded-xl px-4 pt-6 pb-2 focus:outline-none focus:ring-1 focus:ring-orange-500 focus:border-orange-500 transition placeholder-transparent bg-transparent"
                 />
                 <label
                   htmlFor="phone"
                   className="absolute left-4 top-1.5 text-xs text-gray-500 transition-all pointer-events-none 
-          peer-placeholder-shown:text-base peer-placeholder-shown:top-3.5 
-          peer-focus:top-1.5 peer-focus:text-xs peer-focus:text-orange-500"
+                  peer-placeholder-shown:text-base peer-placeholder-shown:top-3.5 
+                  peer-focus:top-1.5 peer-focus:text-xs peer-focus:text-orange-500"
                 >
                   Phone Number *
                 </label>
@@ -217,18 +297,32 @@ export default function HotelDetailsSection({HotelData} : {HotelData : any}) {
                 id="comments"
                 name="comments"
                 placeholder="Comments"
+                value={form.comments}
+                onChange={handleChange}
                 rows={4}
                 className="peer w-full border border-gray-300 rounded-xl px-4 pt-6 pb-2 focus:outline-none focus:ring-1 focus:ring-orange-500 focus:border-orange-500 transition placeholder-transparent bg-transparent resize-none"
               ></textarea>
               <label
                 htmlFor="comments"
                 className="absolute left-4 top-1.5 text-xs text-gray-500 transition-all pointer-events-none 
-        peer-placeholder-shown:text-base peer-placeholder-shown:top-3.5 
-        peer-focus:top-1.5 peer-focus:text-xs peer-focus:text-orange-500"
+                  peer-placeholder-shown:text-base peer-placeholder-shown:top-3.5 
+                  peer-focus:top-1.5 peer-focus:text-xs peer-focus:text-orange-500"
               >
                 Comments
               </label>
             </div>
+            {/* success or failure massege*/}
+            {status === "success" && (
+              <div className="p-2 mb-4 text-sm md:col-span-2 text-green-700 bg-green-50 rounded-xl border border-green-200">
+                {feedbackMsg}
+              </div>
+            )}
+
+            {status === "error" && (
+              <div className="p-2 mb-4 text-sm md:col-span-2 text-red-700 bg-red-50 rounded-xl border border-red-200">
+                {feedbackMsg}
+              </div>
+            )}
 
             {/* SUBMIT BUTTON */}
             <button
@@ -245,7 +339,7 @@ export default function HotelDetailsSection({HotelData} : {HotelData : any}) {
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.7 }}
           className="lg:sticky lg:top-28"
-        >
+          >
           <motion.div
             whileHover={{ y: -5 }}
             className="bg-white rounded-3xl shadow-2xl p-6 border border-gray-100"

@@ -209,6 +209,12 @@ export default function Navbar() {
           )}
         </div>
       </header>
+      {/* 3. common Form Component */}
+      <CommonEnquiryForm
+        open={isFormOpen}
+        onClose={() => setIsFormOpen(false)}
+        defaultService="General Enquiry"
+      />
     </>
   );
 }

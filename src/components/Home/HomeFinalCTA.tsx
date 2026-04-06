@@ -6,10 +6,8 @@ import { ArrowRight, Phone } from "lucide-react";
 import TourEnquiryPopup from "@/utils/TourEnquiryPopUp";
 import { useState } from "react";
 import Link from "next/link";
-import CommonEnquiryForm from "@/utils/CommanEnquiryForm";
 
 export default function FinalCTA() {
-  // const [isFormOpen, setIsFromOpen] = useState(false);
 
   return (
     <>

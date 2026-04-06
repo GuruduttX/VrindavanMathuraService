@@ -200,12 +200,12 @@ export default function PoojaHero() {
             ))}
           </div>
         </div>
+      </section>
         <CommonEnquiryForm
           open={isFormOpen}
           onClose={() => setIsFromOpen(false)}
           defaultService="Pooja"
         />
-      </section>
     </>
   );
 }
