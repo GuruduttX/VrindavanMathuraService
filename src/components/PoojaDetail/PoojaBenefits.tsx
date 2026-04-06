@@ -1,4 +1,11 @@
+"use client"
+
+import CommonEnquiryForm from "@/utils/CommanEnquiryForm";
+import { useState } from "react";
+
 export default function PoojaBenefits() {
+  const [open, setOpen] = useState(false);
+  
   const benefits = [
     {
       title: "Spiritual Peace",
@@ -38,8 +45,12 @@ export default function PoojaBenefits() {
     },
   ];
 
+
   return (
-    <section className="py-24 px-6 bg-white relative overflow-hidden">
+    <>
+       <CommonEnquiryForm open={open} onClose={()=>setOpen(false)} defaultService="Pooja" />
+      
+      <section className="py-24 px-6 bg-white relative overflow-hidden">
       {/* Background decoration */}
       <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,_#FFFBEA_0%,_transparent_60%)] pointer-events-none" />
       <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_bottom_left,_#FFFBEA_0%,_transparent_60%)] pointer-events-none" />
@@ -143,6 +154,7 @@ export default function PoojaBenefits() {
             </p>
           </div>
           <button
+             onClick={()=>setOpen(true)}
             className="shrink-0 inline-flex items-center gap-2.5 px-8 py-3.5 rounded-full
             bg-gradient-to-r from-amber-500 to-orange-500 text-white font-semibold text-sm
             shadow-[0_4px_20px_#E17100]
@@ -157,5 +169,7 @@ export default function PoojaBenefits() {
         </div>
       </div>
     </section>
+    </>
+ 
   );
 }

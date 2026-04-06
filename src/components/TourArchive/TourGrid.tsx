@@ -1,5 +1,8 @@
 "use client";
+import CommonEnquiryForm from "@/utils/CommanEnquiryForm";
 import TourCard from "@/utils/TourCard";
+import TourEnquiryPopup from "@/utils/TourEnquiryPopUp";
+import { useState } from "react";
 
 
 interface Tour {
@@ -14,8 +17,12 @@ interface Props {
 
 
 export default function TourGrid({ tours }: Props) {
+
+  const [open, setOpen] = useState(false);
     
   return (
+    <>
+    <TourEnquiryPopup open={open} onClose={()=>setOpen(false)}/>
     <div id="tours" className="space-y-12">
 
       {/* Optional header row */}
@@ -32,9 +39,11 @@ export default function TourGrid({ tours }: Props) {
       {/* Grid */}
       <div className="grid gap-10 sm:grid-cols-1 md:grid-cols-2 xl:grid-cols-2 2xl:grid-cols-3">
         {tours.map((tour) => (
-          <TourCard key={tour._id} tour={tour} />
+          <TourCard key={tour._id} tour={tour} setOpen={setOpen} />
         ))}
       </div>
     </div>
+    </>
+   
   );
 }

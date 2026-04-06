@@ -69,7 +69,7 @@ const getTourPackageData = async () => {
   try {
 
     const res = await fetch(
-      `http://localhost:3000/api/users/tour-packages/`
+      `/api/users/tour-packages`
     );
 
     if (!res.ok) {
@@ -89,6 +89,8 @@ const getTourPackageData = async () => {
 
 export default async function page() {
   const tours = await getTourPackageData();
+
+ 
 
   const tourServiceSchema = {
     "@context": "https://schema.org",

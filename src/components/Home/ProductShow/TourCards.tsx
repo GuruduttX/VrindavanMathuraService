@@ -3,16 +3,14 @@ import CommonEnquiryForm from "@/utils/CommanEnquiryForm";
 import TourEnquiryPopup from "@/utils/TourEnquiryPopUp";
 import { Star, MapPin, Moon } from "lucide-react";
 import Link from "next/link";
-import { useState } from "react";
+import { useState, SetStateAction } from "react";
 
 
-export default function TourCard({ product }: { product: any }) {
-  const [open, setOpen] = useState(false);
+export default function TourCard({ product , setOpen}: { product: any, setOpen : React.Dispatch<SetStateAction<boolean>> }) {
   
 
   return (
     <>
-      <CommonEnquiryForm open={open} onClose={()=>setOpen(false)}/>
       <div className="flex flex-col rounded-xl border border-stone-200 overflow-hidden bg-white">
       
       {/* Image */}
@@ -91,7 +89,7 @@ export default function TourCard({ product }: { product: any }) {
         </Link>
       
       </div>
-    </div>
+     </div>
     </>
     
   );

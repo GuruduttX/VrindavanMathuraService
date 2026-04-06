@@ -22,6 +22,7 @@ import DurationSection from '@/components/Admin/PackageEditor/DurationSection';
 import DestRoutes from '@/components/Admin/PackageEditor/DestRoute';
 import SelectedInclusion from '@/components/Admin/PackageEditor/SelectedInclusion';
 import PackageOverview from '@/components/Admin/PackageEditor/PackageOverview';
+import CMSContentSection from '@/components/Admin/CMS/CMSContentSection';
 
 type PackageForm = {
   title: string;
@@ -220,17 +221,10 @@ export default function CreateNewPackage() {
     <div
       className=" p-8 rounded-2xl border border-pink-900/40
         shadow-[0_0_60px_-15px_rgba(236,72,153,0.15)]"
-      style={{ background: "#1a0b11" }}
+        style={{ background: "#1a0b11" }}
     >
       {/* Ambient glow */}
-      <div
-        className="pointer-events-none fixed inset-0 z-0"
-        style={{
-          background:
-            "radial-gradient(ellipse 55% 35% at 15% 15%, rgba(236,72,153,0.08) 0%, transparent 60%), radial-gradient(ellipse 45% 30% at 85% 75%, rgba(244,114,182,0.05) 0%, transparent 55%)",
-        }}
-      />
-
+     
       <form className="relative z-10 space-y-6" onSubmit={handleSave}>
         <CMSHeader editorType="Package" />
         <CMSMetaSection title={form.title} category={form.category} slug={form.slug} onChange={updateForm} editorType="Package" />
@@ -252,6 +246,7 @@ export default function CreateNewPackage() {
         <Policy refund={form.refund} cancel={form.cancel} confirm={form.confirmation} payment={form.payment} editorType="Package" onChange={updateForm} />
         <CMSMediaSection image={form.image} alt={form.alt} onChange={updateForm} editorType="Package" />
         <ChildImagePicker childImage={childImage} setChildImage={setChildImage} />
+        
         <CMSActions
           actionType="create"
           editorType="Package"

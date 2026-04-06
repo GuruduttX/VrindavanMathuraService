@@ -19,7 +19,14 @@ interface PoojaHeroProps {
 export default function PoojaHero({ pooja }: PoojaHeroProps) {
   const[isFrormOpen, setIsFromOpen] = useState(false);
   return (
-    <section className="relative w-full min-h-[92vh] flex items-center overflow-hidden">
+    <>
+     <CommonEnquiryForm
+        open={isFrormOpen}
+        onClose={() => setIsFromOpen(false)}
+        defaultService="Pooja Booking"
+      />
+
+      <section className="relative w-full min-h-[92vh] flex items-center overflow-hidden">
       {/* Background Image */}
       <div className="absolute inset-0">
         <Image
@@ -199,8 +206,8 @@ export default function PoojaHero({ pooja }: PoojaHeroProps) {
               </button>
             </Link>
 
-            <Link href="/contact" className="cursor-pointer">
-              <button
+              <button 
+                 onClick={()=>setIsFromOpen(true)}
                 className="inline-flex items-center gap-2.5 px-9 py-4 rounded-full
                 text-white font-semibold text-sm tracking-wide
                 border border-white/40 bg-white/10 backdrop-blur-sm
@@ -211,13 +218,8 @@ export default function PoojaHero({ pooja }: PoojaHeroProps) {
                 Talk to Priest
                 <span className="text-base">🙏</span>
               </button>
-            </Link>
-          </div>
-          <CommonEnquiryForm
-            open={isFrormOpen}
-            onClose={() => setIsFromOpen(false)}
-            defaultService="Taxi Booking"
-          />
+=          </div>
+          
 
           {/* Trust strip */}
           <div className="mt-8 flex flex-wrap items-center gap-x-5 gap-y-2 text-white/45 text-xs">
@@ -262,5 +264,7 @@ export default function PoojaHero({ pooja }: PoojaHeroProps) {
         </svg>
       </div>
     </section>
+    </>
+   
   );
 }
