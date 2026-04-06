@@ -27,27 +27,89 @@ export default function SideForm() {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
+    // Required fields
     if (!form.name || !form.phone || !form.travelDate || !form.travellers) {
       alert("Please fill all required fields");
       return;
     }
 
+    // Phone validation
+    const phoneRegex = /^[0-9]{10}$/;
+    if (!phoneRegex.test(form.phone)) {
+      alert("Enter valid 10-digit phone number");
+      return;
+    }
+
+    // Email validation (optional)
+    if (form.email) {
+      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      if (!emailRegex.test(form.email)) {
+        alert("Enter valid email address");
+        return;
+      }
+    }
+
     setLoading(true);
+
+    try {
+      const res = await fetch("/api/simbark", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(form),
+      });
+
+      const data = await res.json();
+
+      if (!res.ok) throw new Error(data.message);
+
+      // Success
+      setSuccess(true);
+
+      // Reset form
+      setForm({
+        name: "",
+        email: "",
+        phone: "",
+        travelDate: "",
+        travellers: "",
+        message: "",
+      });
+
+      // 🔥 OPTIONAL: WhatsApp redirect
+      /*
+      const whatsappMsg = `Hi, I'm ${form.name}
+Travel Date: ${form.travelDate}
+Travellers: ${form.travellers}`;
+
+      window.open(
+        `https://wa.me/91XXXXXXXXXX?text=${encodeURIComponent(whatsappMsg)}`
+      );
+      */
+
+    } catch (err) {
+      console.error(err);
+      alert("Something went wrong");
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
     <div className="w-full max-w-sm">
-      <div className="
+      <div
+        className="
         relative
         bg-white/90 backdrop-blur-md
         rounded-3xl
-        border border-pink-100
+        border border-orange-100
         shadow-xl
         p-8
-      ">
-
-        {/* Subtle Glow */}
-        <div className="absolute -top-10 -right-10 w-32 h-32 bg-pink-200/30 blur-2xl rounded-full pointer-events-none" />
+      "
+      >
+        {/* Glow */}
+        <div className="absolute -top-10 -right-10 w-32 h-32 bg-orange-200/30 blur-2xl rounded-full pointer-events-none" />
 
         <h3 className="text-xl font-semibold text-gray-900 mb-6">
           Enquire About This Package
@@ -73,13 +135,15 @@ export default function SideForm() {
 
           {/* Phone */}
           <div className="flex gap-3">
-            <div className="
+            <div
+              className="
               w-20 rounded-xl
-              border border-pink-200
+              border border-orange-200
               flex items-center justify-center
-              text-sm text-pink-600 font-medium
-              bg-pink-50
-            ">
+              text-sm text-[#A84010] font-medium
+              bg-orange-50
+            "
+            >
               +91
             </div>
 
@@ -104,11 +168,11 @@ export default function SideForm() {
               required
               className="
                 peer w-full rounded-xl
-                border border-pink-200
+                border border-orange-200
                 px-4 pt-5 pb-2
                 text-sm outline-none
-                focus:border-pink-500
-                focus:ring-2 focus:ring-pink-100
+                focus:border-[#A84010]
+                focus:ring-2 focus:ring-orange-100
                 transition
               "
             />
@@ -116,7 +180,7 @@ export default function SideForm() {
               className="
                 absolute left-4 top-2 text-xs
                 text-gray-500
-                peer-focus:text-pink-600
+                peer-focus:text-[#A84010]
                 transition
               "
             >
@@ -139,13 +203,14 @@ export default function SideForm() {
             onChange={handleChange}
           />
 
+          {/* Button */}
           <button
             type="submit"
             disabled={loading}
             className="
               w-full
-              bg-gradient-to-r from-pink-600 to-rose-500
-              hover:from-pink-700 hover:to-rose-600
+              bg-[linear-gradient(145deg,#7A2E00,#A84010,#E8821A)]
+              hover:opacity-90
               text-white font-semibold
               py-3 rounded-xl
               shadow-md hover:shadow-lg
@@ -159,12 +224,12 @@ export default function SideForm() {
 
         </form>
 
+        {/* Success */}
         {success && (
-          <p className="mt-4 text-xs text-pink-700 text-center">
-            Enquiry sent successfully ✔ Redirecting to WhatsApp…
+          <p className="mt-4 text-xs text-[#A84010] text-center">
+            Enquiry sent successfully ✔
           </p>
         )}
-
       </div>
     </div>
   );

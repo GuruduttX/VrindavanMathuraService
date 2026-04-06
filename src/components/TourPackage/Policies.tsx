@@ -7,11 +7,11 @@ import {
   CreditCard,
 } from "lucide-react";
 
-const iconMap : any= {
-  "Refund Policy": <RotateCcw className="w-5 h-5 text-pink-600" />,
-  "Cancel Policy": <Ban className="w-5 h-5 text-pink-600" />,
-  "Confirmation  Policy": <BadgeCheck className="w-5 h-5 text-pink-600" />,
-  "Payment Ploicy": <CreditCard className="w-5 h-5 text-pink-600" />,
+const iconMap: any = {
+  "Refund Policy": <RotateCcw className="w-5 h-5 text-[#A84010]" />,
+  "Cancel Policy": <Ban className="w-5 h-5 text-[#A84010]" />,
+  "Confirmation  Policy": <BadgeCheck className="w-5 h-5 text-[#A84010]" />,
+  "Payment Ploicy": <CreditCard className="w-5 h-5 text-[#A84010]" />,
 };
 
 export default function Policies({ PackageData }: any) {
@@ -36,7 +36,7 @@ export default function Policies({ PackageData }: any) {
             className="relative pl-8"
           >
             {/* Left Accent Line */}
-            <span className="absolute left-0 top-1 w-1 h-full bg-pink-200 rounded-full" />
+            <span className="absolute left-0 top-1 w-1 h-full bg-orange-200 rounded-full" />
 
             <div className="flex items-center gap-3 mb-3">
               {iconMap[item.title]}
