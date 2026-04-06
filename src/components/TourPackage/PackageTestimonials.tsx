@@ -9,13 +9,13 @@ export default function PackageTestimonials({ PackageData }: any) {
   ];
 
   return (
-    <section className="py-14 lg:py-24 bg-gradient-to-b from-pink-50 to-white overflow-hidden">
+    <section className="py-14 lg:py-24 bg-gradient-to-b from-orange-50 to-white overflow-hidden">
       <div className="max-w-7xl mx-auto px-4 sm:px-6">
 
-        {/* LEFT – SUMMARY (full width on mobile, 1/3 on desktop) */}
+        {/* LEFT – SUMMARY */}
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 lg:gap-14">
           <div className="space-y-4 text-center lg:text-left">
-            <p className="text-sm font-semibold text-pink-600 tracking-wide">
+            <p className="text-sm font-semibold text-[#A84010] tracking-wide">
               Guest Reviews
             </p>
 
@@ -28,7 +28,7 @@ export default function PackageTestimonials({ PackageData }: any) {
               <div>
                 <div className="flex gap-1">
                   {Array.from({ length: 5 }).map((_, i) => (
-                    <Star key={i} className="w-5 h-5 text-pink-500 fill-pink-500" />
+                    <Star key={i} className="w-5 h-5 text-[#E8821A] fill-[#E8821A]" />
                   ))}
                 </div>
                 <p className="text-sm text-gray-500 mt-1">Based on 180+ journeys</p>
@@ -36,18 +36,18 @@ export default function PackageTestimonials({ PackageData }: any) {
             </div>
           </div>
 
-          {/* RIGHT – INFINITE SCROLL */}
+          {/* RIGHT – SCROLL */}
           <div className="lg:col-span-2 relative">
             <div className="overflow-hidden">
               <div className="flex gap-4 sm:gap-6 infinite-scroll">
                 {testimonials.map((t: any, index: number) => (
                   <div
                     key={index}
-                    className="min-w-[260px] sm:min-w-[300px] max-w-[260px] sm:max-w-[300px] bg-white border border-pink-100 rounded-3xl p-5 shadow-sm hover:shadow-md transition shrink-0"
+                    className="min-w-[260px] sm:min-w-[300px] max-w-[260px] sm:max-w-[300px] bg-white border border-orange-100 rounded-3xl p-5 shadow-sm hover:shadow-md transition shrink-0"
                   >
                     {/* Header */}
                     <div className="flex items-center gap-3 mb-4">
-                      <div className="h-9 w-9 sm:h-10 sm:w-10 rounded-full bg-pink-100 text-pink-600 flex items-center justify-center font-semibold text-sm shrink-0">
+                      <div className="h-9 w-9 sm:h-10 sm:w-10 rounded-full bg-orange-100 text-[#A84010] flex items-center justify-center font-semibold text-sm shrink-0">
                         {t.name?.charAt(0) || "G"}
                       </div>
                       <div className="min-w-0">
@@ -55,7 +55,7 @@ export default function PackageTestimonials({ PackageData }: any) {
                           <p className="font-semibold text-gray-900 text-sm truncate">
                             {t.name || "Guest"}
                           </p>
-                          <BadgeCheck className="w-4 h-4 text-pink-600 shrink-0" />
+                          <BadgeCheck className="w-4 h-4 text-[#A84010] shrink-0" />
                         </div>
                         <p className="text-xs text-gray-500 truncate">{t.location || "India"}</p>
                       </div>
@@ -64,7 +64,7 @@ export default function PackageTestimonials({ PackageData }: any) {
                     {/* Rating */}
                     <div className="flex gap-1 mb-3">
                       {Array.from({ length: 5 }).map((_, i) => (
-                        <Star key={i} className="w-3.5 h-3.5 text-pink-500 fill-pink-500" />
+                        <Star key={i} className="w-3.5 h-3.5 text-[#E8821A] fill-[#E8821A]" />
                       ))}
                     </div>
 
@@ -78,7 +78,7 @@ export default function PackageTestimonials({ PackageData }: any) {
             </div>
 
             {/* Gradient Fade Edges */}
-            <div className="pointer-events-none absolute top-0 left-0 h-full w-10 sm:w-16 bg-gradient-to-r from-pink-50 to-transparent" />
+            <div className="pointer-events-none absolute top-0 left-0 h-full w-10 sm:w-16 bg-gradient-to-r from-orange-50 to-transparent" />
             <div className="pointer-events-none absolute top-0 right-0 h-full w-10 sm:w-16 bg-gradient-to-l from-white to-transparent" />
           </div>
 

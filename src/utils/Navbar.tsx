@@ -48,8 +48,12 @@ export default function Navbar() {
 
   return (
     <>
-      <TourEnquiryPopup open={open} onClose={() => setOpen(false)} />
-      <header className="fixed top-6 left-0 w-full z-50 flex justify-center">
+       <CommonEnquiryForm
+                open={isFormOpen}
+                onClose={() => setIsFormOpen(false)}
+                defaultService="General Enquiry"
+              />
+      <header className="fixed top-6 left-0 w-full z-40 flex justify-center">
         <div className="relative w-[92vw] sm:w-[90vw] xl:w-[85vw]">
           {/* Glow Background */}
           <div
@@ -169,11 +173,7 @@ export default function Navbar() {
               </button>
 
               {/* 3. common Form Component */}
-              <CommonEnquiryForm
-                open={isFormOpen}
-                onClose={() => setIsFormOpen(false)}
-                defaultService="General Enquiry"
-              />
+              
             </div>
           </nav>
 
