@@ -3,7 +3,16 @@
 import { useState, useEffect } from "react";
 import Image from "next/image";
 import { motion } from "framer-motion";
-import { Star, Wifi, Car, Utensils, MapPin, Hotel } from "lucide-react";
+import {
+  Star,
+  Wifi,
+  Car,
+  Utensils,
+  MapPin,
+  Hotel,
+  ChevronDown,
+  ChevronUp,
+} from "lucide-react";
 import Link from "next/link";
 
 
@@ -50,6 +59,7 @@ export default function HotelsArchive() {
   const [parking, setParking] = useState(false);
   const [restaurant, setRestaurant] = useState(false);
   const [hotels, setHotels] = useState<Hotel[]>([]);
+  const [isFilterOpen, setIsFilterOpen] = useState(false);
 
 
   useEffect(() => {
@@ -132,100 +142,117 @@ console.log(filteredHotels, "filtered hotels");
 
           <div
             className="
-          sticky
-          top-24
-          bg-white
-          rounded-3xl
-          shadow-xl
-          p-6
-          space-y-8
-          border border-gray-100
-          "
+                        sticky
+                        top-28
+                        z-40
+                        bg-white
+                        rounded-3xl
+                        shadow-xl
+                        p-6
+                        border border-gray-100
+                        h-fit
+                      "
           >
-            <h3 className="text-xl font-semibold">Filter Hotels</h3>
+            {/* HEADER & MOBILE TOGGLE */}
+            <div
+              className="flex items-center justify-between cursor-pointer lg:cursor-default"
+              onClick={() => setIsFilterOpen(!isFilterOpen)}
+            >
+              <h3 className="text-xl font-semibold">Filter Hotels</h3>
 
-            {/* PRICE */}
-
-            <div>
-              <p className="text-sm text-gray-500 mb-3">Price Range</p>
-
-              <input
-                type="range"
-                min={500}
-                max={20000}
-                value={price}
-                onChange={(e) => setPrice(Number(e.target.value))}
-                className="w-full accent-amber-500"
-              />
-
-              <p className="text-sm mt-2 text-gray-600">Up to ₹{price}</p>
+              {/* Caret icon only visible on mobile (hidden on lg screens) */}
+              <button className="lg:hidden text-gray-500 hover:text-amber-500 transition">
+                {isFilterOpen ? (
+                  <ChevronUp size={24} />
+                ) : (
+                  <ChevronDown size={24} />
+                )}
+              </button>
             </div>
 
-            {/* RATING */}
-
-            <div>
-              <p className="text-sm text-gray-500 mb-3">Rating</p>
-
-              {[4, 4.5].map((value) => (
-                <button
-                  key={value}
-                  onClick={() => setRating(value)}
-                  className="
-                  flex items-center gap-2
-                  w-full
-                  px-3 py-2
-                  rounded-lg
-                  hover:bg-amber-50
-                  transition
-                  text-sm
-                  "
-                >
-                  <Star size={16} className="text-yellow-500" />
-                  {value}+ Rating
-                </button>
-              ))}
-            </div>
-
-            {/* AMENITIES */}
-
-            <div>
-              <p className="text-sm text-gray-500 mb-3">Amenities</p>
-
-              <label className="flex items-center gap-2 text-sm mb-2">
+            {/* FILTER CONTENT */}
+            {/* lg:block ensures it's ALWAYS visible on desktop.
+        On mobile, it toggles between 'block' and 'hidden' based on state. 
+    */}
+            <div
+              className={`mt-8 space-y-8 lg:block ${isFilterOpen ? "block" : "hidden"}`}
+            >
+              {/* PRICE */}
+              <div>
+                <p className="text-sm text-gray-500 mb-3">Price Range</p>
                 <input
-                  type="checkbox"
-                  checked={wifi}
-                  onChange={() => setWifi(!wifi)}
-                  className="accent-amber-500"
+                  type="range"
+                  min={500}
+                  max={20000}
+                  value={price}
+                  onChange={(e) => setPrice(Number(e.target.value))}
+                  className="w-full accent-amber-500"
                 />
-                <Wifi size={16} className="text-amber-500" />
-                Free WiFi
-              </label>
+                <p className="text-sm mt-2 text-gray-600">Up to ₹{price}</p>
+              </div>
 
-              <label className="flex items-center gap-2 text-sm mb-2">
-                <input
-                  type="checkbox"
-                  checked={parking}
-                  onChange={() => setParking(!parking)}
-                  className="accent-amber-500"
-                />
-                <Car size={16} className="text-amber-500" />
-                Parking
-              </label>
+              {/* RATING */}
+              <div>
+                <p className="text-sm text-gray-500 mb-3">Rating</p>
+                {[4, 4.5].map((value) => (
+                  <button
+                    key={value}
+                    onClick={() => setRating(value)}
+                    className="
+              flex items-center gap-2
+              w-full
+              px-3 py-2
+              rounded-lg
+              hover:bg-amber-50
+              transition
+              text-sm
+            "
+                  >
+                    <Star size={16} className="text-yellow-500" />
+                    {value}+ Rating
+                  </button>
+                ))}
+              </div>
 
-              <label className="flex items-center gap-2 text-sm">
-                <input
-                  type="checkbox"
-                  checked={restaurant}
-                  onChange={() => setRestaurant(!restaurant)}
-                  className="accent-amber-500"
-                />
-                <Utensils size={16} className="text-amber-500" />
-                Restaurant
-              </label>
+              {/* AMENITIES */}
+              <div>
+                <p className="text-sm text-gray-500 mb-3">Amenities</p>
+
+                <label className="flex items-center gap-2 text-sm mb-2 cursor-pointer">
+                  <input
+                    type="checkbox"
+                    checked={wifi}
+                    onChange={() => setWifi(!wifi)}
+                    className="accent-amber-500 w-4 h-4"
+                  />
+                  <Wifi size={16} className="text-amber-500" />
+                  Free WiFi
+                </label>
+
+                <label className="flex items-center gap-2 text-sm mb-2 cursor-pointer">
+                  <input
+                    type="checkbox"
+                    checked={parking}
+                    onChange={() => setParking(!parking)}
+                    className="accent-amber-500 w-4 h-4"
+                  />
+                  <Car size={16} className="text-amber-500" />
+                  Parking
+                </label>
+
+                <label className="flex items-center gap-2 text-sm cursor-pointer">
+                  <input
+                    type="checkbox"
+                    checked={restaurant}
+                    onChange={() => setRestaurant(!restaurant)}
+                    className="accent-amber-500 w-4 h-4"
+                  />
+                  <Utensils size={16} className="text-amber-500" />
+                  Restaurant
+                </label>
+              </div>
             </div>
           </div>
-
           {/* HOTEL LIST */}
 
           <div className="lg:col-span-3 grid md:grid-cols-2 gap-8">
@@ -264,7 +291,7 @@ console.log(filteredHotels, "filtered hotels");
 
                 {/* CONTENT */}
 
-                <div className="p-6 z-999">
+                <div className="p-6">
                   <h3 className="text-lg font-semibold">{hotel.title}</h3>{" "}
                   {/* Changed from name to title */}
                   <div className="flex items-center text-gray-500 text-sm mt-1">

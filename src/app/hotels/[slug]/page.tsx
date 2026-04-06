@@ -23,7 +23,6 @@ const getHotelData = async (slug: string) => {
         }
 
         const { data } = await response.json();
-
         return data
         
     } catch (error) {
@@ -48,17 +47,17 @@ const page = async ({ params }: { params: Promise<{ slug: string }> }) => {
     }
 
     return (
-        <>
-            <Navbar />
-            <HotelHero HotelData={HotelData}/>
-            <HotelDetailsSection HotelData={HotelData}/>
-            <GuestReviewSection/>
-            
-            <HotelCTA/>
-            <HotelFAQ/>
-            <LuxuryFooter />
-        </>
-    )
+      <>
+        <Navbar />
+        <HotelHero HotelData={HotelData} />
+        <HotelDetailsSection HotelData={HotelData} />
+        <GuestReviewSection HotelData={HotelData} />
+
+        <HotelCTA />
+        <HotelFAQ />
+        <LuxuryFooter />
+      </>
+    );
 }
 
 export default page

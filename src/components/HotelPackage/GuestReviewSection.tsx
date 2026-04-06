@@ -8,14 +8,23 @@ import {
   CheckCircle2,
   Key,
   Sparkle,
+  Hotel,
 } from "lucide-react";
 
-export default function GuestReviewSection() {
+export default function GuestReviewSection({HotelData}:any) {
+  console.log(HotelData, "Guest review section");
+
+   const highlightLabels: Record<string, string> = {
+     comfortStay: "Comfort Stay",
+     greatLocation: "Great Location",
+     hospitality: "Hospitality",
+     amazingView: "Amazing View",
+     cleanliness: "Cleanliness",
+     greatValue: "Great Value",
+   };
   return (
     <section className="py-28 bg-gradient-to-b from-amber-100 via-amber-50 to-white">
-
       <div className="max-w-7xl mx-auto px-6">
-
         {/* TOP RATING */}
 
         <motion.div
@@ -24,17 +33,14 @@ export default function GuestReviewSection() {
           transition={{ duration: 0.7 }}
           className="text-center"
         >
-
           <div className="flex items-center justify-center gap-6">
-
             <span className="text-5xl">🏆</span>
 
             <h2 className="text-7xl font-bold bg-gradient-to-r from-amber-500 via-amber-500 to-orange-600 bg-clip-text text-transparent">
-              5.0
+              {HotelData.rating}
             </h2>
 
             <span className="text-5xl">🏆</span>
-
           </div>
 
           <h3 className="mt-4 text-2xl font-semibold text-gray-800">
@@ -45,59 +51,51 @@ export default function GuestReviewSection() {
             This hotel is in the top 10% of Vrindavan stays based on guest
             ratings, comfort, hospitality and location experience.
           </p>
-
         </motion.div>
-
-
 
         {/* RATING BREAKDOWN */}
 
         <div className="mt-20 grid md:grid-cols-2 lg:grid-cols-6 gap-6">
-
           <RatingCard
             title="Cleanliness"
-            rating="4.9"
+            rating={HotelData.ratingSummary.scores.cleanliness}
             icon={<Sparkles />}
           />
 
           <RatingCard
             title="Accuracy"
-            rating="5.0"
+            rating={HotelData.ratingSummary.scores.accuracy}
             icon={<CheckCircle2 />}
           />
 
           <RatingCard
             title="Check-in"
-            rating="4.9"
+            rating={HotelData.ratingSummary.scores.checkIn}
             icon={<Key />}
           />
 
           <RatingCard
             title="Communication"
-            rating="5.0"
+            rating={HotelData.ratingSummary.scores.communication}
             icon={<MessageCircle />}
           />
 
           <RatingCard
             title="Location"
-            rating="5.0"
+            rating={HotelData.ratingSummary.scores.location}
             icon={<MapPin />}
           />
 
           <RatingCard
             title="Value"
-            rating="5.0"
+            rating={HotelData.ratingSummary.scores.value}
             icon={<Sparkle />}
           />
-
         </div>
-
-
 
         {/* OVERALL GRAPH */}
 
         <div className="mt-20 max-w-xl mx-auto">
-
           <h3 className="text-lg font-semibold mb-6 text-gray-800">
             Overall Rating
           </h3>
@@ -107,26 +105,30 @@ export default function GuestReviewSection() {
           <RatingBar stars={3} width="40%" />
           <RatingBar stars={2} width="15%" />
           <RatingBar stars={1} width="5%" />
-
         </div>
-
-
 
         {/* REVIEW TAGS */}
 
         <div className="mt-20 flex flex-wrap justify-center gap-4">
+          {Object.entries(HotelData.ratingSummary.highlights).map(
+            ([key, count]) => {
+              // Skip if the count is 0, or if the backend sends an unknown key
+              if (!count || !highlightLabels[key]) return null;
 
-          <Tag label="Amazing View (18)" />
+              // 3. Render the tag combining the readable label and the count
+              return (
+                <Tag key={key} label={`${highlightLabels[key]} (${count})`} />
+              );
+            },
+          )}
+          {/* <Tag label="Amazing View (18)" />
           <Tag label="Hospitality (15)" />
           <Tag label="Great Location (10)" />
           <Tag label="Cleanliness (5)" />
           <Tag label="Great Value (3)" />
-          <Tag label="Comfort Stay (7)" />
-
+          <Tag label="Comfort Stay (7)" /> */}
         </div>
-
       </div>
-
     </section>
   );
 }
