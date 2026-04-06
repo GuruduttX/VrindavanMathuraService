@@ -1,5 +1,5 @@
-import { uploadImage } from "@/controllers/uploadImageControllers";
+import { uploadImageController } from "@/controllers/admin/uploadImageControllers";
 
 export async function POST(req: Request) {
-  return uploadImage(req);
+  return uploadImageController(req);
 }

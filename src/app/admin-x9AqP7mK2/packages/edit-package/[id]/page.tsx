@@ -15,7 +15,7 @@ import Policy from '@/components/Admin/PackageEditor/Policy';
 import Document from '@/components/Admin/PackageEditor/Document';
 import Testimonials from '@/components/Admin/PackageEditor/Testimonials';
 import ItinearyMaker from '@/components/Admin/PackageEditor/Itinerary';
-import DANDestination, { destinations } from '@/components/Admin/PackageEditor/DANDestination';
+import DANDestination from '@/components/Admin/PackageEditor/DANDestination';
 import ChildImagePicker from '@/components/Admin/PackageEditor/ChildImagePicker';
 import CMSSchema from '@/components/Admin/CMS/CMSSchema';
 import DurationSection from '@/components/Admin/PackageEditor/DurationSection';
@@ -54,20 +54,20 @@ type PackageForm = {
   status: string;
 };
 
-type FAQ      = { id: string; question: string; answer: string };
+type FAQ = { id: string; question: string; answer: string };
 type Testimonial = { id: string; name: string; description: string; rating: string };
-type HighLights  = { id: string; description: string };
-type Inclusions  = { id: string; description: string };
-type Exclusions  = { id: string; description: string };
-type Documents   = { id: string; description: string };
-type Itinerary   = { id: string; day: number; title: string; description: string };
-type ChildImage  = { id: string; image: string; alt: string };
+type HighLights = { id: string; description: string };
+type Inclusions = { id: string; description: string };
+type Exclusions = { id: string; description: string };
+type Documents = { id: string; description: string };
+type Itinerary = { id: string; day: number; title: string; description: string };
+type ChildImage = { id: string; image: string; alt: string };
 type BreakdownItem = { id: string; days: string; place: string };
 type SegmentType = { id: string; from: string; to: string };
-type RouteType   = { source: string; destination: string; segments: SegmentType[] };
+type RouteType = { source: string; destination: string; segments: SegmentType[] };
 
 export default function page() {
-  const {id} = useParams();
+  const { id } = useParams();
 
 
   const [form, setForm] = useState<PackageForm>({
@@ -82,33 +82,33 @@ export default function page() {
   });
 
   const [loading, setLoading] = useState(false);
-  const [childImage,  setChildImage]   = useState<ChildImage[]>([]);
-  const [faqs, setFaqs]         = useState<FAQ[]>([{ id: crypto.randomUUID(), question: "", answer: "" }]);
+  const [childImage, setChildImage] = useState<ChildImage[]>([]);
+  const [faqs, setFaqs] = useState<FAQ[]>([{ id: crypto.randomUUID(), question: "", answer: "" }]);
   const [testimonials, setTestimonials] = useState<Testimonial[]>([{ id: crypto.randomUUID(), name: "", description: "", rating: "" }]);
-  const [highLights,   setHighLights]   = useState<HighLights[]>([{ id: crypto.randomUUID(), description: "" }]);
-  const [inclusions, setInclusions]   = useState<Inclusions[]>([{ id: crypto.randomUUID(), description: "" }]);
-  const [exclusions, setExclusions]  = useState<Exclusions[]>([{ id: crypto.randomUUID(), description: "" }]);
-  const [documents,  setDocuments]   = useState<Documents[]>([{ id: crypto.randomUUID(), description: "" }]);
-  const [itinerary,  setItinerary]  = useState<Itinerary[]>([{ id: crypto.randomUUID(), day: 1, title: "", description: "" }]);
-  const [breakdown,  setBreakdown]  = useState<BreakdownItem[]>([{ id: crypto.randomUUID(), days: "0", place: "" }]);
-  const [route,  setRoute]   = useState<RouteType>({ source: "", destination: "", segments: [] });
+  const [highLights, setHighLights] = useState<HighLights[]>([{ id: crypto.randomUUID(), description: "" }]);
+  const [inclusions, setInclusions] = useState<Inclusions[]>([{ id: crypto.randomUUID(), description: "" }]);
+  const [exclusions, setExclusions] = useState<Exclusions[]>([{ id: crypto.randomUUID(), description: "" }]);
+  const [documents, setDocuments] = useState<Documents[]>([{ id: crypto.randomUUID(), description: "" }]);
+  const [itinerary, setItinerary] = useState<Itinerary[]>([{ id: crypto.randomUUID(), day: 1, title: "", description: "" }]);
+  const [breakdown, setBreakdown] = useState<BreakdownItem[]>([{ id: crypto.randomUUID(), days: "0", place: "" }]);
+  const [route, setRoute] = useState<RouteType>({ source: "", destination: "", segments: [] });
 
 
   //Fill data
 
-  const getPackages = async()=>{
+  const getPackages = async () => {
     try {
-        const res = await fetch(`/api/tour-packages/${id}`);
-        if(!res.ok){
-            toast.error("Error fetching package");
-        }
-        const result = await res.json();
+      const res = await fetch(`/api/admin/tour-packages/${id}`);
+      if (!res.ok) {
+        toast.error("Error fetching package");
+      }
+      const result = await res.json();
 
-        const data = result.data;
+      const data = result.data;
 
-        console.log("data", data);
+      console.log("data", data);
 
-    
+
       setForm({
         title: data.title ?? "",
         price: data.price?.toString() ?? "",
@@ -122,7 +122,7 @@ export default function page() {
         schemaTitle: data.schemaTitle ?? "",
         schemaDescription: data.schemaDescription ?? "",
 
-        image: data.heroImage ?? "",  
+        image: data.heroImage ?? "",
         alt: "",
 
         overview: data.overview ?? "",
@@ -144,7 +144,7 @@ export default function page() {
 
         status: data.status ?? "",
         destination: data.destination ?? "",
-        reviews : data.reviews ?? ""
+        reviews: data.reviews ?? ""
       });
 
       setFaqs(data.faqs ?? []);
@@ -157,82 +157,82 @@ export default function page() {
       setItinerary(data.itinerary ?? [])
       setChildImage(data.childImage ?? []);
       setBreakdown(data.durationbreakdown ?? []);
-      setRoute(data.routes ?? {source: "", destination : "", segments : []})
+      setRoute(data.routes ?? { source: "", destination: "", segments: [] })
 
-      
+
     } catch (error) {
-       console.log("Errro", error);
+      console.log("Errro", error);
     }
-     
+
 
   }
 
-  useEffect(()=>{
-      getPackages();
-  },[id])
+  useEffect(() => {
+    getPackages();
+  }, [id])
 
-  
+
 
   const updateForm = (field: keyof PackageForm, value: string) => {
     setForm((prev) => ({ ...prev, [field]: value }));
   };
 
-    const buildPayload = (status: "published" | "draft") => ({
-        title: form.title,
-        category: form.category,
-        slug: form.slug,
+  const buildPayload = (status: "published" | "draft") => ({
+    title: form.title,
+    category: form.category,
+    slug: form.slug,
 
-        price: Number(form.price),
-        days: Number(form.day),
-        nights: Number(form.night),
+    price: Number(form.price),
+    days: Number(form.day),
+    nights: Number(form.night),
 
-        destination: form.destination,
-        rating: form.rating,
-        reviews : form.reviews,
+    destination: form.destination,
+    rating: form.rating,
+    reviews: form.reviews,
 
-        overview: form.overview,
-        duration: form.duration,
+    overview: form.overview,
+    duration: form.duration,
 
-        heroImage: form.image || "",
+    heroImage: form.image || "",
 
-        metaTitle: form.metaTitle,
-        metaDescription: form.metaDescription,
+    metaTitle: form.metaTitle,
+    metaDescription: form.metaDescription,
 
-        schemaTitle: form.schemaTitle,
-        schemaDescription: form.schemaDescription,
-        refund: form.refund,
-        cancel: form.cancel,
-        confirmation: form.confirmation,
-        payment: form.payment,
+    schemaTitle: form.schemaTitle,
+    schemaDescription: form.schemaDescription,
+    refund: form.refund,
+    cancel: form.cancel,
+    confirmation: form.confirmation,
+    payment: form.payment,
 
 
-        childImages: childImage,
-        faqs,
-        testimonials: testimonials,
+    childImages: childImage,
+    faqs,
+    testimonials: testimonials,
 
-        highlights: highLights,
-        inclusions,
-        exclusions,
-        knowBeforeYouGo : documents,
-        itinerary,
+    highlights: highLights,
+    inclusions,
+    exclusions,
+    knowBeforeYouGo: documents,
+    itinerary,
 
-        durationbreakdown: breakdown,
+    durationbreakdown: breakdown,
 
-        routes: route,
+    routes: route,
 
-        isBreakfastIncluded: form.breakfast_included,
-        isStayIncluded: form.stay_included,
-        isTransferIncluded: form.transfer_included,
-        isSightseeingIncluded: form.sightseeing_included,
+    isBreakfastIncluded: form.breakfast_included,
+    isStayIncluded: form.stay_included,
+    isTransferIncluded: form.transfer_included,
+    isSightseeingIncluded: form.sightseeing_included,
 
-        status,
+    status,
   });
 
   const postPayload = async (payload: object) => {
     const res = await fetch(`/api/tour-packages/${id}`, {
-      method:  "PUT",
+      method: "PUT",
       headers: { "Content-Type": "application/json" },
-      body:    JSON.stringify(payload),
+      body: JSON.stringify(payload),
     });
 
     const data = await res.json();
@@ -245,23 +245,14 @@ export default function page() {
       formEl.reportValidity();
       return false;
     }
-    // if (!form.image) {
-    //   toast.error("Package image is missing");
-    //   return false;
-    // }
+
     if (!form.category) {
       toast.error("Package category is missing");
       return false;
     }
-    // if (
-    //   childImage.length < 4 ||
-    //   !childImage[0]?.image || !childImage[1]?.image ||
-    //   !childImage[2]?.image || !childImage[3]?.image
-    // ) {
-    //   toast.error(`Only ${childImage.length} child image(s) added — need 4`);
-    //   return false;
-    // }
+
     return true;
+
   };
 
   const handleSave = async (e: React.FormEvent<HTMLFormElement>) => {
@@ -298,7 +289,7 @@ export default function page() {
     }
   };
 
-  const handlePreview = () => {};
+
 
   return (
     <div
@@ -307,6 +298,7 @@ export default function page() {
       style={{ background: "#1a0b11" }}
     >
       {/* Ambient glow */}
+
       <div
         className="pointer-events-none fixed inset-0 z-0"
         style={{
@@ -315,7 +307,7 @@ export default function page() {
         }}
       />
 
-      <form className="relative z-10 space-y-6" onSubmit={handleSave}>
+      <form className="space-y-6" onSubmit={handleSave}>
         <CMSHeader editorType="Package" />
         <CMSMetaSection title={form.title} category={form.category} slug={form.slug} onChange={updateForm} editorType="Package" />
         <PackageDetails reviews={form.reviews} rating={form.rating} price={form.price} duration={form.duration} onChange={updateForm} editorType="Package" />
@@ -339,7 +331,6 @@ export default function page() {
         <CMSActions
           actionType="update"
           editorType="Package"
-         
           onSaveDraft={handleSaveDraft}
           loading={loading}
         />

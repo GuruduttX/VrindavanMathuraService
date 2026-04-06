@@ -46,7 +46,7 @@ const CMSMediaSection = ({
 
       setLoading(true);
 
-      const res = await fetch("/api/upload", {
+      const res = await fetch("/api/admin/upload", {
         method: "POST",
         body: formData
       });
