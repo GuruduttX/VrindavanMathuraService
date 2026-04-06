@@ -20,17 +20,23 @@ export default function PoojaHero({ pooja }: PoojaHeroProps) {
   const[isFrormOpen, setIsFromOpen] = useState(false);
   return (
     <>
+     <CommonEnquiryForm
+        open={isFrormOpen}
+        onClose={() => setIsFromOpen(false)}
+        defaultService="Pooja Booking"
+      />
+
       <section className="relative w-full min-h-[92vh] flex items-center overflow-hidden">
-        {/* Background Image */}
-        <div className="absolute inset-0">
-          <Image
-            src={"/images/pooja/mainHero.webp"}
-            alt={pooja.title}
-            fill
-            className=" object-cover object-center brightness-[0.35]"
-            priority
-          />
-        </div>
+      {/* Background Image */}
+      <div className="absolute inset-0">
+        <Image
+          src={"/images/pooja/mainHero.webp"}
+          alt={pooja.title}
+          fill
+          className=" object-cover object-center brightness-[0.35]"
+          priority
+        />
+      </div>
 
         {/* Gradient Overlays */}
         <div className="absolute inset-0 bg-gradient-to-br from-orange-950/80 via-amber-800/70 to-amber-500/50" />
@@ -200,20 +206,20 @@ export default function PoojaHero({ pooja }: PoojaHeroProps) {
                 </button>
               </Link>
 
-              <Link href="/contact" className="cursor-pointer">
-                <button
-                  className="inline-flex items-center gap-2.5 px-9 py-4 rounded-full
+              <button 
+                 onClick={()=>setIsFromOpen(true)}
+                className="inline-flex items-center gap-2.5 px-9 py-4 rounded-full
                 text-white font-semibold text-sm tracking-wide
                 border border-white/40 bg-white/10 backdrop-blur-sm
                 hover:bg-white hover:text-amber-700 hover:border-white
                 hover:scale-[1.03] active:scale-95
                 transition-all duration-200 cursor-pointer"
-                >
-                  Talk to Priest
-                  <span className="text-base">🙏</span>
-                </button>
-              </Link>
-            </div>
+              >
+                Talk to Priest
+                <span className="text-base">🙏</span>
+              </button>
+=          </div>
+          
 
             {/* Trust strip */}
             <div className="mt-8 flex flex-wrap items-center gap-x-5 gap-y-2 text-white/45 text-xs">
@@ -240,30 +246,17 @@ export default function PoojaHero({ pooja }: PoojaHeroProps) {
           className="absolute bottom-7 left-1/2 -translate-x-1/2 flex flex-col items-center gap-1
         text-white/35 text-[10px] tracking-widest cursor-default select-none"
         >
-          <span>SCROLL</span>
-          <svg
-            className="animate-bounce"
-            width="12"
-            height="14"
-            viewBox="0 0 12 14"
-            fill="none"
-          >
-            <path
-              d="M6 1v10M1 8l5 5 5-5"
-              stroke="currentColor"
-              strokeWidth="1.4"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-            />
-          </svg>
-        </div>
-      </section>
-      
-      <CommonEnquiryForm
-        open={isFrormOpen}
-        onClose={() => setIsFromOpen(false)}
-        defaultService="Taxi Booking"
-      />
+          <path
+            d="M6 1v10M1 8l5 5 5-5"
+            stroke="currentColor"
+            strokeWidth="1.4"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+          />
+        </svg>
+      </div>
+    </section>
     </>
+   
   );
 }

@@ -101,7 +101,7 @@ export default function PoojaCard({ product }: any) {
         </div>
         <Link href={`/pooja/${product.slug}`} className="bg-amber-400 text-amber-950 text-sm font-medium
           px-4 py-2 rounded-lg hover:bg-amber-500 transition-colors">
-          Book Puja
+          View Page
         </Link>
       </div>
     </div>
