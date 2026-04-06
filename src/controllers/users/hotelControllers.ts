@@ -14,6 +14,8 @@ export const getUserAllHotelsController = async () => {
         
     } catch (error) {
 
+        
+
         return NextResponse.json({
             success : true,
             message : "All Hotels Are Not Founded There Are Some Errors"

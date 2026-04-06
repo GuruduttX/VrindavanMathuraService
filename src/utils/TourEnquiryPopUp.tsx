@@ -10,13 +10,73 @@ interface Props {
 
 export default function TourEnquiryPopup({ open, onClose }: Props) {
   const [animate, setAnimate] = useState(false);
-  const [loading] = useState(false);
+  const [loading, setLoading] = useState(false);
 
   const [form, setForm] = useState({
     name: "",
     phone: "",
     email: "",
+    serviceType: "Tour Package",
   });
+
+  const handleChange = (e: any) =>
+    setForm({ ...form, [e.target.name]: e.target.value });
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+
+    // PHONE VALIDATION
+    const phoneRegex = /^[0-9]{10}$/;
+    if (!phoneRegex.test(form.phone)) {
+      alert("Enter valid 10-digit phone number");
+      return;
+    }
+
+    // EMAIL VALIDATION
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(form.email)) {
+      alert("Enter valid email");
+      return;
+    }
+
+    if (!form.name.trim()) {
+      alert("Name is required");
+      return;
+    }
+
+    setLoading(true);
+
+    try {
+      const res = await fetch("/api/simbark", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(form),
+      });
+
+      const data = await res.json();
+
+      if (!res.ok) throw new Error(data.message);
+
+      alert("Submitted successfully ✅");
+
+      // RESET
+      setForm({
+        name: "",
+        phone: "",
+        email: "",
+        serviceType: "Tour Package",
+      });
+
+      onClose(); // optional UX improvement
+    } catch (err) {
+      console.error(err);
+      alert("Something went wrong");
+    } finally {
+      setLoading(false);
+    }
+  };
 
   useEffect(() => {
     if (open) {
@@ -30,9 +90,6 @@ export default function TourEnquiryPopup({ open, onClose }: Props) {
 
   if (!open) return null;
 
-  const handleChange = (e: any) =>
-    setForm({ ...form, [e.target.name]: e.target.value });
-
   return (
     <div className="fixed inset-0 z-[999] flex items-center justify-center p-4">
 
@@ -45,129 +102,62 @@ export default function TourEnquiryPopup({ open, onClose }: Props) {
       {/* MODAL */}
       <div
         className={`relative w-full max-w-lg rounded-3xl
-        bg-white shadow-2xl border border-pink-300
+        bg-white shadow-2xl border border-orange-200
         transform transition-all duration-500
         ${animate ? "translate-y-0 opacity-100" : "-translate-y-10 opacity-0"}`}
       >
 
-        {/* CLOSE BUTTON */}
+        {/* CLOSE */}
         <button
           onClick={onClose}
-          aria-label="Close"
-          className="absolute top-3 right-3 z-50 cursor-pointer
-          bg-white/90 backdrop-blur-md 
-          p-2.5 rounded-full shadow-lg 
-          hover:bg-white transition 
-          border border-gray-200"
+          className="absolute top-3 right-3 p-2.5 rounded-full border"
         >
-          <X size={20} className="text-gray-700" />
+          <X size={20} />
         </button>
 
         {/* HEADER */}
-        <div className="relative p-6 rounded-t-3xl bg-gradient-to-r from-pink-600 to-rose-500 text-white">
-          <h2 className="text-xl md:text-2xl font-bold flex items-center gap-2">
-            <Map size={22} /> Plan Your Vrindavan Visit
+        <div className="p-6 bg-[linear-gradient(145deg,#7A2E00,#A84010,#E8821A)] text-white rounded-t-3xl">
+          <h2 className="text-xl font-bold flex items-center gap-2">
+            <Map size={20} /> Plan Your Visit
           </h2>
-
-          <p className="text-sm opacity-90 mt-1">
-            Get quick help from our local experts for routes, parking & darshan.
-          </p>
-        </div>
-
-        {/* WHATSAPP CARD */}
-        <div className="p-4">
-          <div className="bg-green-50 border border-green-200 rounded-xl p-3 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
-
-            <div>
-              <p className="text-xs text-gray-600">Need instant help?</p>
-              <p className="text-sm font-medium text-gray-800">
-                Chat with our expert on WhatsApp
-              </p>
-            </div>
-
-            <a
-              href="https://wa.me/917302265809"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="bg-green-500 hover:bg-green-600 text-white px-4 py-2 rounded-lg text-sm font-medium text-center"
-            >
-              Connect on WhatsApp
-            </a>
-
-          </div>
         </div>
 
         {/* FORM */}
-        <form className="px-4 pb-5 space-y-3">
+        <form onSubmit={handleSubmit} className="p-5 space-y-3">
 
-          {/* NAME */}
-          <div className="relative">
-            <User className="absolute left-3 top-3 text-gray-400" size={16} />
-            <input
-              name="name"
-              placeholder="Your Name"
-              required
-              onChange={handleChange}
-              className="w-full pl-10 pr-4 py-2.5 rounded-xl border border-gray-200
-              focus:border-pink-500 focus:ring-2 focus:ring-pink-200
-              outline-none text-sm"
-            />
-          </div>
+          <input
+            name="name"
+            value={form.name}
+            onChange={handleChange}
+            placeholder="Name"
+            className="w-full border p-2 rounded"
+          />
 
-          {/* PHONE */}
-          <div className="relative">
-            <Phone className="absolute left-3 top-3 text-gray-400" size={16} />
-            <input
-              name="phone"
-              placeholder="Phone Number"
-              required
-              onChange={handleChange}
-              className="w-full pl-10 pr-4 py-2.5 rounded-xl border border-gray-200
-              focus:border-pink-500 focus:ring-2 focus:ring-pink-200
-              outline-none text-sm"
-            />
-          </div>
+          <input
+            name="phone"
+            value={form.phone}
+            onChange={handleChange}
+            placeholder="Phone"
+            className="w-full border p-2 rounded"
+          />
 
-          {/* EMAIL */}
-          <div className="relative">
-            <Mail className="absolute left-3 top-3 text-gray-400" size={16} />
-            <input
-              type="email"
-              name="email"
-              placeholder="Email Address"
-              required
-              onChange={handleChange}
-              className="w-full pl-10 pr-4 py-2.5 rounded-xl border border-gray-200
-              focus:border-pink-500 focus:ring-2 focus:ring-pink-200
-              outline-none text-sm"
-            />
-          </div>
+          <input
+            name="email"
+            value={form.email}
+            onChange={handleChange}
+            placeholder="Email"
+            className="w-full border p-2 rounded"
+          />
 
-          {/* BUTTONS */}
-          <div className="flex flex-col sm:flex-row gap-3 pt-2">
-
-            <button
-              type="submit"
-              className="w-full sm:flex-1 py-2.5 rounded-xl font-semibold text-white
-              bg-gradient-to-r from-pink-600 to-rose-500
-              hover:from-pink-700 hover:to-rose-600 transition text-sm"
-            >
-              {loading ? "Sending..." : "Get Call Back"}
-            </button>
-
-            <a
-              href="https://wa.me/917302265809"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="w-full sm:flex-1 text-center py-2.5 rounded-xl font-semibold text-white
-              bg-green-500 hover:bg-green-600 transition text-sm"
-            >
-               Instant Help
-            </a>
-
-          </div>
-
+          <button
+            type="submit"
+            disabled={loading}
+            className="w-full py-2 rounded bg-[#A84010] text-white"
+          >
+            {loading ? "Sending..." : "Submit"}
+          </button>
         </form>
+
       </div>
     </div>
   );

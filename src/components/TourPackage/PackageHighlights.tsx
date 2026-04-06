@@ -17,7 +17,7 @@ export default function PackageHighlights({
     <section className="py-10">
       <div className="max-w-7xl mx-auto px-4 sm:px-6">
 
-        <div className="border-t border-pink-100 mb-8" />
+        <div className="border-t border-orange-100 mb-8" />
 
         <h2 className="text-2xl font-semibold text-gray-900 mb-6">
           Trip Highlights
@@ -27,10 +27,10 @@ export default function PackageHighlights({
           {PackageData.highlights.map((item, index) => (
             <div
               key={index}
-              className="flex items-start gap-3 p-4 rounded-2xl border border-pink-100 bg-pink-50/50 hover:bg-pink-50 transition-colors duration-200 min-w-0 overflow-hidden"
+              className="flex items-start gap-3 p-4 rounded-2xl border border-orange-100 bg-orange-50/50 hover:bg-orange-50 transition-colors duration-200 min-w-0 overflow-hidden"
             >
-              <div className="shrink-0 w-8 h-8 rounded-full bg-pink-100 flex items-center justify-center mt-0.5">
-                <Sparkles className="w-4 h-4 text-pink-500" />
+              <div className="shrink-0 w-8 h-8 rounded-full bg-orange-100 flex items-center justify-center mt-0.5">
+                <Sparkles className="w-4 h-4 text-[#A84010]" />
               </div>
               <p className="text-gray-700 leading-relaxed text-sm pt-1 break-words min-w-0 flex-1">
                 {item.description}
@@ -39,7 +39,7 @@ export default function PackageHighlights({
           ))}
         </div>
 
-        <div className="border-b border-pink-100 mt-8" />
+        <div className="border-b border-orange-100 mt-8" />
 
       </div>
     </section>

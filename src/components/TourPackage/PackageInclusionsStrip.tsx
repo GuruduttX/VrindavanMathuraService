@@ -51,7 +51,7 @@ export default function PackageInclusionsStrip({
       <div className="max-w-7xl mx-auto px-6">
 
         {/* TOP BORDER */}
-        <div className="border-t border-pink-100 pt-6">
+        <div className="border-t border-orange-100 pt-6">
 
           <div className="flex flex-wrap gap-x-10 gap-y-4 items-center">
 
@@ -67,7 +67,7 @@ export default function PackageInclusionsStrip({
                 <span
                   className={`${
                     item.checked
-                      ? "text-pink-600"
+                      ? "text-[#A84010]"
                       : "text-gray-300"
                   }`}
                 >
@@ -84,7 +84,7 @@ export default function PackageInclusionsStrip({
         </div>
 
         {/* BOTTOM BORDER */}
-        <div className="border-b border-pink-100 mt-6" />
+        <div className="border-b border-orange-100 mt-6" />
 
       </div>
     </section>

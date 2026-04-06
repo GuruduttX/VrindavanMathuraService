@@ -1,14 +1,20 @@
 "use client";
 
-import { X, MessageSquare } from "lucide-react"; // Swapped to a generic icon
+import { X } from "lucide-react";
 import { useEffect, useState } from "react";
-import Image from "next/image";
 
 interface Props {
   open: boolean;
   onClose: () => void;
-  defaultService?: string; // Optional: Pre-fill the dropdown based on where they clicked
+  defaultService?: string;
 }
+
+type FormType = {
+  name: string;
+  phone: string;
+  email: string;
+  serviceType: string;
+};
 
 export default function CommonEnquiryForm({
   open,
@@ -17,8 +23,9 @@ export default function CommonEnquiryForm({
 }: Props) {
   const [animate, setAnimate] = useState(false);
   const [loading, setLoading] = useState(false);
+  const [success, setSuccess] = useState(false);
 
-  const [form, setForm] = useState({
+  const [form, setForm] = useState<FormType>({
     name: "",
     phone: "",
     email: "",
@@ -35,182 +42,225 @@ export default function CommonEnquiryForm({
 
   useEffect(() => {
     if (open) {
-      requestAnimationFrame(() => setAnimate(true));
-      // Reset form when opened, preserving the defaultService if provided
-      setForm((prev) => ({ ...prev, serviceType: defaultService }));
+      setTimeout(() => setAnimate(true), 10);
+      setForm({
+        name: "",
+        phone: "",
+        email: "",
+        serviceType: defaultService,
+      });
     } else {
       setAnimate(false);
+      setSuccess(false);
     }
   }, [open, defaultService]);
 
   if (!open) return null;
 
-  // Added proper TypeScript typing for the event
   const handleChange = (
-    e: React.ChangeEvent<
-      HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement
-    >,
-  ) => setForm({ ...form, [e.target.name]: e.target.value });
+    e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
+  ) => {
+    setForm((prev) => ({
+      ...prev,
+      [e.target.name]: e.target.value,
+    }));
+  };
 
-   const handleSubmit = async (e: React.FormEvent) => {
-     e.preventDefault();
-     const phoneRegex = /^[0-9]{10}$/;
-     if (!phoneRegex.test(form.phone)) {
-       alert("Please enter a valid 10-digit phone number.");
-       return;
-     }
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
 
-     // 2. Email Validation (Standard RFC regex)
-     const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
-     if (!emailRegex.test(form.email)) {
-       alert("Please enter a valid email address.");
-       return;
-     }
+    // Validation
+    if (!form.name.trim()) return alert("Name is required");
 
-    //  3. Basic Required Check
-     if (!form.name.trim()) {
-       alert("Name is required.");
-       return;
-     }
-     setLoading(true);
-     try {
-       const response = await fetch("api/simbark", {
-         method: "POST",
-         body: JSON.stringify(form),
-       });
+    if (!/^[0-9]{10}$/.test(form.phone)) {
+      return alert("Enter valid 10-digit phone");
+    }
 
-       const formsubmitData = await response.json();
+    if (
+      !/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/.test(form.email)
+    ) {
+      return alert("Enter valid email");
+    }
 
-       if (!response.ok) {
-         throw new Error(formsubmitData.message || "Submission failed");
-       }
+    if (!form.serviceType) {
+      return alert("Select service type");
+    }
 
-       console.log("Success:", formsubmitData);
-     } catch (error) {
-       console.log("ERROR: submitting form", error);
-     } finally {
-       setLoading(false);
-       setForm({
-         name: "",
-         phone: "",
-         email: "",
-         serviceType: defaultService,
-       });
-     }
-   };; 
-  
+    try {
+      setLoading(true);
+
+      const res = await fetch("/api/simbark", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(form),
+      });
+
+      const data = await res.json();
+
+      if (res.ok) {
+        setSuccess(true);
+        setForm({
+          name: "",
+          phone: "",
+          email: "",
+          serviceType: defaultService,
+        });
+      } else {
+        alert(data.message || "Failed to submit");
+      }
+    } catch (err) {
+      console.error(err);
+      alert("Something went wrong");
+    } finally {
+      setLoading(false);
+    }
+  };
 
   return (
-    <div className="fixed inset-0 m-auto z-[999] flex items-start justify-center gap-4 max-w-[450px] text-black text-left">
-      {/* <div
+    <div className="fixed  inset-0 z-[9999] flex items-start justify-center">
+
+      {/* BACKDROP */}
+      <div
         className="absolute inset-0 bg-black/60 backdrop-blur-sm"
         onClick={onClose}
-      /> */}
+      />
 
+      {/* MODAL */}
       <div
-        className={`relative bg-white w-full max-w-4xl mx-4 rounded-3xl shadow-xl
-        transform transition duration-500 mt-20
-        ${animate ? "translate-y-0 opacity-100" : "-translate-y-10 opacity-0"}`}
+        className={`relative bg-white w-full max-w-lg mx-4 rounded-3xl shadow-xl
+        overflow-hidden z-10
+        transform transition-all duration-500 ease-out
+        ${animate ? "translate-y-20 opacity-100" : "-translate-y-40 opacity-0"}`}
       >
+
+        {/* CLOSE */}
         <button
           onClick={onClose}
-          className="absolute top-5 right-5 z-99 bg-white rounded-full p-2 shadow hover:bg-gray-100 transition"
+          className="absolute top-4  cursor-pointer right-4 z-[50] bg-white rounded-full p-2 shadow hover:bg-gray-100"
         >
-          <X size={20} className="text-gray-600" />
+          <X />
         </button>
 
-        {/* Generic Header */}
-        <div className="p-8 border-b bg-amber-600 text-white rounded-t-3xl relative flex ">
-          <div>
-            <h2 className="text-2xl md:text-3xl font-bold flex items-center gap-3">
-              <MessageSquare size={28} /> Service Enquiry
-            </h2>
-            <p className="text-amber-100 mt-2 text-sm">
-              Fill out the form below and we'll get back to you shortly.
-            </p>
-          </div>
+        {/* HEADER */}
+        <div className="p-8 border-b bg-gradient-to-r from-orange-500 to-amber-500 text-white">
+          <h2 className="text-2xl md:text-3xl font-bold">
+            Service Enquiry
+          </h2>
+          <p className="text-white/80 mt-2 text-sm">
+            Fill out the form and we’ll contact you shortly.
+          </p>
         </div>
 
-        <form className="p-8 grid grid-cols-1 gap-4" onSubmit={handleSubmit}>
-          <div className="flex flex-col">
-            <label htmlFor="name" className="text-sm text-gray-500">
-              Your Full Name*
+        {/* FORM */}
+        <form onSubmit={handleSubmit} className="p-8 flex flex-col gap-4">
+
+          {/* NAME */}
+          <div>
+            <label className="text-xs text-gray-500 mb-1 block">
+              Full Name *
             </label>
             <input
               name="name"
-              placeholder="Full Name"
-              className="input border border-gray-500/40 p-2 rounded-lg focus:outline-none focus:ring focus:ring-amber-500 focus:border-amber-500"
-              required
+              type="text"
               value={form.name}
               onChange={handleChange}
+              placeholder="Your full name"
+              required
+              className="w-full border border-gray-300 px-4 py-3 rounded-xl 
+              focus:outline-none focus:ring-2 focus:ring-orange-400"
             />
           </div>
-          <div className="flex flex-col">
-            <label htmlFor="phone" className="text-sm text-gray-500">
-              Phone Number*
+
+          {/* PHONE */}
+          <div>
+            <label className="text-xs text-gray-500 mb-1 block">
+              Phone Number *
             </label>
             <input
               name="phone"
-              placeholder="Your Phone Number"
-              className="input border border-gray-500/40 p-2 rounded-lg focus:outline-none focus:ring focus:ring-amber-500 focus:border-amber-500"
-              required
+              type="tel"
               value={form.phone}
               onChange={handleChange}
+              placeholder="Enter phone number"
+              required
+              className="w-full border border-gray-300 px-4 py-3 rounded-xl 
+              focus:outline-none focus:ring-2 focus:ring-orange-400"
             />
           </div>
-          <div className="flex flex-col">
-            <label htmlFor="email" className="text-sm text-gray-500">
-              Email Address*
+
+          {/* EMAIL */}
+          <div>
+            <label className="text-xs text-gray-500 mb-1 block">
+              Email Address *
             </label>
             <input
               name="email"
-              placeholder="Enter your Email"
-              className="input border border-gray-500/40 p-2 rounded-lg focus:outline-none focus:ring focus:ring-amber-500 focus:border-amber-500"
-              required
-              id="email"
+              type="email"
               value={form.email}
               onChange={handleChange}
+              placeholder="Enter email"
+              required
+              className="w-full border border-gray-300 px-4 py-3 rounded-xl 
+              focus:outline-none focus:ring-2 focus:ring-orange-400"
             />
           </div>
 
-          <div className="flex flex-col">
-
-          {/* New Service Type Dropdown */}
-          <select
-            name="serviceType"
-            className="input bg-white border border-gray-500/40 p-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-amber-500 focus:border-amber-500"
-            required
-            value={form.serviceType}
-            onChange={handleChange}
-          >
-            <option value="" disabled>
-              Select Service Type
-            </option>
-            {services.map((service, idx) => (
-              <option key={idx} value={service}>
-                {service}
-              </option>
-            ))}
-          </select>
+          {/* SERVICE SELECT */}
+          <div>
+            <label className="text-xs text-gray-500 mb-1 block">
+              Select Service *
+            </label>
+            <select
+              name="serviceType"
+              value={form.serviceType}
+              onChange={handleChange}
+              required
+              className="w-full border border-gray-300 px-4 py-3 rounded-xl 
+              focus:outline-none focus:ring-2 focus:ring-orange-400 bg-white"
+            >
+              <option value="">Select Service</option>
+              {services.map((s, i) => (
+                <option key={i} value={s}>
+                  {s}
+                </option>
+              ))}
+            </select>
           </div>
 
-          <div className="flex gap-1 flex-col ">
+          {/* BUTTONS */}
+          <div className="flex flex-col sm:flex-row gap-3 mt-2">
+
             <button
               type="submit"
-              className="bg-amber-600 hover:bg-amber-700 transition text-white py-3 font-semibold rounded-xl md:col-span-2 mt-2 flex-1"
               disabled={loading}
+              className="w-full sm:flex-1 bg-gradient-to-r from-orange-500 to-amber-600 
+              text-white py-3 rounded-xl font-semibold 
+              disabled:opacity-50 transition cursor-pointer"
             >
-              {loading ? "Sending..." : "Submit Enquiry"}
+              {loading ? "Sending..." : "Send Enquiry"}
             </button>
+
             <a
-              href="https://wa.me/7302265809?text=Hi!%20I%20have%20an%20enquiry%20about%20your%20services."
+              href="https://wa.me/7302265809"
               target="_blank"
-              rel="noopener noreferrer"
-              className="bg-green-600 hover:bg-green-700 transition text-white py-3 font-semibold rounded-xl md:col-span-2 mt-2 flex-1 text-center"
+              className="w-full sm:flex-1 text-center 
+              bg-green-500 hover:bg-green-600 text-white 
+              py-3 rounded-xl font-semibold transition"
             >
-              Chat with us
+              WhatsApp
             </a>
+
           </div>
+
+          {/* SUCCESS */}
+          {success && (
+            <p className="text-green-600 text-sm font-medium">
+              Enquiry sent successfully!
+            </p>
+          )}
+
         </form>
       </div>
     </div>
