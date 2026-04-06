@@ -10,10 +10,11 @@ export default function HotelsCTA() {
   const [isFormOpen, setIsFormOpen] = useState(false);
 
   return (
-    <section className="py-24">
-      <div className="max-w-7xl mx-auto px-6">
-        <div
-          className="
+    <>
+      <section className="py-24">
+        <div className="max-w-7xl mx-auto px-6">
+          <div
+            className="
         relative
         grid
         lg:grid-cols-2
@@ -26,19 +27,19 @@ export default function HotelsCTA() {
         p-10
         overflow-hidden
         "
-        >
-          {/* subtle glow */}
+          >
+            {/* subtle glow */}
 
-          <div className="absolute -top-16 left-0 w-[260px] h-[260px] bg-amber-400/20 blur-[120px] rounded-full"></div>
-          <div className="absolute bottom-0 right-0 w-[260px] h-[260px] bg-orange-400/20 blur-[120px] rounded-full"></div>
+            <div className="absolute -top-16 left-0 w-[260px] h-[260px] bg-amber-400/20 blur-[120px] rounded-full"></div>
+            <div className="absolute bottom-0 right-0 w-[260px] h-[260px] bg-orange-400/20 blur-[120px] rounded-full"></div>
 
-          {/* LEFT TEXT */}
+            {/* LEFT TEXT */}
 
-          <div className="relative">
-            <h2 className="text-4xl font-bold leading-tight">
-              Find Your
-              <span
-                className="
+            <div className="relative">
+              <h2 className="text-4xl font-bold leading-tight">
+                Find Your
+                <span
+                  className="
               block
               bg-gradient-to-r
               from-amber-600
@@ -47,23 +48,23 @@ export default function HotelsCTA() {
               bg-clip-text
               text-transparent
               "
-              >
-                Perfect Stay
-              </span>
-              in Vrindavan
-            </h2>
+                >
+                  Perfect Stay
+                </span>
+                in Vrindavan
+              </h2>
 
-            <p className="text-gray-600 mt-5 max-w-md">
-              Relax in peaceful hotels near temples and enjoy a comfortable
-              spiritual journey in Vrindavan.
-            </p>
+              <p className="text-gray-600 mt-5 max-w-md">
+                Relax in peaceful hotels near temples and enjoy a comfortable
+                spiritual journey in Vrindavan.
+              </p>
 
-            {/* buttons */}
+              {/* buttons */}
 
-            <div className="flex flex-wrap gap-4 mt-8">
-              <motion.button
-                whileHover={{ scale: 1.05 }}
-                className="
+              <div className="flex flex-wrap gap-4 mt-8">
+                <motion.button
+                  whileHover={{ scale: 1.05 }}
+                  className="
                 px-7
                 py-3
                 rounded-full
@@ -76,14 +77,14 @@ export default function HotelsCTA() {
                 shadow-lg
                 flex items-center gap-2
                 "
-              >
-                Browse Hotels
-                <ArrowRight size={18} />
-              </motion.button>
+                >
+                  Browse Hotels
+                  <ArrowRight size={18} />
+                </motion.button>
 
-              <motion.button
-                whileHover={{ scale: 1.05 }}
-                className="
+                <motion.button
+                  whileHover={{ scale: 1.05 }}
+                  className="
                 px-7
                 py-3
                 rounded-full
@@ -94,59 +95,59 @@ export default function HotelsCTA() {
                 transition
                 flex items-center gap-2
                 "
-                onClick={() => setIsFormOpen(true)}
-              >
-                Enquire Now
-                <Phone size={18} />
-              </motion.button>
+                  onClick={() => setIsFormOpen(true)}
+                >
+                  Enquire Now
+                  <Phone size={18} />
+                </motion.button>
+              </div>
             </div>
-          </div>
 
-          {/* RIGHT HOTEL PREVIEW CARD */}
+            {/* RIGHT HOTEL PREVIEW CARD */}
 
-          <motion.div
-            whileHover={{ y: -8 }}
-            className="
+            <motion.div
+              whileHover={{ y: -8 }}
+              className="
             relative
             rounded-3xl
             overflow-hidden
             shadow-lg
             h-[260px]
             "
-          >
-            <Image
-              src="/images/Home/hotel.webp"
-              alt="Hotel Vrindavan"
-              fill
-              className="object-cover"
-            />
+            >
+              <Image
+                src="/images/Home/hotel.webp"
+                alt="Hotel Vrindavan"
+                fill
+                className="object-cover"
+              />
 
-            <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent"></div>
+              <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent"></div>
 
-            {/* rating */}
+              {/* rating */}
 
-            <div className="absolute top-4 right-4 bg-white px-3 py-1 rounded-lg shadow flex items-center gap-1 text-sm">
-              <Star size={14} className="text-yellow-500" />
-              4.6
-            </div>
+              <div className="absolute top-4 right-4 bg-white px-3 py-1 rounded-lg shadow flex items-center gap-1 text-sm">
+                <Star size={14} className="text-yellow-500" />
+                4.6
+              </div>
 
-            {/* text */}
+              {/* text */}
 
-            <div className="absolute bottom-4 left-4 text-white">
-              <h3 className="font-semibold text-lg">Radha Palace Hotel</h3>
+              <div className="absolute bottom-4 left-4 text-white">
+                <h3 className="font-semibold text-lg">Radha Palace Hotel</h3>
 
-              <p className="text-sm opacity-90">Near Prem Mandir</p>
-            </div>
-          </motion.div>
+                <p className="text-sm opacity-90">Near Prem Mandir</p>
+              </div>
+            </motion.div>
+          </div>
         </div>
-      </div>
-
-      {/* 3. The Form Component */}
-      <CommonEnquiryForm
-        open={isFormOpen}
-        onClose={() => setIsFormOpen(false)}
-        defaultService="Hotel Booking" // Pre-selects this in the dropdown
-      />
-    </section>
+      </section>
+        {/* 3. The Form Component */}
+        <CommonEnquiryForm
+          open={isFormOpen}
+          onClose={() => setIsFormOpen(false)}
+          defaultService="Hotel Booking" // Pre-selects this in the dropdown
+        />
+    </>
   );
 }

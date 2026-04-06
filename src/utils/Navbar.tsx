@@ -167,13 +167,6 @@ export default function Navbar() {
               >
                 {isMobileMenuOpen ? <X size={20} /> : <Menu size={20} />}
               </button>
-
-              {/* 3. common Form Component */}
-              <CommonEnquiryForm
-                open={isFormOpen}
-                onClose={() => setIsFormOpen(false)}
-                defaultService="General Enquiry"
-              />
             </div>
           </nav>
 
@@ -209,6 +202,12 @@ export default function Navbar() {
           )}
         </div>
       </header>
+      {/* 3. common Form Component */}
+      <CommonEnquiryForm
+        open={isFormOpen}
+        onClose={() => setIsFormOpen(false)}
+        defaultService="General Enquiry"
+      />
     </>
   );
 }
