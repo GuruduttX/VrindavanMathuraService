@@ -35,7 +35,7 @@ export default function PoojaHero() {
     <>
       <section
         ref={ref}
-        className="relative w-full min-h-[95vh] flex items-center justify-center overflow-hidden pt-30 md:pt-20"
+        className="relative w-full min-h-[95vh] flex items-center justify-center overflow-hidden  md:pt-20"
         style={{ fontFamily: "'Nunito', sans-serif" }}
       >
         {/* Background */}

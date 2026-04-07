@@ -295,7 +295,7 @@ function BlogCards({ blogs }: { blogs: IBlog[] }) {
             <div className="flex gap-2 mt-4">
 
               <Link
-                href={`/admin-x9AqP7mK2/blogs/edit-blog/${blog.slug}`}
+                href={`/admin-x9AqP7mK2/blogs/edit-blog/${blog._id}`}
                 className="flex-1 text-center py-2 rounded-lg text-sm
                 bg-pink-600/20 text-pink-300"
               >

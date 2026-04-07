@@ -23,6 +23,7 @@ import DestRoutes from '@/components/Admin/PackageEditor/DestRoute';
 import SelectedInclusion from '@/components/Admin/PackageEditor/SelectedInclusion';
 import PackageOverview from '@/components/Admin/PackageEditor/PackageOverview';
 import { useParams } from 'next/navigation';
+import SourceCitySelector from '@/components/Admin/PackageEditor/SourceCitySelector';
 
 
 type PackageForm = {
@@ -92,6 +93,7 @@ export default function page() {
   const [itinerary, setItinerary] = useState<Itinerary[]>([{ id: crypto.randomUUID(), day: 1, title: "", description: "" }]);
   const [breakdown, setBreakdown] = useState<BreakdownItem[]>([{ id: crypto.randomUUID(), days: "0", place: "" }]);
   const [route, setRoute] = useState<RouteType>({ source: "", destination: "", segments: [] });
+  const [availableSrc, setAvailableSrc] = useState<string[]>([]);
 
 
   //Fill data
@@ -106,7 +108,7 @@ export default function page() {
 
       const data = result.data;
 
-      console.log("data", data);
+      console.log("data", data,childImage);
 
 
       setForm({
@@ -122,8 +124,8 @@ export default function page() {
         schemaTitle: data.schemaTitle ?? "",
         schemaDescription: data.schemaDescription ?? "",
 
-        image: data.heroImage ?? "",
-        alt: "",
+        image: data.heroImage.image ?? "",
+        alt: data.heroImage.alt ?? "",
 
         overview: data.overview ?? "",
 
@@ -155,9 +157,11 @@ export default function page() {
       setExclusions(data.exclusions ?? [])
       setDocuments(data.knowBeforeYouGo ?? [])
       setItinerary(data.itinerary ?? [])
-      setChildImage(data.childImage ?? []);
+      setChildImage(data.childImages ?? []);
       setBreakdown(data.durationbreakdown ?? []);
       setRoute(data.routes ?? { source: "", destination: "", segments: [] })
+      setAvailableSrc(data.availableSrc ?? []);
+      
 
 
     } catch (error) {
@@ -193,7 +197,7 @@ export default function page() {
     overview: form.overview,
     duration: form.duration,
 
-    heroImage: form.image || "",
+    heroImage: {image : form.image || "", alt : form.alt},
 
     metaTitle: form.metaTitle,
     metaDescription: form.metaDescription,
@@ -219,6 +223,7 @@ export default function page() {
     durationbreakdown: breakdown,
 
     routes: route,
+    availableSrc,
 
     isBreakfastIncluded: form.breakfast_included,
     isStayIncluded: form.stay_included,
@@ -229,7 +234,7 @@ export default function page() {
   });
 
   const postPayload = async (payload: object) => {
-    const res = await fetch(`/api/tour-packages/${id}`, {
+    const res = await fetch(`/api/admin/tour-packages/${id}`, {
       method: "PUT",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(payload),
@@ -314,6 +319,7 @@ export default function page() {
         <DANDestination destination={form.destination} onChange={updateForm} editorType="Package" />
         <CMSSeoSection metaTitle={form.metaTitle} metaDescription={form.metaDescription} onChange={updateForm} editorType="Package" />
         <CMSSchema schemaTitle={form.schemaTitle} schemaDescription={form.schemaDescription} onChange={updateForm} editorType="Package" />
+        <SourceCitySelector availableSrc={availableSrc} setAvailableSrc={setAvailableSrc}/>
         <SelectedInclusion transfer_included={form.transfer_included} breakfast_included={form.breakfast_included} stay_included={form.stay_included} sightseeing_included={form.sightseeing_included} onChange={updateForm} />
         <DurationSection days={form.day} nights={form.night} onChange={updateForm} breakdown={breakdown} setBreakdown={setBreakdown} />
         <DestRoutes route={route} setRoute={setRoute} />

@@ -28,8 +28,7 @@ const CMSActions = ({
       </button>
 
 
-      {
-        actionType === "create" ? <> <button
+     <button
           type="button"
           onClick={onSaveDraft}
 
@@ -41,8 +40,8 @@ const CMSActions = ({
         >
           Save Draft
         </button>
-        </> : <></>
-      }
+       
+      
 
 
       <span className="ml-auto text-xs text-pink-500/50 self-center">

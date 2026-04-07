@@ -9,6 +9,7 @@ import FaqHandler from '@/components/Admin/CMS/FaqHandler';
 import { useState } from 'react';
 import toast from 'react-hot-toast';
 import CMSSchema from '@/components/Admin/CMS/CMSSchema';
+import PackageOverview from '@/components/Admin/PackageEditor/PackageOverview';
 
 type BlogForm = {
 
@@ -76,7 +77,7 @@ export default function CreateNewBlog() {
 
     try {
 
-      const res = await fetch(`/api/blog/${form.slug}`);
+      const res = await fetch(`/api/admin/blog/${form.slug}`);
       const data = await res.json();
 
       if (data?.exists) {
@@ -290,6 +291,7 @@ export default function CreateNewBlog() {
           <CMSContentSection subContent={form.subContent} content={form.content} onChange={updateForm} editorType="Blog"
           />
 
+\
           <CMSActions actionType="create" editorType="Blog" onSaveDraft={SaveDraft} />
 
         </form>

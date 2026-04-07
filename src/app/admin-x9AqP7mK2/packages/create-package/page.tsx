@@ -22,7 +22,7 @@ import DurationSection from '@/components/Admin/PackageEditor/DurationSection';
 import DestRoutes from '@/components/Admin/PackageEditor/DestRoute';
 import SelectedInclusion from '@/components/Admin/PackageEditor/SelectedInclusion';
 import PackageOverview from '@/components/Admin/PackageEditor/PackageOverview';
-import CMSContentSection from '@/components/Admin/CMS/CMSContentSection';
+import SourceCitySelector from '@/components/Admin/PackageEditor/SourceCitySelector';
 
 type PackageForm = {
   title: string;
@@ -89,6 +89,8 @@ export default function CreateNewPackage() {
   const [itinerary,    setItinerary]    = useState<Itinerary[]>([{ id: crypto.randomUUID(), day: 1, title: "", description: "" }]);
   const [breakdown,    setBreakdown]    = useState<BreakdownItem[]>([{ id: crypto.randomUUID(), days: "0", place: "" }]);
   const [route,        setRoute]        = useState<RouteType>({ source: "", destination: "", segments: [] });
+  const [availableSrc, setAvailableSrc] = useState<string[]>([]);
+
 
   const updateForm = (field: keyof PackageForm, value: string) => {
     setForm((prev) => ({ ...prev, [field]: value }));
@@ -132,6 +134,7 @@ export default function CreateNewPackage() {
       exclusions,
       knowBeforeYouGo : documents,
       itinerary,
+      availableSrc,
 
       durationbreakdown: breakdown,
 
@@ -232,6 +235,7 @@ export default function CreateNewPackage() {
         <DANDestination destination={form.destination} onChange={updateForm} editorType="Package" />
         <CMSSeoSection metaTitle={form.metaTitle} metaDescription={form.metaDescription} onChange={updateForm} editorType="Package" />
         <CMSSchema schemaTitle={form.schemaTitle} schemaDescription={form.schemaDescription} onChange={updateForm} editorType="Package" />
+        <SourceCitySelector availableSrc={availableSrc} setAvailableSrc={setAvailableSrc}/>
         <SelectedInclusion transfer_included={form.transfer_included} breakfast_included={form.breakfast_included} stay_included={form.stay_included} sightseeing_included={form.sightseeing_included} onChange={updateForm} />
         <DurationSection days={form.day} nights={form.night} onChange={updateForm} breakdown={breakdown} setBreakdown={setBreakdown} />
         <DestRoutes route={route} setRoute={setRoute} />
