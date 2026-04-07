@@ -70,13 +70,13 @@ export default function TravelCTA() {
             </div>
           </motion.div>
         </div>
+      </section>
 
         <CommonEnquiryForm
           open={isFormOpen}
           onClose={() => setIsFormOpen(false)}
           defaultService="Taxi Booking"
         />
-      </section>
     </>
   );
 }

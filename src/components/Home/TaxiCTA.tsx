@@ -114,12 +114,6 @@ export default function TaxiCTA() {
               </div>
             </div>
 
-            <CommonEnquiryForm
-              open={isFormOpen}
-              onClose={() => setIsFormOpen(false)}
-              defaultService="Taxi Booking"
-            />
-
             {/* right visual */}
             <div className="relative">
               <div
@@ -169,6 +163,11 @@ export default function TaxiCTA() {
           </div>
         </div>
       </section>
+      <CommonEnquiryForm
+        open={isFormOpen}
+        onClose={() => setIsFormOpen(false)}
+        defaultService="Taxi Booking"
+      />
     </>
   );
 }

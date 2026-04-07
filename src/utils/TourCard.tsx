@@ -3,8 +3,10 @@
 import Image from "next/image";
 import Link from "next/link";
 import { Star, MapPin, Users, Clock } from "lucide-react";
+import { setSourceMapsEnabled } from "process";
 
-export default function TourCard({ tour }: any) {
+export default function TourCard({ tour, setOpen }: any) {
+
   return (
     <div className="bg-white rounded-3xl shadow-lg hover:shadow-xl transition duration-300 overflow-hidden border border-orange-100">
 
@@ -96,13 +98,12 @@ export default function TourCard({ tour }: any) {
           </div>
 
           {/* Button */}
-          <Link href={`/tour-packages/${tour.id}`}>
-            <button className="px-6 py-3 cursor-pointer rounded-full 
+        
+            <button onClick={()=>setOpen(true)}  className="px-6 py-3 cursor-pointer rounded-full 
             bg-[linear-gradient(145deg,#7A2E00,#A84010,#E8821A)] 
             text-white font-medium shadow-md hover:scale-105 transition duration-300">
               Book Now
             </button>
-          </Link>
         </div>
       </div>
     </div>

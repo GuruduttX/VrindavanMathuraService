@@ -19,10 +19,23 @@ const PackageOverview = ({
         Package Overview
       </h3>
 
-      <div className="rounded-xl overflow-hidden border border-pink-900/50 shadow-[0_0_20px_rgba(236,72,153,0.05)]">
+      <div className="editor-light rounded-xl overflow-hidden border border-pink-900/50 shadow-[0_0_20px_rgba(236,72,153,0.05)] ">
+        {/* SunEditor pink overrides */}
+        {/* <style>{`
+          .sun-editor { background: #1e0b14 !important; border: none !important; }
+          .sun-editor .se-toolbar { background: #2a0e1a !important; border-bottom: 1px solid rgba(190,74,106,0.25) !important; }
+          .sun-editor .se-btn { color: #f0c4cf !important; }
+          .sun-editor .se-btn:hover { background: rgba(190,74,106,0.2) !important; color: #fce8ed !important; }
+          .sun-editor .se-wrapper { background: #1e0b14 !important; }
+          .sun-editor .se-wrapper .se-wrapper-inner { background: #1e0b14 !important; color: #f5e8eb !important; }
+          .sun-editor-editable { background: #1e0b14 !important; color: #f5e8eb !important; caret-color: #e4a0b0; }
+          .sun-editor .se-resizing-bar { background: #2a0e1a !important; border-top: 1px solid rgba(190,74,106,0.2) !important; color: #a07080 !important; }
+        `}</style> */}
+        
 
         <SunEditor
-          setContents={overview}
+            
+           setContents={overview}
           setOptions={{
             minHeight: "65vh",
             maxHeight: "70vh",

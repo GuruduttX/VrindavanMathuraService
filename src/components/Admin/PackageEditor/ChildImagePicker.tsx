@@ -65,7 +65,7 @@ const ChildImagePicker = ({
       formData.append("file", file); //  backend expects "image"
       formData.append("folder", "vrindavan-package");
 
-      const res = await fetch("/api/upload", {
+      const res = await fetch("/api/admin/upload", {
         method: "POST",
         body: formData,
       });

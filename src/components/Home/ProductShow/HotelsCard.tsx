@@ -5,14 +5,12 @@ import Link from "next/link";
 import { useState } from "react";
 import CommonEnquiryForm from "@/utils/CommanEnquiryForm";
 
-export default function HotelCard({ product }: any) {
+export default function HotelCard({ product, setOpen }: any) {
   const scores = product.ratingSummary?.scores;
-  const [open, setOpen] = useState(false);
   
 
   return (
     <>
-       <CommonEnquiryForm open={open} onClose={()=>setOpen(false)}/>
         <div className="flex flex-col rounded-xl  border border-stone-200 overflow-hidden bg-white">
 
       {/* Image */}

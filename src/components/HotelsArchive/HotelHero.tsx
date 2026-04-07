@@ -16,53 +16,54 @@ export default function HotelsHero() {
 
 
   return (
-    <section className="relative overflow-hidden bg-gradient-to-br from-orange-50 via-amber-50 to-amber-100 pt-12">
-      {/* Background blobs */}
-      <div className="absolute -top-40 -left-40 w-[500px] h-[500px] bg-amber-200/40 rounded-full blur-[90px]" />
-      <div className="absolute bottom-0 right-0 w-[500px] h-[500px] bg-fuchsia-200/40 rounded-full blur-[100px]" />
+    <>
+      <section className="relative overflow-hidden bg-gradient-to-br from-orange-50 via-amber-50 to-amber-100 pt-12">
+        {/* Background blobs */}
+        <div className="absolute -top-40 -left-40 w-[500px] h-[500px] bg-amber-200/40 rounded-full blur-[90px]" />
+        <div className="absolute bottom-0 right-0 w-[500px] h-[500px] bg-orange-200/40 rounded-full blur-[100px] -z-10" />
 
-      <div className="max-w-[1300px] mx-auto px-6 lg:px-20 py-20 grid lg:grid-cols-2 gap-16 items-center">
-        {/* LEFT CONTENT */}
-        <motion.div
-          initial={{ opacity: 0, y: 40 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
-        >
-          {/* Badge */}
+        <div className="max-w-[1300px] mx-auto px-6 lg:px-20 py-20 grid lg:grid-cols-2 gap-16 items-center">
+          {/* LEFT CONTENT */}
           <motion.div
-            initial={{ opacity: 0, y: 20 }}
+            initial={{ opacity: 0, y: 40 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.2 }}
-            className="inline-flex items-center gap-2 bg-amber-100 text-amber-600 font-semibold text-sm px-4 py-2 rounded-full mb-6"
+            transition={{ duration: 0.6 }}
           >
-            🏨 Explore Luxury Stays
-          </motion.div>
+            {/* Badge */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.2 }}
+              className="inline-flex items-center gap-2 bg-amber-100 text-amber-600 font-semibold text-sm px-4 py-2 rounded-full mb-6"
+            >
+              🏨 Explore Luxury Stays
+            </motion.div>
 
-          {/* Heading */}
-          <motion.h1
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.3 }}
-            className="text-[42px] lg:text-[50px] font-bold leading-tight text-gray-900"
-          >
-            Find the Perfect Hotel
-            <br />
-            in <span className="text-amber-600">Vrindavan</span>
-          </motion.h1>
+            {/* Heading */}
+            <motion.h1
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.3 }}
+              className="text-[42px] lg:text-[50px] font-bold leading-tight text-gray-900"
+            >
+              Find the Perfect Hotel
+              <br />
+              in <span className="text-amber-600">Vrindavan</span>
+            </motion.h1>
 
-          {/* Description */}
-          <motion.p
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ delay: 0.45 }}
-            className="mt-5 text-gray-500 max-w-[500px] text-lg"
-          >
-            Discover luxury hotels, spiritual stays, and budget friendly
-            accommodations near the sacred temples of Vrindavan and Mathura.
-          </motion.p>
+            {/* Description */}
+            <motion.p
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ delay: 0.45 }}
+              className="mt-5 text-gray-500 max-w-[500px] text-lg"
+            >
+              Discover luxury hotels, spiritual stays, and budget friendly
+              accommodations near the sacred temples of Vrindavan and Mathura.
+            </motion.p>
 
-          {/* Category Pills */}
-          {/* <motion.div
+            {/* Category Pills */}
+            {/* <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 0.55 }}
@@ -86,8 +87,8 @@ export default function HotelsHero() {
             ))}
           </motion.div> */}
 
-          {/* SEARCH BAR */}
-          {/* <motion.div
+            {/* SEARCH BAR */}
+            {/* <motion.div
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.7 }}
@@ -133,11 +134,10 @@ export default function HotelsHero() {
             </motion.button>
 
           </motion.div> */}
-          <QuickEnquiry/>
-          
+            <QuickEnquiry />
 
-          {/* Quick Filters */}
-          {/* <motion.div
+            {/* Quick Filters */}
+            {/* <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 0.9 }}
@@ -159,20 +159,22 @@ export default function HotelsHero() {
             ))}
           </motion.div> */}
 
-          {/* Stats */}
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ delay: 1 }}
-            className="flex gap-8 mt-10"
-          >
-            <Stat number="200+" label="Hotels" />
-            <Stat number="5K+" label="Guests" />
-            <Stat number="₹999" label="Starting From" />
+            {/* Stats */}
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ delay: 1 }}
+              className="flex gap-4 mt-10 flex-col md:flex-row"
+            >
+              <div className="flex gap-8 justify-center">
+              <Stat number="200+" label="Hotels" />
+              <Stat number="5K+" label="Guests" />
+              <Stat number="₹999" label="Starting From" />
+              </div>
 
-            {/* Enquire button */}
-            <button
-              className="
+              {/* Enquire button */}
+              <button
+                className="
                 px-7
                 py-3
                 rounded-full
@@ -183,74 +185,76 @@ export default function HotelsHero() {
                 transition
                 flex items-center gap-2
                 relative
+                justify-center
                  z-10
                 "
-              onClick={() => setIsFormOpen(true)}
-            >
-              Enquire Now
-              <Phone size={18} />
-            </button>
+                onClick={() => setIsFormOpen(true)}
+              >
+                Enquire Now
+                <Phone size={18} />
+              </button>
+            </motion.div>
           </motion.div>
-        </motion.div>
 
-        {/* RIGHT SIDE FLOATING CARDS */}
-        <motion.div
-          initial={{ opacity: 0, x: 60 }}
-          animate={{ opacity: 1, x: 0 }}
-          transition={{ duration: 0.8 }}
-          className="relative h-[500px] hidden lg:block"
-        >
-          <div className="absolute top-0 left-24 float-slow">
-            <HotelCard
-              image="https://images.unsplash.com/photo-1566073771259-6a8506099945"
-              name="Radha Palace"
-              rating="4.9"
-              price="3499"
-            />
-          </div>
+          {/* RIGHT SIDE FLOATING CARDS */}
+          <motion.div
+            initial={{ opacity: 0, x: 60 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.8 }}
+            className="relative h-[500px] hidden lg:block"
+          >
+            <div className="absolute top-0 left-24 float-slow">
+              <HotelCard
+                image="https://images.unsplash.com/photo-1566073771259-6a8506099945"
+                name="Radha Palace"
+                rating="4.9"
+                price="3499"
+              />
+            </div>
 
-          <div className="absolute top-40 left-0 float-medium">
-            <HotelCard
-              image="https://images.unsplash.com/photo-1551882547-ff40c63fe5fa"
-              name="Nidhivan Resort"
-              rating="4.7"
-              price="2199"
-            />
-          </div>
+            <div className="absolute top-40 left-0 float-medium">
+              <HotelCard
+                image="https://images.unsplash.com/photo-1551882547-ff40c63fe5fa"
+                name="Nidhivan Resort"
+                rating="4.7"
+                price="2199"
+              />
+            </div>
 
-          <div className="absolute bottom-0 right-10 float-fast">
-            <HotelCard
-              image="https://images.unsplash.com/photo-1520250497591-112f2f40a3f4"
-              name="Yamuna Riverside"
-              rating="4.8"
-              price="4299"
-            />
-          </div>
-        </motion.div>
-      </div>
+            <div className="absolute bottom-0 right-10 float-fast">
+              <HotelCard
+                image="https://images.unsplash.com/photo-1520250497591-112f2f40a3f4"
+                name="Yamuna Riverside"
+                rating="4.8"
+                price="4299"
+              />
+            </div>
+          </motion.div>
+        </div>
 
-      {/* Wavy Divider */}
-      <div className="absolute bottom-0 left-0 w-full overflow-hidden leading-none">
-        <svg
-          className="relative block w-full h-[120px]"
-          viewBox="0 0 1440 320"
-          preserveAspectRatio="none"
-        >
-          <path
-            fill="#ffffff"
-            fillOpacity="1"
-            d="M0,224L80,213.3C160,203,320,181,480,176C640,171,800,181,960,197.3C1120,213,1280,235,1360,245.3L1440,256L1440,320L0,320Z"
-          ></path>
-        </svg>
-      </div>
+        {/* Wavy Divider */}
+        <div className="absolute bottom-0 left-0 w-full overflow-hidden leading-none">
+          <svg
+            className="relative block w-full h-[120px]"
+            viewBox="0 0 1440 320"
+            preserveAspectRatio="none"
+          >
+            <path
+              fill="#ffffff"
+              fillOpacity="1"
+              d="M0,224L80,213.3C160,203,320,181,480,176C640,171,800,181,960,197.3C1120,213,1280,235,1360,245.3L1440,256L1440,320L0,320Z"
+            ></path>
+          </svg>
+        </div>
 
-      {/* 3. The Form Component */}
-      <CommonEnquiryForm
-        open={isFormOpen}
-        onClose={() => setIsFormOpen(false)}
-        defaultService="Hotel Booking" 
-      />
-    </section>
+      </section>
+        {/* 3. The Form Component */}
+        <CommonEnquiryForm
+          open={isFormOpen}
+          onClose={() => setIsFormOpen(false)}
+          defaultService="Hotel Booking"
+        />
+    </>
   );
 }
 

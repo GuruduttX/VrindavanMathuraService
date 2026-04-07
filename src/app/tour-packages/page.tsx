@@ -1,5 +1,4 @@
 import dynamic from "next/dynamic"
-
 import Navbar from "@/utils/Navbar"
 import LuxuryFooter from "@/utils/Footer"
 import TourHero from "@/components/TourArchive/TourHero"
@@ -69,7 +68,18 @@ const getTourPackageData = async () => {
   try {
 
     const res = await fetch(
-      `http://localhost:3000/api/users/tour-packages/`
+
+      `http://localhost:3000/api/users/tour-packages`,
+
+      {
+
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json"
+        }
+
+      }
+
     );
 
     if (!res.ok) {
@@ -78,6 +88,8 @@ const getTourPackageData = async () => {
     }
 
     const data = await res.json();
+    console.log("THE DATA COME IS :");
+    console.log(data);
     return data.data;
 
   } catch (error) {
@@ -89,6 +101,10 @@ const getTourPackageData = async () => {
 
 export default async function page() {
   const tours = await getTourPackageData();
+
+  console.log(tours)
+
+
 
   const tourServiceSchema = {
     "@context": "https://schema.org",
@@ -111,20 +127,20 @@ export default async function page() {
     "@context": "https://schema.org",
     "@type": "ItemList",
     "name": "Mathura Vrindavan Tour Packages",
-    "itemListElement": tours.map((tour : any, index : number) => (
+    "itemListElement": tours.map((tour: any, index: number) => (
       [
 
-       {
-        "@type": "ListItem",
-        "position": index,
-        "name": tour.title,
-        "url": `https://vrindavantoursandpackages.com/tour-packages/${tour.duration}/${tour.slug}`
-      },
-     
-    ]
+        {
+          "@type": "ListItem",
+          "position": index,
+          "name": tour.title,
+          "url": `https://vrindavantoursandpackages.com/tour-packages/${tour.duration}/${tour.slug}`
+        },
+
+      ]
 
     ))
-     
+
   };
 
   const travelAgencySchema = {

@@ -72,12 +72,12 @@ export default function HotelCTA() {
             </div>
           </motion.div>
         </div>
+      </section>
         <CommonEnquiryForm
           open={isFormOpen}
           onClose={() => setIsFormOpen(false)}
           defaultService="Hotel Booking"
         />
-      </section>
     </>
   );
 }
