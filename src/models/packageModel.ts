@@ -56,6 +56,8 @@ interface KnowBeforeYouGo {
    description : string;
 }
 
+
+
 export interface ITourPackage extends Document {
   title: string;
   slug: string;
@@ -97,7 +99,6 @@ export interface ITourPackage extends Document {
   payment?: string;
 
   heroImage?: {alt : string, image : string};
-  images: string[];
 
   childImages: ChildImage[];
 
@@ -111,9 +112,11 @@ export interface ITourPackage extends Document {
   isStayIncluded: boolean;
   isBreakfastIncluded: boolean;
   isSightseeingIncluded: boolean;
+  availableSrc : string[];
 
   createdAt: Date;
   updatedAt: Date;
+
 }
 
 
@@ -172,6 +175,13 @@ const TourPackageSchema: Schema<ITourPackage> = new Schema(
             return this.status === "published";
           } },
       },
+    ],
+    availableSrc : [
+       {
+        type : String, function() : boolean {
+            return  this.status === 'published';
+        }
+       }
     ],
 
     destination: { type: String, function () : boolean {
@@ -257,7 +267,6 @@ const TourPackageSchema: Schema<ITourPackage> = new Schema(
 
     heroImage: { alt : {type : String} , image : {type : String} },
 
-    images: [{ type: String }],
 
     childImages: [
       {

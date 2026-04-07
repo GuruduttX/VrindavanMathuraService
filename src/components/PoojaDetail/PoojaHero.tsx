@@ -253,7 +253,7 @@ export default function PoojaHero({ pooja }: PoojaHeroProps) {
             strokeLinecap="round"
             strokeLinejoin="round"
           />
-        </svg>
+        
       </div>
     </section>
     </>

@@ -149,7 +149,7 @@ export default function EditBlog() {
 
     try {
 
-      const res = await fetch(`/api/blog/${dataId}`, {
+      const res = await fetch(`/api/admin/blog/${dataId}`, {
         method: "PUT",
         headers: {
           "Content-Type": "application/json"
@@ -172,8 +172,51 @@ export default function EditBlog() {
 
   };
 
-  const handlePublish = () => {
-    
+  const handlePublish = async() => {
+
+    const payload = {
+      title: form.title,
+      category: form.category,
+      slug: form.slug,
+      meta: {
+        title: form.metaTitle,
+        description: form.metaDescription,
+      },
+      structuredData: {
+        title: form.schemaTitle,
+        description: form.schemaDescription
+      },
+      image: form.image,
+      alt: form.alt,
+      subContent: form.subContent,
+      content: form.content,
+      author: form.author,
+      status : "draft",
+      faqs
+    };
+
+    try {
+
+      const res = await fetch(`/api/admin/blog/${dataId}`, {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify(payload)
+      });
+
+      const data = await res.json();
+
+      if (!data.success) {
+        toast.error(data.error || "Failed to update blog");
+        return;
+      }
+
+      toast.success("Blog Updated Successfully");
+
+    } catch (error) {
+      toast.error("Server Error");
+    }
   }
 
 
