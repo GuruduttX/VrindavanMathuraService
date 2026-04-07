@@ -199,7 +199,17 @@ export default function HotelDetailsSection({ HotelData }: { HotelData: any }) {
           <div className="mt-14 text-gray-600 leading-relaxed">
             <h3 className="text-xl font-semibold mb-4">About this stay</h3>
 
-            {HotelData.about.replace(/<[^>]*>?/gm, "")}
+            <div
+              className="BlogContent
+                    prose prose-slate max-w-none
+                    prose-ul:list-disc prose-ul:pl-6
+                    prose-ol:list-decimal prose-ol:pl-6
+                    prose-li:my-1
+                    prose-li:marker:text-slate-500
+                    prose-p:leading-7
+                    "
+              dangerouslySetInnerHTML={{ __html: HotelData.about ?? "" }}
+            />
 
             <p className="mt-4">
               The hotel offers AC rooms, temple view balconies, vegetarian

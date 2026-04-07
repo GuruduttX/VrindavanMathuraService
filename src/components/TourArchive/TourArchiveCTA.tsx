@@ -130,7 +130,7 @@ export default function TourArchiveCTA() {
       <CommonEnquiryForm
         open={isFormOpen}
         onClose={() => setIsFromOpen(false)}
-        defaultService="Taxi Booking"
+        defaultService="General Enquiry"
       />
     </>
   );

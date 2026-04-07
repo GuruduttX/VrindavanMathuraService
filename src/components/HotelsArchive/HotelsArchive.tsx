@@ -12,6 +12,7 @@ import {
   Hotel,
   ChevronDown,
   ChevronUp,
+  CheckCircle
 } from "lucide-react";
 import Link from "next/link";
 
@@ -266,6 +267,7 @@ console.log(filteredHotels, "filtered hotels");
                 shadow-xl
                 overflow-hidden
                 group
+                max-w-sm
                 "
               >
                 {/* IMAGE */}
@@ -291,12 +293,31 @@ console.log(filteredHotels, "filtered hotels");
 
                 {/* CONTENT */}
 
-                <div className="p-6">
+                <div className="p-6 space-y-3">
                   <h3 className="text-lg font-semibold">{hotel.title}</h3>{" "}
                   {/* Changed from name to title */}
-                  <div className="flex items-center text-gray-500 text-sm mt-1">
+                  <div className="flex items-center text-gray-500 text-orange-500 text-sm mt-1">
                     <MapPin size={14} className="mr-1" />
                     {hotel.category} {/* Changed from location to category */}
+                  </div>
+
+                  <div className="grid grid-cols-2 gap-2 text-sm text-gray-700">
+                    <span className="flex items-center gap-1">
+                      <CheckCircle className="w-4 h-4 text-green-500" />
+                      AC Cab
+                    </span>
+                    <span className="flex items-center gap-1">
+                      <CheckCircle className="w-4 h-4 text-green-500" />
+                      Local Guide
+                    </span>
+                    <span className="flex items-center gap-1">
+                      <CheckCircle className="w-4 h-4 text-green-500" />
+                      Temple Darshan
+                    </span>
+                    <span className="flex items-center gap-1">
+                      <CheckCircle className="w-4 h-4 text-green-500" />
+                      Pickup & Drop
+                    </span>
                   </div>
                   {/* AMENITIES -> INCLUSIONS */}
                   <div className="flex gap-4 mt-4 text-sm text-gray-600">
@@ -320,26 +341,40 @@ console.log(filteredHotels, "filtered hotels");
                     )}
                   </div>
                   {/* PRICE */}
-                  <div className="flex items-center justify-between mt-6">
-                    <span className="text-amber-600 font-semibold">
-                      ₹{hotel.price} / night
-                    </span>
+                  <div className="flex items-center gap-3 justify-around mt-6 text-lg font-bold">
 
-                    <Link href={`/hotels/${hotel.slug}`}>
-                      <button
-                        className="
+                    <Link
+                      href={`/hotels/${hotel.slug}`}
+                      className="
                     px-4 py-2
-                    rounded-full
+                    rounded-xl
                     text-white
+                    text-center
                     text-sm
                     bg-gradient-to-r from-orange-500 to-amber-600
                     hover:scale-105
                     transition
+                    flex-1
                     "
-                      >
-                        View Hotel
-                      </button>
+                    >
+                      <button>View Hotel</button>
                     </Link>
+                    <button
+                      className="
+                    px-4 py-2
+                    rounded-xl
+                    text-orange-500
+                    border-orange-500
+                    border
+                    text-sm
+                    bg-white
+                    hover:scale-105
+                    transition
+                    flex-1
+                    "
+                    >
+                      Enquire Now
+                    </button>
                   </div>
                 </div>
               </motion.div>

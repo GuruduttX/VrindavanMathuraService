@@ -20,6 +20,7 @@ export function FloatingInput({
       <input
         type={type}
         name={name}
+        value={value}
         onChange={onChange}
         required={required}
         placeholder=" "

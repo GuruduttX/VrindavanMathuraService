@@ -57,11 +57,17 @@ export default function SideForm() {
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify(form),
+        body: JSON.stringify({
+          name: form.name,
+          phone: form.phone,
+          email: form.email,
+          serviceType: `${form.message}\n
+          Service Type:- Tour Package , Travel Date:- ${form.travelDate} , Travellers Count:- ${form.travellers}`,
+        }),
       });
 
       const data = await res.json();
-
+      console.log(data)
       if (!res.ok) throw new Error(data.message);
 
       // Success
@@ -76,19 +82,8 @@ export default function SideForm() {
         travellers: "",
         message: "",
       });
-
-      // 🔥 OPTIONAL: WhatsApp redirect
-      /*
-      const whatsappMsg = `Hi, I'm ${form.name}
-Travel Date: ${form.travelDate}
-Travellers: ${form.travellers}`;
-
-      window.open(
-        `https://wa.me/91XXXXXXXXXX?text=${encodeURIComponent(whatsappMsg)}`
-      );
-      */
-
     } catch (err) {
+      setSuccess(false)
       console.error(err);
       alert("Something went wrong");
     } finally {
