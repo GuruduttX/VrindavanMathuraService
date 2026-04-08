@@ -1,5 +1,4 @@
 import { deleteAdminPoojaService, getAdminPoojasService , updateAdminPoojaService,getAdminPoojaByIdService, createAdminPoojaService } from "@/services/admin/poojaServices";
-import { createPooja } from "@/services/poojaServices";
 import { NextResponse } from "next/server";
 
 
