@@ -1,5 +1,7 @@
 "use client";
 
+import { TourFilterProvider } from "@/context/TourFilterContext";
+
 interface TourArchiveLayoutProps {
   sidebar: React.ReactNode;
   children: React.ReactNode;
@@ -10,26 +12,16 @@ export default function TourArchiveLayout({
   children,
 }: TourArchiveLayoutProps) {
   return (
-    <section className="bg-gray-50 py-10 sm:py-20 px-4 sm:px-6 md:px-10 lg:px-20">
-      <div className="max-w-[1400px] mx-auto">
+    <TourFilterProvider>
+      <section className="bg-gray-50 py-10 sm:py-20 px-4 sm:px-6 md:px-10 lg:px-20">
+        <div className="max-w-[1400px] mx-auto flex flex-col gap-8 md:gap-12">
+          {/* Top Filters (Passed via the 'sidebar' prop) */}
+          <div className="w-full">{sidebar}</div>
 
-        <div className="grid grid-cols-1 xl:grid-cols-[320px_1fr] gap-8 xl:gap-16">
-
-          {/* Sidebar (Filters) */}
-          <aside className="xl:sticky xl:top-16 self-start">
-            <div className="xl:bg-white xl:rounded-3xl xl:shadow-lg xl:border xl:border-gray-100 xl:p-6">
-              {sidebar}
-            </div>
-          </aside>
-
-          {/* Main Content */}
-          <div className="space-y-12">
-            {children}
-          </div>
-
+          {/* Main Content (Packages Grid) */}
+          <div className="w-full">{children}</div>
         </div>
-
-      </div>
-    </section>
+      </section>
+    </TourFilterProvider>
   );
 }

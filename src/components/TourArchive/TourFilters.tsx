@@ -1,191 +1,91 @@
 "use client";
 
-import { useState } from "react";
-import { SlidersHorizontal } from "lucide-react";
+import { useTourFilter } from "@/context/TourFilterContext";
+
+const CATEGORIES = [
+  "Explore All",
+  "1 Day Tour Package",
+  "2 Day Tour Package",
+  "3 Day Tour Package",
+  "4 Day Tour Package",
+  "5 Day Tour Package",
+  "6 Day Tour Package",
+  "7 Day Tour Package",
+  "8 Day Tour Package",
+  "9 Day Tour Package",
+  "10 Day Tour Package",
+];
 
 export default function TourFilters() {
-  const [activeDuration, setActiveDuration] = useState<string | null>(null);
-  const [activeBudgets, setActiveBudgets] = useState<string[]>([]);
-  const [activeTourTypes, setActiveTourTypes] = useState<string[]>([]);
-
-  const toggleBudget = (item: string) => {
-    setActiveBudgets((prev) =>
-      prev.includes(item) ? prev.filter((b) => b !== item) : [...prev, item]
-    );
-  };
-
-  const toggleTourType = (item: string) => {
-    setActiveTourTypes((prev) =>
-      prev.includes(item) ? prev.filter((t) => t !== item) : [...prev, item]
-    );
-  };
-
-  const resetAll = () => {
-    setActiveDuration(null);
-    setActiveBudgets([]);
-    setActiveTourTypes([]);
-  };
-
-  const hasActiveFilters =
-    activeDuration || activeBudgets.length > 0 || activeTourTypes.length > 0;
+  const { activeCategory, setActiveCategory } = useTourFilter();
 
   return (
-    <>
-      {/* ===== MOBILE ===== */}
-      <div className="xl:hidden space-y-4">
+    <div className="w-full">
+      {/* Scrollable Container */}
+      <div className="flex items-center gap-4 overflow-x-auto justify-around no-scrollbar pb-6 pt-2 px-2">
+        {CATEGORIES.map((cat) => {
+          const isActive = activeCategory === cat;
 
-        {/* Duration */}
-        <div>
-          <p className="text-xs font-semibold text-gray-500 uppercase tracking-wider mb-2">
-            Duration
-          </p>
-          <div className="flex gap-2 overflow-x-auto no-scrollbar pb-1">
-            {["1 Day", "2 Days", "3+ Days"].map((item) => (
-              <button
-                key={item}
-                onClick={() =>
-                  setActiveDuration(activeDuration === item ? null : item)
+          // Parse the category string to match the UI layout
+          const isAll = cat === "Explore All";
+          const number = isAll ? "All" : cat.split(" ")[0]; // Gets "1", "2", or "All"
+          const dayText = isAll ? "DAYS" : number === "1" ? "DAY" : "DAYS";
+
+          return (
+            <button
+              key={cat}
+              onClick={() => setActiveCategory(cat)}
+              className={`
+                flex-shrink-0 flex flex-col items-center justify-between 
+                w-[90px] h-[105px] rounded-[24px] py-3 transition-all duration-300
+                ${
+                  isActive
+                    ? "bg-gradient-to-b from-amber-600 to-orange-400 border-transparent shadow-orange-600/5 -translate-y-1"
+                    : "bg-white border-[1.5px] border-orange-200 hover:border-orange-400 hover:bg-orange-50/50 hover:-translate-y-0.5"
                 }
-                className={`px-3.5 py-1.5 rounded-full text-xs font-medium whitespace-nowrap transition duration-200 cursor-pointer flex-shrink-0 ${
-                  activeDuration === item
-                    ? "bg-[linear-gradient(145deg,#7A2E00,#A84010,#E8821A)] text-white shadow-sm"
-                    : "bg-white border border-orange-200 text-gray-600 hover:border-[#A84010] hover:text-[#A84010]"
-                }`}
-              >
-                {item}
-              </button>
-            ))}
-          </div>
-        </div>
+              `}
+            >
+              <div className="flex flex-col items-center gap-0.5">
+                {/* Large Number */}
+                <span
+                  className={`
+                  text-2xl font-bold leading-none mb-1
+                  ${isActive ? "text-white" : "text-[#b84812]"}
+                `}
+                >
+                  {number}
+                </span>
 
-        {/* Budget + Type */}
-        <div>
-          <p className="text-xs font-semibold text-gray-500 uppercase tracking-wider mb-2">
-            Budget & Type
-          </p>
-          <div className="flex gap-2 overflow-x-auto no-scrollbar pb-1">
-            {["Under ₹5K", "₹5K-₹10K", "₹10K+"].map((label) => (
-              <button
-                key={label}
-                onClick={() => toggleBudget(label)}
-                className={`px-3.5 py-1.5 rounded-full text-xs font-medium whitespace-nowrap transition duration-200 cursor-pointer flex-shrink-0 ${
-                  activeBudgets.includes(label)
-                    ? "bg-[linear-gradient(145deg,#7A2E00,#A84010,#E8821A)] text-white shadow-sm"
-                    : "bg-white border border-orange-200 text-gray-600 hover:border-[#A84010] hover:text-[#A84010]"
-                }`}
-              >
-                {label}
-              </button>
-            ))}
+                {/* DAYS / PACKAGE Text */}
+                <span
+                  className={`
+                  text-[9px] font-bold tracking-widest uppercase leading-tight
+                  ${isActive ? "text-white" : "text-orange-500"}
+                `}
+                >
+                  {dayText}
+                </span>
+                <span
+                  className={`
+                  text-[9px] font-bold tracking-widest uppercase leading-tight
+                  ${isActive ? "text-white" : "text-orange-500"}
+                `}
+                >
+                  PACKAGE
+                </span>
+              </div>
 
-            <div className="w-px bg-orange-200 flex-shrink-0 my-0.5" />
-
-            {["Temple", "Festival", "VIP", "Family"].map((type) => (
-              <button
-                key={type}
-                onClick={() => toggleTourType(type)}
-                className={`px-3.5 py-1.5 rounded-full text-xs font-medium whitespace-nowrap transition duration-200 cursor-pointer flex-shrink-0 ${
-                  activeTourTypes.includes(type)
-                    ? "bg-[linear-gradient(145deg,#7A2E00,#A84010,#E8821A)] text-white shadow-sm"
-                    : "bg-white border border-orange-200 text-gray-600 hover:border-[#A84010] hover:text-[#A84010]"
-                }`}
-              >
-                {type}
-              </button>
-            ))}
-          </div>
-        </div>
-
-        {/* Reset */}
-        {hasActiveFilters && (
-          <button
-            onClick={resetAll}
-            className="text-xs text-[#A84010] font-medium hover:text-[#7A2E00] transition cursor-pointer"
-          >
-            ✕ Clear all filters
-          </button>
-        )}
+              {/* Indicator Dot */}
+              <div
+                className={`
+                w-1.5 h-1.5 rounded-full mt-2
+                ${isActive ? "bg-white/80" : "bg-orange-200"}
+              `}
+              />
+            </button>
+          );
+        })}
       </div>
-
-      {/* ===== DESKTOP ===== */}
-      <div className="hidden xl:block space-y-8">
-
-        {/* Title */}
-        <div className="flex items-center gap-3">
-          <div className="h-10 w-10 flex items-center justify-center rounded-xl 
-          bg-[linear-gradient(145deg,#7A2E00,#A84010,#E8821A)] text-white shadow-md">
-            <SlidersHorizontal size={18} />
-          </div>
-          <h3 className="text-lg font-semibold text-gray-900">
-            Filter Tours
-          </h3>
-        </div>
-
-        {/* Divider */}
-        <div className="h-px bg-gradient-to-r from-orange-200 via-orange-100 to-transparent" />
-
-        {/* Duration */}
-        <div>
-          <h4 className="font-medium mb-3 text-gray-800">Duration</h4>
-          <div className="flex flex-wrap gap-2">
-            {["1 Day", "2 Days", "3+ Days"].map((item) => (
-              <button
-                key={item}
-                onClick={() =>
-                  setActiveDuration(activeDuration === item ? null : item)
-                }
-                className={`px-4 py-2 rounded-full text-sm font-medium transition duration-200 cursor-pointer ${
-                  activeDuration === item
-                    ? "bg-[linear-gradient(145deg,#7A2E00,#A84010,#E8821A)] text-white shadow-md"
-                    : "border border-orange-200 text-gray-600 hover:border-[#A84010] hover:text-[#A84010] hover:bg-orange-50"
-                }`}
-              >
-                {item}
-              </button>
-            ))}
-          </div>
-        </div>
-
-        {/* Budget */}
-        <div>
-          <h4 className="font-medium mb-3 text-gray-800">Budget</h4>
-          <div className="space-y-3 text-sm text-gray-600">
-            {["Under ₹5,000", "₹5,000 - ₹10,000", "₹10,000+"].map((label) => (
-              <label key={label} className="flex items-center gap-3 cursor-pointer group">
-                <input type="checkbox" className="accent-[#A84010] w-4 h-4" />
-                <span className="group-hover:text-[#A84010] transition">{label}</span>
-              </label>
-            ))}
-          </div>
-        </div>
-
-        {/* Tour Type */}
-        <div>
-          <h4 className="font-medium mb-3 text-gray-800">Tour Type</h4>
-          <div className="space-y-3 text-sm text-gray-600">
-            {["Temple", "Festival", "VIP Darshan", "Family"].map((type) => (
-              <label key={type} className="flex items-center gap-3 cursor-pointer group">
-                <input type="checkbox" className="accent-[#A84010] w-4 h-4" />
-                <span className="group-hover:text-[#A84010] transition">{type}</span>
-              </label>
-            ))}
-          </div>
-        </div>
-
-        {/* Divider */}
-        <div className="h-px bg-gradient-to-r from-orange-200 via-orange-100 to-transparent" />
-
-        {/* Reset Button */}
-        <button
-          onClick={resetAll}
-          className="w-full py-3 rounded-full 
-          bg-gradient-to-r from-orange-50 to-orange-100 border border-orange-200 
-          text-[#A84010] text-sm font-medium 
-          hover:from-orange-100 hover:to-orange-200 transition duration-200 cursor-pointer"
-        >
-          Reset All Filters
-        </button>
-      </div>
-    </>
+    </div>
   );
 }

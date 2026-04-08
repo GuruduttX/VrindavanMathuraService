@@ -6,13 +6,11 @@ import { Star, MapPin, Users, Clock } from "lucide-react";
 import { setSourceMapsEnabled } from "process";
 
 export default function TourCard({ tour, setOpen }: any) {
-
+  console.log(tour)
   return (
     <div className="bg-white rounded-3xl shadow-lg hover:shadow-xl transition duration-300 overflow-hidden border border-orange-100">
-
       {/* Image Section */}
       <div className="relative h-60 w-full overflow-hidden">
-
         <Image
           src={"/images/Home/holy-image.webp"}
           alt={"The name is something called"}
@@ -80,30 +78,24 @@ export default function TourCard({ tour, setOpen }: any) {
         </div>
 
         {/* Divider */}
-        <div className="border-t border-orange-100 pt-4 flex items-end justify-between">
-
-          {/* Price */}
-          <div>
-            {tour.oldPrice && (
-              <p className="text-sm text-gray-400 line-through">
-                ₹{tour.oldPrice.toLocaleString()}
-              </p>
-            )}
-
-            <p className="text-2xl font-bold text-[#A84010]">
-              ₹{tour.price.toLocaleString()}
-            </p>
-
-            <p className="text-xs text-gray-500">per person</p>
-          </div>
-
+        <div className="border-t border-orange-100 pt-4 flex gap-4 justify-around">
           {/* Button */}
-        
-            <button onClick={()=>setOpen(true)}  className="px-6 py-3 cursor-pointer rounded-full 
+          <Link
+            href={`tour-packages/${tour.duration}/${tour.slug}`}
+            className="flex-1 px-4  py-3 cursor-pointer rounded-xl 
             bg-[linear-gradient(145deg,#7A2E00,#A84010,#E8821A)] 
-            text-white font-medium shadow-md hover:scale-105 transition duration-300">
-              Book Now
-            </button>
+            text-white font-medium shadow-md hover:scale-105 transition duration-300 grid"
+          >
+            <button className="place-self-center">View Tour</button>
+          </Link>
+
+          <button
+            onClick={() => setOpen(true)}
+            className="px-4 flex-1 py-3 cursor-pointer rounded-xl border
+            border-orange-200 text-gray-600 hover:border-[#A84010] hover:text-[#A84010] font-medium shadow-md hover:scale-105 transition duration-300"
+          >
+            Enquire Now
+          </button>
         </div>
       </div>
     </div>

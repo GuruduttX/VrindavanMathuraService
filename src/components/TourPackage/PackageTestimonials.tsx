@@ -7,11 +7,10 @@ export default function PackageTestimonials({ PackageData }: any) {
     ...(PackageData?.testimonials || []),
     ...(PackageData?.testimonials || []),
   ];
-
+  console.log(PackageData)
   return (
     <section className="py-14 lg:py-24 bg-gradient-to-b from-orange-50 to-white overflow-hidden">
       <div className="max-w-7xl mx-auto px-4 sm:px-6">
-
         {/* LEFT – SUMMARY */}
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 lg:gap-14">
           <div className="space-y-4 text-center lg:text-left">
@@ -24,14 +23,21 @@ export default function PackageTestimonials({ PackageData }: any) {
             </h2>
 
             <div className="flex items-center justify-center lg:justify-start gap-4">
-              <span className="text-5xl font-bold text-gray-900">4.8</span>
+              <span className="text-5xl font-bold text-gray-900">
+                {PackageData.rating}
+              </span>
               <div>
                 <div className="flex gap-1">
                   {Array.from({ length: 5 }).map((_, i) => (
-                    <Star key={i} className="w-5 h-5 text-[#E8821A] fill-[#E8821A]" />
+                    <Star
+                      key={i}
+                      className="w-5 h-5 text-[#E8821A] fill-[#E8821A]"
+                    />
                   ))}
                 </div>
-                <p className="text-sm text-gray-500 mt-1">Based on 180+ journeys</p>
+                <p className="text-sm text-gray-500 mt-1">
+                  Based on {PackageData.reviews}+ journeys
+                </p>
               </div>
             </div>
           </div>
@@ -57,20 +63,28 @@ export default function PackageTestimonials({ PackageData }: any) {
                           </p>
                           <BadgeCheck className="w-4 h-4 text-[#A84010] shrink-0" />
                         </div>
-                        <p className="text-xs text-gray-500 truncate">{t.location || "India"}</p>
+                        <p className="text-xs text-gray-500 truncate">
+                          {t.location || "India"}
+                        </p>
                       </div>
                     </div>
 
                     {/* Rating */}
                     <div className="flex gap-1 mb-3">
                       {Array.from({ length: 5 }).map((_, i) => (
-                        <Star key={i} className="w-3.5 h-3.5 text-[#E8821A] fill-[#E8821A]" />
+                        <Star
+                          key={i}
+                          className="w-3.5 h-3.5 text-[#E8821A] fill-[#E8821A]"
+                        />
                       ))}
                     </div>
 
                     {/* Review */}
                     <p className="text-sm text-gray-700 leading-relaxed line-clamp-4">
-                      "{t.description || "Very peaceful and well-managed spiritual experience."}"
+                      "
+                      {t.description ||
+                        "Very peaceful and well-managed spiritual experience."}
+                      "
                     </p>
                   </div>
                 ))}
@@ -81,7 +95,6 @@ export default function PackageTestimonials({ PackageData }: any) {
             <div className="pointer-events-none absolute top-0 left-0 h-full w-10 sm:w-16 bg-gradient-to-r from-orange-50 to-transparent" />
             <div className="pointer-events-none absolute top-0 right-0 h-full w-10 sm:w-16 bg-gradient-to-l from-white to-transparent" />
           </div>
-
         </div>
       </div>
     </section>

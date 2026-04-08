@@ -54,7 +54,7 @@ export default function HotelDetailsHero({HotelData } : {HotelData : any}) {
             initial={{ opacity: 0, y: 40 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.2 }}
-            className="bg-white rounded-3xl shadow-xl p-8 mt-6 flex flex-col lg:flex-row justify-between"
+            className="bg-white rounded-3xl md:shadow-xl p-4 md:p-8 mt-6 flex flex-col lg:flex-row justify-between"
           >
             <div>
               {/* Title */}
