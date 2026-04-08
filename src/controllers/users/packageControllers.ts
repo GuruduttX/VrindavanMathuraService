@@ -14,6 +14,7 @@ export async function getUserAllToursController() {
     });
 
   } catch (error) {
+    console.log("package error", error)
     return NextResponse.json(
       { success: false, message: "Failed to fetch users tours" },
       { status: 500 }

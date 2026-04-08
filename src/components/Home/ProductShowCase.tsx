@@ -42,31 +42,37 @@ export default function ProductsShowcase() {
   const indicatorRef = useRef<HTMLDivElement | null>(null);
 
 
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const [toursRes, hotelsRes, pujaRes] = await Promise.all([
-          fetch("/api/users/tour-packages"),
-          fetch("/api/users/hotels"),
-          fetch("/api/users/pooja"),
-        ]);
+useEffect(() => {
+  const fetchData = async () => {
+    try {
+ 
+      const toursRes = await fetch("/api/users/tour-packages");
+      const tours = await toursRes.json();
 
-        const tours = await toursRes.json();
-        const hotels = await hotelsRes.json();
-        const puja = await pujaRes.json();
+  
+      const hotelsRes = await fetch("/api/users/hotels");
+      const hotels = await hotelsRes.json();
 
-        setData({
-          tours: tours.data || [],
-          hotels: hotels.data || [],
-          puja: puja.data || [],
-        });
-      } catch (err) {
-        console.error("API Error:", err);
-      }
-    };
+ 
+      const pujaRes = await fetch("/api/users/pooja");
+      const puja = await pujaRes.json();
 
-    fetchData();
-  }, []);
+
+      setData({
+        tours: tours?.data || [],
+        hotels: hotels?.data || [],
+        puja: puja?.data || [],
+      });
+
+    } catch (err) {
+      console.error("API Error:", err);
+    }
+  };
+
+  fetchData();
+}, []);
+
+
 
   // indicator animation
   useEffect(() => {
