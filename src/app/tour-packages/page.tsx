@@ -227,6 +227,7 @@ export default async function page() {
       <Navbar />
       <TourHero />
       <TourTrustStrip />
+      
       <TourArchiveLayout sidebar={<TourFilters />}>
         <TourGrid tours={tours} />
       </TourArchiveLayout>
