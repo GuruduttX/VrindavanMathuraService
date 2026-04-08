@@ -14,7 +14,7 @@ import { notFound } from "next/navigation";
 const getBlogs = async (slug: string) => {
 
     try {
-        const response = await fetch(`http://localhost:3000/api/users/blog/${slug}`, { cache: "no-store" });
+        const response = await fetch(`${process.env.NEXT_PUBLIC_URL}/api/users/blog/${slug}`, { cache: "no-store" });
 
         if(response.status == 404) {
             return null;

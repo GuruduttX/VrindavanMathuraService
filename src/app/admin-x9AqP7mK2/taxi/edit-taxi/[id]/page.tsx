@@ -63,7 +63,7 @@ export default function EditTaxi() {
 
     try {
 
-      const res = await fetch(`/api/admin/taxi/${id}`, {
+      const res = await fetch(`${process.env.NEXT_PUBLIC_URL}/api/admin/taxi/${id}`, {
         cache: "no-store"
       })
 
@@ -126,7 +126,7 @@ export default function EditTaxi() {
 
     try {
 
-      const res = await fetch(`/api/admin/taxi/${id}`, {
+      const res = await fetch(`${process.env.NEXT_PUBLIC_URL}/api/admin/taxi/${id}`, {
         method: "PUT",
         headers: {
           "Content-Type": "application/json"

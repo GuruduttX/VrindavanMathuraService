@@ -1,6 +1,6 @@
 export async function GET() {
   try {
-    const baseUrl = process.env.BASE_URL || "https://yourdomain.com";
+    const baseUrl = process.env.NEXT_PUBLIC_URL || "https://yourdomain.com";
 
     const res = await fetch(`${baseUrl}/api/users/hotels`, {
       next: { revalidate: 3600 }

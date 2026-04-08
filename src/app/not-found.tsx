@@ -141,7 +141,6 @@ export default function NotFound() {
                         {/* Back Card */}
 
                         <motion.div
-                            variants={floatingCard}
                             animate="animate"
                             className="absolute w-64 h-80 rounded-3xl shadow-2xl overflow-hidden rotate-[-8deg]"
                         >
@@ -156,7 +155,6 @@ export default function NotFound() {
                         {/* Front Card */}
 
                         <motion.div
-                            variants={floatingCard}
                             animate="animate"
                             transition={{ delay: 1 }}
                             className="relative w-64 h-80 rounded-3xl shadow-2xl overflow-hidden rotate-[8deg]"

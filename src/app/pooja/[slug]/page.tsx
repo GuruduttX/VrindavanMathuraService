@@ -15,7 +15,7 @@ import PoojaContent from "@/components/PoojaDetail/PoojaContent";
 
 const getPooja = async (slug: string) => {
  const res = await fetch(
-  `http://localhost:3000/api/users/pooja/${slug}`
+  `${process.env.NEXT_PUBLIC_URL}/api/users/pooja/${slug}`
 );
   if (!res.ok) throw new Error("Failed");
 

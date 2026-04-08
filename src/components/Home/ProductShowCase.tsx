@@ -46,15 +46,15 @@ useEffect(() => {
   const fetchData = async () => {
     try {
  
-      const toursRes = await fetch("/api/users/tour-packages");
+      const toursRes = await fetch(`${process.env.NEXT_PUBLIC_URL}/api/users/tour-packages`);
       const tours = await toursRes.json();
 
   
-      const hotelsRes = await fetch("/api/users/hotels");
+      const hotelsRes = await fetch(`${process.env.NEXT_PUBLIC_URL}/api/users/hotels`);
       const hotels = await hotelsRes.json();
 
  
-      const pujaRes = await fetch("/api/users/pooja");
+      const pujaRes = await fetch(`${process.env.NEXT_PUBLIC_URL}/api/users/pooja`);
       const puja = await pujaRes.json();
 
 

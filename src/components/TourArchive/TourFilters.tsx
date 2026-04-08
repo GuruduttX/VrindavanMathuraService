@@ -1,7 +1,6 @@
 "use client";
 
-import { useTourFilter } from "@/context/TourFilterContext";
-
+import { useTourFilter } from "@/config/context/TourFilterContext";
 const CATEGORIES = [
   "Explore All",
   "1 Day Tour Package",

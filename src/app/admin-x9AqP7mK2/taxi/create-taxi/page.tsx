@@ -92,7 +92,7 @@ export default function CreateNewTaxi() {
 
     try {
 
-      const res = await fetch("/api/admin/taxi", {
+      const res = await fetch(`${process.env.NEXT_PUBLIC_URL}/api/admin/taxi`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json"
@@ -151,7 +151,7 @@ export default function CreateNewTaxi() {
 
     try {
 
-      const res = await fetch("/api/admin/taxi", {
+      const res = await fetch(`${process.env.NEXT_PUBLIC_URL}/api/admin/taxi`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json"

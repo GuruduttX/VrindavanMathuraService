@@ -45,7 +45,7 @@ export default function TaxiHero() {
     }
 
     try {
-      const response = await fetch("api/simbark", {
+      const response = await fetch(`${process.env.NEXT_PUBLIC_URL}/api/simbark`, {
         method: "POST",
         body: JSON.stringify({
           name: form.name,

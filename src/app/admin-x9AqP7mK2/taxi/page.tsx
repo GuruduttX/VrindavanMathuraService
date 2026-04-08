@@ -31,7 +31,7 @@ export default function TaxiPage() {
     try {
       setLoading(true);
 
-      const res = await fetch("/api/admin/taxi");
+      const res = await fetch(`${process.env.NEXT_PUBLIC_URL}/api/admin/taxi`);
 
       if (!res.ok) {
         throw new Error("Failed to fetch taxis");

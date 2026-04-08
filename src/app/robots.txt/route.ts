@@ -1,6 +1,6 @@
 export async function GET() {
   const BASE_URL =
-    process.env.BASE_URL ||
+    process.env.NEXT_PUBLIC_URL ||
     "https://vrindavanmathuraguide.com";
   return new Response(
 `User-agent: *

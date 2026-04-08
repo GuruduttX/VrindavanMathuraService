@@ -6,7 +6,7 @@ export const revalidate = 3600;
 export async function GET() {
   try {
     const res = await fetch(
-      `${process.env.BASE_URL}/api/users/blog`,
+      `${process.env.NEXT_PUBLIC_URL}/api/users/blog`,
       {
        
         cache: "force-cache",

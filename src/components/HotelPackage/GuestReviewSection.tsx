@@ -12,7 +12,6 @@ import {
 } from "lucide-react";
 
 export default function GuestReviewSection({HotelData}:any) {
-  console.log(HotelData, "Guest review section");
 
    const highlightLabels: Record<string, string> = {
      comfortStay: "Comfort Stay",

@@ -100,7 +100,7 @@ export default function page() {
 
   const getPackages = async () => {
     try {
-      const res = await fetch(`/api/admin/tour-packages/${id}`);
+      const res = await fetch(`${process.env.NEXT_PUBLIC_URL}/api/admin/tour-packages/${id}`);
       if (!res.ok) {
         toast.error("Error fetching package");
       }
@@ -234,7 +234,7 @@ export default function page() {
   });
 
   const postPayload = async (payload: object) => {
-    const res = await fetch(`/api/admin/tour-packages/${id}`, {
+    const res = await fetch(`${process.env.NEXT_PUBLIC_URL}/api/admin/tour-packages/${id}`, {
       method: "PUT",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(payload),
