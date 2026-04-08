@@ -10,7 +10,7 @@ const getPoojaData = async () => {
     try {
 
         const res = await fetch(
-            `http://localhost:3000/api/users/pooja`
+            `${process.env.NEXT_PUBLIC_URL}/api/users/pooja`
         );
 
         if (!res.ok) {

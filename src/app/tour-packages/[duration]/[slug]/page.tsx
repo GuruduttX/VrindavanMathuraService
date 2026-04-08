@@ -24,7 +24,7 @@ const getPackageData = async (slug: string, duration: string) => {
   try {
     
    const res = await fetch(
-  `http://localhost:3000/api/users/tour-packages/search/?slug=${slug}&duration=${duration}`
+  `${process.env.NEXT_PUBLIC_URL}/api/users/tour-packages/search/?slug=${slug}&duration=${duration}`
   );
 
   if(!res.ok) {

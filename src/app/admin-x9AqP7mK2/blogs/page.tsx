@@ -75,7 +75,7 @@ export default function BlogsPage() {
     try {
       setLoading(true);
 
-      const res = await fetch("/api/admin/blog", {
+      const res = await fetch(`${process.env.NEXT_PUBLIC_URL}/api/admin/blog`, {
         cache: "no-store"
       });
 

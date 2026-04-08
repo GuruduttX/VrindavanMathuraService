@@ -66,7 +66,7 @@ export default function HotelsArchive() {
   useEffect(() => {
     const fetchHotels = async () => {
       try {
-        const res = await fetch("api/users/hotels");
+        const res = await fetch(`${process.env.NEXT_PUBLIC_URL}/api/users/hotels`);
 
         if (!res.ok) {
           throw new Error(`HTTP error! status: ${res.status}`);

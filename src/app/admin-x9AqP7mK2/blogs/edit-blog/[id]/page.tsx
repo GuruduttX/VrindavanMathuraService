@@ -71,7 +71,7 @@ export default function EditBlog() {
 
       try {
 
-        const res = await fetch(`/api/admin/blog/${id}`);
+        const res = await fetch(`${process.env.NEXT_PUBLIC_URL}/api/admin/blog/${id}`);
         const data = await res.json();
 
         console.log("THE DATA COME IS : ");
@@ -149,7 +149,7 @@ export default function EditBlog() {
 
     try {
 
-      const res = await fetch(`/api/admin/blog/${dataId}`, {
+      const res = await fetch(`${process.env.NEXT_PUBLIC_URL}/api/admin/blog/${dataId}`, {
         method: "PUT",
         headers: {
           "Content-Type": "application/json"
@@ -197,7 +197,7 @@ export default function EditBlog() {
 
     try {
 
-      const res = await fetch(`/api/admin/blog/${dataId}`, {
+      const res = await fetch(`${process.env.NEXT_PUBLIC_URL}/api/admin/blog/${dataId}`, {
         method: "PUT",
         headers: {
           "Content-Type": "application/json"

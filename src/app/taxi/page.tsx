@@ -69,7 +69,7 @@ const getTaxiData = async () => {
     try {
 
         const res = await fetch(
-            `http://localhost:3000/api/users/taxi`
+            `${process.env.NEXT_PUBLIC_URL}/api/users/taxi`
         );
 
         if (!res.ok) {

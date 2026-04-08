@@ -20,7 +20,7 @@ export default function HotelsPage() {
   const fetchHotels = async () => {
     try {
       setLoading(true);
-      const res = await fetch("/api/admin/hotels", { cache: "no-store" });
+      const res = await fetch(`${process.env.NEXT_PUBLIC_URL}/api/admin/hotels`, { cache: "no-store" });
       if (!res.ok) throw new Error("Failed to fetch");
       const data = await res.json();
       setHotels(data.data || []);

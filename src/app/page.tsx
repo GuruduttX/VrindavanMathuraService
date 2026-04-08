@@ -15,6 +15,7 @@ const PopularTours = dynamic(() => import("@/utils/PopularTours"));
 const ServicesSection = dynamic(() => import("@/utils/ServicesSection"));
 const TaxiShowcase = dynamic(() => import("@/utils/TaxiShowCase"));
 
+
 export const metadata: Metadata = {
   title:
     "Mathura Vrindavan Tour Packages | Hotels, Taxi & Temple Puja Services",

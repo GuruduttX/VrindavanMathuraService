@@ -1,8 +1,5 @@
 "use client";
-
-import Image from "next/image";
 import { useState, useEffect, useRef } from "react";
-import { MapPin, CheckCircle, Star, Car, Hotel } from "lucide-react";
 import HotelCard from "./ProductShow/HotelsCard";
 import PoojaCard from "./ProductShow/PoojaCards";
 import TourCard from "./ProductShow/TourCards";
@@ -42,31 +39,37 @@ export default function ProductsShowcase() {
   const indicatorRef = useRef<HTMLDivElement | null>(null);
 
 
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const [toursRes, hotelsRes, pujaRes] = await Promise.all([
-          fetch("/api/users/tour-packages"),
-          fetch("/api/users/hotels"),
-          fetch("/api/users/pooja"),
-        ]);
+useEffect(() => {
+  const fetchData = async () => {
+    try {
+ 
+      const toursRes = await fetch(`${process.env.NEXT_PUBLIC_URL}/api/users/tour-packages`);
+      const tours = await toursRes.json();
 
-        const tours = await toursRes.json();
-        const hotels = await hotelsRes.json();
-        const puja = await pujaRes.json();
+  
+      const hotelsRes = await fetch(`${process.env.NEXT_PUBLIC_URL}/api/users/hotels`);
+      const hotels = await hotelsRes.json();
 
-        setData({
-          tours: tours.data || [],
-          hotels: hotels.data || [],
-          puja: puja.data || [],
-        });
-      } catch (err) {
-        console.error("API Error:", err);
-      }
-    };
+ 
+      const pujaRes = await fetch(`${process.env.NEXT_PUBLIC_URL}/api/users/pooja`);
+      const puja = await pujaRes.json();
 
-    fetchData();
-  }, []);
+
+      setData({
+        tours: tours?.data || [],
+        hotels: hotels?.data || [],
+        puja: puja?.data || [],
+      });
+
+    } catch (err) {
+      console.error("API Error:", err);
+    }
+  };
+
+  fetchData();
+}, []);
+
+
 
   // indicator animation
   useEffect(() => {

@@ -12,7 +12,6 @@ import Inclusion from '@/components/Admin/PackageEditor/Inclusion';
 import Exclusion from '@/components/Admin/PackageEditor/Exclusion';
 import CMSSchema from '@/components/Admin/CMS/CMSSchema';
 import { useParams } from 'next/navigation';
-import { getHotelByIdService } from '@/services/hotelServices';
 import QuickInclusion from '@/components/Admin/HotelEditor/QuickInclusion';
 import RatingSummary from '@/components/Admin/HotelEditor/SummaryPackage';
 import CMSHostField from '@/components/Admin/HotelEditor/CMSHostField';
@@ -98,7 +97,7 @@ export default function CreateNewPackage() {
    const getHotel = async()=>{
     try {
 
-        const res = await fetch(`/api/admin/hotels/${id}`);
+        const res = await fetch(`${process.env.NEXT_PUBLIC_URL}/api/admin/hotels/${id}`);
 
         if(!res.ok){
            throw new Error("Get Error In Updating fields");
@@ -194,7 +193,7 @@ export default function CreateNewPackage() {
   });
 
   const postPayload = async (payload: object) => {
-    const res = await fetch(`/api/admin/hotels/${id}`, {
+    const res = await fetch(`${process.env.NEXT_PUBLIC_URL}/api/admin/hotels/${id}`, {
       method:  "PUT",
       headers: { "Content-Type": "application/json" },
       body:    JSON.stringify(payload),

@@ -23,7 +23,7 @@ export default function PackagesPage() {
   useEffect(() => {
     const getPackages = async () => {
       try {
-        const res = await fetch("/api/admin/tour-packages");
+        const res = await fetch(`${process.env.NEXT_PUBLIC_URL}/api/admin/tour-packages`);
         const data = await res.json();
         if (!data.success) throw new Error("Failed");
         setPackages(data.data || []);
@@ -41,7 +41,7 @@ export default function PackagesPage() {
     if (!selectedId) return;
 
     try {
-      const res = await fetch(`/api/admin/tour-packages/${selectedId}`, {
+      const res = await fetch(`${process.env.NEXT_PUBLIC_URL}/api/admin/tour-packages/${selectedId}`, {
         method: "DELETE",
       });
 
