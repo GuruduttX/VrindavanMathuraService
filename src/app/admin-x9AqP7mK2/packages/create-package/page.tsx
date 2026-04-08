@@ -104,10 +104,10 @@ export default function CreateNewPackage() {
       price: Number(form.price),
       days: Number(form.day),
       nights: Number(form.night),
-      reviews : form.reviews,
+      reviews : Number(form.reviews),
 
       destination: form.destination,
-      rating: form.rating,
+      rating: Number(form.rating),
 
       overview: form.overview,
       duration: form.duration,

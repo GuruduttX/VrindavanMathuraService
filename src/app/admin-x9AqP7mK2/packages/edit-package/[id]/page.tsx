@@ -191,8 +191,8 @@ export default function page() {
     nights: Number(form.night),
 
     destination: form.destination,
-    rating: form.rating,
-    reviews: form.reviews,
+    rating: Number(form.rating),
+    reviews: Number(form.reviews),
 
     overview: form.overview,
     duration: form.duration,
