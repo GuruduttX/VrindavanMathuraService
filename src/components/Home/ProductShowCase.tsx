@@ -1,8 +1,5 @@
 "use client";
-
-import Image from "next/image";
 import { useState, useEffect, useRef } from "react";
-import { MapPin, CheckCircle, Star, Car, Hotel } from "lucide-react";
 import HotelCard from "./ProductShow/HotelsCard";
 import PoojaCard from "./ProductShow/PoojaCards";
 import TourCard from "./ProductShow/TourCards";
