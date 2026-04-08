@@ -12,7 +12,6 @@ import Inclusion from '@/components/Admin/PackageEditor/Inclusion';
 import Exclusion from '@/components/Admin/PackageEditor/Exclusion';
 import CMSSchema from '@/components/Admin/CMS/CMSSchema';
 import { useParams } from 'next/navigation';
-import { getHotelByIdService } from '@/services/hotelServices';
 import QuickInclusion from '@/components/Admin/HotelEditor/QuickInclusion';
 import RatingSummary from '@/components/Admin/HotelEditor/SummaryPackage';
 import CMSHostField from '@/components/Admin/HotelEditor/CMSHostField';
