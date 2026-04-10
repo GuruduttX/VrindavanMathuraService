@@ -14,7 +14,7 @@ export default function TourArchiveLayout({
 }: TourArchiveLayoutProps) {
   return (
     <TourFilterProvider>
-      <section className="bg-gray-50 py-10 sm:py-20 px-4 sm:px-6 md:px-10 lg:px-20">
+      <section className="bg-gray-50 py-10 sm:py-20 px-4 sm:px-6 md:px-10 lg:px-20" id="tours">
         <div className="max-w-[1400px] mx-auto flex flex-col gap-8 md:gap-12">
           {/* Top Filters (Passed via the 'sidebar' prop) */}
           <div className="w-full">{sidebar}</div>
