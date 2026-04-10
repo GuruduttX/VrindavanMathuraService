@@ -37,7 +37,7 @@ export default function PackageHero({ PackageData }: any) {
 
             <li>
               <Link
-                href="/pooja-packages"
+                href="/tour-packages/#tours"
                 className="text-gray-400 hover:text-[#A84010] transition-colors duration-200"
               >
                 Packages
