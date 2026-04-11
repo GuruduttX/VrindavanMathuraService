@@ -74,6 +74,7 @@ export async function updateAdminTourController(
     const result = tourPackageSchema.safeParse(body);
 
     if(!result.success){
+      console.log(result.error.flatten())
       return Response.json({
         success : false,
         errors : result.error.flatten()
@@ -90,6 +91,7 @@ export async function updateAdminTourController(
     });
 
   } catch (error) {
+    console.log("Error", error);
     return NextResponse.json(
       { success: false, message: "Update failed" },
       { status: 500 }

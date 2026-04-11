@@ -1,5 +1,4 @@
 "use client";
-
 import { Star, BadgeCheck } from "lucide-react";
 
 export default function PackageTestimonials({ PackageData }: any) {
