@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
 import CommonEnquiryForm from "@/utils/CommanEnquiryForm";
+import QuickEnquiry from "@/utils/QuickQuery";
 
 
 const STATS = [
@@ -33,7 +34,7 @@ export default function PoojaHero() {
 
   return (
     <>
-      <section
+    <section
         ref={ref}
         className="relative w-full min-h-[95vh] flex items-center justify-center overflow-hidden  md:pt-20"
         style={{ fontFamily: "'Nunito', sans-serif" }}
@@ -47,57 +48,57 @@ export default function PoojaHero() {
           }}
         />
 
-        {/* Soft circle accents */}
-        <div
-          className="absolute rounded-full pointer-events-none"
-          style={{
-            width: 500,
-            height: 500,
-            background:
-              "radial-gradient(circle, rgba(236, 141, 27, 0.08) 0%, transparent 70%)",
-            top: "-80px",
-            left: "-80px",
-          }}
-        />
-        <div
-          className="absolute rounded-full pointer-events-none"
-          style={{
-            width: 400,
-            height: 400,
-            background:
-              "radial-gradient(circle, rgba(236, 141, 27, 0.08) 0%, transparent 70%)",
-            bottom: "0px",
-            right: "-60px",
-          }}
-        />
+          {/* Soft circle accents */}
+          <div
+            className="absolute rounded-full pointer-events-none"
+            style={{
+              width: 500,
+              height: 500,
+              background:
+                "radial-gradient(circle, rgba(236, 141, 27, 0.08) 0%, transparent 70%)",
+              top: "-80px",
+              left: "-80px",
+            }}
+          />
+          <div
+            className="absolute rounded-full pointer-events-none"
+            style={{
+              width: 400,
+              height: 400,
+              background:
+                "radial-gradient(circle, rgba(236, 141, 27, 0.08) 0%, transparent 70%)",
+              bottom: "0px",
+              right: "-60px",
+            }}
+          />
 
-        {/* Dot pattern */}
-        <div
-          className="absolute inset-0 opacity-30 pointer-events-none"
-          style={{
-            backgroundImage:
-              "radial-gradient(circle at 1px 1px, rgba(236, 141, 27, 0.08) 1px, transparent 0)",
-            backgroundSize: "32px 32px",
-          }}
-        />
+          {/* Dot pattern */}
+          <div
+            className="absolute inset-0 opacity-30 pointer-events-none"
+            style={{
+              backgroundImage:
+                "radial-gradient(circle at 1px 1px, rgba(236, 141, 27, 0.08) 1px, transparent 0)",
+              backgroundSize: "32px 32px",
+            }}
+          />
 
-        {/* Bottom wave */}
-        <div className="absolute bottom-0 left-0 w-full overflow-hidden leading-none pointer-events-none">
-          <svg
-            viewBox="0 0 1440 100"
-            className="w-full h-20"
-            preserveAspectRatio="none"
-          >
-            <path
-              d="M0,50 C360,100 900,0 1440,60 L1440,100 L0,100 Z"
-              fill="white"
-              opacity="0.9"
-            />
-          </svg>
-        </div>
+          {/* Bottom wave */}
+          <div className="absolute bottom-0 left-0 w-full overflow-hidden leading-none pointer-events-none">
+            <svg
+              viewBox="0 0 1440 100"
+              className="w-full h-20"
+              preserveAspectRatio="none"
+            >
+              <path
+                d="M0,50 C360,100 900,0 1440,60 L1440,100 L0,100 Z"
+                fill="white"
+                opacity="0.9"
+              />
+            </svg>
+          </div>
 
-        {/* Content */}
-        <div className="relative z-10 text-center px-6 max-w-3xl">
+          {/* Content */}
+          <div className="relative z-10 text-center px-6 max-w-3xl">
           {/* Diya icons */}
           <div className="ph-anim ph-d1 flex justify-center gap-3 mb-6 text-2xl">
             <span className="diya-icon">🪔</span>
@@ -198,9 +199,12 @@ export default function PoojaHero() {
                 </span>
               </div>
             ))}
-          </div>
+            </div>
+            <div className="md:hidden">
+            <QuickEnquiry />
+            </div>
         </div>
-      </section>
+    </section>
         <CommonEnquiryForm
           open={isFormOpen}
           onClose={() => setIsFromOpen(false)}

@@ -47,7 +47,7 @@ export default async function TaxiReviewPage({ params,}: {params: Promise<{ id: 
         <div className="max-w-7xl mx-auto grid lg:grid-cols-3 gap-8">
           <LeftReviewSection taxi = {taxi} />
 
-          <RightReviewSection />
+          <RightReviewSection taxi = {taxi}/>
         </div>
       </div>
       <LuxuryFooter />

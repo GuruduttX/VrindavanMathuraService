@@ -40,8 +40,67 @@ interface LeftReviewSectionProps {
   taxi: Taxiinterface;
 }
 const LeftReviewSection = ({ taxi }: LeftReviewSectionProps) => {
+  const [form, setForm] = useState({
+    name: "",
+    email: "",
+    pickUp: "",
+    drop: "",
+    phone: "",
+    time: "" 
+  })
   const [destination, setDestination] = useState("Your destination");
   const [pickUp, setPickUp] = useState("Your location");
+  const [success, setSuccess] = useState(false);
+
+  const handleSubmit = async (e: React.SubmitEvent) => {
+    e.preventDefault();
+    setDestination(form.drop);
+    setPickUp(form.pickUp);
+    console.log(form);
+    try {
+      const response = await fetch(`/api/simbark`,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            name: form.name,
+            phone: form.phone,
+            email: form.email,
+            serviceType: `pickUp:- ${form.pickUp}, Drop:- ${form.drop}, PickUp Time:- ${form.time} "Enquiry from taxi Review page."`
+          }),
+        },
+      );
+
+      const data = await response.json();
+      console.log(data)
+      if(response.ok) {
+        setSuccess(true);
+        setTimeout(()=> setSuccess(false), 5000);
+        setForm({
+          name: "",
+          email: "",
+          phone: "",
+          pickUp: "",
+          drop: "",
+          time: "",
+        })
+      }else {
+        alert(data.message || "Failed to submit");
+      }
+
+    } catch (error) {
+      console.log(error)
+    }
+
+  }
+
+  const handleChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>,
+  ) => {
+    setForm((prev) => ({ ...prev, [e.target.name]: e.target.value }));
+  };
   return (
     <div className="lg:col-span-2 space-y-8">
       {/* JOURNEY ROUTE CARD */}
@@ -70,34 +129,65 @@ const LeftReviewSection = ({ taxi }: LeftReviewSectionProps) => {
       {/* TRAVELLER DETAILS */}
       <div className="bg-white rounded-3xl shadow-lg p-6 border border-amber-100">
         <h2 className="text-lg font-semibold mb-4">Traveller Details</h2>
-        <form action="">
+        <form onSubmit={handleSubmit}>
           <div className="grid md:grid-cols-2 gap-4">
             <input
               placeholder="Full Name"
+              name="name"
               className="border rounded-xl px-4 py-3 focus:ring-2 focus:ring-amber-400 outline-none"
+              value={form.name}
+              onChange={handleChange}
             />
 
             <input
               placeholder="Mobile Number"
+              name="phone"
               className="border rounded-xl px-4 py-3 focus:ring-2 focus:ring-amber-400 outline-none"
+              value={form.phone}
+              onChange={handleChange}
             />
 
             <input
               placeholder="Pick Up location"
+              name="pickUp"
               className="border rounded-xl px-4 py-3 mt-4 w-full focus:ring-2 focus:ring-amber-400 outline-none"
+              value={form.pickUp}
+              onChange={handleChange}
             />
 
             <input
               placeholder="Drop location"
+              name="drop"
               className="border rounded-xl px-4 py-3 mt-4 w-full focus:ring-2 focus:ring-amber-400 outline-none"
+              value={form.drop}
+              onChange={handleChange}
+            />
+
+            <input
+              placeholder="Pick Up Time"
+              name="time"
+              className="border rounded-xl px-4 py-3 mt-4 w-full focus:ring-2 focus:ring-amber-400 outline-none"
+              value={form.time}
+              onChange={handleChange}
             />
 
             <input
               placeholder="Email"
+              name="email"
               className="border rounded-xl px-4 py-3 mt-4 w-full focus:ring-2 focus:ring-amber-400 outline-none"
+              value={form.email}
+              onChange={handleChange}
             />
           </div>
-          <button className="mt-6 w-full bg-gradient-to-r from-amber-500 to-orange-600 text-white py-3 rounded-xl font-medium hover:scale-105 transition">
+          {success && (
+            <p className="text-green-600 text-sm font-medium mx-auto">
+              Enquiry sent successfully!
+            </p>
+          )}
+          <button
+            type="submit"
+            className="mt-6 w-full bg-gradient-to-r from-amber-500 to-orange-600 text-white py-3 rounded-xl font-medium hover:scale-105 transition"
+          >
             Book Taxi
           </button>
         </form>
@@ -133,35 +223,12 @@ const LeftReviewSection = ({ taxi }: LeftReviewSectionProps) => {
         <h2 className="text-lg font-semibold mb-4">Inclusions</h2>
 
         <div className="grid md:grid-cols-2 gap-3 text-sm">
-          <div className="flex gap-2">
-            <CheckCircle className="text-green-500" size={18} />
-            Driver Allowances
-          </div>
-
-          <div className="flex gap-2">
-            <CheckCircle className="text-green-500" size={18} />
-            Toll Taxes Included
-          </div>
-
-          <div className="flex gap-2">
-            <CheckCircle className="text-green-500" size={18} />
-            Parking Charges
-          </div>
-
-          <div className="flex gap-2">
-            <CheckCircle className="text-green-500" size={18} />
-            Fuel Charges
-          </div>
-
-          <div className="flex gap-2">
-            <CheckCircle className="text-green-500" size={18} />
-            VIP Darshan Assistance
-          </div>
-
-          <div className="flex gap-2">
-            <CheckCircle className="text-green-500" size={18} />
-            Local Guide in Vrindavan
-          </div>
+          {taxi.inclusions.map((item) => (
+            <div key={item._id} className="flex gap-2">
+              <CheckCircle className="text-green-500" size={18} />
+              {item.description}
+            </div>
+          ))}
         </div>
       </div>
 
@@ -170,20 +237,12 @@ const LeftReviewSection = ({ taxi }: LeftReviewSectionProps) => {
         <h2 className="text-lg font-semibold mb-4">Exclusions</h2>
 
         <div className="grid md:grid-cols-2 gap-3 text-sm">
-          <div className="flex gap-2">
-            <XCircle className="text-red-500" size={18} />
-            Personal Expenses
-          </div>
-
-          <div className="flex gap-2">
-            <XCircle className="text-red-500" size={18} />
-            Extra Sightseeing
-          </div>
-
-          <div className="flex gap-2">
-            <XCircle className="text-red-500" size={18} />
-            Temple Entry Tickets
-          </div>
+          {taxi.exclusions.map((item, idx) => (
+            <div key={item._id} className="flex gap-2">
+              <XCircle className="text-red-500" size={18} />
+              {item.description}
+            </div>
+          ))}
         </div>
       </div>
 
