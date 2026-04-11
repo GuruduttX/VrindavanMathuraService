@@ -1,13 +1,15 @@
 import { connectDB } from "@/lib/mongodb";
 import Taxi from "@/models/taxiModel";
+import { taxiSchema } from "@/zodSchema/taxiSchema";
+import { ITaxi } from "@/types/taxiTypes";
 
 
-export const createAdminTaxiService = async (req: Request) => {
+export const createAdminTaxiService = async (taxiData :  Partial<ITaxi>) => {
   try {
 
     await connectDB();
 
-    const taxiData = await req.json();
+   
 
     console.log("THE DATA OF THE TAXI IS : ");
     console.log(taxiData);
@@ -43,13 +45,12 @@ export const getAdminTaxiByIdService = async (id: string) => {
 };
 
 
-export const updateAdminTaxiService = async (req: Request, id: string) => {
+export const updateAdminTaxiService = async (taxiData : Partial<ITaxi>, id: string) => {
   try {
     await connectDB();
 
-    const data = await req.json();
 
-    return await Taxi.findByIdAndUpdate(id, data, { new: true });
+    return await Taxi.findByIdAndUpdate(id, taxiData, { new: true });
   } catch (error) {
     throw new Error("Error updating taxi");
   }

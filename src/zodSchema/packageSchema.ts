@@ -1,109 +1,163 @@
 import { z } from "zod";
 
-// reusable
+// reusable (make optional-friendly)
 const textItem = z.object({
-  description: z.string().min(3),
+  description: z.string().min(3).optional(),
 });
 
 const itinerary = z.object({
-  day: z.number().min(1),
-  title: z.string().min(3),
-  description: z.string().min(5),
+  day: z.number().min(1).optional(),
+  title: z.string().min(3).optional(),
+  description: z.string().min(5).optional(),
 });
 
 const faq = z.object({
-  question: z.string().min(5),
-  answer: z.string().min(5),
+  question: z.string().min(5).optional(),
+  answer: z.string().min(5).optional(),
 });
 
 const duration = z.object({
-  days: z.number().min(1),
-  place: z.string().min(2),
+  days: z.number().min(1).optional(),
+  place: z.string().min(2).optional(),
 });
 
 const testimonial = z.object({
-  name: z.string().min(2),
-  description: z.string().min(5),
-  rating: z.number().min(1).max(5),
+  name: z.string().min(2).optional(),
+  description: z.string().min(5).optional(),
+  rating: z.number().min(1).max(5).optional(),
 });
 
 const childImage = z.object({
-  image: z.string().url(),
-  alt: z.string(),
+  image: z.string().url().optional(),
+  alt: z.string().optional(),
 });
 
 const routeSegment = z.object({
-  from: z.string(),
-  to: z.string(),
+  from: z.string().optional(),
+  to: z.string().optional(),
 });
 
 const route = z.object({
-  source: z.string(),
-  destination: z.string(),
-  segments: z.array(routeSegment),
+  source: z.string().optional(),
+  destination: z.string().optional(),
+  segments: z.array(routeSegment).optional(),
 });
 
-export const tourPackageSchema = z.object({
-  title: z.string().min(3),
-  slug: z.string().regex(/^[a-z0-9-]+$/),
+export const tourPackageSchema = z
+  .object({
+    title: z.string().min(3).optional(),
+    slug: z.string().regex(/^[a-z0-9-]+$/).optional(),
 
-  category: z.string(),
+    category: z.string().optional(),
 
-  price: z.coerce.number().min(0),
-  rating: z.coerce.number().min(0).max(5).optional(),
-  reviews: z.coerce.number().optional(),
+    price: z.coerce.number().min(0).optional(),
+    rating: z.coerce.number().min(0).max(5).optional(),
+    reviews: z.coerce.number().optional(),
 
-  duration: z.string(),
-  status: z.enum(["draft", "published"]),
+    duration: z.string().optional(),
+    status: z.enum(["draft", "published"]),
 
-  days: z.number(),
-  nights: z.number(),
+    days: z.number().optional(),
+    nights: z.number().optional(),
 
-  durationbreakdown: z.array(duration),
+    durationbreakdown: z.array(duration).optional(),
 
-  destination: z.string(),
-  overview: z.string().optional(),
+    destination: z.string().optional(),
+    overview: z.string().optional(),
 
-  highlights: z.array(textItem),
-  itinerary: z.array(itinerary),
+    highlights: z.array(textItem).optional(),
+    itinerary: z.array(itinerary).optional(),
 
-  inclusions: z.array(textItem),
-  exclusions: z.array(textItem),
+    inclusions: z.array(textItem).optional(),
+    exclusions: z.array(textItem).optional(),
 
-  knowBeforeYouGo: z.array(textItem).optional(),
+    knowBeforeYouGo: z.array(textItem).optional(),
 
-  faqs: z.array(faq),
+    faqs: z.array(faq).optional(),
 
-  metaTitle: z.string().optional(),
-  metaDescription: z.string().optional(),
+    metaTitle: z.string().optional(),
+    metaDescription: z.string().optional(),
 
-  schemaTitle: z.string().optional(),
-  schemaDescription: z.string().optional(),
+    schemaTitle: z.string().optional(),
+    schemaDescription: z.string().optional(),
 
-  refund: z.string().optional(),
-  cancel: z.string().optional(),
-  confirmation: z.string().optional(),
-  payment: z.string().optional(),
+    refund: z.string().optional(),
+    cancel: z.string().optional(),
+    confirmation: z.string().optional(),
+    payment: z.string().optional(),
 
-  heroImage: z
-    .object({
-      image: z.string().url(),
-      alt: z.string(),
-    })
-    .optional(),
+    heroImage: z
+      .object({
+        image: z.string().url(),
+        alt: z.string(),
+      })
+      .optional(),
 
-  childImages: z.array(childImage),
+    childImages: z.array(childImage).optional(),
 
-  testimonials: z.array(testimonial),
+    testimonials: z.array(testimonial).optional(),
 
-  documents: z.array(textItem),
+    documents: z.array(textItem).optional(),
 
-  routes: route,
+    routes: route.optional(),
 
-  isTransferIncluded: z.boolean(),
-  isStayIncluded: z.boolean(),
-  isBreakfastIncluded: z.boolean(),
-  isSightseeingIncluded: z.boolean(),
+    isTransferIncluded: z.boolean().optional(),
+    isStayIncluded: z.boolean().optional(),
+    isBreakfastIncluded: z.boolean().optional(),
+    isSightseeingIncluded: z.boolean().optional(),
 
-  availableSrc: z.array(z.string()),
-});
+    availableSrc: z.array(z.string()).optional(),
+  })
+  .superRefine((data, ctx) => {
+    if (data.status === "published") {
+      // 🔥 Required fields for publish
+
+      if (!data.title) {
+        ctx.addIssue({
+          path: ["title"],
+          message: "Title is required",
+          code: z.ZodIssueCode.custom,
+        });
+      }
+
+      if (!data.slug) {
+        ctx.addIssue({
+          path: ["slug"],
+          message: "Slug is required",
+          code: z.ZodIssueCode.custom,
+        });
+      }
+
+      if (!data.price) {
+        ctx.addIssue({
+          path: ["price"],
+          message: "Price is required",
+          code: z.ZodIssueCode.custom,
+        });
+      }
+
+      if (!data.destination) {
+        ctx.addIssue({
+          path: ["destination"],
+          message: "Destination is required",
+          code: z.ZodIssueCode.custom,
+        });
+      }
+
+      if (!data.itinerary || data.itinerary.length === 0) {
+        ctx.addIssue({
+          path: ["itinerary"],
+          message: "Itinerary is required",
+          code: z.ZodIssueCode.custom,
+        });
+      }
+
+      if (!data.highlights || data.highlights.length === 0) {
+        ctx.addIssue({
+          path: ["highlights"],
+          message: "Highlights required",
+          code: z.ZodIssueCode.custom,
+        });
+      }
+    }
+  });

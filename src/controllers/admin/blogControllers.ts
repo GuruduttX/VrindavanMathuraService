@@ -1,13 +1,25 @@
 import { createAdminBlogService, deleteAdminBlogService, getAllAdminBlogsService, getAdminBlogByIdService , updateAdminBlogService} from "@/services/admin/blogServices";
+import { blogSchema } from "@/zodSchema/blogSchema";
 
 import { NextResponse } from "next/server";
+import { success } from "zod";
 
 
 export const createAdminBlogController = async (req: Request) => {
 
     try {
 
-        const blogData = await req.json();
+        const body = await req.json();
+        const result = blogSchema.safeParse(body);
+
+        if(!result.success){
+            return Response.json({
+                success : false,
+                error : result.error.flatten()
+            }, {status : 400})
+        }
+
+        const blogData = result.data;
 
         const blog = await createAdminBlogService(blogData);
 
@@ -88,7 +100,21 @@ export const updateAdminBlogController = async (req: Request, id: string) => {
 
     try {
 
-        const blogData = await req.json();
+        const body = await req.json();
+
+        if(!id){
+            return Response.json({success : false, error : 'Id is required'}, {status : 400})
+        }
+        const result = blogSchema.safeParse(body);
+
+        if(!result.success){
+            return Response.json({
+                success : false,
+                error : result.error.flatten()
+            }, {status : 400})
+        }
+
+        const blogData = result.data;
 
         const blog = await updateAdminBlogService(id, blogData);
 
