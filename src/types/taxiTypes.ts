@@ -13,7 +13,7 @@ export interface ITaxiExclusion {
 }
 
 
-export type CabType = "SUV" | "Sedan" | "Hatchback" | "TempoTraveller";
+export type CabType = "SUV" | "Sedan" | "Hatchback" | "Tempo Traveller" | "Luxury";
 
 export type FuelType = "Petrol" | "Diesel" | "Electric" | "CNG";
 

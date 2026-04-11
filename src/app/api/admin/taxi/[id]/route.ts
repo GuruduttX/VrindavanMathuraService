@@ -21,6 +21,7 @@ export async function PUT(
 ) {
     await connectDB();
     const {id} = await params
+    console.log("this is taxi edit rout")
     return updateAdminTaxiController(req, id);
 }
 

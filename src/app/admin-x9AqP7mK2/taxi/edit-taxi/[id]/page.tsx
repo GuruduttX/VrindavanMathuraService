@@ -76,19 +76,19 @@ export default function EditTaxi() {
       }
 
       const taxi = data.data
-
+      console.log(taxi, "get request data from the taxi edit page")
       setForm({
-        name: taxi.name || "",
-        price: taxi.baseprice || "",
+        name: taxi.title || "",
+        price: taxi.basePrice || "",
         image: taxi.image || "",
         alt: taxi.alt || "",
-        seat: taxi.seat || "",
-        cabtype: taxi.cabtype || "",
-        fueltype: taxi.fueltype || ""
-      })
+        seat: taxi.seats || "",
+        cabtype: taxi.cabType || "",
+        fueltype: taxi.fuelType || "",
+      });
 
-      setInclusions(taxi.inclusion || [])
-      setExclusions(taxi.exclusion || [])
+      setInclusions(taxi.inclusions || []);
+      setExclusions(taxi.exclusions || []);
 
     } catch (error) {
 
@@ -113,15 +113,15 @@ export default function EditTaxi() {
     e.preventDefault()
 
     const payload = {
-      name: form.name,
-      seat: form.seat,
-      cabtype: form.cabtype,
-      fueltype: form.fueltype,
+      title: form.name,
+      seats: form.seat,
+      cabType: form.cabtype,
+      fuelType: form.fueltype,
       baseprice: form.price,
       image: form.image,
       alt: form.alt,
-      inclusion: inclusions,
-      exclusion: exclusions
+      inclusions: inclusions,
+      exclusions: exclusions
     }
 
     try {
@@ -143,7 +143,6 @@ export default function EditTaxi() {
 
       toast.success("Taxi Updated Successfully")
 
-      router.push("/admin-x9AqP7mK2/taxis")
 
     } catch (error) {
 

@@ -30,7 +30,7 @@ export default function PoojaCTASection() {
               devotion and tradition. Revisit divine blessings anytime.
             </p>
 
-            <button className="bg-white text-amber-600 px-8 py-3 rounded-full font-medium hover:bg-amber-100 transition ml-14 md:ml-0">
+            <button className="bg-white  text-amber-600 px-8 py-3 rounded-full font-medium hover:bg-amber-100 transition ml-24 md:ml-0">
               Browse All Poojas
             </button>
           </div>
