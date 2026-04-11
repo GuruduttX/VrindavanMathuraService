@@ -2,27 +2,38 @@
 import Image from "next/image";
 import Link from "next/link";
 import { useState, useEffect, useRef } from "react";
+import { usePathname } from "next/navigation";
 import { Menu, X } from "lucide-react";
-import TourEnquiryPopup from "./TourEnquiryPopUp";
 import CommonEnquiryForm from "./CommanEnquiryForm";
 
+const navItems = [
+  { label: "Home", url: "/" },
+  { label: "Tours", url: "/tour-packages" },
+  { label: "Taxi", url: "/taxi" },
+  { label: "Hotels", url: "/hotels" },
+  { label: "Pooja", url: "/pooja" },
+  { label: "About", url: "/about" },
+];
 export default function Navbar() {
+  const pathname = usePathname(); 
   const [scrolled, setScrolled] = useState(false);
   const [active, setActive] = useState("Home");
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [open, setOpen] = useState(false);
   const [isFormOpen, setIsFormOpen] = useState(false);
-  const navItems = [
-    { label: "Home", url: "/" },
-    { label: "Tours", url: "/tour-packages" },
-    { label: "Taxi", url: "/taxi" },
-    { label: "Hotels", url: "/hotels" },
-    { label: "Pooja", url: "/pooja" },
-    { label: "About", url: "/about" },
-  ];
-
   const containerRef = useRef<HTMLElement>(null);
   const indicatorRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const currentTab = navItems.find((item) => {
+      if (item.url === "/") return pathname === "/";
+      return pathname.startsWith(item.url);
+    });
+
+    if (currentTab) {
+      setActive(currentTab.label);
+    }
+  }, [pathname]);
 
   useEffect(() => {
     const handleScroll = () => setScrolled(window.scrollY > 10);
@@ -48,11 +59,11 @@ export default function Navbar() {
 
   return (
     <>
-       <CommonEnquiryForm
-                open={isFormOpen}
-                onClose={() => setIsFormOpen(false)}
-                defaultService="General Enquiry"
-              />
+      <CommonEnquiryForm
+        open={isFormOpen}
+        onClose={() => setIsFormOpen(false)}
+        defaultService="General Enquiry"
+      />
       <header className="fixed top-6 left-0 w-full z-40 flex justify-center">
         <div className="relative w-[92vw] sm:w-[90vw] xl:w-[85vw]">
           {/* Glow Background */}
@@ -173,7 +184,7 @@ export default function Navbar() {
               </button>
 
               {/* 3. common Form Component */}
-              
+
             </div>
           </nav>
 

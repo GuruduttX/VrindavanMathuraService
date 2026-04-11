@@ -7,7 +7,7 @@ import { useState, SetStateAction } from "react";
 
 
 export default function TourCard({ product , setOpen}: { product: any, setOpen : React.Dispatch<SetStateAction<boolean>> }) {
-  
+  console.log(product, "this is product highlight");
 
   return (
     <>
@@ -64,7 +64,7 @@ export default function TourCard({ product , setOpen}: { product: any, setOpen :
         {product.highlights?.length > 0 && (
           <div className="flex flex-wrap gap-1.5">
             {product.highlights.slice(0, 3).map((h: any) => (
-              <span key={h.id} className="text-[11px] bg-stone-100 text-stone-600
+              <span key={h._id} className="text-[11px] bg-stone-100 text-stone-600
                 rounded px-2 py-0.5 border border-stone-200">
                 {h.description}
               </span>

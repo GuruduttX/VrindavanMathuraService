@@ -1,6 +1,13 @@
 import React from 'react'
+import { Taxiinterface } from './LeftReviewSection'
 
-const RightReviewSection = () => {
+interface RightReviewSectionProps {
+  taxi: Taxiinterface
+}
+const RightReviewSection = ({ taxi }: RightReviewSectionProps) => {
+
+
+    console.log(taxi, "from right review section")
     return (
         <div className="sticky top-28 h-fit">
 
@@ -14,7 +21,7 @@ const RightReviewSection = () => {
 
                     <div className="flex justify-between">
                         <span>Base Fare</span>
-                        <span>₹3000</span>
+                        <span>{`₹${taxi.basePrice}`}</span>
                     </div>
 
                     <div className="flex justify-between">
