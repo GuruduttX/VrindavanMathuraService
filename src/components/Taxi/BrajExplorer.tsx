@@ -87,7 +87,7 @@ export default function BrajExplorer() {
               </div>
 
               {/* label */}
-              <div className="mt-3 text-center">
+              <div className={`mt-3 text-center relative md:static -top-14 ${index % 2 == 0 ? 'left-16': 'right-18'}`}>
 
                 <p className="font-semibold">
                   {place.name}
