@@ -1,6 +1,5 @@
 import { NextResponse } from "next/server";
 import { getAdminPackagesService, createAdminPackageService, updateAdminPackagesService, getAdminPackageByIdService , deleteAdminPackageService} from "@/services/admin/packageService";
-import { connectDB } from "@/lib/mongodb";
 
 
 // Get All
