@@ -1,4 +1,10 @@
-import { createAdminTaxiService, deleteAdminTaxiService, getAllAdminTaxisService, getAdminTaxiByIdService, updateAdminTaxiService,
+import {
+  createAdminTaxiService,
+  deleteAdminTaxiService,
+  getAllAdminTaxisService,
+  getAdminTaxiByIdService,
+  updateAdminTaxiService,
+  getUserTaxiBySlugService,
 } from "@/services/admin/taxiServices";
 import { taxiSchema } from "@/zodSchema/taxiSchema";
 
@@ -40,6 +46,25 @@ export const createAdminTaxiController = async (req: Request) => {
     }
 };
 
+export const getUserTaxiBySlugController = async(id:string) => {
+    try {
+        const taxi = await getUserTaxiBySlugService(id);
+        return NextResponse.json(
+            {
+                success: true,
+                data: taxi,
+            }
+        )
+    } catch (error:any) {
+        return NextResponse.json(
+          {
+            success: false,
+            error: error.message,
+          },
+          { status: 500 },
+        );
+    }
+}
 
 export const getAdminTaxisController = async () => {
     try {

@@ -44,6 +44,14 @@ export const getAdminTaxiByIdService = async (id: string) => {
   }
 };
 
+export const getUserTaxiBySlugService = async (id: string) => {
+  try {
+    await connectDB();
+    return await Taxi.findById(id);
+  } catch (error) {
+    throw new Error("Error User Fetching taxi by ID")
+  }
+}
 
 export const updateAdminTaxiService = async (taxiData : Partial<ITaxi>, id: string) => {
   try {

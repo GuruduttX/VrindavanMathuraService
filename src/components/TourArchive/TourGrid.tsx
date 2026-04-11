@@ -3,7 +3,11 @@ import CommonEnquiryForm from "@/utils/CommanEnquiryForm";
 import TourCard from "@/utils/TourCard";
 // import TourEnquiryPopup from "@/utils/TourEnquiryPopUp"; // (Unused in your snippet, so left commented if you need it)
 import { useState } from "react";
+<<<<<<< HEAD
 import { useTourFilter } from "@/context/TourFilterContext";
+=======
+import { useTourFilter } from "../../context/TourFilterContext";
+>>>>>>> 4b955d50c2e009fb9c5958ee5209dd0d7a079e18
 
 // 1. Added category to the interface
 interface Tour {

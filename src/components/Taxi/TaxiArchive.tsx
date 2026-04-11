@@ -5,11 +5,16 @@ import Image from "next/image";
 import { Users, Fuel, Search } from "lucide-react";
 import { motion } from "framer-motion";
 import { ChevronDown } from "lucide-react";
+import Link from "next/link";
+import { useRouter } from "next/navigation";
 
 export default function TaxiArchive({ taxis }: { taxis: any }) {
   const [search, setSearch] = useState("");
   const [filter, setFilter] = useState("all");
   const [isOpen, setIsOpen] = useState(false);
+
+  const router = useRouter();
+
 
   const filteredTaxis = taxis.filter((taxi: any) => {
     const matchesSearch = taxi.title
@@ -18,6 +23,8 @@ export default function TaxiArchive({ taxis }: { taxis: any }) {
     const matchesFilter = filter === "all" || taxi.cabType === filter;
     return matchesSearch && matchesFilter;
   });
+
+  
 
   return (
     <section className="bg-gradient-to-br from-amber-50 via-white to-orange-50 min-h-screen py-20">
@@ -82,18 +89,18 @@ export default function TaxiArchive({ taxis }: { taxis: any }) {
             <div className="relative w-full lg:w-96 group">
               <div
                 className="
-    flex items-center
-    rounded-2xl
-    bg-white
-    px-4 py-3
-    border border-amber-100
-    shadow-sm
-    transition-all
-    duration-300
-    group-focus-within:border-amber-400
-    group-focus-within:ring-2
-    group-focus-within:ring-amber-200
-  "
+                  flex items-center
+                  rounded-2xl
+                  bg-white
+                  px-4 py-3
+                  border border-amber-100
+                  shadow-sm
+                  transition-all
+                  duration-300
+                  group-focus-within:border-amber-400
+                  group-focus-within:ring-2
+                  group-focus-within:ring-amber-200
+                "
               >
                 <Search
                   size={18}
@@ -179,7 +186,7 @@ export default function TaxiArchive({ taxis }: { taxis: any }) {
                   </p>
                   <p className="text-sm text-gray-400 font-medium">per trip</p>
                 </div>
-
+                <Link href={`taxi/review/${taxi._id}`}>
                 <button
                   className="mt-0 lg:mt-4
                             px-8
@@ -199,6 +206,7 @@ export default function TaxiArchive({ taxis }: { taxis: any }) {
                 >
                   Select Cab
                 </button>
+                </Link>
               </div>
             </motion.div>
           ))}
