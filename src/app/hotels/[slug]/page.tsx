@@ -52,7 +52,6 @@ const page = async ({ params }: { params: Promise<{ slug: string }> }) => {
         <HotelHero HotelData={HotelData} />
         <HotelDetailsSection HotelData={HotelData} />
         <GuestReviewSection HotelData={HotelData} />
-
         <HotelCTA />
         <HotelFAQ />
         <LuxuryFooter />

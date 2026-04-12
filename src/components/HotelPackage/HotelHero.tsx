@@ -1,5 +1,4 @@
 "use client";
-
 import Image from "next/image";
 import { motion } from "framer-motion";
 import { Star, Wifi, Coffee, Car, MapPin, LucideIcon } from "lucide-react";
@@ -7,172 +6,184 @@ import { useState } from "react";
 import CommonEnquiryForm from "@/utils/CommanEnquiryForm";
 import QuickEnquiry from "@/utils/QuickQuery";
 
-export default function HotelDetailsHero({HotelData } : {HotelData : any}) {
-    // console.log(HotelData, "from hotel-slug-hero")
-    const[isFormOpen, setIsFormOpen] = useState(false);
-    const inclusionConfig: Record<string, { Icon: LucideIcon; label: string }> = {
-      freeWifi: { Icon: Wifi, label: "Free WiFi" },
-      breakfast: { Icon: Coffee, label: "Breakfast" },
-      parking: { Icon: Car, label: "Parking" },
-    };
+export default function HotelDetailsHero({ HotelData }: { HotelData: any }) {
+  const [isFormOpen, setIsFormOpen] = useState(false);
+
+  const inclusionConfig: Record<string, { Icon: LucideIcon; label: string }> = {
+    freeWifi: { Icon: Wifi, label: "Free WiFi" },
+    breakfast: { Icon: Coffee, label: "Breakfast" },
+    parking: { Icon: Car, label: "Parking" },
+  };
+
   return (
     <>
-      <section className="relative bg-linear-to-b from-amber-50 to-white pt-30 pb-5">
-        <div className="max-w-300 mx-auto px-6">
-          {/* Breadcrumb */}
-          <p className="text-sm text-gray-400 mb-4">
-            Home / Hotels /{" "}
-            <span className="text-amber-600 font-medium">
+
+      <section className="relative pt-36 pb-15 bg-gradient-to-br from-amber-50 via-yellow-50 to-orange-100 px-30">
+
+        <div className="absolute bottom-0 left-0 w-full overflow-hidden leading-none pointer-events-none">
+          <svg
+            viewBox="0 0 1440 80"
+            xmlns="http://www.w3.org/2000/svg"
+            preserveAspectRatio="none"
+            className="w-full h-16 md:h-20"
+          >
+            <path
+              d="M0,40 C180,80 360,0 540,40 C720,80 900,0 1080,40 C1260,80 1380,20 1440,40 L1440,80 L0,80 Z"
+              fill="white"
+            />
+          </svg>
+        </div>
+
+        {/* decorative glow */}
+        <div className="absolute top-0 left-0 w-96 h-96 bg-orange-200 rounded-full blur-[120px] opacity-40"></div>
+        <div className="absolute right-0 bottom-0 w-96 h-96 bg-yellow-200 rounded-full blur-[120px] opacity-40"></div>
+
+        <div className="max-w-[1400px] mx-auto px-4">
+
+          {/* breadcrumb */}
+          <p className="text-sm text-gray-400 mb-6">
+            Home / Hotels /
+            <span className="text-amber-600 font-semibold ml-1">
               {HotelData.title}
             </span>
           </p>
 
-          {/* Hero Image */}
+          {/* HERO IMAGE */}
           <motion.div
-            initial={{ opacity: 0, y: 40 }}
+            initial={{ opacity: 0, y: 60 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
-            className="relative rounded-3xl overflow-hidden shadow-xl"
+            className="relative rounded-[28px] overflow-hidden shadow-2xl group"
           >
             <Image
               src={HotelData.image}
               alt={HotelData.alt}
-              width={1200}
-              height={500}
-              className="w-full h-[420px] object-cover"
+              width={1400}
+              height={600}
+              className="w-full h-[460px] object-cover transition-transform duration-700 group-hover:scale-105"
             />
 
-            {/* Rating badge */}
-            <div className="absolute top-5 left-5 bg-white/90 backdrop-blur px-4 py-2 rounded-full shadow flex items-center gap-2 text-sm font-medium">
+            {/* overlay */}
+            <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-black/10 to-transparent"></div>
+
+            {/* floating rating */}
+            <div className="absolute top-6 left-6 bg-white/80 backdrop-blur-xl px-5 py-2 rounded-full shadow-lg flex items-center gap-2 text-sm font-semibol">
               <Star className="text-yellow-500 w-4 h-4 fill-yellow-500" />
-              {HotelData.Rating} Rating
+              {HotelData.rating} Rating
+            </div>
+
+            {/* location badge */}
+            <div className="absolute bottom-6 left-6 bg-black/50 backdrop-blur-lg text-white px-4 py-2 rounded-full text-sm flex items-center gap-2">
+              <MapPin size={16} />
+              {HotelData.category}
             </div>
           </motion.div>
 
-          {/* Hotel Info Card */}
+          {/* INFO SECTION */}
           <motion.div
-            initial={{ opacity: 0, y: 40 }}
+            initial={{ opacity: 0, y: 50 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.2 }}
-            className="bg-white rounded-3xl md:shadow-xl p-4 md:p-8 mt-6 flex flex-col lg:flex-row justify-between"
+            className="mt-8 grid lg:grid-cols-[1fr_auto] gap-8 items-start"
           >
+            {/* LEFT CONTENT */}
             <div>
-              {/* Title */}
-              <h1 className="text-2xl md:text-3xl lg:text-4xl font-extrabold text-gray-900 leading-tight break-words">
+
+              <h1 className="text-3xl md:text-4xl lg:text-5xl font-extrabold text-gray-900 leading-tight">
                 {HotelData.title}
               </h1>
 
-              <p className="text-gray-500 mt-2 max-w-[700px]">
+              <p className="text-gray-500 mt-3 max-w-[700px] text-lg">
                 {HotelData.subcontent}
               </p>
 
-              {/* Rating + Reviews */}
-              <div className="flex items-center gap-4 mt-4">
-                <span className="flex items-center gap-1 text-amber-600 font-medium text-sm">
-                  ⭐ {HotelData.Rating}
+              {/* rating row */}
+              <div className="flex items-center gap-3 mt-5">
+
+                <span className="flex items-center text-amber-600 text-lg font-bold">
+                  ⭐ {HotelData.rating}
                 </span>
 
-                <span className="text-gray-400 text-sm">
-                  {HotelData.reviews} reviews
+                <span className="text-gray-400 text-sm font-medium">
+                  ({HotelData.reviews} Reviews)
                 </span>
 
-                <span className="bg-green-100 text-green-600 px-2 py-1 text-xs rounded-full font-medium">
+                <span className="bg-green-100 text-green-600 px-3 py-1 text-xs rounded-full font-semibold">
                   Top Rated
                 </span>
+
               </div>
 
-              {/* Amenities */}
-              <div className="flex flex-wrap gap-6 mt-6 text-sm text-gray-600">
+              {/* amenities */}
+              <div className="flex flex-wrap gap-4 mt-8">
+
                 {Object.entries(HotelData.quickInclusions).map(
                   ([key, isIncluded]) => {
-                    // Skip if the inclusion is false, or if we don't have a config for this key
                     if (!isIncluded || !inclusionConfig[key]) return null;
 
-                    // Extract the specific Icon and label for this inclusion
                     const { Icon, label } = inclusionConfig[key];
 
                     return (
-                      <div key={key} className="flex items-center gap-2">
-                        <Icon size={16} /> {label}
+                      <div
+                        key={key}
+                        className="flex items-center gap-2 px-4 py-2 bg-white shadow-sm rounded-full border border-gray-100 hover:shadow-md transition"
+                      >
+                        <Icon size={16} className="text-orange-500" />
+                        <span className="text-sm font-medium">{label}</span>
                       </div>
                     );
-                  },
+                  }
                 )}
-
-                <div className="flex items-center gap-2">
-                  <MapPin size={16} /> {HotelData.category}
-                </div>
               </div>
             </div>
 
-            {/* Price Card */}
-            {/* <div className="mt-8 bg-gradient-to-r from-amber-500 to-orange-500 rounded-2xl p-6 flex items-center justify-between text-white">
-            <div>
-              <p className="text-xs uppercase opacity-80">Special Offer</p>
+            {/* BOOKING CARD */}
+            <div className="hidden lg:block">
+              <div className="bg-white/70 backdrop-blur-xl border border-orange-100 shadow-[0_20px_60px_rgba(0,0,0,0.08)] rounded-3xl px-10 py-7 flex items-center justify-between gap-10">
 
-              <p className="text-2xl font-bold mt-1">
-                ₹1,299 <span className="text-sm font-normal">/ night</span>
-              </p>
+                {/* LEFT CONTENT */}
+                <div className="flex flex-col">
 
-              <p className="text-xs opacity-80 mt-1">
-                Limited time price • Free cancellation
-              </p>
-            </div>
-
-            <motion.button
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-              className="bg-white text-amber-600 font-semibold px-6 py-3 rounded-xl shadow"
-            >
-              Book Now →
-            </motion.button>
-          </div> */}
-
-            <div className="shrink-0 w-fit bg-white/70 backdrop-blur-md border border-orange-100 shadow-xl rounded-2xl px-6 py-5 hidden lg:block">
-              <div className="flex items-center gap-8">
-                {/* LEFT SIDE (replacing price area) */}
-                <div className="text-right">
-                  <p className="text-xs uppercase tracking-wide text-gray-500">
+                  <p className="text-xs uppercase tracking-wider text-gray-500">
                     Flexible Pricing
                   </p>
 
-                  <div className="flex items-end justify-end">
-                    <span className="text-2xl font-bold text-orange-600">
-                      Get Price →
-                    </span>
-                  </div>
+                  <h3 className="text-3xl font-bold text-orange-600 mt-1">
+                    Get Price →
+                  </h3>
 
-                  <div className="flex justify-end">
-                    <span className="mt-2 text-xs bg-orange-50 text-orange-600 px-3 py-1 rounded-full font-medium">
-                      No Hidden Charges
-                    </span>
-                  </div>
+                  <span className="mt-3 w-fit text-xs bg-orange-50 text-orange-600 px-4 py-1.5 rounded-full font-medium">
+                    No Hidden Charges
+                  </span>
+
                 </div>
 
                 {/* BUTTON */}
                 <button
                   onClick={() => setIsFormOpen(true)}
-                  className="whitespace-nowrap cursor-pointer px-8 py-4 rounded-xl bg-gradient-to-r from-orange-500 to-orange-600 text-white font-semibold shadow-md hover:shadow-xl hover:scale-105 transition-all duration-300"
+                  className="whitespace-nowrap cursor-pointer px-10 py-4 rounded-2xl bg-gradient-to-r from-orange-500 to-yellow-500 text-white font-semibold text-lg shadow-[0_10px_25px_rgba(255,115,0,0.4)] hover:shadow-[0_15px_35px_rgba(255,115,0,0.5)] hover:scale-[1.03] transition-all duration-300"
                 >
                   Check Availability →
                 </button>
+
               </div>
             </div>
 
-            {/**Quick enquiry form for mobile only */}
+            {/* mobile enquiry */}
             <div className="md:hidden">
               <QuickEnquiry />
             </div>
+
           </motion.div>
 
         </div>
       </section>
-          {/* 3. common Form Component */}
-          <CommonEnquiryForm
-            open={isFormOpen}
-            onClose={() => setIsFormOpen(false)}
-            defaultService="Hotel Booking"
-          />
+
+      <CommonEnquiryForm
+        open={isFormOpen}
+        onClose={() => setIsFormOpen(false)}
+        defaultService="Hotel Booking"
+      />
     </>
   );
 }
