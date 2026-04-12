@@ -1,5 +1,5 @@
 import mongoose, { Schema, Document, Model } from "mongoose";
-import { tourPackageSchema } from "@/zodSchema/tourSchema";
+import { tourPackageSchema } from "@/zodSchema/packageSchema";
 import {z} from 'zod'
 
 // interface Itinerary {

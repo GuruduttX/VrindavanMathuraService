@@ -241,7 +241,10 @@ export default function page() {
     });
 
     const data = await res.json();
-    if (!res.ok || !data.success) throw new Error(data.message || "Something went wrong");
+    if (!res.ok || !data.success){
+       console.log(data.errors.fieldErrors)
+       throw new Error(data.errors || "Something went wrong");
+    }
     return data;
   };
 
