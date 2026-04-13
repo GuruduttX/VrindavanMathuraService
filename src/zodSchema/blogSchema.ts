@@ -2,25 +2,25 @@ import { z } from "zod";
 
 // sub schemas
 const faqSchema = z.object({
-  question: z.string().min(5),
-  answer: z.string().min(5),
+  question: z.string(),
+  answer: z.string(),
 });
 
 const metaSchema = z.object({
-  title: z.string().min(3),
-  description: z.string().min(10),
+  title: z.string(),
+  description: z.string(),
 });
 
 const schemaData = z.object({
-  schemaTitle: z.string().min(3),
-  schemaDescription: z.string().min(10),
+  schemaTitle: z.string(),
+  schemaDescription: z.string(),
 });
 
 export const blogSchema = z
   .object({
     title: z.string().optional(),
     category: z.string().optional(),
-    slug: z.string().regex(/^[a-z0-9-]+$/).optional(),
+    slug: z.string().optional(),
 
     author: z.string().optional(),
 

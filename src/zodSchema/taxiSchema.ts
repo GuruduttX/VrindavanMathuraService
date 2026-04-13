@@ -2,11 +2,11 @@ import { z } from "zod";
 
 // sub schemas
 const inclusionSchema = z.object({
-  inclusion: z.string().min(2).optional(),
+  inclusion: z.string().optional(),
 });
 
 const exclusionSchema = z.object({
-  exclusion: z.string().min(2).optional(),
+  exclusion: z.string().optional(),
 });
 
 // enums
@@ -26,7 +26,7 @@ const fuelTypeEnum = z.enum([
 
 export const taxiSchema = z
   .object({
-    title: z.string().min(3).optional(),
+    title: z.string().optional(),
 
     basePrice: z.coerce.number().min(0).optional(),
     seats: z.number().min(1).optional(),
@@ -44,7 +44,7 @@ export const taxiSchema = z
   })
   .superRefine((data, ctx) => {
     if (data.status === "published") {
-      // 🔥 Required fields for publish
+      // Required fields for publish
 
       if (!data.title) {
         ctx.addIssue({
