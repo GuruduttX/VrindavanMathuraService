@@ -1,125 +1,146 @@
-"use client"
+"use client";
 import TourEnquiryPopup from "@/utils/TourEnquiryPopUp";
-import { motion, useScroll, useTransform } from "framer-motion";
-import { useRef } from "react";
-import { ArrowRight } from "lucide-react";
+import { motion } from "framer-motion";
+import { ArrowRight, MapPin, Star } from "lucide-react";
 import { useState } from "react";
 import CommonEnquiryForm from "@/utils/CommanEnquiryForm";
 import Link from "next/link";
+import Image from "next/image";
 
+const stats = [
+  { value: "5000+", label: "Happy Pilgrims" },
+  { value: "50+", label: "Tour Packages" },
+  { value: "12+", label: "Years Experience" },
+];
+
+const trustItems = [
+  "Verified Local Guides",
+  "24/7 Support",
+  "Best Price Guarantee",
+  "Spiritual & Comfortable",
+];
 
 export default function TravelCTA() {
   const [isFormOpen, setIsFormOpen] = useState(false);
-  const [tourOpen, setTourOpen] = useState(false);
-  const targetRef = useRef(null);
-
-  // Tracks the scroll progress through the invisible 200vh wrapper
-  const { scrollYProgress } = useScroll({
-    target: targetRef,
-    offset: ["start center", "end center"],
-  });
-
-  // --- Animation Sequence ---
-  // Heading: Comes from right, starts big, scales down, then fades out
-  const headingX = useTransform(scrollYProgress, [0, 0.4], ["100%", "0%"]);
-  const headingScale = useTransform(scrollYProgress, [0, 0.4], [1.3, 1]);
-  const headingOpacity = useTransform(
-    scrollYProgress,
-    [0, 0.1, 0.4, 0.5],
-    [0, 1, 1, 0],
-  );
-
-  // Paragraph & Buttons: Slide up and fade in after heading leaves
-  const contentY = useTransform(scrollYProgress, [0.5, 0.7], [60, 0]);
-  const contentOpacity = useTransform(scrollYProgress, [0.5, 0.7], [0, 1]);
-  // Prevent button clicks while they are invisible
-  const contentPointerEvents = useTransform(
-    scrollYProgress,
-    [0.5, 0.6],
-    ["none", "auto"],
-  );
   return (
     <>
-      <TourEnquiryPopup open={tourOpen} onClose={() => setTourOpen(false)} />
+      <CommonEnquiryForm open={isFormOpen} onClose={() => setIsFormOpen(false)} defaultService="Taxi Booking" />
 
-      <div ref={targetRef} className="h-[200vh] relative">
-        {/* 2. Your Original Section: Now sticky, so it pins to the screen. 
-          Notice it uses your exact original padding (py-10 md:py-28) */}
-        <section className="sticky top-[25vh] py-10 md:py-28 overflow-hidden rounded-none shadow-2xl z-10">
-          {/* background gradient */}
-          <div className="absolute inset-0 bg-gradient-to-r from-orange-500 via-amber-500 to-yellow-600"></div>
+      <section className="py-10 md:py-16 px-4 sm:px-6">
+        <div className="max-w-6xl mx-auto">
+          <div className="relative overflow-hidden rounded-3xl bg-gradient-to-br from-orange-600 via-amber-500 to-yellow-500 shadow-xl shadow-amber-400/30">
 
-          {/* glow effects */}
-          <div className="absolute top-[-150px] left-[-100px] w-[400px] h-[400px] bg-white/20 blur-[150px] rounded-full"></div>
-          <div className="absolute bottom-[-150px] right-[-100px] w-[400px] h-[400px] bg-white/20 blur-[150px] rounded-full"></div>
-
-          {/* 3. Fixed Height Inner Box: Because the animated elements are 'absolute', 
-            we set a min-height here so the banner doesn't collapse. */}
-          <div className="max-w-6xl mx-auto px-6 relative h-[280px] md:h-[250px] flex items-center justify-center">
-            {/* LAYER 1: The Sweeping Heading */}
-            <motion.div
+            {/* Dot pattern */}
+            <div
+              className="absolute inset-0 pointer-events-none opacity-10"
               style={{
-                x: headingX,
-                scale: headingScale,
-                opacity: headingOpacity,
+                backgroundImage: "radial-gradient(circle, white 1px, transparent 1px)",
+                backgroundSize: "22px 22px",
               }}
-              className="absolute w-full text-center"
-            >
-              <h2 className="text-3xl md:text-5xl lg:text-6xl font-bold leading-tight text-white drop-shadow-md">
-                Plan Your Divine Vrindavan Journey Today
-              </h2>
-            </motion.div>
+            />
 
-            {/* LAYER 2: The Paragraph and Buttons */}
-            <motion.div
-              style={{
-                y: contentY,
-                opacity: contentOpacity,
-                pointerEvents: contentPointerEvents,
-              }}
-              className="absolute w-full text-center flex flex-col items-center"
-            >
-              {/* Adding a smaller context heading so the space doesn't look empty */}
-              <h3 className="text-2xl md:text-4xl font-bold text-white leading-tight">
-                Start Your Journey
-              </h3>
+            {/* Orbs */}
+            <div className="absolute -top-16 -left-16 w-64 h-64 rounded-full bg-white/10 pointer-events-none" />
+            <div className="absolute -bottom-12 left-32 w-48 h-48 rounded-full bg-white/[0.06] pointer-events-none" />
 
-              <p className="mt-4 md:mt-6 text-base md:text-lg text-white/95 max-w-2xl mx-auto drop-shadow-sm font-medium">
-                Book your tour packages, taxis, hotels and temple pujas with
-                trusted local service. Experience Vrindavan with comfort,
-                spirituality and unforgettable memories.
-              </p>
+            <div className="relative grid md:grid-cols-2 items-stretch">
 
-              <div className="mt-8 flex flex-col sm:flex-row gap-4 md:gap-6 justify-center w-full max-w-md md:max-w-none px-4 md:px-0">
-                <Link href="/tour-packages" className="w-full sm:w-auto">
+              {/* LEFT — Text */}
+              <motion.div
+                initial={{ opacity: 0, x: -30 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                transition={{ duration: 0.6 }}
+                viewport={{ once: true }}
+                className="px-8 md:px-12 py-10 text-white flex flex-col justify-center"
+              >
+                <div className="inline-flex items-center gap-2 bg-white/15 border border-white/25 rounded-full px-3 py-1 text-xs font-semibold tracking-widest uppercase mb-4 w-fit">
+                  <MapPin size={10} className="opacity-80" />
+                  Vrindavan's Trusted Partner
+                </div>
+
+                <h2 className="text-2xl md:text-4xl font-extrabold leading-tight tracking-tight mb-3">
+                  Plan Your Divine<br />Vrindavan Journey
+                </h2>
+
+                <p className="text-white/75 text-sm leading-relaxed max-w-sm mb-7">
+                  Tours, taxis, hotels &amp; temple pujas — all with trusted local expertise. Spirituality meets comfort.
+                </p>
+
+                <div className="flex flex-col sm:flex-row gap-3 mb-8">
+                  <Link href="/tour-packages">
+                    <motion.button
+                      whileHover={{ scale: 1.04 }}
+                      whileTap={{ scale: 0.97 }}
+                      className="flex items-center justify-center gap-2 px-6 py-3 rounded-xl bg-white text-amber-700 font-bold text-sm shadow-lg cursor-pointer w-full sm:w-auto"
+                    >
+                      Book Tour Package <ArrowRight size={15} />
+                    </motion.button>
+                  </Link>
                   <motion.button
-                    whileHover={{ scale: 1.05 }}
-                    whileTap={{ scale: 0.95 }}
-                    className="px-6 md:px-8 py-3 md:py-4 rounded-full bg-white text-amber-600 font-semibold shadow-lg flex items-center gap-2 justify-center w-full"
+                    whileHover={{ scale: 1.04 }}
+                    whileTap={{ scale: 0.97 }}
+                    onClick={() => setIsFormOpen(true)}
+                    className="flex items-center justify-center gap-2 px-6 py-3 rounded-xl bg-white/10 border border-white/30 text-white font-semibold text-sm hover:bg-white/20 transition-colors cursor-pointer backdrop-blur-sm"
                   >
-                    Book Tour Package
-                    <ArrowRight size={18} />
+                    Enquire Now <ArrowRight size={15} />
                   </motion.button>
-                </Link>
+                </div>
 
-                <motion.button
-                  whileHover={{ scale: 1.05 }}
-                  whileTap={{ scale: 0.95 }}
-                  className="px-6 md:px-8 py-3 md:py-4 rounded-full border-2 border-white text-white font-semibold hover:bg-white hover:text-amber-600 transition w-full sm:w-auto"
-                  onClick={() => setIsFormOpen(true)}
-                >
-                  Enquire Now
-                </motion.button>
-              </div>
-            </motion.div>
+                <div className="flex items-center gap-6 pt-6 border-t border-white/20">
+                  {stats.map(({ value, label }) => (
+                    <div key={label}>
+                      <div className="text-xl font-extrabold">{value}</div>
+                      <div className="text-[11px] text-white/55 mt-0.5 tracking-wide">{label}</div>
+                    </div>
+                  ))}
+                </div>
+              </motion.div>
+
+             {/* RIGHT — Image slot */}
+<motion.div
+  initial={{ opacity: 0, scale: 0.97 }}
+  whileInView={{ opacity: 1, scale: 1 }}
+  transition={{ duration: 0.6, delay: 0.1 }}
+  viewport={{ once: true }}
+  className="hidden md:block relative min-h-[320px] overflow-hidden py-6 px-6"
+>
+  {/* Image */}
+  <img
+    src="/images/Home/CTAImage.webp"
+    alt="Vrindavan Mathura CTA"
+    className="w-full h-full object-cover object-center rounded-xl"
+  />
+
+  {/* Left fade — blends into the text side */}
+  <div
+    className="absolute inset-0"
+    
+  />
+
+  {/* Top fade */}
+ 
+
+  {/* Bottom fade — into trust bar */}
+
+
+  {/* Subtle warm tint overlay to harmonize colors */}
+</motion.div>
+
+            </div>
+
+            {/* Trust bar */}
+            <div className="relative border-t border-white/15 px-8 md:px-12 py-3 flex justify-around items-center gap-x-6 gap-y-1.5">
+              {trustItems.map((item) => (
+                <div key={item} className="flex items-center gap-1.5 text-white/65 text-xs font-medium">
+                  <Star size={10} className="text-yellow-300 fill-yellow-300" />
+                  {item}
+                </div>
+              ))}
+            </div>
+
           </div>
-        </section>
-      </div>
-      <CommonEnquiryForm
-        open={isFormOpen}
-        onClose={() => setIsFormOpen(false)}
-        defaultService="Taxi Booking"
-      />
+        </div>
+      </section>
     </>
   );
 }

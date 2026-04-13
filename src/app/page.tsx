@@ -14,6 +14,7 @@ const PopularHotels = dynamic(() => import("@/utils/PopularHotels"));
 const PopularTours = dynamic(() => import("@/utils/PopularTours"));
 const ServicesSection = dynamic(() => import("@/utils/ServicesSection"));
 const TaxiShowcase = dynamic(() => import("@/utils/TaxiShowCase"));
+const FAQPage = dynamic(()=>import("@/components/Home/FAQPage")) 
 
 
 export const metadata: Metadata = {
@@ -264,10 +265,11 @@ const page = () => {
       <SpiritualJourney />
       <PopularTours />
       <HomeTrustBuildingSection />
-      <HotelCTA />
       <PopularHotels />
+      <HotelCTA />
       <TaxiCTA />
-      <TaxiShowcase />
+      {/* <TaxiShowcase /> */}
+      <FAQPage/>
       <HomeFinalCTA />
       <Footer />
     </div>

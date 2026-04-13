@@ -1,6 +1,8 @@
 import { NextResponse } from "next/server";
 import { getAdminPackagesService, createAdminPackageService, updateAdminPackagesService, getAdminPackageByIdService , deleteAdminPackageService} from "@/services/admin/packageService";
 import { connectDB } from "@/lib/mongodb";
+import { tourPackageSchema } from "@/zodSchema/packageSchema";
+import { success } from "zod";
 
 
 // Get All
@@ -27,7 +29,18 @@ export async function createAdminTourController(req: Request) {
   try {
     const body = await req.json();
 
-    const tour = await createAdminPackageService(body) ;
+    const result = tourPackageSchema.safeParse(body);
+
+    if(!result.success){
+      return Response.json({
+        success : false,
+        errors : result.error.flatten()
+      }, {status : 400})
+    }
+
+    const data = result.data;
+
+    const tour = await createAdminPackageService(data) ;
 
     return NextResponse.json({
       success: true,
@@ -58,7 +71,19 @@ export async function updateAdminTourController(
        return;
     }
 
-    const updatedTour = await updateAdminPackagesService(id, body);
+    const result = tourPackageSchema.safeParse(body);
+
+    if(!result.success){
+      console.log(result.error.flatten())
+      return Response.json({
+        success : false,
+        errors : result.error.flatten()
+      }, {status : 400})
+    }
+
+    const data = result.data;
+
+    const updatedTour = await updateAdminPackagesService(id, data);
 
     return NextResponse.json({
       success: true,
@@ -66,6 +91,7 @@ export async function updateAdminTourController(
     });
 
   } catch (error) {
+    console.log("Error", error);
     return NextResponse.json(
       { success: false, message: "Update failed" },
       { status: 500 }

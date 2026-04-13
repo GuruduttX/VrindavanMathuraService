@@ -1,23 +1,21 @@
 import { Document } from "mongoose";
 
 export interface IFAQ {
-  question: string;
-  answer: string;
+  question?: string;
+  answer?: string;
 }
 
 export interface IInclusion {
-  freeWifi: boolean;
-  breakfast: boolean;
-  parking: boolean;
+  freeWifi?: boolean;
+  breakfast?: boolean;
+  parking?: boolean;
 }
-
 
 export interface IOffer {
   title?: string;
   discount?: number;
   validTill?: Date;
 }
-
 
 export interface IRatingScores {
   accuracy?: number;
@@ -28,58 +26,63 @@ export interface IRatingScores {
   cleanliness?: number;
 }
 
-
 export interface IHighlights {
   hospitality?: number;
   greatLocation?: number;
   comfortStay?: number;
 }
 
-
 export interface IRatingSummary {
-  reviewText: string;
-  scores: IRatingScores;
-  highlights: IHighlights;
+  reviewText?: string;
+  scores?: IRatingScores;
+  highlights?: IHighlights;
 }
 
 export interface IInc {
-   id : string;
-   description : string;
+  description?: string;
 }
 
-export interface IExc { 
-    id : string;
-    description : string;
+export interface IExc {
+  description?: string;
 }
-
 
 export interface IHotel extends Document {
+  title?: string;
+  subcontent?: string;
+  duration?: string;
 
-  title: string;
-  subcontent: string;
-  duration : string,
-  slug : string
-  category : string,
-  rating: number;
-  reviews: number;
-  image : string,
-  metaTitle : string,
-  metaDescription : string,
-  schemaTitle : string,
-  schemaDescription : string,
-  alt : string,
-  price: number;
-  location: string;
-  host: string;
-  about: string;
-  quickInclusions: IInclusion;
-  offers: IOffer[];
-  faqs: IFAQ[];
-  inclusions: IInc[];
-  exclusions: IExc[];
-  ratingSummary: IRatingSummary;
-  status : string
+  slug?: string;
+  category?: string;
+
+  rating?: number;
+  reviews?: number;
+
+  image?: string;
+  alt?: string;
+
+  metaTitle?: string;
+  metaDescription?: string;
+
+  schemaTitle?: string;
+  schemaDescription?: string;
+
+  price?: number;
+  location?: string;
+  host?: string;
+  about?: string;
+
+  quickInclusions?: IInclusion;
+
+  offers?: IOffer[];
+  faqs?: IFAQ[];
+
+  inclusions?: IInc[];
+  exclusions?: IExc[];
+
+  ratingSummary?: IRatingSummary;
+
+  status: "draft" | "published"; // only required field
+
   createdAt?: Date;
   updatedAt?: Date;
-
 }

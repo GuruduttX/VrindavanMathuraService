@@ -208,15 +208,30 @@ export default function EditBlog() {
       const data = await res.json();
 
       if (!data.success) {
-        toast.error(data.error || "Failed to update blog");
+        
+        let errorMessage = "Failed to update blog";
+
+        if (data.error) {
+          if (typeof data.error === "string") {
+            // Handle simple string errors
+            errorMessage = data.error;
+          } else if (data.error.fieldErrors) {
+            // Extract the first validation error from the object to show in the toast
+            const firstField = Object.keys(data.error.fieldErrors)[0];
+            const firstErrorMsg = data.error.fieldErrors[firstField][0];
+            errorMessage = `Validation Error: ${firstField} - ${firstErrorMsg}`;
+          }
+        }
+        toast.error(errorMessage);
         return;
       }
+
 
       toast.success("Blog Updated Successfully");
 
     } catch (error) {
-      toast.error("Server Error");
-    }
+      console.error("Publish Error:", error);
+      toast.error("Server Error. Please try again later.");    }
   }
 
 

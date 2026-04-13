@@ -1,106 +1,260 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { MapPin, Car, Hotel, Sparkles } from "lucide-react";
+import { useState } from "react";
+import {
+  MapPin, Car, Hotel, Sparkles,
+  Phone, Mail, Clock, CheckCircle2, ArrowRight, Users, Star, Award,
+} from "lucide-react";
 
-const services = [
-  {
-    title: "Vrindavan Tour Packages",
-    description:
-      "Explore divine destinations like Govardhan, Barsana, Nandgaon and Mathura with guided spiritual tours.",
-    icon: MapPin,
-  },
-  {
-    title: "Taxi & Travel Service",
-    description:
-      "Book comfortable AC taxis for Delhi to Vrindavan trips, temple tours and local travel.",
-    icon: Car,
-  },
-  {
-    title: "Hotel Booking",
-    description:
-      "Find the best hotels and guest houses near temples with comfortable stay and affordable pricing.",
-    icon: Hotel,
-  },
-  {
-    title: "Puja & Temple Rituals",
-    description:
-      "Book special pujas, temple darshan services and spiritual rituals with experienced priests.",
-    icon: Sparkles,
-  },
+const stats = [
+  { icon: Users, value: "5000+", label: "Happy Pilgrims" },
+  { icon: Star, value: "4.8", label: "Avg Rating" },
+  { icon: Award, value: "12+", label: "Years Experience" },
+  { icon: CheckCircle2, value: "50+", label: "Tour Packages" },
 ];
 
-export default function ServicesSection() {
+const whyUs = [
+  "Local experts with 12+ years",
+  "Trusted by 5000+ pilgrims",
+  "Best price guarantee",
+  "24/7 trip support",
+];
+
+const serviceOptions = [
+  { value: "tour", label: "Tour Package", icon: MapPin },
+  { value: "hotel", label: "Hotel Booking", icon: Hotel },
+  { value: "taxi", label: "Taxi Service", icon: Car },
+  { value: "puja", label: "Puja & Temple", icon: Sparkles },
+];
+
+export default function ContactSection() {
+  const [submitted, setSubmitted] = useState(false);
+  const [form, setForm] = useState({ name: "", email: "", phone: "", service: "" });
+
+const handleSubmit = async (e: React.SubmitEvent) => {
+    e.preventDefault();
+
+    // Validation
+    if (!form.name.trim()) return alert("Name is required");
+
+    if (!/^[0-9]{10}$/.test(form.phone)) {
+      return alert("Enter valid 10-digit phone");
+    }
+
+    if (
+      !/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/.test(form.email)
+    ) {
+      return alert("Enter valid email");
+    }
+
+    if (!form.service) {
+      return alert("Select service type");
+    }
+
+    try {
+      const res = await fetch("/api/simbark", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(form),
+      });
+
+      const data = await res.json();
+
+      if (res.ok) {
+        setSubmitted(true)
+        setForm({
+          name: "",
+          phone: "",
+          email: "",
+          service: "",
+        });
+      } else {
+        alert(data.message || "Failed to submit");
+      }
+    } catch (err) {
+      console.error(err);
+      alert("Something went wrong");
+    } finally {
+    }
+  };
   return (
-    <section className="py-10 md:py-28 relative bg-gradient-to-b from-white via-amber-50 to-white overflow-hidden">
+    <section className="relative py-16 md:py-20 overflow-hidden bg-gradient-to-b from-white via-amber-50/40 to-white">
 
-      {/* soft glow background */}
-      <div className="absolute top-0 left-0 w-[420px] h-[420px] bg-orange-300/30 blur-[140px] rounded-full"></div>
-      <div className="absolute bottom-0 right-0 w-[420px] h-[420px] bg-amber-300/30 blur-[140px] rounded-full"></div>
+      <div className="absolute top-0 left-0 w-80 h-80 bg-orange-200/20 blur-3xl rounded-full pointer-events-none" />
+      <div className="absolute bottom-0 right-0 w-80 h-80 bg-amber-200/20 blur-3xl rounded-full pointer-events-none" />
 
-      <div className="max-w-7xl mx-auto px-6 relative">
+      <div className="relative max-w-6xl mx-auto px-4 sm:px-6">
 
-        {/* section heading */}
-        <motion.div
-          initial={{ opacity: 0, y: 40 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
-          viewport={{ once: true }}
-          className="text-center mb-16"
-        >
-
-          <h2 className="text-2xl md:text-5xl font-bold bg-gradient-to-r from-orange-600 via-amber-600 to-yellow-500 bg-clip-text text-transparent">
-            Everything You Need For Your Vrindavan Journey
+        {/* Heading */}
+        {/* Section label */}
+        <div className="text-center mb-12">
+          <div className="inline-flex items-center gap-2 bg-amber-100 text-amber-700 text-xs font-semibold tracking-widest uppercase px-4 py-1.5 rounded-full mb-4">
+            ✦ Get In Touch
+          </div>
+          <h2 className="text-3xl md:text-5xl font-extrabold tracking-tight bg-gradient-to-br from-orange-600 via-amber-500 to-yellow-500 bg-clip-text text-transparent">
+            Plan Your Divine Journey
           </h2>
-
-          <p className="text-sm md:text-lg text-gray-600 mt-4 max-w-xl mx-auto">
-            Plan your complete spiritual trip with tour packages, taxi services,
-            hotel booking and temple puja arrangements — all in one place.
-          </p>
-
-        </motion.div>
-
-        {/* services grid */}
-        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
-
-          {services.map((service, index) => {
-            const Icon = service.icon;
-
-            return (
-              <motion.div
-                key={index}
-                initial={{ opacity: 0, y: 60 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6, delay: index * 0.15 }}
-                viewport={{ once: true }}
-                whileHover={{ y: -10 }}
-                className="relative group bg-white/80 backdrop-blur-xl border border-amber-100 rounded-3xl p-8 shadow-xl hover:shadow-2xl transition cursor-pointer"
-              >
-
-                {/* icon */}
-                <div className="w-16 h-16 flex items-center justify-center rounded-2xl bg-gradient-to-r from-orange-500 to-amber-600 text-white mb-6 shadow-lg">
-                  <Icon size={28} />
-                </div>
-
-                {/* title */}
-                <h3 className="text-xl font-semibold mb-3">
-                  {service.title}
-                </h3>
-
-                {/* description */}
-                <p className="text-gray-600 leading-relaxed text-sm">
-                  {service.description}
-                </p>
-
-                {/* hover glow */}
-                <div className="absolute inset-0 rounded-3xl opacity-0 group-hover:opacity-100 transition pointer-events-none bg-gradient-to-r from-orange-500/20 via-amber-500/20 to-yellow-500/20"></div>
-
-              </motion.div>
-            );
-          })}
-
+          <div className="flex items-center justify-center gap-3 mt-3">
+            <svg width="80" height="12" viewBox="0 0 80 12" fill="none">
+              <line x1="0" y1="6" x2="26" y2="6" stroke="#fdba74" strokeWidth="1.5" strokeLinecap="round"/>
+              <circle cx="34" cy="6" r="3" fill="#f97316"/>
+              <circle cx="43" cy="6" r="2" fill="#fbbf24"/>
+              <circle cx="50" cy="6" r="1.5" fill="#fde68a"/>
+            </svg>
+            <p className="text-gray-400 text-sm">We'll get back to you within 2 hours</p>
+            <svg width="80" height="12" viewBox="0 0 80 12" fill="none">
+              <circle cx="30" cy="6" r="1.5" fill="#fde68a"/>
+              <circle cx="37" cy="6" r="2" fill="#fbbf24"/>
+              <circle cx="46" cy="6" r="3" fill="#f97316"/>
+              <line x1="54" y1="6" x2="80" y2="6" stroke="#fdba74" strokeWidth="1.5" strokeLinecap="round"/>
+            </svg>
+          </div>
         </div>
 
+        <div className="grid lg:grid-cols-2 gap-12 items-center">
+
+          {/* LEFT */}
+          <motion.div
+            initial={{ opacity: 0, x: -24 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.55 }}
+            viewport={{ once: true }}
+            className="flex flex-col gap-4"
+          >
+            <p className="text-gray-500 text-sm leading-relaxed">
+              Vrindavan's most trusted travel partner — curating complete spiritual journeys across Vrindavan, Mathura &amp; Braj Dham since 2012.
+            </p>
+
+            {/* Stats */}
+            <div className="grid grid-cols-2 gap-2.5">
+              {stats.map(({ icon: Icon, value, label }) => (
+                <div key={label} className="flex items-center gap-3 bg-white border border-amber-100 rounded-xl px-3.5 py-3 shadow-sm">
+                  <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-orange-500 to-amber-400 flex items-center justify-center flex-shrink-0">
+                    <Icon size={14} className="text-white" />
+                  </div>
+                  <div>
+                    <div className="text-sm font-extrabold text-gray-900 leading-none">{value}</div>
+                    <div className="text-[11px] text-gray-400 mt-0.5">{label}</div>
+                  </div>
+                </div>
+              ))}
+            </div>
+
+            {/* Why us */}
+            <div className="bg-gradient-to-br from-orange-500 via-amber-500 to-yellow-400 rounded-2xl p-4">
+              <p className="text-white font-bold text-xs uppercase tracking-wider mb-2.5">Why Choose Us</p>
+              <ul className="grid grid-cols-2 gap-y-2 gap-x-3">
+                {whyUs.map((item) => (
+                  <li key={item} className="flex items-center gap-1.5 text-white/90 text-xs">
+                    <CheckCircle2 size={12} className="text-yellow-200 flex-shrink-0" />
+                    {item}
+                  </li>
+                ))}
+              </ul>
+            </div>
+
+            {/* Contact */}
+            <div className="grid grid-cols-2 gap-2">
+              {[
+                { icon: Phone, label: "+91 98765 43210" },
+                { icon: Mail, label: "info@vrindavan.com" },
+                { icon: Clock, label: "8AM – 9PM Daily" },
+                { icon: MapPin, label: "Vrindavan, UP" },
+              ].map(({ icon: Icon, label }) => (
+                <div key={label} className="flex items-center gap-2 bg-white border border-amber-100 rounded-xl px-3 py-2.5 shadow-sm">
+                  <Icon size={12} className="text-amber-500 flex-shrink-0" />
+                  <span className="text-gray-500 text-xs truncate">{label}</span>
+                </div>
+              ))}
+            </div>
+          </motion.div>
+
+          {/* RIGHT — Form */}
+          <motion.div
+            initial={{ opacity: 0, x: 24 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.55, delay: 0.1 }}
+            viewport={{ once: true }}
+          >
+            <div className="bg-white rounded-2xl border border-amber-100 shadow-xl shadow-amber-100/30 p-6">
+              {submitted ? (
+                <div className="flex flex-col items-center justify-center py-10 text-center">
+                  <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-orange-500 to-amber-400 flex items-center justify-center mb-4 shadow-lg shadow-amber-200">
+                    <CheckCircle2 size={26} className="text-white" />
+                  </div>
+                  <h4 className="text-lg font-extrabold text-gray-900 mb-1">Enquiry Sent!</h4>
+                  <p className="text-gray-400 text-sm">We'll reach out within 2 hours.</p>
+                  <button
+                    onClick={() => { setSubmitted(false); setForm({ name: "", email: "", phone: "", service: "" }); }}
+                    className="mt-5 text-amber-600 text-sm font-semibold hover:underline"
+                  >
+                    Send another
+                  </button>
+                </div>
+              ) : (
+                <form onSubmit={handleSubmit} className="flex flex-col gap-4">
+                  <div>
+                    <h3 className="text-base font-extrabold text-gray-900">Send an Enquiry</h3>
+                    <p className="text-gray-400 text-xs mt-0.5">We'll get back to you within 2 hours.</p>
+                  </div>
+
+                  <input
+                    required
+                    type="text"
+                    placeholder="Full Name"
+                    value={form.name}
+                    onChange={(e) => setForm({ ...form, name: e.target.value })}
+                    className="w-full px-4 py-2.5 rounded-xl border border-gray-200 bg-gray-50 text-sm text-gray-800 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-amber-400 focus:border-transparent transition"
+                  />
+
+                  <input
+                    required
+                    type="email"
+                    placeholder="Email Address"
+                    value={form.email}
+                    onChange={(e) => setForm({ ...form, email: e.target.value })}
+                    className="w-full px-4 py-2.5 rounded-xl border border-gray-200 bg-gray-50 text-sm text-gray-800 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-amber-400 focus:border-transparent transition"
+                  />
+
+                  <input
+                    required
+                    type="tel"
+                    placeholder="Phone Number"
+                    value={form.phone}
+                    onChange={(e) => setForm({ ...form, phone: e.target.value })}
+                    className="w-full px-4 py-2.5 rounded-xl border border-gray-200 bg-gray-50 text-sm text-gray-800 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-amber-400 focus:border-transparent transition"
+                  />
+
+                  <select
+                    required
+                    value={form.service}
+                    onChange={(e) => setForm({ ...form, service: e.target.value })}
+                    className="w-full px-4 py-2.5 rounded-xl border border-gray-200 bg-gray-50 text-sm text-gray-500 focus:outline-none focus:ring-2 focus:ring-amber-400 focus:border-transparent transition appearance-none cursor-pointer"
+                  >
+                    <option value="" disabled>Select a Service</option>
+                    {serviceOptions.map(({ value, label }) => (
+                      <option key={value} value={value}>{label}</option>
+                    ))}
+                  </select>
+
+                  <button
+                    type="submit"
+                    className="flex items-center justify-center gap-2 w-full py-3 rounded-xl bg-gradient-to-r from-orange-500 via-amber-500 to-yellow-400 text-white font-bold text-sm shadow-md shadow-amber-200/50 hover:shadow-lg hover:shadow-amber-300/60 hover:-translate-y-0.5 transition-all duration-200 cursor-pointer mt-1"
+                  >
+                    Send Enquiry
+                    <ArrowRight size={15} />
+                  </button>
+
+                  <p className="text-center text-[11px] text-gray-400">🔒 Your details are safe with us.</p>
+                </form>
+              )}
+            </div>
+          </motion.div>
+
+        </div>
       </div>
     </section>
   );
