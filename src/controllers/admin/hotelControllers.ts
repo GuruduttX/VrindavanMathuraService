@@ -1,11 +1,23 @@
 import { createAdminHotelService, deleteAdminHotelService, getAllAdminHotelsService, getAdminHotelByIdService, updateAdminHotelService } from "@/services/admin/hotelServices";
+import { hotelSchema } from "@/zodSchema/hotelSchema";
 import { NextResponse } from "next/server";
 
 export const createAdminHotelController = async (req: Request) => {
 
     try {
 
-        const hotelData = await req.json();
+        const body = await req.json()
+
+        const result = hotelSchema.safeParse(body);
+
+        if(!result.success){
+            return Response.json({
+                success : false,
+                error : result.error.flatten()
+            }, {status : 400})
+        }
+
+        const hotelData = result.data;
 
         const hotel = await createAdminHotelService(hotelData);
 
@@ -84,7 +96,18 @@ export const updateAdminHotelController = async (req: Request, id: string) => {
 
     try {
 
-        const hotelData = await req.json();
+        const body = await req.json();
+        const result = hotelSchema.safeParse(body);
+
+        if(!result.success){
+            return Response.json({
+                success : false,
+                error : result.error.flatten()
+            }, {status : 400})
+        }
+
+        const hotelData = result.data;
+
         const hotel = await updateAdminHotelService(id, hotelData);
 
         return NextResponse.json({

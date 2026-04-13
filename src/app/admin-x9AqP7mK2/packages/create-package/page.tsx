@@ -96,6 +96,16 @@ export default function CreateNewPackage() {
     setForm((prev) => ({ ...prev, [field]: value }));
   };
 
+  // const handleZodErrors = (errors : any)=>{
+  //     const obj = errors.fieldErrors;
+
+  //     Object.entries(obj).forEach(([field , messages])=>{
+  //         if (messages?.length) {
+  //         toast.error(messages[0]); // only first error
+  // }
+  //     })
+  // }
+
   const buildPayload = (status: "published" | "draft") => ({
       title: form.title,
       category: form.category,
@@ -165,22 +175,22 @@ export default function CreateNewPackage() {
       formEl.reportValidity();
       return false;
     }
-    // if (!form.image) {
-    //   toast.error("Package image is missing");
-    //   return false;
-    // }
+    if (!form.image) {
+      toast.error("Package image is missing");
+      return false;
+    }
     if (!form.category) {
       toast.error("Package category is missing");
       return false;
     }
-    // if (
-    //   childImage.length < 4 ||
-    //   !childImage[0]?.image || !childImage[1]?.image ||
-    //   !childImage[2]?.image || !childImage[3]?.image
-    // ) {
-    //   toast.error(`Only ${childImage.length} child image(s) added — need 4`);
-    //   return false;
-    // }
+    if (
+      childImage.length < 4 ||
+      !childImage[0]?.image || !childImage[1]?.image ||
+      !childImage[2]?.image || !childImage[3]?.image
+    ) {
+      toast.error(`Only ${childImage.length} child image(s) added — need 4`);
+      return false;
+    }
     return true;
   };
 
@@ -226,6 +236,7 @@ export default function CreateNewPackage() {
         shadow-[0_0_60px_-15px_rgba(236,72,153,0.15)]"
         style={{ background: "#1a0b11" }}
     >
+
       {/* Ambient glow */}
      
       <form className="relative z-10 space-y-6" onSubmit={handleSave}>

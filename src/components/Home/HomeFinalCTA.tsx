@@ -6,12 +6,14 @@ import { ArrowRight, Phone } from "lucide-react";
 import TourEnquiryPopup from "@/utils/TourEnquiryPopUp";
 import { useState } from "react";
 import Link from "next/link";
+import CommonEnquiryForm from "@/utils/CommanEnquiryForm";
 
 export default function FinalCTA() {
+  const [open , setOpen] = useState(false);
 
   return (
     <>
-      {/* <TourEnquiryPopup open={open} onClose={() => setOpen(false)} /> */}
+      <CommonEnquiryForm open={open} onClose={()=>setOpen(false)}/>
       <section className="py-5">
         <div className="max-w-7xl mx-auto px-6">
           <div
@@ -118,6 +120,7 @@ export default function FinalCTA() {
                 via-amber-500
                 to-orange-600
                 shadow-lg
+                cursor-pointer
                 "
                   >
                     Explore Tours
@@ -128,19 +131,20 @@ export default function FinalCTA() {
                 <motion.button
                   whileHover={{ scale: 1.05 }}
                   className="
-                px-7
-                py-3
-                rounded-full
-                w-full
-                border
-                border-amber-500
-                text-amber-600
-                flex items-center gap-2
-                justify-center
-                hover:bg-amber-50
-                transition
-                cursor-pointer
+                  px-7
+                  py-3
+                  rounded-full
+                  w-full
+                  border
+                  border-amber-500
+                  text-amber-600
+                  flex items-center gap-2
+                  justify-center
+                  hover:bg-amber-50
+                  transition
+                  cursor-pointer
                 "
+                onClick={()=>setOpen(true)}
                 >
                   Talk to Guide
                   <Phone size={18} />

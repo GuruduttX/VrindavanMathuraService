@@ -85,24 +85,55 @@ useEffect(() => {
 
   return (
     <> 
-       <CommonEnquiryForm open={opne} onClose={()=>setIsOpen(false)}/>
+      <CommonEnquiryForm open={opne} onClose={()=>setIsOpen(false)}/>
       <section className="py-10 md:py-24 relative bg-gradient-to-b from-white via-amber-50 to-white">
 
         <div className="max-w-7xl mx-auto px-6">
 
           {/* heading */}
-          <div className="text-center mb-12">
-            <h2 className="text-3xl md:text-5xl font-bold bg-gradient-to-r from-orange-600 via-amber-600 to-yellow-500 bg-clip-text text-transparent">
-              Explore Our Services
-            </h2>
-            <p className="text-gray-600 mt-5">
-              Tours, taxis and hotels — all in one place
-            </p>
-          </div>
+         <div className="text-center mb-12">
+
+  
+  {/* headline with inline SVG underline decoration */}
+  <div className="relative inline-block">
+    <h2 className="text-3xl md:text-5xl font-bold bg-gradient-to-r from-orange-600 via-amber-500 to-yellow-400 bg-clip-text text-transparent leading-tight tracking-tight">
+      Tours, Hotels &amp; Rituals
+    </h2>
+
+    {/* SVG decorative underline */}
+    <svg
+      viewBox="0 0 320 12"
+      className="w-full mt-1"
+      preserveAspectRatio="none"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <defs>
+        <linearGradient id="uline" x1="0%" y1="0%" x2="100%" y2="0%">
+          <stop offset="0%"   stopColor="#ea580c" />
+          <stop offset="50%"  stopColor="#f59e0b" />
+          <stop offset="100%" stopColor="#facc15" />
+        </linearGradient>
+      </defs>
+      {/* wavy underline path */}
+      <path
+        d="M0,6 Q40,0 80,6 T160,6 T240,6 T320,6"
+        fill="none"
+        stroke="url(#uline)"
+        strokeWidth="3"
+        strokeLinecap="round"
+      />
+    </svg>
+  </div>
+
+ 
+
+  
+
+</div>
 
           {/* FILTER */}
           <div className="flex justify-center mb-10">
-            <div className="relative flex gap-0 md:gap-2 bg-white shadow-lg p-2 rounded-full border-2 border-amber-400 cursor-pointer">
+            <div className="relative flex gap-6 md:gap-2 bg-white shadow-lg p-2 rounded-full border-2 border-amber-400 cursor-pointer">
 
               <div
                 ref={indicatorRef}
