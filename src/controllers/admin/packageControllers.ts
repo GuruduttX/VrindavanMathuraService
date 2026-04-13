@@ -31,7 +31,10 @@ export async function createAdminTourController(req: Request) {
 
     const result = tourPackageSchema.safeParse(body);
 
+    
+
     if(!result.success){
+      console.log("Package Editor Error", result.error.flatten());
       return Response.json({
         success : false,
         errors : result.error.flatten()
@@ -39,8 +42,9 @@ export async function createAdminTourController(req: Request) {
     }
 
     const data = result.data;
+    
 
-    const tour = await createAdminPackageService(data) ;
+    const tour = await createAdminPackageService(data);
 
     return NextResponse.json({
       success: true,

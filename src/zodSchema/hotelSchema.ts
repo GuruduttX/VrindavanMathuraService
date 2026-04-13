@@ -2,8 +2,8 @@ import { z } from "zod";
 
 // sub schemas
 const faqSchema = z.object({
-  question: z.string().min(5),
-  answer: z.string().min(5),
+  question: z.string(),
+  answer: z.string(),
 });
 
 const inclusionSchema = z.object({
@@ -49,7 +49,7 @@ export const hotelSchema = z
     subcontent: z.string().optional(),
     duration: z.string().optional(),
 
-    slug: z.string().regex(/^[a-z0-9-]+$/).optional(),
+    slug: z.string().optional(),
 
     category: z.string().optional(),
 
