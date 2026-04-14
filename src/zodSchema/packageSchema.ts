@@ -2,29 +2,29 @@ import { z } from "zod";
 
 // reusable (make optional-friendly)
 const textItem = z.object({
-  description: z.string().min(3).optional(),
+  description: z.string().optional(),
 });
 
 const itinerary = z.object({
-  day: z.number().min(1).optional(),
-  title: z.string().min(3).optional(),
-  description: z.string().min(5).optional(),
+  day: z.number().optional(),
+  title: z.string().optional(),
+  description: z.string().optional(),
 });
 
 const faq = z.object({
-  question: z.string().min(5).optional(),
-  answer: z.string().min(5).optional(),
+  question: z.string().optional(),
+  answer: z.string().optional(),
 });
 
 const duration = z.object({
-  days: z.number().min(1).optional(),
-  place: z.string().min(2).optional(),
+  days: z.number().optional(),
+  place: z.string().optional(),
 });
 
 const testimonial = z.object({
-  name: z.string().min(2).optional(),
-  description: z.string().min(5).optional(),
-  rating: z.number().min(1).max(5).optional(),
+  name: z.string().optional(),
+  description: z.string().optional(),
+  rating: z.coerce.number().min(1).max(5).optional(),
 });
 
 const childImage = z.object({
@@ -45,8 +45,8 @@ const route = z.object({
 
 export const tourPackageSchema = z
   .object({
-    title: z.string().min(3).optional(),
-    slug: z.string().regex(/^[a-z0-9-]+$/).optional(),
+    title: z.string().optional(),
+    slug: z.string().optional(),
 
     category: z.string().optional(),
 
@@ -108,9 +108,12 @@ export const tourPackageSchema = z
 
     availableSrc: z.array(z.string()).optional(),
   })
+  
   .superRefine((data, ctx) => {
     if (data.status === "published") {
-      // 🔥 Required fields for publish
+      // Required fields for publish
+
+
 
       if (!data.title) {
         ctx.addIssue({

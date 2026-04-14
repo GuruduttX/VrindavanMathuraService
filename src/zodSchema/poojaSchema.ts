@@ -2,14 +2,14 @@ import { z } from "zod";
 
 export const poojaSchema = z
   .object({
-    title: z.string().min(3).optional(),
-    slug: z.string().regex(/^[a-z0-9-]+$/).optional(),
+    title: z.string().optional(),
+    slug: z.string().optional(),
 
     temple: z.string().optional(),
     location: z.string().optional(),
 
     price: z.coerce.number().min(0).optional(),
-    discountPrice: z.coerce.number().min(0).optional(),
+    discountPrice: z.coerce.number().optional(),
 
     ratings: z.coerce.number().min(0).max(5).optional(),
 
