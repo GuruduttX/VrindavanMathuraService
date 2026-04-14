@@ -23,6 +23,7 @@ type HotelForm = {
   price: string;
   about : string;
   duration : string,
+  location : string;
   subcontent : string;
   host : string,
   metaTitle: string;
@@ -62,6 +63,7 @@ export default function CreateNewPackage() {
     alt: "",
     reviews: "", 
     rating: "",
+    location : "",
     status: "",
     
   });
@@ -96,6 +98,29 @@ export default function CreateNewPackage() {
     setForm((prev) => ({ ...prev, [field]: value }));
   };
 
+  const getHotelsBySlug = async (slug: string) => {
+  try {
+    const res = await fetch(
+      `${process.env.NEXT_PUBLIC_URL}/api/users/hotels/${slug}`
+    );
+
+    if (res.status === 404) {
+      return { exists: false };
+    }
+
+    const data = await res.json();
+
+    return {
+      exists: true,
+      data: data.data || data, // handle both formats
+    };
+
+  } catch (error) {
+    console.error("Slug check error:", error);
+    return { exists: false };
+  }
+};
+
   const buildPayload = (status: "published" | "draft") => ({
       title: form.title,
       category: form.category,
@@ -104,6 +129,7 @@ export default function CreateNewPackage() {
       duration : form.duration,
       price: Number(form.price),
       rating: form.rating,
+      location : form.location,
       reviews : form.reviews,
       host : form.host,
       image : form.image,
@@ -121,6 +147,22 @@ export default function CreateNewPackage() {
       ratingSummary
   });
 
+   const handleZodErrors = (errors : any)=>{
+      const fieldErrors = errors.fieldErrors;
+
+
+      for(const [field , messages] of Object.entries(fieldErrors) as [string, string[]][]){
+          if (messages && messages?.length > 0) {
+            toast.error(`${field}: ${messages[0]}`); 
+            return;
+          }
+      }
+
+      if (errors.formErrors?.length) {
+        toast.error(errors.formErrors[0]);
+  }
+  }
+
   const postPayload = async (payload: object) => {
     const res = await fetch(`${process.env.NEXT_PUBLIC_URL}/api/admin/hotels`, {
       method:  "POST",
@@ -130,14 +172,21 @@ export default function CreateNewPackage() {
 
     const data = await res.json();
 
-    console.log("THE DATA OF THE HOTELS COME FROM THE DATABASE IS : ")
-    console.log(data);
+    // console.log("THE DATA OF THE HOTELS COME FROM THE DATABASE IS : ")
+    // console.log(data);
     
-    if (!res.ok || !data.success) throw new Error(data.message || "Something went wrong");
+    if (!res.ok || !data.success){
+
+      console.log("here are errors",data.errors);
+       handleZodErrors(data.errors);
+
+
+     throw new Error(data.message || "Something went wrong");
+    }
     return data;
   };
 
-  const validateForPublish = (formEl: HTMLFormElement): boolean => {
+  const validateForPublish = async(formEl: HTMLFormElement): Promise<boolean> => {
     if (!formEl.checkValidity()) {
       formEl.reportValidity();
       return false;
@@ -147,13 +196,39 @@ export default function CreateNewPackage() {
       toast.error("Hotel Package category is missing");
       return false;
     }
+
+     if(!form.slug){
+       toast.error("Hotel Package Slug is required")
+       return false;
+     }
+       
+
+      const result = await getHotelsBySlug(form.slug);
+
+      if (result?.exists){
+        toast.error("Slug already exists");
+        return false;
+      }
+
+    // if(form.reviews && typeof form.reviews !== "number"){
+    //   toast.error("Reviews fields should be number")
+    //   return false;
+    // }
+
+    // if(form.rating && typeof form.rating !== 'number'){
+    //    return false;
+    // }
     
     return true;
   };
 
   const handleSave = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    if (!validateForPublish(e.currentTarget)) return;
+    const valid =  await validateForPublish(e.currentTarget);
+
+    if(!valid){
+        return;
+    }
 
 
     setLoading(true);
@@ -161,8 +236,7 @@ export default function CreateNewPackage() {
       await postPayload(buildPayload("published"));
       toast.success("Hotel Package published successfully!");
     } catch (err: any) {
-      console.log(err.message);
-      toast.error(err.message || "Failed to publish hotel package");
+      toast.error( "Failed to publish hotel package");
     } finally {
       setLoading(false);
     }
@@ -175,12 +249,23 @@ export default function CreateNewPackage() {
       return;
     }
 
+   console.log("sf", form.slug)
+    if(form.slug){
+     const result = await getHotelsBySlug(form.slug);
+      
+      if (result?.exists){
+        toast.error("Slug already exists");
+        return;
+      }
+    }
+
+
     setLoading(true);
     try {
       await postPayload(buildPayload("draft"));
       toast.success("Draft saved successfully!");
     } catch (err: any) {
-      toast.error(err.message || "Failed to save draft");
+      toast.error("Failed to save draft");
     } finally {
       setLoading(false);
     }
@@ -206,10 +291,12 @@ export default function CreateNewPackage() {
         <CMSHeader editorType="Hotel" />
         <CMSMetaSection title={form.title} category={form.category} slug={form.slug} onChange={updateForm} editorType="Hotel" />
         <CMSHostField
-          value={form.host}
+          host={form.host}
+          location={form.location}
+
           onChange={updateForm}
         />  
-         <PackageDetails reviews={form.reviews} rating={form.rating} price={form.price} duration={form.duration} onChange={updateForm} editorType="Package"/>
+        <PackageDetails reviews={form.reviews} rating={form.rating} price={form.price} duration={form.duration} onChange={updateForm} editorType="Package"/>
         <CMSSeoSection metaTitle={form.metaTitle} metaDescription={form.metaDescription} onChange={updateForm} editorType="Hotel" />
         <CMSSchema schemaTitle={form.schemaTitle} schemaDescription={form.schemaDescription} onChange={updateForm} editorType="Hotel" />
         <QuickInclusion

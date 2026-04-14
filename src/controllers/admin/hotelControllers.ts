@@ -11,9 +11,10 @@ export const createAdminHotelController = async (req: Request) => {
         const result = hotelSchema.safeParse(body);
 
         if(!result.success){
+            
             return Response.json({
                 success : false,
-                error : result.error.flatten()
+                errors : result.error.flatten()
             }, {status : 400})
         }
 
@@ -102,7 +103,7 @@ export const updateAdminHotelController = async (req: Request, id: string) => {
         if(!result.success){
             return Response.json({
                 success : false,
-                error : result.error.flatten()
+                errors : result.error.flatten()
             }, {status : 400})
         }
 

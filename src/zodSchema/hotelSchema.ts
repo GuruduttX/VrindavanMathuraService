@@ -2,6 +2,7 @@ import { z } from "zod";
 
 // sub schemas
 const faqSchema = z.object({
+  id : z.string(),
   question: z.string(),
   answer: z.string(),
 });
@@ -40,6 +41,7 @@ const ratingSummary = z.object({
 });
 
 const textItem = z.object({
+  id : z.string().optional(),
   description: z.string().optional(),
 });
 
@@ -56,7 +58,7 @@ export const hotelSchema = z
     rating: z.coerce.number().optional(),
     reviews: z.coerce.number().optional(),
 
-    image: z.string().url().optional(),
+    image: z.string().optional(),
     alt: z.string().optional(),
 
     metaTitle: z.string().optional(),

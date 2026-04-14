@@ -54,7 +54,7 @@ const page = async ({ params }: { params: Promise<{ slug: string }> }) => {
         <GuestReviewSection HotelData={HotelData} />
 
         <HotelCTA />
-        <HotelFAQ />
+        <HotelFAQ faqs={HotelData.faqs} />
         <LuxuryFooter />
       </>
     );

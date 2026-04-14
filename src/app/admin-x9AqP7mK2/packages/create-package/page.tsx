@@ -23,6 +23,7 @@ import DestRoutes from '@/components/Admin/PackageEditor/DestRoute';
 import SelectedInclusion from '@/components/Admin/PackageEditor/SelectedInclusion';
 import PackageOverview from '@/components/Admin/PackageEditor/PackageOverview';
 import SourceCitySelector from '@/components/Admin/PackageEditor/SourceCitySelector';
+import { object } from 'zod';
 
 type PackageForm = {
   title: string;
@@ -96,15 +97,21 @@ export default function CreateNewPackage() {
     setForm((prev) => ({ ...prev, [field]: value }));
   };
 
-  // const handleZodErrors = (errors : any)=>{
-  //     const obj = errors.fieldErrors;
+  const handleZodErrors = (errors : any)=>{
+      const fieldErrors = errors.fieldErrors;
 
-  //     Object.entries(obj).forEach(([field , messages])=>{
-  //         if (messages?.length) {
-  //         toast.error(messages[0]); // only first error
-  // }
-  //     })
-  // }
+
+      for(const [field , messages] of Object.entries(fieldErrors) as [string, string[]][]){
+          if (messages && messages?.length > 0) {
+            toast.error(`${field}: ${messages[0]}`); 
+            return;
+          }
+      }
+
+      if (errors.formErrors?.length) {
+    toast.error(errors.formErrors[0]);
+  }
+  }
 
   const buildPayload = (status: "published" | "draft") => ({
       title: form.title,
@@ -166,37 +173,76 @@ export default function CreateNewPackage() {
     });
 
     const data = await res.json();
-    if (!res.ok || !data.success) throw new Error(data.message || "Something went wrong");
+    if (!res.ok || !data.success){ 
+       console.log("Errors", data.errors);
+       handleZodErrors(data.errors);
+       
+      throw new Error("");
+    }
     return data;
   };
 
-  const validateForPublish = (formEl: HTMLFormElement): boolean => {
-    if (!formEl.checkValidity()) {
-      formEl.reportValidity();
+ const findPackages = async (slug: string) => {
+  try {
+    const res = await fetch(
+      `${process.env.NEXT_PUBLIC_URL}/api/users/tour-packages/${slug}`
+    );
+
+    const data = await res.json();
+
+    
+
+    return data; 
+  } catch (err) {
+    toast.error("Error checking slug");
+    return null;
+  }
+};
+
+const validateForPublish = async (formEl: HTMLFormElement): Promise<boolean> => {
+  if (!formEl.checkValidity()) {
+    formEl.reportValidity();
+    return false;
+  }
+
+  if (!form.image) {
+    toast.error("Package image is missing");
+    return false;
+  }
+
+  if (!form.category) {
+    toast.error("Package category is missing");
+    return false;
+  }
+
+  if (!form.slug) {
+    toast.error("Package slug is required");
+    return false;
+  }
+
+ 
+  const result = await findPackages(form.slug);
+
+  if (result?.exists) {
+      toast.error("Slug already exists");
       return false;
-    }
-    if (!form.image) {
-      toast.error("Package image is missing");
-      return false;
-    }
-    if (!form.category) {
-      toast.error("Package category is missing");
-      return false;
-    }
-    if (
-      childImage.length < 4 ||
-      !childImage[0]?.image || !childImage[1]?.image ||
-      !childImage[2]?.image || !childImage[3]?.image
-    ) {
-      toast.error(`Only ${childImage.length} child image(s) added — need 4`);
-      return false;
-    }
-    return true;
-  };
+  }
+
+  const validImages = childImage.filter((img) => img?.image);
+
+  if (validImages.length < 4) {
+    toast.error(`Only ${validImages.length} child image(s) added — need 4`);
+    return false;
+  }
+
+  return true;
+};
 
   const handleSave = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    if (!validateForPublish(e.currentTarget)) return;
+    const valid = await validateForPublish(e.currentTarget);
+
+    if(!valid) return;
 
 
     setLoading(true);
@@ -204,11 +250,34 @@ export default function CreateNewPackage() {
       await postPayload(buildPayload("published"));
       toast.success("Package published successfully!");
     } catch (err: any) {
-      toast.error(err.message || "Failed to publish package");
+      toast.error("Failed to publish package");
     } finally {
       setLoading(false);
     }
   };
+
+  const validateForDraft = async (): Promise<boolean> => {
+ 
+  if (!form.image) {
+    toast.error("Package image is missing");
+    return false;
+  }
+
+  
+  if (form.slug) {
+    
+  
+
+ 
+  const result = await findPackages(form.slug);
+  if (result?.exists) {
+    toast.error("Slug already exists");
+    return false;
+  }
+}  
+
+  return true;
+};
 
   // Save Draft
   const handleSaveDraft = async () => {
@@ -217,12 +286,18 @@ export default function CreateNewPackage() {
       return;
     }
 
+    const valid = await validateForDraft();
+
+    if(!valid){
+       return;
+    }
+
     setLoading(true);
     try {
       await postPayload(buildPayload("draft"));
       toast.success("Draft saved successfully!");
     } catch (err: any) {
-      toast.error(err.message || "Failed to save draft");
+      toast.error("Failed to save draft");
     } finally {
       setLoading(false);
     }

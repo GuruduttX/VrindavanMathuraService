@@ -9,6 +9,7 @@ const hotelSchema = new Schema<IHotel>({
     required: true
   },
 
+
   slug: {
     type: String,
     unique: true,
@@ -17,6 +18,10 @@ const hotelSchema = new Schema<IHotel>({
 
   subcontent: {
     type: String,
+  },
+
+  location : {
+    type : String
   },
 
   category: {
@@ -73,17 +78,15 @@ const hotelSchema = new Schema<IHotel>({
     {
       id: {
         type: String,
-        required: true
+       
       },
 
       question: {
         type: String,
-        required: true
       },
 
       answer: {
         type: String,
-        required: true
       }
     }
 

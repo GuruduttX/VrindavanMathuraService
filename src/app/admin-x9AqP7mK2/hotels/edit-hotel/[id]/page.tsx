@@ -34,6 +34,7 @@ type HotelForm = {
   reviews: string;
   rating: string;
   status: string;
+  location : string;
 };
 
 type FAQ         = { id: string; question: string; answer: string };
@@ -66,7 +67,8 @@ export default function CreateNewPackage() {
     alt: "",
     reviews: "", 
     rating: "",
-    status: ""
+    status: "",
+    location : ""
   });
 
   const [loading, setLoading] = useState(false);
@@ -93,6 +95,22 @@ export default function CreateNewPackage() {
       comfortStay: 0,
     },
   });
+
+   const handleZodErrors = (errors : any)=>{
+        const fieldErrors = errors.fieldErrors;
+  
+  
+        for(const [field , messages] of Object.entries(fieldErrors) as [string, string[]][]){
+            if (messages && messages?.length > 0) {
+              toast.error(`${field}: ${messages[0]}`); 
+              return;
+            }
+        }
+  
+        if (errors.formErrors?.length) {
+          toast.error(errors.formErrors[0]);
+    }
+   }
 
    const getHotel = async()=>{
     try {
@@ -125,7 +143,8 @@ export default function CreateNewPackage() {
             alt: data.alt,
             reviews: data.reviews, 
             rating: data.rating,
-            status: data.status
+            status: data.status,
+            location : data.location
         });
 
         setFaqs(data.faqs ?? []);
@@ -184,6 +203,7 @@ export default function CreateNewPackage() {
       metaDescription: form.metaDescription,
       schemaTitle: form.schemaTitle,
       schemaDescription: form.schemaDescription,
+      location : form.location,
       faqs,
       inclusions,
       exclusions,
@@ -203,7 +223,11 @@ export default function CreateNewPackage() {
 
     console.log("THE DATA OF THE HOTELS COME FROM THE DATABASE IS : ")
     
-    if (!res.ok || !data.success) throw new Error(data.message || "Something went wrong");
+    if (!res.ok || !data.success){
+      console.log("Errs", data.errors);
+       handleZodErrors(data.errors);
+       throw new Error(data.message || "Something went wrong");
+    }
     return data;
   };
 
@@ -231,7 +255,7 @@ export default function CreateNewPackage() {
       await postPayload(buildPayload("published"));
       toast.success("Hotel Package published successfully!");
     } catch (err: any) {
-      toast.error(err.message || "Failed to publish hotel package");
+      toast.error( "Failed to publish hotel package");
     } finally {
       setLoading(false);
     }
@@ -275,7 +299,8 @@ export default function CreateNewPackage() {
         <CMSHeader editorType="Hotel" />
         <CMSMetaSection title={form.title} category={form.category} slug={form.slug} onChange={updateForm} editorType="Hotel" />
           <CMSHostField
-            value={form.host}
+            host={form.host}
+            location={form.location}
             onChange={updateForm}
           />
         <PackageDetails reviews={form.reviews} rating={form.rating} price={form.price} duration={form.duration} onChange={updateForm} editorType="Package"/>

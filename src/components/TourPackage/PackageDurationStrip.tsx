@@ -1,5 +1,6 @@
 "use client";
 
+import { useRef } from "react";
 import { motion } from "framer-motion";
 
 interface DurationItem {
@@ -13,103 +14,165 @@ interface PackageDurationStripProps {
   breakdown: DurationItem[];
 }
 
+function ordinal(n: number): { num: string; suffix: string } {
+  const s = ["th", "st", "nd", "rd"];
+  const v = n % 100;
+  return {
+    num: String(n),
+    suffix: s[(v - 20) % 10] ?? s[v] ?? s[0],
+  };
+}
+
 export default function PackageDurationStrip({
   duration,
   breakdown,
 }: PackageDurationStripProps) {
+  const scrollRef = useRef<HTMLDivElement>(null);
+
   return (
-    <section className="relative py-14 px-6 overflow-hidden bg-[linear-gradient(180deg,#FFF7ED_0%,#ffffff_60%,#FFF7ED_100%)]">
+    <section className="px-4 md:px-6 py-0 sm:py-4">
       <div className="max-w-7xl mx-auto">
 
-        {/* 🔶 Duration Badge */}
+        {/* ── DESKTOP ── */}
         <motion.div
-          initial={{ opacity: 0, y: -20 }}
+          initial={{ opacity: 0, y: 16 }}
           whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
-          className="inline-flex items-center justify-center px-6 py-3 mb-10 rounded-full 
-          bg-[linear-gradient(145deg,#7A2E00_0%,#A84010_40%,#E8821A_100%)] 
-          text-white font-semibold text-lg shadow-md shadow-orange-200"
+          transition={{ duration: 0.5 }}
+          className="hidden md:flex items-stretch gap-0 overflow-x-auto  no-scrollbar
+            rounded-xl border border-orange-100 bg-white shadow-sm max-w-4xl"
         >
-          {duration}
-        </motion.div>
-
-        {/* 📱 Mobile Timeline */}
-        <div className="flex flex-col gap-0 md:hidden">
-          {breakdown.map((item, index) => (
-            <motion.div
-              key={item.id}
-              initial={{ opacity: 0, x: -20 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              transition={{ delay: index * 0.1 }}
-              className="flex items-start gap-4"
+          {/* Duration badge cell */}
+          <div className="flex items-center shrink-0 px-5 py-4 border-r border-orange-100 bg-orange-50">
+            <span
+              className="inline-flex items-center rounded-full text-white px-4 py-1.5
+                text-sm font-bold tracking-wide whitespace-nowrap
+                bg-[linear-gradient(145deg,#7A2E00_0%,#A84010_40%,#E8821A_100%)]
+                shadow-md shadow-orange-200"
             >
-              {/* Node + Line */}
-              <div className="flex flex-col items-center">
-                <div className="w-4 h-4 bg-[#E8821A] rounded-full border-4 border-white shadow-md mt-1" />
-                {index < breakdown.length - 1 && (
-                  <div className="w-0.5 h-10 bg-gradient-to-b from-[#E8821A] to-[#FED7AA]" />
-                )}
-              </div>
+              {duration}
+            </span>
+          </div>
 
-              {/* Content */}
-              <div className="pb-6">
-                <span className="text-3xl font-extrabold text-[#7A2E00]">
-                  {item.days}
-                </span>
-                <span className="text-xs text-gray-500 ml-1">days in</span>
-                <p className="text-sm font-semibold text-gray-800 leading-tight">
-                  {item.place}
-                </p>
-              </div>
-            </motion.div>
-          ))}
-        </div>
-
-        {/* 💻 Desktop Timeline */}
-        <div className="hidden md:block relative overflow-x-auto pb-2">
-          <div className="relative flex gap-10 w-max min-w-full">
-
-            {/* Line */}
-            <motion.div
-              initial={{ width: 0 }}
-              whileInView={{ width: "100%" }}
-              transition={{ duration: 1.2, ease: "easeOut" }}
-              className="absolute top-[10px] left-0 h-1 
-              bg-gradient-to-r from-[#A84010] via-[#D4621A] to-[#E8821A] rounded-full"
-            />
-
-            {breakdown.map((item, index) => (
+          {/* Stop cells */}
+          {breakdown.map((item, index) => {
+            const { num, suffix } = ordinal(index + 1);
+            return (
               <motion.div
                 key={item.id}
-                initial={{ opacity: 0, y: 30 }}
+                initial={{ opacity: 0, y: 12 }}
                 whileInView={{ opacity: 1, y: 0 }}
-                transition={{ delay: index * 0.1 }}
-                className="relative flex flex-col items-center text-center group shrink-0 w-28 cursor-pointer"
+                transition={{ delay: Math.min(index * 0.05, 0.35) }}
+                className="flex items-center shrink-0 gap-3 px-5 py-4
+                  border-r border-orange-100 last:border-r-0
+                  hover:bg-orange-50/60 transition-colors duration-150 group cursor-pointer"
               >
-                {/* Dot */}
-                <div className="w-5 h-5 bg-[#E8821A] rounded-full border-4 border-white shadow-md 
-                group-hover:scale-110 group-hover:shadow-orange-300 transition-all duration-300" />
-
-                {/* Day */}
-                <motion.span
-                  initial={{ scale: 0 }}
-                  whileInView={{ scale: 1 }}
-                  transition={{ delay: index * 0.1, type: "spring" }}
-                  className="mt-4 text-4xl font-extrabold text-[#7A2E00]"
+                <span
+                  className="text-3xl font-extrabold text-[#E8821A]
+                    group-hover:text-[#A84010] transition-colors leading-none tabular-nums"
                 >
-                  {item.days}
-                </motion.span>
-
-                <span className="text-xs text-gray-500 mt-1">Days in</span>
-
-                {/* Place */}
-                <span className="text-sm font-semibold text-gray-800 leading-tight">
-                  {item.place}
+                  {num}
+                  <sup className="text-sm font-bold">{suffix}</sup>
                 </span>
+                <div className="flex flex-col leading-tight min-w-0">
+                  <span className="text-[10px] uppercase tracking-widest text-gray-400 font-medium">
+                    Day in
+                  </span>
+                  <span className="text-sm font-semibold text-gray-800 whitespace-nowrap">
+                    {item.place}
+                  </span>
+                </div>
               </motion.div>
-            ))}
+            );
+          })}
+        </motion.div>
+
+        {/* ── MOBILE ── */}
+        <motion.div
+          initial={{ opacity: 0, y: 16 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5 }}
+          className="md:hidden rounded-2xl border border-orange-100 bg-white shadow-sm overflow-hidden"
+        >
+          {/* Header */}
+          <div className="flex items-center justify-between px-3.5 py-2.5 bg-orange-50 border-b border-orange-100">
+            <span
+              className="inline-flex items-center rounded-full text-white
+                px-3.5 py-1 text-xs font-bold tracking-wide
+                bg-[linear-gradient(145deg,#7A2E00_0%,#A84010_40%,#E8821A_100%)]
+                shadow-sm shadow-orange-200"
+            >
+              {duration}
+            </span>
+            <span className="text-[11px] text-orange-700 font-medium">
+              {breakdown.length} stops &nbsp;→ swipe
+            </span>
           </div>
-        </div>
+
+          {/* Swipeable chips */}
+          <div className="relative">
+            <div
+              ref={scrollRef}
+              className="flex overflow-x-auto scrollbar-hide scroll-smooth snap-x snap-mandatory"
+              style={{ WebkitOverflowScrolling: "touch" }}
+            >
+              {breakdown.map((item, index) => {
+                const { num, suffix } = ordinal(index + 1);
+                return (
+                  <motion.div
+                    key={item.id}
+                    initial={{ opacity: 0, scale: 0.88 }}
+                    whileInView={{ opacity: 1, scale: 1 }}
+                    transition={{
+                      delay: Math.min(index * 0.05, 0.3),
+                      type: "spring",
+                      stiffness: 260,
+                      damping: 20,
+                    }}
+                    className="flex flex-col items-center justify-center gap-0.5
+                      flex-shrink-0 snap-start px-4 py-3
+                      border-r border-orange-100 last:border-r-0
+                      min-w-[76px] cursor-pointer
+                      active:bg-orange-50 transition-colors"
+                  >
+                    <div className="flex items-baseline gap-px">
+                      <span className="text-[22px] font-extrabold text-[#E8821A] leading-none tabular-nums">
+                        {num}
+                      </span>
+                      <span className="text-[9px] font-bold text-[#A84010] leading-none mb-0.5">
+                        {suffix}
+                      </span>
+                    </div>
+                    <span className="text-[11px] font-semibold text-gray-700 text-center leading-tight max-w-[68px] break-words">
+                      {item.place}
+                    </span>
+                  </motion.div>
+                );
+              })}
+            </div>
+
+            {/* Right fade scroll hint */}
+            <div className="pointer-events-none absolute right-0 top-0 bottom-0 w-8
+              bg-gradient-to-l from-white to-transparent" />
+          </div>
+
+          {/* Swipe footer */}
+          <div className="flex items-center gap-1.5 px-3.5 py-2 border-t border-orange-100 bg-orange-50/40">
+            <svg
+              className="w-3 h-3 text-[#E8821A]"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="2.5"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            >
+              <path d="M5 12h14M12 5l7 7-7 7" />
+            </svg>
+            <span className="text-[10px] text-[#A84010] font-medium">
+              Swipe to see all stops
+            </span>
+          </div>
+        </motion.div>
 
       </div>
     </section>

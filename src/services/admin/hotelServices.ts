@@ -46,10 +46,8 @@ export const getAdminHotelByIdService = async (id: string) => {
 export const updateAdminHotelService = async (id: string, data: Partial<IHotel>) => {
 
   try {
-    const updatedHotel = await Hotel.findByIdAndUpdate(id, data, {
-      new: true,
-      runValidators: true
-    });
+    const updatedHotel = await Hotel.findByIdAndUpdate(id, data, {returnDocument : "after"}
+    );
 
     return updatedHotel;
 
