@@ -1,28 +1,32 @@
-import mongoose, {Document} from "mongoose";
-interface PoojaDocument extends Document {
-  title: string;
-  slug: string;
-  temple: string;
-  location: string;
+import { Document } from "mongoose";
 
-  price: number;
+export interface IPooja extends Document {
+  title?: string;
+  slug?: string;
+
+  temple?: string;
+  location?: string;
+
+  price?: number;
   discountPrice?: number;
-  ratings : number;
+  ratings?: number;
 
   description?: string;
   aboutContent?: string;
 
   duration?: string;
 
-  benefits: string[];
+  benefits?: string[];
 
-  availableDays: string[];
+  availableDays?: string[];
 
-  images: string[];
+  images?: string[];
 
-  isActive: boolean;
-  isFeatured: boolean;
+  isActive?: boolean;
+  isFeatured?: boolean;
 
-  createdAt: Date;
-  updatedAt: Date;
+  status: "draft" | "published"; //  only required field
+
+  createdAt?: Date;
+  updatedAt?: Date;
 }

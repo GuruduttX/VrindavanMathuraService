@@ -1,5 +1,7 @@
 import { deleteAdminPoojaService, getAdminPoojasService , updateAdminPoojaService,getAdminPoojaByIdService, createAdminPoojaService } from "@/services/admin/poojaServices";
+import { poojaSchema } from "@/zodSchema/poojaSchema";
 import { NextResponse } from "next/server";
+import { success } from "zod";
 
 
 export async function getAdminPoojasController(){
@@ -17,7 +19,15 @@ export async function createAdminPoojaController(req: Request) {
   try {
     const body = await req.json(); 
 
-    const pooja = await createAdminPoojaService(body); 
+    const result = poojaSchema.safeParse(body);
+
+    if(!result.success){
+       return Response.json({success: false, error : result.error.flatten()}, {status : 400});
+    }
+
+    const poojaData = result.data;
+
+    const pooja = await createAdminPoojaService(poojaData); 
 
     return NextResponse.json({
       success: true,
@@ -41,9 +51,19 @@ export async function updateAdminPoojaController(
 ) {
   try {
     const body = await req.json();   
-    const { id } = params;           
+    const result = poojaSchema.safeParse(body);
 
-    const updated = await updateAdminPoojaService(body, id);
+    if(!result.success){
+       return Response.json({success: false, error : result.error.flatten()}, {status : 400});
+    }
+
+    const poojaData = result.data;
+
+    const { id } = params;  
+    
+    
+
+    const updated = await updateAdminPoojaService(poojaData, id);
 
     return NextResponse.json({
       success: true,

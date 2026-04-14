@@ -1,105 +1,98 @@
-import mongoose , { Document } from "mongoose";
-
+import mongoose, { Document } from "mongoose";
 
 interface Itinerary {
   _id?: mongoose.Types.ObjectId;
-  day: number;
-  title: string;
-  description: string;
+  day?: number;
+  title?: string;
+  description?: string;
 }
 
 interface FAQ {
   _id?: mongoose.Types.ObjectId;
-  question: string;
-  answer: string;
+  question?: string;
+  answer?: string;
 }
 
 interface Duration {
-  days: number;
-  place: string;
+  days?: number;
+  place?: string;
 }
 
 interface Testimonial {
-  name: string;
-  description: string;
-  rating: number;
-}
-
-interface BreakdownItem {
-  days: number;
-  place: string;
+  name?: string;
+  description?: string;
+  rating?: number;
 }
 
 interface RouteSegment {
-  from: string;
-  to: string;
+  from?: string;
+  to?: string;
 }
 
 interface RouteType {
-  source: string;
-  destination: string;
-  segments: RouteSegment[];
+  source?: string;
+  destination?: string;
+  segments?: RouteSegment[];
 }
+
 export interface ITourPackage extends Document {
-  title: string;
-  slug: string;
-  category: string;
-  price: number;
-  rating: number;
+  title?: string;
+  slug?: string;
+  category?: string;
 
-  duration: string;
-  status: string;
+  price?: number;
+  rating?: number;
 
-  days: number;
-  nights: number;
+  duration?: string;
 
-  durationbreakdown: Duration[];
+  status: "draft" | "published"; 
 
-  destination: string;
+  days?: number;
+  nights?: number;
+
+  durationbreakdown?: Duration[];
+
+  destination?: string;
   overview?: string;
 
-  highlights: string[];
-  itinerary: Itinerary[];
+  highlights?: string[];
+  itinerary?: Itinerary[];
 
-  inclusions: string[];
-  exclusions: string[];
+  inclusions?: string[];
+  exclusions?: string[];
 
-  faqs: FAQ[];
+  faqs?: FAQ[];
 
+  metaTitle?: string;
+  metaDescription?: string;
 
-  metaTitle: string;
-  metaDescription: string;
+  schemaTitle?: string;
+  schemaDescription?: string;
 
-  schemaTitle: string;
-  schemaDescription: string;
-
-  refund: string;
-  cancel: string;
-  confirmation: string;
-  payment: string;
+  refund?: string;
+  cancel?: string;
+  confirmation?: string;
+  payment?: string;
 
   heroImage?: string;
-  images: string[];
+  images?: string[];
 
-  childImages: {
-    image: string;
-    alt: string;
+  childImages?: {
+    image?: string;
+    alt?: string;
   }[];
 
-  testimonials: Testimonial[];
+  testimonials?: Testimonial[];
 
-  documents: string[];
+  documents?: string[];
 
-  routes: RouteType[];
+  routes?: RouteType[];
 
-  isTransferIncluded: boolean;
-  isStayIncluded: boolean;
-  isBreakfastIncluded: boolean;
-  isSightseeingIncluded: boolean;
+  isTransferIncluded?: boolean;
+  isStayIncluded?: boolean;
+  isBreakfastIncluded?: boolean;
+  isSightseeingIncluded?: boolean;
 
- 
-  createdAt: Date;
-  updatedAt: Date;
+  createdAt?: Date;
+  updatedAt?: Date;
 }
-
-

@@ -6,13 +6,27 @@ import {
   updateAdminTaxiService,
   getUserTaxiBySlugService,
 } from "@/services/admin/taxiServices";
+import { taxiSchema } from "@/zodSchema/taxiSchema";
 
-import { NextRequest, NextResponse } from "next/server";
+import { NextResponse } from "next/server";
+import { success } from "zod";
 
 
 export const createAdminTaxiController = async (req: Request) => {
+    
     try {
-        const taxi = await createAdminTaxiService(req);
+        const body =  await req.json();
+
+        const result = taxiSchema.safeParse(body);
+        
+        if(!result.success){
+            return Response.json({success : false, error : result.error.flatten()}
+        ,{status : 400})
+        }
+
+        const taxiData = result.data;
+
+        const taxi = await createAdminTaxiService(taxiData);
 
         return NextResponse.json(
             {
@@ -106,8 +120,21 @@ export const getAdminTaxiByIdController = async (id: string) => {
 
 
 export const updateAdminTaxiController = async (req: Request, id: string) => {
+    
     try {
-        const taxi = await updateAdminTaxiService(req, id);
+
+        const body =  await req.json();
+
+        const result = taxiSchema.safeParse(body);
+        
+        if(!result.success){
+            return Response.json({success : false, error : result.error.flatten()}
+        ,{status : 400})
+        }
+
+        const taxiData = result.data;
+
+        const taxi = await updateAdminTaxiService(taxiData, id);
 
         return NextResponse.json({
             success: true,
