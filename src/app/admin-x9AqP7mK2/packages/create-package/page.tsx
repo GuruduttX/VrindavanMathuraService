@@ -185,17 +185,20 @@ export default function CreateNewPackage() {
  const findPackages = async (slug: string) => {
   try {
     const res = await fetch(
-      `${process.env.NEXT_PUBLIC_URL}/api/users/tour-packages/${slug}`
+      `${process.env.NEXT_PUBLIC_URL}/api/admin/tour-packages/check-slug?slug=${form.slug}`
     );
+
+    if(res.status === 404){
+       return {exists : false};
+    }
 
     const data = await res.json();
 
-    
 
     return data; 
   } catch (err) {
     toast.error("Error checking slug");
-    return null;
+     return {exists : false}
   }
 };
 
@@ -238,23 +241,23 @@ const validateForPublish = async (formEl: HTMLFormElement): Promise<boolean> => 
   return true;
 };
 
-  const handleSave = async (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    const valid = await validateForPublish(e.currentTarget);
+const handleSave = async (e: React.FormEvent<HTMLFormElement>) => {
+  e.preventDefault();
+  const valid = await validateForPublish(e.currentTarget);
 
-    if(!valid) return;
+  if(!valid) return;
 
 
-    setLoading(true);
-    try {
-      await postPayload(buildPayload("published"));
-      toast.success("Package published successfully!");
-    } catch (err: any) {
-      toast.error("Failed to publish package");
-    } finally {
-      setLoading(false);
-    }
-  };
+  setLoading(true);
+  try {
+    await postPayload(buildPayload("published"));
+    toast.success("Package published successfully!");
+  } catch (err: any) {
+    toast.error("Failed to publish package");
+  } finally {
+    setLoading(false);
+  }
+};
 
   const validateForDraft = async (): Promise<boolean> => {
  
@@ -265,9 +268,6 @@ const validateForPublish = async (formEl: HTMLFormElement): Promise<boolean> => 
 
   
   if (form.slug) {
-    
-  
-
  
   const result = await findPackages(form.slug);
   if (result?.exists) {

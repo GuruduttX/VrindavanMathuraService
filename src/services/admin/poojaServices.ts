@@ -39,3 +39,15 @@ export async function deleteAdminPoojaService(id : string) {
     return pooja;
 }
 
+export async function getAdminPoojaBySlugService(slug : string){
+     await connectDB();
+     const poojas = await PoojaModel.findOne({slug : slug});
+     console.log(poojas)
+      if (!poojas) {
+        throw new Error("Pooja not found");
+      }
+     return poojas;
+}
+
+
+

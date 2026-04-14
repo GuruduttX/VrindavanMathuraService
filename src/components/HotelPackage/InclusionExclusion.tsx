@@ -55,7 +55,7 @@ const InclusionsExclusions = ({
         {/* ── Quick Inclusions badges ── */}
         {activeQuick.length > 0 && (
           <div className="flex flex-wrap gap-2.5 mb-7">
-            {activeQuick.map(({ key, label, Icon }) => (
+            {activeQuick?.map(({ key, label, Icon }) => (
               <div
                 key={key}
                 className="flex items-center gap-2 px-4 py-2 rounded-full
@@ -90,7 +90,7 @@ const InclusionsExclusions = ({
               </div>
 
               <ul className="space-y-1">
-                {inclusions.map((item) => (
+                {inclusions?.map((item) => (
                   <li
                     key={item.id}
                     className="flex items-start gap-2.5 px-3 py-2 rounded-xl
@@ -115,11 +115,11 @@ const InclusionsExclusions = ({
 
           {/* ── Exclusions card ── */}
           <div className="rounded-2xl border border-stone-200 bg-white shadow-sm overflow-hidden">
-            <div className="h-1 w-full bg-rose-500" />
+            <div className="h-1 w-full bg-rose-900" />
             <div className="p-5">
               <div className="flex items-center gap-2.5 mb-4">
                 <div className="w-8 h-8 rounded-xl bg-rose-100 flex items-center justify-center flex-shrink-0">
-                  <XCircle size={16} className="text-rose-500" strokeWidth={2.4} />
+                  <XCircle size={16} className="text-rose-900" strokeWidth={2.4} />
                 </div>
                 <h3
                   className="text-base font-bold text-stone-800"
@@ -129,7 +129,7 @@ const InclusionsExclusions = ({
               </div>
 
               <ul className="space-y-1">
-                {exclusions.map((item) => (
+                {exclusions?.map((item) => (
                   <li
                     key={item.id}
                     className="flex items-start gap-2.5 px-3 py-2 rounded-xl

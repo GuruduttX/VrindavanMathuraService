@@ -74,3 +74,12 @@ export const deleteAdminTaxiService = async (id: string) => {
     throw new Error("Error deleting taxi");
   }
 };
+
+export async function getAdminPoojaBySlugService(slug : string){
+     await connectDB();
+     const taxis = await Taxi.findOne({slug : slug});
+      if (!taxis) {
+        throw new Error("Taxi not found");
+      }
+     return taxis;
+}

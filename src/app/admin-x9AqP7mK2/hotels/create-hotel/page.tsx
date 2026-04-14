@@ -101,7 +101,7 @@ export default function CreateNewPackage() {
   const getHotelsBySlug = async (slug: string) => {
   try {
     const res = await fetch(
-      `${process.env.NEXT_PUBLIC_URL}/api/users/hotels/${slug}`
+      `${process.env.NEXT_PUBLIC_URL}/api/admin/hotels/check-slug?slug=${slug}`
     );
 
     if (res.status === 404) {

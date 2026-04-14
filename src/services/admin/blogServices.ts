@@ -1,5 +1,6 @@
 import Blog from "@/models/blogModel";
 import { IBlog } from "@/types/blogTypes";
+import { connectDB } from "@/lib/mongodb";
 
 
 export const createAdminBlogService = async (data: Partial<IBlog>) => {
@@ -74,3 +75,13 @@ export const deleteAdminBlogService = async (id: string) => {
     throw new Error(error.message || "Failed to delete blog");
   }
 };
+
+
+export async function getBlogBySlugServices(slug : string){
+     await connectDB();
+     const blog = await Blog.findOne({slug : slug});
+      if (!blog) {
+        throw new Error("Blog not found");
+      }
+     return blog;
+}

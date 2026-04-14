@@ -32,7 +32,7 @@ export async function getTourBySlugController(slug:string) {
 
        if (!tour) {
       return NextResponse.json(
-         {exists : false} , {status : 200}    
+         {exists : false} , {status : 404}    
       );
     }
 

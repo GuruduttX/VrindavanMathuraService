@@ -200,7 +200,7 @@ export default function page() {
   const findPackages = async (slug: string) => {
   try {
     const res = await fetch(
-      `${process.env.NEXT_PUBLIC_URL}/api/users/tour-packages/${slug}`
+      `${process.env.NEXT_PUBLIC_URL}/api/admin/tour-packages/check-slug?slug=${form.slug}`
     );
 
     const data = await res.json();
@@ -307,14 +307,10 @@ export default function page() {
   const result = await findPackages(form.slug);
 
 
-  console.log("Rsult", result._id)
-
-  console.log("This is id", id , "   ", "This is ", result._id)
-
-//   if (result?.exists &&   result?.data?._id !== id) {
-//   toast.error("Slug already exists");
-//   return false;
-// }
+  if (result?.exists &&   result?.data?._id !== id) {
+  toast.error("Slug already exists");
+  return false;
+}
   const validImages = childImage.filter((img) => img?.image);
 
   if (validImages.length < 4) {
@@ -358,13 +354,14 @@ export default function page() {
     if (form.slug) {
        
    
-  //   const result = await findPackages(form.slug);
-  //   console.log("this is the result", result.data);
-  //   if (result?.exists && result.data._id !== id) {
-  //     toast.error("Slug already exists");
-  //     return false;
-  // }
-  }  
+    const result = await findPackages(form.slug);
+
+
+    if (result?.exists && result?.data?._id !== id) {
+      toast.error("Slug already exists");
+      return false;
+  }
+   }  
   
     return true;
   };

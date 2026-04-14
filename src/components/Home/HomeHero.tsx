@@ -1,12 +1,11 @@
 import Image from "next/image";
-import SearchBar from "./SearchBar";
 import QuickQuery from "@/utils/QuickQuery";
 
 export default function HomeHero() {
 
     return (
         <>
-            <section className="relative overflow-hidden bg-gradient-to-br from-amber-50 via-orange-50 to-yellow-100">
+            <section className="relative overflow-hidden bg-gradient-to-br from-orange-200 via-orange-100 to-orange-50">
 
                 {/* background decorative blur */}
                 <div className="absolute top-[-100px] right-[-100px] w-[400px] h-[400px] bg-orange-400/30 rounded-full blur-[120px]" />

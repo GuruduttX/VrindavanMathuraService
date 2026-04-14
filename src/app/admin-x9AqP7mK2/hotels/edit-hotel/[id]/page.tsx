@@ -231,7 +231,30 @@ export default function CreateNewPackage() {
     return data;
   };
 
-  const validateForPublish = (formEl: HTMLFormElement): boolean => {
+const getHotelsBySlug = async (slug: string) => {
+  try {
+    const res = await fetch(
+      `${process.env.NEXT_PUBLIC_URL}/api/admin/hotels/check-slug?slug=${slug}`
+    );
+
+    if (res.status === 404) {
+      return { exists: false };
+    }
+
+    const data = await res.json();
+
+    return {
+      exists: true,
+      data: data.data || data, // handle both formats
+    };
+
+  } catch (error) {
+    console.error("Slug check error:", error);
+    return { exists: false };
+  }
+};
+
+  const validateForPublish = async(formEl: HTMLFormElement): Promise<boolean> => {
     if (!formEl.checkValidity()) {
       formEl.reportValidity();
       return false;
@@ -241,13 +264,24 @@ export default function CreateNewPackage() {
       toast.error("Hotel Package category is missing");
       return false;
     }
+
+    const result = await getHotelsBySlug(form.slug);
+
+    if (result?.exists &&   result?.data?._id !== id) {
+    toast.error("Slug already exists");
+    return false;
+}
     
     return true;
   };
 
   const handleSave = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    if (!validateForPublish(e.currentTarget)) return;
+    const valid = await validateForPublish(e.currentTarget);
+
+    if(!valid){
+       return ;
+    }
 
 
     setLoading(true);
@@ -267,6 +301,15 @@ export default function CreateNewPackage() {
       toast.error("Please add a title before saving as draft");
       return;
     }
+
+    if(form.slug){
+    const result = await getHotelsBySlug(form.slug);
+
+    if (result?.exists &&   result?.data?._id !== id) {
+       toast.error("Slug already exists");
+      return false;
+    }
+  }
 
     setLoading(true);
     try {

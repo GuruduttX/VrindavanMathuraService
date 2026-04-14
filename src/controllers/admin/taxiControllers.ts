@@ -5,6 +5,7 @@ import {
   getAdminTaxiByIdService,
   updateAdminTaxiService,
   getUserTaxiBySlugService,
+  getAdminPoojaBySlugService
 } from "@/services/admin/taxiServices";
 import { taxiSchema } from "@/zodSchema/taxiSchema";
 
@@ -170,3 +171,20 @@ export const deleteAdminTaxiController = async (id: string) => {
         );
     }
 };
+
+export async function getAdminTaxiBySlugController(slug : string){
+    try {
+
+      const taxi = await getAdminPoojaBySlugService(slug);
+      
+      if(!taxi){
+         return NextResponse.json({exists : false}, {status : 404});
+      }
+
+      return NextResponse.json({exists : true, data : taxi}, {status : 200});
+      
+    } catch (error) {
+       console.log("This is the error ", error);
+       return NextResponse.json({message : "Something went Wrong!"},{status:500})
+    }
+}
