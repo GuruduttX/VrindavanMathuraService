@@ -3,12 +3,19 @@
 import Image from "next/image";
 import Link from "next/link";
 import { Star, MapPin, Users, Clock } from "lucide-react";
-import { setSourceMapsEnabled } from "process";
+import { motion } from "framer-motion"
 
 export default function TourCard({ tour, setOpen }: any) {
   console.log(tour)
   return (
-    <div className="bg-white rounded-3xl shadow-lg hover:shadow-xl transition duration-300 overflow-hidden border border-orange-100">
+    <motion.div
+      initial={{ opacity: 0, y: 60 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.6, delay: 2 * 0.15 }}
+      viewport={{ once: true }}
+      whileHover={{ y: -10 }}
+      className="bg-white rounded-3xl shadow-lg hover:shadow-xl transition duration-300 overflow-hidden border border-orange-100"
+    >
       {/* Image Section */}
       <div className="relative h-60 w-full overflow-hidden">
         <Image
@@ -98,6 +105,6 @@ export default function TourCard({ tour, setOpen }: any) {
           </button>
         </div>
       </div>
-    </div>
+    </motion.div>
   );
 }

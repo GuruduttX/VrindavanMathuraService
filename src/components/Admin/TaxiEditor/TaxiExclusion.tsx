@@ -43,19 +43,19 @@ const TaxiExclusion = ({
         <div className="bg-[#1e0d14] border border-pink-900/40 rounded-2xl w-full p-6
         shadow-[0_0_25px_rgba(236,72,153,0.08)] transition">
 
-            {/* 🔥 Title */}
+            {/*  Title */}
             <div className="text-2xl font-semibold text-pink-300 text-center mb-6">
                 Exclusions
             </div>
 
-            {exclusions.map((exclusion) => (
+            {exclusions.map((exclusion, idx) => (
                 <div
-                    key={exclusion.id}
+                    key={exclusion.id || idx}
                     className="bg-pink-950/30 border border-pink-900/40 rounded-xl w-full p-5
                     shadow-[0_0_15px_rgba(236,72,153,0.05)] mb-5"
                 >
 
-                    {/* 🔥 Textarea */}
+                    {/*  Textarea */}
                     <textarea
                         rows={3}
                         required

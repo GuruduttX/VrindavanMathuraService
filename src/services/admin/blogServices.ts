@@ -80,8 +80,6 @@ export const deleteAdminBlogService = async (id: string) => {
 export async function getBlogBySlugServices(slug : string){
      await connectDB();
      const blog = await Blog.findOne({slug : slug});
-      if (!blog) {
-        throw new Error("Blog not found");
-      }
+     
      return blog;
 }

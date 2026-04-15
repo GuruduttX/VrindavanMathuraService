@@ -41,7 +41,7 @@ export default function PoojaHero() {
       >
         {/* Background */}
         <div
-          className="absolute inset-0"
+          className="absolute inset-0 "
           style={{
             background:
               "linear-gradient(145deg, #FFFAEB 0%, #FDF2E2 40%, #FFF8E9 70%, #FFE1C3 100%)",
@@ -98,7 +98,7 @@ export default function PoojaHero() {
           </div>
 
           {/* Content */}
-          <div className="relative z-10 text-center px-6 max-w-3xl">
+          <div className="relative z-10 text-center px-6 max-w-3xl mt-30 md:mt-0">
           {/* Diya icons */}
           <div className="ph-anim ph-d1 flex justify-center gap-3 mb-6 text-2xl">
             <span className="diya-icon">🪔</span>

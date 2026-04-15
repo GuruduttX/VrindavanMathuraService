@@ -60,7 +60,7 @@ export default function TaxiArchive({ taxis }: { taxis: any }) {
               "SUV",
               "Hatchback",
               "MiniBus",
-              "TempoTraveller",
+              "Tempo Traveller",
             ].map((type) => (
               <button
                 key={type}
@@ -132,63 +132,65 @@ export default function TaxiArchive({ taxis }: { taxis: any }) {
             </div>
           </div>
 
-          {/* Taxi Cards */}
-
-          {filteredTaxis.map((taxi: any) => (
-            <motion.div
-              key={taxi._id}
-              whileHover={{ y: -6 }}
-              className="bg-white rounded-3xl shadow-lg p-6 flex flex-col lg:flex-row items-center justify-between gap-8" // Increased gap to 8
-            >
-              {/* Taxi Info - Removed inner border and padding to give content room */}
-              <div className="flex flex-col sm:flex-row items-start sm:items-center gap-6 flex-1 w-full">
-                {/* Image Container - Larger on desktop to avoid looking "tiny" */}
-                <div className="relative w-full sm:w-44 h-48 sm:h-28 rounded-2xl overflow-hidden shrink-0 shadow-sm">
-                  <Image
-                    src={taxi.image}
-                    alt={taxi.alt}
-                    fill
-                    loading="lazy"
-                    className="object-cover"
-                  />
-                </div>
-
-                {/* Content Area - Uses more horizontal space */}
-                <div className="flex-1">
-                  <div className="flex flex-wrap items-center gap-3">
-                    <h3 className="font-bold text-xl md:text-2xl text-gray-800 tracking-tight">
-                      {taxi.title}
-                    </h3>
-                    <span className="text-xs font-semibold px-3 py-1 rounded-full bg-green-100 text-green-700 uppercase tracking-wider">
-                      {taxi.cabType}
-                    </span>
+          <div className="flex flex-col gap-7 max-h-137.5 overflow-y-scroll no-scrollbar">
+            {/* Taxi Cards */}
+            {filteredTaxis.map((taxi: any) => (
+              <motion.div
+                key={taxi._id}
+                whileHover={{ y: -6 }}
+                className="bg-white rounded-3xl shadow-lg p-6 flex flex-col lg:flex-row items-center justify-between gap-8" // Increased gap to 8
+              >
+                {/* Taxi Info - Removed inner border and padding to give content room */}
+                <div className="flex flex-col sm:flex-row items-start sm:items-center gap-6 flex-1 w-full">
+                  {/* Image Container - Larger on desktop to avoid looking "tiny" */}
+                  <div className="relative w-full sm:w-44 h-48 sm:h-28 rounded-2xl overflow-hidden shrink-0 shadow-sm">
+                    <Image
+                      src={taxi.image}
+                      alt={taxi.alt}
+                      fill
+                      loading="lazy"
+                      className="object-cover"
+                    />
                   </div>
 
-                  {/* Metadata - More spacing and slightly larger icons */}
-                  <div className="flex gap-8 text-gray-500 font-medium mt-4">
-                    <span className="flex items-center gap-2">
-                      <Users size={18} className="text-amber-500" />
-                      {taxi.seats} Seats
-                    </span>
-                    <span className="flex items-center gap-2">
-                      <Fuel size={18} className="text-amber-500" />
-                      {taxi.fuelType}
-                    </span>
+                  {/* Content Area - Uses more horizontal space */}
+                  <div className="flex-1">
+                    <div className="flex flex-wrap items-center gap-3">
+                      <h3 className="font-bold text-xl md:text-2xl text-gray-800 tracking-tight">
+                        {taxi.title}
+                      </h3>
+                      <span className="text-xs font-semibold px-3 py-1 rounded-full bg-green-100 text-green-700 uppercase tracking-wider">
+                        {taxi.cabType}
+                      </span>
+                    </div>
+
+                    {/* Metadata - More spacing and slightly larger icons */}
+                    <div className="flex gap-8 text-gray-500 font-medium mt-4">
+                      <span className="flex items-center gap-2">
+                        <Users size={18} className="text-amber-500" />
+                        {taxi.seats} Seats
+                      </span>
+                      <span className="flex items-center gap-2">
+                        <Fuel size={18} className="text-amber-500" />
+                        {taxi.fuelType}
+                      </span>
+                    </div>
                   </div>
                 </div>
-              </div>
 
-              {/* Price & Action Section - Grouped for better alignment on desktop */}
-              <div className="flex flex-row lg:flex-col items-center lg:items-end justify-between w-full lg:w-auto pt-6 lg:pt-0 border-t lg:border-t-0 border-gray-100">
-                <div className="lg:text-right">
-                  <p className="text-3xl font-extrabold text-amber-600">
-                    ₹{taxi.basePrice}
-                  </p>
-                  <p className="text-sm text-gray-400 font-medium">per trip</p>
-                </div>
-                <Link href={`taxi/review/${taxi._id}`}>
-                <button
-                  className="mt-0 lg:mt-4
+                {/* Price & Action Section - Grouped for better alignment on desktop */}
+                <div className="flex flex-row lg:flex-col items-center lg:items-end justify-between w-full lg:w-auto pt-6 lg:pt-0 border-t lg:border-t-0 border-gray-100">
+                  <div className="lg:text-right">
+                    <p className="text-3xl font-extrabold text-amber-600">
+                      ₹{taxi.basePrice}
+                    </p>
+                    <p className="text-sm text-gray-400 font-medium">
+                      per trip
+                    </p>
+                  </div>
+                  <Link href={`taxi/review/${taxi._id}`}>
+                    <button
+                      className="mt-0 lg:mt-4
                             px-8
                             py-3
                             rounded-full
@@ -203,13 +205,14 @@ export default function TaxiArchive({ taxis }: { taxis: any }) {
                             transition-all
                             cursor-pointer
                           "
-                >
-                  Select Cab
-                </button>
-                </Link>
-              </div>
-            </motion.div>
-          ))}
+                    >
+                      Select Cab
+                    </button>
+                  </Link>
+                </div>
+              </motion.div>
+            ))}
+          </div>
         </div>
       </div>
     </section>

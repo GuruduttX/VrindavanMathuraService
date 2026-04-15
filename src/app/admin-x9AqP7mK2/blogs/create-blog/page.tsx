@@ -74,6 +74,18 @@ export default function CreateNewBlog() {
       return false;
     }
 
+    if(form.slug){
+       toast.error("Slug is required");
+       return;
+    }
+
+     const result = await getBlogBySlug(form.slug);
+
+      if (result?.exists){
+        toast.error("Slug already exists");
+        return false;
+      }
+
 
     try {
 
@@ -92,6 +104,29 @@ export default function CreateNewBlog() {
 
     return true;
   };
+
+    const getBlogBySlug = async (slug: string) => {
+      try {
+        const res = await fetch(
+          `${process.env.NEXT_PUBLIC_URL}/api/admin/blogs/check-slug?slug=${slug}`
+        );
+
+        if (res.status === 404) {
+          return { exists: false };
+        }
+
+        const data = await res.json();
+
+        return {
+          exists: true,
+          data: data.data || data, // handle both formats
+        };
+
+      } catch (error) {
+        console.error("Slug check error:", error);
+        return { exists: false };
+      }
+};
 
 
   const handleSave = async (
@@ -132,7 +167,7 @@ export default function CreateNewBlog() {
 
     try {
 
-      const res = await fetch("${process.env.NEXT_PUBLIC_URL}/api/admin/blog", {
+      const res = await fetch(`${process.env.NEXT_PUBLIC_URL}/api/admin/blog`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json"
@@ -176,6 +211,17 @@ export default function CreateNewBlog() {
 
   const SaveDraft = async () => {
 
+    if(form.slug){
+
+    const result = await getBlogBySlug(form.slug);
+
+      if (result?.exists){
+        toast.error("Slug already exists");
+        return false;
+      }
+    }
+
+
     const payload = {
       title: form.title,
       category: form.category,
@@ -196,6 +242,13 @@ export default function CreateNewBlog() {
       status : "draft",
       faqs
     };
+
+     const result = await getBlogBySlug(form.slug);
+
+      if (result?.exists){
+        toast.error("Slug already exists");
+        return false;
+      }
 
     try {
 

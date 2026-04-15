@@ -3,6 +3,8 @@
 import { useEffect, useState } from "react";
 import Link from "next/link";
 import { LayoutGrid, Table } from "lucide-react";
+import toast from "react-hot-toast";
+import DeleteConfirmModal from "@/utils/Admin/DeleteConfirmModal";
 
 /* ------------------ Types ------------------ */
 interface Taxi {
@@ -26,6 +28,12 @@ export default function TaxiPage() {
   const [taxis, setTaxis] = useState<Taxi[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
+  const [open, setOpen] = useState(false);
+  const [selectedId, setSelectedId] = useState<string | null>(null);
+
+  const [taxiStatus, setTaxiStatus] = useState("All Status");
+
+
 
   const getTaxis = async () => {
     try {
@@ -48,6 +56,28 @@ export default function TaxiPage() {
     }
   };
 
+ const handleDelete = async () => {
+   if (!selectedId) return;
+
+   try {
+     const res = await fetch(
+       `${process.env.NEXT_PUBLIC_URL}/api/admin/taxi/${selectedId}`,
+       {
+         method: "DELETE",
+       },
+     );
+
+     const data = await res.json();
+     if (!data.success) throw new Error(data.message);
+
+     setTaxis((prev) => prev.filter((p) => p._id !== selectedId));
+     toast.success("Deleted successfully");
+     setOpen(false);
+   } catch (err: any) {
+     toast.error(err.message);
+   }
+  };
+
   useEffect(() => {
     getTaxis();
   }, []);
@@ -64,7 +94,12 @@ export default function TaxiPage() {
     const matchFuel =
       fuelFilter === "all" || taxi.fuelType === fuelFilter;
 
-    return matchSearch && matchType && matchFuel;
+    const status  =
+         taxiStatus ==='All Status' || taxi.status === taxiStatus;
+
+
+
+    return matchSearch && matchType && matchFuel &&  status;
   });
 
   /* ------------------ Stats ------------------ */
@@ -76,6 +111,11 @@ export default function TaxiPage() {
 
   return (
     <section className="min-h-screen">
+      <DeleteConfirmModal
+        open={open}
+        onConfirm={handleDelete}
+        onCancel={() => setOpen(false)}
+      />
 
       {/* HEADER */}
       <div className="mb-6">
@@ -96,7 +136,6 @@ export default function TaxiPage() {
 
       {/* CONTROLS */}
       <div className="flex flex-wrap gap-3 mb-6">
-
         <input
           placeholder="Search taxi..."
           value={search}
@@ -129,6 +168,17 @@ export default function TaxiPage() {
           <option value="Electric">Electric</option>
         </select>
 
+           {/* Cab Type */}
+        <select
+          value={taxiStatus}
+          onChange={(e) => setTaxiStatus(e.target.value)}
+          className="px-3 py-2 bg-pink-950/40 border border-pink-900/40 rounded-lg text-pink-200"
+        >
+          <option value="All Status">All Status</option>
+          <option value="published">Published</option>
+          <option value="draft">Draft</option>
+        </select>
+
         {/* View Toggle */}
         <div className="flex bg-pink-950/40 rounded-lg border border-pink-900/40">
           <button onClick={() => setView("card")} className="px-3 py-2">
@@ -152,19 +202,35 @@ export default function TaxiPage() {
       {error && <p className="text-red-400">{error}</p>}
 
       {/* CONTENT */}
-      {!loading && !error && (
-        view === "card" ? (
-          <TaxiCards taxis={filteredTaxi} />
+      {!loading &&
+        !error &&
+        (view === "card" ? (
+          <TaxiCards
+            taxis={filteredTaxi}
+            setOpen={setOpen}
+            setSelectedId={setSelectedId}
+          />
         ) : (
-          <TaxiTable taxis={filteredTaxi} />
-        )
-      )}
+          <TaxiTable
+            taxis={filteredTaxi}
+            setOpen={setOpen}
+            setSelectedId={setSelectedId}
+          />
+        ))}
     </section>
   );
 }
 
 /* ------------------ CARD VIEW ------------------ */
-function TaxiCards({ taxis }: { taxis: Taxi[] }) {
+function TaxiCards({
+  taxis,
+  setSelectedId,
+  setOpen,
+}: {
+  taxis: Taxi[];
+  setOpen: (open:boolean)=> void,
+  setSelectedId: (id: string)=> void
+}) {
   return (
     <div
       className="grid gap-6"
@@ -183,17 +249,13 @@ function TaxiCards({ taxis }: { taxis: Taxi[] }) {
           />
 
           <div className="p-4">
-            <h3 className="text-pink-100 font-semibold">
-              {taxi.title}
-            </h3>
+            <h3 className="text-pink-100 font-semibold">{taxi.title}</h3>
 
             <p className="text-xs text-pink-400 mt-1">
               🚗 {taxi.cabType} • ⛽ {taxi.fuelType}
             </p>
 
-            <p className="text-xs text-pink-400">
-              👥 {taxi.seats} Seats
-            </p>
+            <p className="text-xs text-pink-400">👥 {taxi.seats} Seats</p>
 
             <p className="text-pink-300 font-semibold mt-2">
               ₹ {taxi.basePrice} / trip
@@ -207,7 +269,13 @@ function TaxiCards({ taxis }: { taxis: Taxi[] }) {
                 Edit
               </Link>
 
-              <button className="flex-1 py-2 bg-red-900/20 rounded text-red-400">
+              <button
+                onClick={() => {
+                  setSelectedId(taxi._id);
+                  setOpen(true);
+                }}
+                className="flex-1 py-2 bg-red-900/20 rounded text-red-400"
+              >
                 Delete
               </button>
             </div>
@@ -219,7 +287,15 @@ function TaxiCards({ taxis }: { taxis: Taxi[] }) {
 }
 
 /* ------------------ TABLE VIEW ------------------ */
-function TaxiTable({ taxis }: { taxis: Taxi[] }) {
+function TaxiTable({
+  taxis,
+  setSelectedId,
+  setOpen,
+}: {
+  taxis: Taxi[];
+  setOpen: (open: boolean) => void;
+  setSelectedId: (id: string) => void;
+}) {
   return (
     <div className="overflow-x-auto border border-pink-900/40 rounded-xl">
       <table className="w-full text-sm text-pink-200">

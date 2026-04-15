@@ -74,8 +74,6 @@ export const deleteAdminHotelService = async (id: string) => {
 export async function getAdminHotelBySlugService(slug : string){
      await connectDB();
      const tour = await Hotel.findOne({slug : slug});
-      if (!tour) {
-        throw new Error("Tour not found");
-      }
+      
      return tour;
 }

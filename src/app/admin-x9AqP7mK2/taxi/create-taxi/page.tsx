@@ -79,10 +79,10 @@ export default function CreateNewTaxi() {
 
     const payload = {
       title: form.name,
-      seats: form.seat,
+      seats: Number(form.seat),
       cabType: form.cabtype,
       fuelType: form.fueltype,
-      basePrice: form.price,
+      basePrice: Number(form.price),
       image: form.image,
       alt: form.alt,
       inclusions: inclusions,
@@ -103,7 +103,7 @@ export default function CreateNewTaxi() {
       const data = await res.json();
 
       if (!data.success) {
-        toast.error(data.error || "Failed to publish Taxi");
+        toast.error( "Failed to publish Taxi");
         return;
       }
 
@@ -138,10 +138,10 @@ export default function CreateNewTaxi() {
 
      const payload = {
       title: form.name,
-      seats: form.seat,
+      seats: Number(form.seat),
       cabType: form.cabtype,
       fuelType: form.fueltype,
-      basePrice: form.price,
+      basePrice: Number(form.price),
       image: form.image,
       alt: form.alt,
       inclusions: inclusions,
@@ -163,7 +163,7 @@ export default function CreateNewTaxi() {
 
       if (!data.success) {
         console.log(data.error);
-        toast.error(data.error || "Failed to Draft Taxi");
+        toast.error( "Failed to Draft Taxi");
         return;
       }
       

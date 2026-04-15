@@ -11,6 +11,8 @@ import FaqHandler from "@/components/Admin/CMS/FaqHandler";
 import CMSContentSection from "@/components/Admin/CMS/CMSContentSection";
 import PoojaMeta from "@/components/Admin/PoojaEditor/PoojaMeta";
 import PoojaPricing from "@/components/Admin/PoojaEditor/PoojaPricing";
+import BenefitsHandler from "@/components/Admin/PoojaEditor/BenefitsHandler";
+import Testimonials from "@/components/Admin/PackageEditor/Testimonials";
 
 const inputClass = `
   mt-2 w-full px-5 py-3 rounded-xl
@@ -31,6 +33,17 @@ const locations = [
 ];
 
 type FAQ = { id: string; question: string; answer: string };
+export type TestimonialType = {
+  id: string;
+  name: string;
+  description: string;
+  rating: string;
+};
+
+export type BenefitType =  {
+  id: string,
+  description: string
+}
 
 export default function CreatePoojaPage() {
 
@@ -52,7 +65,6 @@ export default function CreatePoojaPage() {
     schemaTitle: "",
     schemaDescription: "",
     status: "",
-    reviews : "",
     category : ""
     
   });
@@ -61,13 +73,16 @@ export default function CreatePoojaPage() {
     { id: crypto.randomUUID(), question: "", answer: "" },
   ]);
 
+
   const [loading, setLoading] = useState(false);
+  const [testimonials, setTestimonials] = useState<TestimonialType[]>([{ id: crypto.randomUUID(), name: "", description: "", rating: "" }]);
+  
 
   const updateForm = (field: string, value: string) => {
     setForm((prev) => ({ ...prev, [field]: value }));
   };
 
-  /* ---------------- PAYLOAD ---------------- */
+  /* PAYLOAD  */
   const buildPayload = (status: "published" | "draft") => ({
     title: form.title,
     slug: form.slug,
@@ -79,7 +94,7 @@ export default function CreatePoojaPage() {
     discountPrice: Number(form.discountPrice),
 
     rating: form.rating,
-    reviews : form.reviews,
+    reviews : testimonials,
 
     metaData : {
         title : form.metaTitle,
@@ -106,8 +121,32 @@ export default function CreatePoojaPage() {
     status,
   });
 
+   const getPoojaBySlug = async (slug: string) => {
+  try {
+    const res = await fetch(
+      `${process.env.NEXT_PUBLIC_URL}/api/admin/pooja/check-slug?slug=${slug}`
+    );
+
+    if (res.status === 404) {
+      return { exists: false };
+    }
+
+    const data = await res.json();
+
+    return {
+      exists: true,
+      data: data.data || data, // handle both formats
+    };
+
+  } catch (error) {
+    console.error("Slug check error:", error);
+    return { exists: false };
+  }
+};
+
   /* ---------------- API ---------------- */
   const postData = async (payload: any) => {
+
     const res = await fetch(`${process.env.NEXT_PUBLIC_URL}/api/admin/pooja`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
@@ -127,12 +166,31 @@ export default function CreatePoojaPage() {
       return;
     }
 
+     if (!form.slug) {
+        toast.error("Package slug is required");
+        return ;
+      }
+
+   if (form.subContent && form.subContent.length > 200) {
+      toast.error("SubContent should be less than 200 characters");
+      return;
+    }
+    
+     
+      const result = await getPoojaBySlug(form.slug);
+    
+      if (result?.exists) {
+          toast.error("Slug already exists");
+          return;
+      }
+      
+
     setLoading(true);
     try {
       await postData(buildPayload("published"));
       toast.success("Pooja Published ");
     } catch (err: any) {
-      toast.error(err.message);
+      toast.error(err.message || "Failed To Publish");
     } finally {
       setLoading(false);
     }
@@ -144,12 +202,24 @@ export default function CreatePoojaPage() {
       return;
     }
 
+    if (form.slug) {
+    
+  
+
+ 
+  const result =  await getPoojaBySlug(form.slug);
+
+  if (result?.exists) {
+      toast.error("Slug already exists");
+      return false;
+  }}
+
     setLoading(true);
     try {
       await postData(buildPayload("draft"));
       toast.success("Draft Saved ✨");
     } catch (err: any) {
-      toast.error(err.message);
+      toast.error(err.message || "Failed to Save in Draft");
     } finally {
       setLoading(false);
     }
@@ -162,27 +232,24 @@ export default function CreatePoojaPage() {
       style={{ background: "#1a0b11" }}
     >
       <form onSubmit={handlePublish} className="space-y-6">
-
         <CMSHeader editorType="Pooja" />
-         <PoojaMeta
+        <PoojaMeta
           title={form.title}
           temple={form.temple}
           location={form.location}
           slug={form.slug}
+          rating={form.rating}
+          duration={form.duration}
           updateForm={updateForm}
         />
-        
-        
 
-       <PoojaPricing
+        <PoojaPricing
           category={form.category}
           price={form.price}
           discountPrice={form.discountPrice}
           updateForm={updateForm}
         />
 
-        
-      
         {/* MEDIA */}
         <CMSMediaSection
           image={form.image}
@@ -190,9 +257,17 @@ export default function CreatePoojaPage() {
           onChange={updateForm}
           editorType="Pooja"
         />
+        
 
         {/* FAQ */}
         <FaqHandler faqs={faqs} setFaqs={setFaqs} editorType="Pooja" />
+
+        {/* Testimotionals */}
+        <Testimonials
+          testimonials={testimonials}
+          setTestimonials={setTestimonials}
+          editorType="Package"
+        />
 
         {/* SEO */}
         <CMSSeoSection
@@ -202,10 +277,12 @@ export default function CreatePoojaPage() {
           editorType="Pooja"
         />
 
-        <CMSContentSection subContent={form.subContent} content={form.content} onChange={updateForm} editorType="Blog" />
-
-        
-        
+        <CMSContentSection
+          subContent={form.subContent}
+          content={form.content}
+          onChange={updateForm}
+          editorType="Blog"
+        />
 
         {/* SCHEMA */}
         <CMSSchema
@@ -222,7 +299,6 @@ export default function CreatePoojaPage() {
           onSaveDraft={handleDraft}
           loading={loading}
         />
-
       </form>
     </div>
   );

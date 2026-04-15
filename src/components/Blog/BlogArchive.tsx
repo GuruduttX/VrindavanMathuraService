@@ -146,42 +146,9 @@ const BlogArchive = () => {
             <div className="mx-auto w-full px-6 ">
                 {/* BreadCrumb */}
 
-                <div className='flex sm:flex-row  flex-col sm:items-center gap-10 mb-2'>
-                    <nav aria-label="Breadcrumb" className="text-sm text-gray-400 mb-6 pl-5 md:pl-8 lg:pl-10 xl:pl-20 bg-white max-w-sm -mt-9">
-                        <Link href="/" className="hover:text-blue-500 transition">
-                            Home
-                        </Link>
-                        <span className="mx-2">/</span>
-                        <Link href={"/stories/blogs"} className="text-gray-600 font-medium ">
-                            Blog
-                        </Link>
-                    </nav>
-                    {/* <SearchBar blogs={blogs} /> */}
-
-                </div>
+                
 
 
-                {/* Filters Category */}
-                <div className="w-full flex no-scrollbar overflow-y-auto items-center gap-3 pl-2 sm:pl-2 md:pl-1 lg:pl-3 xl:pl-15 mb-8">
-                    {/* Categories */}
-                    {categories.map((cat) => (
-                        <button
-                            key={cat}
-                            onClick={() => {
-                                setActiveCategory(cat);
-                                setSelectedAuthor("");
-                            }}
-                            className={`px-4 py-2 rounded-full text-xs font-medium transition shadow-sm
-                            whitespace-nowrap flex-shrink-0 w-fit cursor-pointer ${activeCategory === cat
-                                    ? "bg-orange-100 text-black"
-                                    : "bg-slate-100 text-slate-700 hover:bg-orange-100"
-                                }`}
-                        >
-                            {cat}
-                        </button>
-                    ))}
-
-                </div>
 
 
                 {/* Author Dropdown */}

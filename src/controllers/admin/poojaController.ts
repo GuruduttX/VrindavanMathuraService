@@ -18,11 +18,11 @@ export async function getAdminPoojasController(){
 export async function createAdminPoojaController(req: Request) {
   try {
     const body = await req.json(); 
-
     const result = poojaSchema.safeParse(body);
 
     if(!result.success){
-       return Response.json({success: false, error : result.error.flatten()}, {status : 400});
+       console.log(result)
+       return Response.json({success: false, errors : result.error.flatten()}, {status : 400});
     }
 
     const poojaData = result.data;
@@ -50,7 +50,8 @@ export async function updateAdminPoojaController(
   params: { id: string }
 ) {
   try {
-    const body = await req.json();   
+    const body = await req.json();
+    // console.log(body, "before zod data")
     const result = poojaSchema.safeParse(body);
 
     if(!result.success){
@@ -58,8 +59,8 @@ export async function updateAdminPoojaController(
     }
 
     const poojaData = result.data;
-
-    const { id } = params;  
+    // console.log(poojaData, "zod validated data")
+    const { id } =  params;  
     
     
 

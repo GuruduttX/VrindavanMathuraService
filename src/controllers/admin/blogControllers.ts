@@ -102,10 +102,11 @@ export const updateAdminBlogController = async (req: Request, id: string) => {
     try {
 
         const body = await req.json();
-
+        console.log(body.faqs, "this is blog faqs")
         if(!id){
             return Response.json({success : false, error : 'Id is required'}, {status : 400})
         }
+        
         const result = blogSchema.safeParse(body);
 
         if(!result.success){

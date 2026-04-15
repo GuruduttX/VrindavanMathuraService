@@ -18,9 +18,12 @@ export const createAdminTaxiController = async (req: Request) => {
     try {
         const body =  await req.json();
 
+        console.log(body);
+
         const result = taxiSchema.safeParse(body);
         
         if(!result.success){
+            console.log("Result", result);
             return Response.json({success : false, error : result.error.flatten()}
         ,{status : 400})
         }
@@ -126,9 +129,11 @@ export const updateAdminTaxiController = async (req: Request, id: string) => {
 
         const body =  await req.json();
 
+        console.log("body", body);
         const result = taxiSchema.safeParse(body);
         
         if(!result.success){
+            console.log("Result", result)
             return Response.json({success : false, error : result.error.flatten()}
         ,{status : 400})
         }
@@ -142,6 +147,7 @@ export const updateAdminTaxiController = async (req: Request, id: string) => {
             data: taxi,
         });
     } catch (error: any) {
+        console.log(error);
         return NextResponse.json(
             {
                 success: false,

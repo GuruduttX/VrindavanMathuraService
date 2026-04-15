@@ -46,9 +46,7 @@ export async function getAdminPackageByIdService(id : string) {
 export async function getPackageBySlugServices(slug : string){
      await connectDB();
      const tour = await TourPackageModel.findOne({slug : slug});
-      if (!tour) {
-        throw new Error("Tour not found");
-      }
+     
      return tour;
 }
 
