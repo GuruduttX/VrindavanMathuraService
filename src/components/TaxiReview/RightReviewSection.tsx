@@ -24,10 +24,6 @@ const RightReviewSection = ({ taxi }: RightReviewSectionProps) => {
                         <span>{`₹${taxi.basePrice}`}</span>
                     </div>
 
-                    <div className="flex justify-between">
-                        <span>Distance</span>
-                        <span>150 km</span>
-                    </div>
 
                     <div className="flex justify-between">
                         <span>Taxes</span>
@@ -40,7 +36,7 @@ const RightReviewSection = ({ taxi }: RightReviewSectionProps) => {
 
                 <div className="flex justify-between font-semibold text-lg">
                     <span>Total</span>
-                    <span className="text-amber-600">₹3000</span>
+                    <span className="text-amber-600">{taxi.basePrice}</span>
                 </div>
 
                 <button className="mt-6 w-full bg-gradient-to-r from-amber-500 to-orange-600 text-white py-3 rounded-xl font-medium hover:scale-105 transition">

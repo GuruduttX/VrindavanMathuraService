@@ -11,6 +11,8 @@ import FaqHandler from "@/components/Admin/CMS/FaqHandler";
 import CMSContentSection from "@/components/Admin/CMS/CMSContentSection";
 import PoojaMeta from "@/components/Admin/PoojaEditor/PoojaMeta";
 import PoojaPricing from "@/components/Admin/PoojaEditor/PoojaPricing";
+import BenefitsHandler from "@/components/Admin/PoojaEditor/BenefitsHandler";
+import Testimonials from "@/components/Admin/PackageEditor/Testimonials";
 
 const inputClass = `
   mt-2 w-full px-5 py-3 rounded-xl
@@ -31,6 +33,17 @@ const locations = [
 ];
 
 type FAQ = { id: string; question: string; answer: string };
+export type TestimonialType = {
+  id: string;
+  name: string;
+  description: string;
+  rating: string;
+};
+
+export type BenefitType =  {
+  id: string,
+  description: string
+}
 
 export default function CreatePoojaPage() {
 
@@ -52,7 +65,6 @@ export default function CreatePoojaPage() {
     schemaTitle: "",
     schemaDescription: "",
     status: "",
-    reviews : "",
     category : ""
     
   });
@@ -61,7 +73,11 @@ export default function CreatePoojaPage() {
     { id: crypto.randomUUID(), question: "", answer: "" },
   ]);
 
+  const [benefits, setBenefits] = useState<BenefitType[]>([]);
+
   const [loading, setLoading] = useState(false);
+  const [testimonials, setTestimonials] = useState<TestimonialType[]>([{ id: crypto.randomUUID(), name: "", description: "", rating: "" }]);
+  
 
   const updateForm = (field: string, value: string) => {
     setForm((prev) => ({ ...prev, [field]: value }));
@@ -79,7 +95,7 @@ export default function CreatePoojaPage() {
     discountPrice: Number(form.discountPrice),
 
     rating: form.rating,
-    reviews : form.reviews,
+    reviews : testimonials,
 
     metaData : {
         title : form.metaTitle,
@@ -104,10 +120,12 @@ export default function CreatePoojaPage() {
 
     faqs,
     status,
+    benefits
   });
 
   /* ---------------- API ---------------- */
   const postData = async (payload: any) => {
+
     const res = await fetch(`${process.env.NEXT_PUBLIC_URL}/api/admin/pooja`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
@@ -162,27 +180,24 @@ export default function CreatePoojaPage() {
       style={{ background: "#1a0b11" }}
     >
       <form onSubmit={handlePublish} className="space-y-6">
-
         <CMSHeader editorType="Pooja" />
-         <PoojaMeta
+        <PoojaMeta
           title={form.title}
           temple={form.temple}
           location={form.location}
           slug={form.slug}
+          rating={form.rating}
+          duration={form.duration}
           updateForm={updateForm}
         />
-        
-        
 
-       <PoojaPricing
+        <PoojaPricing
           category={form.category}
           price={form.price}
           discountPrice={form.discountPrice}
           updateForm={updateForm}
         />
 
-        
-      
         {/* MEDIA */}
         <CMSMediaSection
           image={form.image}
@@ -190,9 +205,17 @@ export default function CreatePoojaPage() {
           onChange={updateForm}
           editorType="Pooja"
         />
+        
 
         {/* FAQ */}
         <FaqHandler faqs={faqs} setFaqs={setFaqs} editorType="Pooja" />
+
+        {/* Testimotionals */}
+        <Testimonials
+          testimonials={testimonials}
+          setTestimonials={setTestimonials}
+          editorType="Package"
+        />
 
         {/* SEO */}
         <CMSSeoSection
@@ -202,10 +225,12 @@ export default function CreatePoojaPage() {
           editorType="Pooja"
         />
 
-        <CMSContentSection subContent={form.subContent} content={form.content} onChange={updateForm} editorType="Blog" />
-
-        
-        
+        <CMSContentSection
+          subContent={form.subContent}
+          content={form.content}
+          onChange={updateForm}
+          editorType="Blog"
+        />
 
         {/* SCHEMA */}
         <CMSSchema
@@ -222,7 +247,6 @@ export default function CreatePoojaPage() {
           onSaveDraft={handleDraft}
           loading={loading}
         />
-
       </form>
     </div>
   );

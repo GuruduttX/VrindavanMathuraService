@@ -23,6 +23,8 @@ type Props = {
   temple: string;
   location: string;
   slug: string;
+  rating: string;
+  duration: string
   updateForm: (field: string, value: string) => void;
 };
 
@@ -31,11 +33,12 @@ export default function PoojaMeta({
   temple,
   location,
   slug,
+  rating,
+  duration,
   updateForm,
 }: Props) {
   return (
     <div className="space-y-6">
-
       {/* TITLE */}
       <div>
         <label className="text-sm text-pink-300/70">Pooja Title</label>
@@ -86,6 +89,27 @@ export default function PoojaMeta({
         />
       </div>
 
+      {/* RATING */}
+      <div>
+        <label className="text-sm text-pink-300/70">rating ⭐️</label>
+        <input
+          type="number"
+          value={rating}
+          onChange={(e) => updateForm("rating", e.target.value)}
+          className={inputClass}
+          placeholder="rating for this Pooja"
+        />
+      </div>
+      {/* DURATION */}
+      <div>
+        <label className="text-sm text-pink-300/70">Duration</label>
+        <input
+          value={duration}
+          onChange={(e) => updateForm("duration", e.target.value)}
+          className={inputClass}
+          placeholder="Duration of this Pooja"
+        />
+      </div>
     </div>
   );
 }

@@ -4,6 +4,8 @@ import { useState, useEffect } from "react";
 import Link from "next/link";
 import { LayoutGrid, Table } from "lucide-react";
 import { IBlog } from "@/types/blogTypes";
+import toast from "react-hot-toast";
+import DeleteConfirmModal from "@/utils/Admin/DeleteConfirmModal";
 
 
 export const BLOG_CATEGORIES = [
@@ -60,12 +62,13 @@ export const BLOG_CATEGORIES = [
 
 /* ------------------ Page ------------------ */
 export default function BlogsPage() {
-
   const [view, setView] = useState<"card" | "table">("card");
   const [search, setSearch] = useState("");
   const [statusFilter, setStatusFilter] = useState("all");
   const [categoryFilter, setCategoryFilter] = useState("all");
   const [sort, setSort] = useState("latest");
+  const [selectedId, setSelectedId] = useState("");
+  const [open, setOpen] = useState(false);
 
   const [blogs, setBlogs] = useState<IBlog[]>([]);
   const [loading, setLoading] = useState(true);
@@ -76,7 +79,7 @@ export default function BlogsPage() {
       setLoading(true);
 
       const res = await fetch(`${process.env.NEXT_PUBLIC_URL}/api/admin/blog`, {
-        cache: "no-store"
+        cache: "no-store",
       });
 
       const data = await res.json();
@@ -84,7 +87,6 @@ export default function BlogsPage() {
       if (data.success) {
         setBlogs(data.data);
       }
-
     } catch (error) {
       console.error("Blog fetch error:", error);
     } finally {
@@ -100,8 +102,7 @@ export default function BlogsPage() {
 
   const filteredBlogs = blogs
     .filter((blog) => {
-
-      const matchesSearch = blog.title
+      const matchesSearch = blog.title 
         .toLowerCase()
         .includes(search.toLowerCase());
 
@@ -112,49 +113,64 @@ export default function BlogsPage() {
         categoryFilter === "all" || blog.category === categoryFilter;
 
       return matchesSearch && matchesStatus && matchesCategory;
-
     })
     .sort((a, b) => {
-
       return sort === "latest"
         ? new Date(b.createdAt!).getTime() - new Date(a.createdAt!).getTime()
         : new Date(a.createdAt!).getTime() - new Date(b.createdAt!).getTime();
-
     });
+
+  /* ------------------ DELETE Blog ------------------ */
+  const handleDelete = async () => {
+    if (!selectedId) return;
+
+    try {
+      const res = await fetch(
+        `${process.env.NEXT_PUBLIC_URL}/api/admin/blog/${selectedId}`,
+        {
+          method: "DELETE",
+        },
+      );
+
+      const data = await res.json();
+      if (!data.success) throw new Error(data.message);
+
+      setBlogs((prev) => prev.filter((p) => p._id.toString() !== selectedId));
+      toast.success("Deleted successfully");
+      setOpen(false);
+    } catch (err: any) {
+      toast.error(err.message);
+    }
+  };
 
   /* ------------------ Stats ------------------ */
 
   const total = blogs.length;
 
-  const published = blogs.filter(
-    (b) => b.status === "published"
-  ).length;
+  const published = blogs.filter((b) => b.status === "published").length;
 
-  const drafts = blogs.filter(
-    (b) => b.status === "draft"
-  ).length;
+  const drafts = blogs.filter((b) => b.status === "draft").length;
 
   /* ------------------ Loading ------------------ */
 
   if (loading) {
-    return (
-      <div className="text-pink-400">
-        Loading blogs...
-      </div>
-    );
+    return <div className="text-pink-400">Loading blogs...</div>;
   }
 
   return (
     <section className="min-h-screen">
+      <DeleteConfirmModal
+        open={open}
+        onConfirm={handleDelete}
+        onCancel={() => setOpen(false)}
+      />
 
       {/* HEADER */}
       <div className="mb-6">
         <h1 className="text-2xl font-semibold text-pink-100">
           Blog Management
         </h1>
-        <p className="text-sm text-pink-400/70">
-          Advanced CMS dashboard
-        </p>
+        <p className="text-sm text-pink-400/70">Advanced CMS dashboard</p>
       </div>
 
       {/* STATS */}
@@ -166,7 +182,6 @@ export default function BlogsPage() {
 
       {/* CONTROLS */}
       <div className="flex flex-wrap gap-3 mb-6">
-
         {/* Search */}
         <input
           placeholder="Search blogs..."
@@ -207,16 +222,26 @@ export default function BlogsPage() {
           onChange={(e) => setSort(e.target.value)}
           className="px-3 py-2 bg-pink-950/40 border border-pink-900/40 rounded-lg text-pink-200 cursor-pointer"
         >
-          <option value="latest" className="cursor-pointer">Latest</option>
-          <option value="oldest" className="cursor-pointer">Oldest</option>
+          <option value="latest" className="cursor-pointer">
+            Latest
+          </option>
+          <option value="oldest" className="cursor-pointer">
+            Oldest
+          </option>
         </select>
 
         {/* View Toggle */}
         <div className="flex bg-pink-950/40 rounded-lg border border-pink-900/40 cursor-pointer">
-          <button onClick={() => setView("card")} className="px-3 py-2 hover:bg-pink-800 cursor-pointer">
+          <button
+            onClick={() => setView("card")}
+            className="px-3 py-2 hover:bg-pink-800 cursor-pointer"
+          >
             <LayoutGrid size={16} />
           </button>
-          <button onClick={() => setView("table")} className="px-3 py-2 hover:bg-pink-800 cursor-pointer">
+          <button
+            onClick={() => setView("table")}
+            className="px-3 py-2 hover:bg-pink-800 cursor-pointer"
+          >
             <Table size={16} />
           </button>
         </div>
@@ -228,25 +253,27 @@ export default function BlogsPage() {
         >
           + Create Blog
         </Link>
-
       </div>
 
       {/* CONTENT */}
       {filteredBlogs.length === 0 ? (
         <p className="text-pink-400">No blogs found</p>
       ) : view === "card" ? (
-        <BlogCards blogs={filteredBlogs} />
+        <BlogCards
+          blogs={filteredBlogs}
+          setSelectedId={setSelectedId}
+          setOpen={setOpen}
+        />
       ) : (
         <BlogTable blogs={filteredBlogs} />
       )}
-
     </section>
   );
 }
 
 /* ------------------ Card View ------------------ */
 
-function BlogCards({ blogs }: { blogs: IBlog[] }) {
+function BlogCards({ blogs, setSelectedId, setOpen }: { blogs: IBlog[], setSelectedId: (id: string)=> void, setOpen: (open:boolean)=> void }) {
   return (
     <div
       className="grid gap-6"
@@ -303,7 +330,11 @@ function BlogCards({ blogs }: { blogs: IBlog[] }) {
               </Link>
 
               <button className="flex-1 py-2 rounded-lg text-sm
-                bg-red-900/20 text-red-400">
+                bg-red-900/20 text-red-400"
+                onClick={()=> {
+                  setSelectedId(blog._id.toString())
+                  setOpen(true);
+                }}>
                 Delete
               </button>
 

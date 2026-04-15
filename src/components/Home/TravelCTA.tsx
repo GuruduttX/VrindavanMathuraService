@@ -21,12 +21,9 @@ const trustItems = [
 ];
 
 export default function TravelCTA() {
-  const [tourOpen, setTourOpen] = useState(false);
   const [isFormOpen, setIsFormOpen] = useState(false);
-
   return (
     <>
-      <TourEnquiryPopup open={tourOpen} onClose={() => setTourOpen(false)} />
       <CommonEnquiryForm open={isFormOpen} onClose={() => setIsFormOpen(false)} defaultService="Taxi Booking" />
 
       <section className="py-10 md:py-16 px-4 sm:px-6">

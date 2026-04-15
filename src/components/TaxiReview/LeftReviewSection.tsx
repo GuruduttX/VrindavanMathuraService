@@ -40,6 +40,7 @@ interface LeftReviewSectionProps {
   taxi: Taxiinterface;
 }
 const LeftReviewSection = ({ taxi }: LeftReviewSectionProps) => {
+  console.log(taxi);
   const [form, setForm] = useState({
     name: "",
     email: "",
@@ -78,6 +79,8 @@ const LeftReviewSection = ({ taxi }: LeftReviewSectionProps) => {
       if(response.ok) {
         setSuccess(true);
         setTimeout(()=> setSuccess(false), 5000);
+        setDestination(form.drop)
+        setPickUp(form.pickUp)
         setForm({
           name: "",
           email: "",
@@ -131,56 +134,111 @@ const LeftReviewSection = ({ taxi }: LeftReviewSectionProps) => {
         <h2 className="text-lg font-semibold mb-4">Traveller Details</h2>
         <form onSubmit={handleSubmit}>
           <div className="grid md:grid-cols-2 gap-4">
-            <input
-              placeholder="Full Name"
-              name="name"
-              className="border rounded-xl px-4 py-3 focus:ring-2 focus:ring-amber-400 outline-none"
-              value={form.name}
-              onChange={handleChange}
-            />
-
-            <input
-              placeholder="Mobile Number"
-              name="phone"
-              className="border rounded-xl px-4 py-3 focus:ring-2 focus:ring-amber-400 outline-none"
-              value={form.phone}
-              onChange={handleChange}
-            />
-
-            <input
-              placeholder="Pick Up location"
-              name="pickUp"
-              className="border rounded-xl px-4 py-3 mt-4 w-full focus:ring-2 focus:ring-amber-400 outline-none"
-              value={form.pickUp}
-              onChange={handleChange}
-            />
-
-            <input
-              placeholder="Drop location"
-              name="drop"
-              className="border rounded-xl px-4 py-3 mt-4 w-full focus:ring-2 focus:ring-amber-400 outline-none"
-              value={form.drop}
-              onChange={handleChange}
-            />
-
-            <input
-              placeholder="Pick Up Time"
-              name="time"
-              className="border rounded-xl px-4 py-3 mt-4 w-full focus:ring-2 focus:ring-amber-400 outline-none"
-              value={form.time}
-              onChange={handleChange}
-            />
-
-            <input
-              placeholder="Email"
-              name="email"
-              className="border rounded-xl px-4 py-3 mt-4 w-full focus:ring-2 focus:ring-amber-400 outline-none"
-              value={form.email}
-              onChange={handleChange}
-            />
+            <div className="relative">
+              <input
+                placeholder="Full Name"
+                name="name"
+                className="peer w-full border border-gray-300 rounded-xl px-4 pt-6 pb-2 focus:outline-none focus:ring-1 focus:ring-orange-500 focus:border-orange-500 transition placeholder-transparent bg-transparent"
+                value={form.name}
+                onChange={handleChange}
+              />
+              <label
+                htmlFor="name"
+                className="absolute left-4 top-1.5 text-xs text-gray-500 transition-all pointer-events-none 
+                peer-placeholder-shown:text-base peer-placeholder-shown:top-3.5 
+                peer-focus:top-1.5 peer-focus:text-xs peer-focus:text-orange-500"
+              >
+                Full Name *
+              </label>
+            </div>
+            <div className="relative">
+              <input
+                placeholder="Mobile Number"
+                name="phone"
+                className="peer w-full border border-gray-300 rounded-xl px-4 pt-6 pb-2 focus:outline-none focus:ring-1 focus:ring-orange-500 focus:border-orange-500 transition placeholder-transparent bg-transparent"
+                value={form.phone}
+                onChange={handleChange}
+              />
+              <label
+                htmlFor="name"
+                className="absolute left-4 top-1.5 text-xs text-gray-500 transition-all pointer-events-none 
+                peer-placeholder-shown:text-base peer-placeholder-shown:top-3.5 
+                peer-focus:top-1.5 peer-focus:text-xs peer-focus:text-orange-500"
+              >
+                Phone number
+              </label>
+            </div>
+            <div className="relative">
+              <input
+                placeholder="Pick Up location"
+                name="pickUp"
+                className="peer w-full border border-gray-300 rounded-xl px-4 pt-6 pb-2 focus:outline-none focus:ring-1 focus:ring-orange-500 focus:border-orange-500 transition placeholder-transparent bg-transparent"
+                value={form.pickUp}
+                onChange={handleChange}
+              />
+              <label
+                htmlFor="name"
+                className="absolute left-4 top-1.5 text-xs text-gray-500 transition-all pointer-events-none 
+                peer-placeholder-shown:text-base peer-placeholder-shown:top-3.5 
+                peer-focus:top-1.5 peer-focus:text-xs peer-focus:text-orange-500"
+              >
+                Pickup Location
+              </label>
+            </div>
+            <div className="relative">
+              <input
+                placeholder="Drop location"
+                name="drop"
+                className="peer w-full border border-gray-300 rounded-xl px-4 pt-6 pb-2 focus:outline-none focus:ring-1 focus:ring-orange-500 focus:border-orange-500 transition placeholder-transparent bg-transparent"
+                value={form.drop}
+                onChange={handleChange}
+              />
+              <label
+                htmlFor="name"
+                className="absolute left-4 top-1.5 text-xs text-gray-500 transition-all pointer-events-none 
+                peer-placeholder-shown:text-base peer-placeholder-shown:top-3.5 
+                peer-focus:top-1.5 peer-focus:text-xs peer-focus:text-orange-500"
+              >
+                Drop Location
+              </label>
+            </div>
+            <div className="relative">
+              <input
+                placeholder="Pick Up Time"
+                name="time"
+                className="peer w-full border border-gray-300 rounded-xl px-4 pt-6 pb-2 focus:outline-none focus:ring-1 focus:ring-orange-500 focus:border-orange-500 transition placeholder-transparent bg-transparent"
+                value={form.time}
+                onChange={handleChange}
+              />
+              <label
+                htmlFor="name"
+                className="absolute left-4 top-1.5 text-xs text-gray-500 transition-all pointer-events-none 
+                peer-placeholder-shown:text-base peer-placeholder-shown:top-3.5 
+                peer-focus:top-1.5 peer-focus:text-xs peer-focus:text-orange-500"
+              >
+                Pickup Time
+              </label>
+            </div>
+            <div className="relative">
+              <input
+                placeholder="Email"
+                name="email"
+                className="peer w-full border border-gray-300 rounded-xl px-4 pt-6 pb-2 focus:outline-none focus:ring-1 focus:ring-orange-500 focus:border-orange-500 transition placeholder-transparent bg-transparent"
+                value={form.email}
+                onChange={handleChange}
+              />
+              <label
+                htmlFor="name"
+                className="absolute left-4 top-1.5 text-xs text-gray-500 transition-all pointer-events-none 
+                peer-placeholder-shown:text-base peer-placeholder-shown:top-3.5 
+                peer-focus:top-1.5 peer-focus:text-xs peer-focus:text-orange-500"
+              >
+                Email
+              </label>
+            </div>
           </div>
           {success && (
-            <p className="text-green-600 text-sm font-medium mx-auto">
+            <p className="text-green-600 text-md text-bold font-medium p-5">
               Enquiry sent successfully!
             </p>
           )}

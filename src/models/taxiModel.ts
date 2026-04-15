@@ -20,28 +20,32 @@ const taxiSchema = new Schema<ITaxi>(
 
     cabType: {
       type: String,
-      enum: ["SUV", "Sedan", "Hatchback", "TempoTraveller"],
+      enum: [
+        "SUV",
+        "Sedan",
+        "Hatchback",
+        "Tempo Traveller",
+        "Luxury",
+        "Electric",
+      ],
       required: true,
     },
 
-    status : {
-       type : String,
-       enum : ["published", "draft"],
-       required : true
-    }
-,
- 
-
+    status: {
+      type: String,
+      enum: ["published", "draft"],
+      required: true,
+    },
     fuelType: {
       type: String,
-      enum: ["Petrol", "Diesel", "Electric", "CNG"], 
+      enum: ["Petrol", "Diesel", "Electric", "CNG"],
       required: true,
     },
 
     inclusions: [
       {
         id: {
-          type: String, 
+          type: String,
           required: true,
         },
         description: {
@@ -74,7 +78,7 @@ const taxiSchema = new Schema<ITaxi>(
       required: true,
     },
   },
-  { timestamps: true }
+  { timestamps: true },
 );
 
 const Taxi =
