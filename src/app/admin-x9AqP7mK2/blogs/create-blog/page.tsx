@@ -132,7 +132,7 @@ export default function CreateNewBlog() {
 
     try {
 
-      const res = await fetch("${process.env.NEXT_PUBLIC_URL}/api/admin/blog", {
+      const res = await fetch(`${process.env.NEXT_PUBLIC_URL}/api/admin/blog`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json"

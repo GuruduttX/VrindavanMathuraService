@@ -2,6 +2,7 @@ import { z } from "zod";
 
 // sub schemas
 const faqSchema = z.object({
+  id: z.string(),
   question: z.string(),
   answer: z.string(),
 });
@@ -12,8 +13,8 @@ const metaSchema = z.object({
 });
 
 const schemaData = z.object({
-  schemaTitle: z.string(),
-  schemaDescription: z.string(),
+  title: z.string(),
+  description: z.string(),
 });
 
 export const blogSchema = z

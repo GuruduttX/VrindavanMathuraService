@@ -6,6 +6,7 @@ export interface IPooja extends Document {
 
   temple?: string;
   location?: string;
+  category?: string,
 
   price?: number;
   discountPrice?: number;
@@ -20,7 +21,19 @@ export interface IPooja extends Document {
 
   availableDays?: string[];
 
-  images?: string[];
+  heroImage?: {
+    image: string,
+    alt: string
+  };
+
+  reviews: [
+    {
+      id: string,
+      name: string,
+      description: string,
+      rating: string
+    }
+  ]
 
   isActive?: boolean;
   isFeatured?: boolean;

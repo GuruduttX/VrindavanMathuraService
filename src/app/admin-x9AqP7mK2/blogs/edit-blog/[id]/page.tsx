@@ -308,7 +308,7 @@ export default function EditBlog() {
           />
 
           <CMSActions
-            actionType="update"
+            actionType="create"
             editorType="Blog"
             onSaveDraft={handlePublish}
           />

@@ -11,8 +11,8 @@ export interface IMETA {
 }
 
 export interface ISchema {
-  schemaTitle?: string;
-  schemaDescription?: string;
+  title?: string;
+  description?: string;
 }
 
 export interface IBlog extends Document {

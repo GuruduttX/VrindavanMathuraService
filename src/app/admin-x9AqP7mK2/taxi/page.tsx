@@ -74,7 +74,7 @@ export default function TaxiPage() {
    } catch (err: any) {
      toast.error(err.message);
    }
- };
+  };
 
   useEffect(() => {
     getTaxis();
