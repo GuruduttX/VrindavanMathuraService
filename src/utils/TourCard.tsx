@@ -58,9 +58,9 @@ export default function TourCard({ tour, setOpen }: any) {
         {/* Location Chips */}
         <div className="flex flex-wrap gap-2">
           {["Lathmar Holi", "Phoolon ki Holi", "Banke Bihari Holi"].map(
-            (tag) => (
+            (tag, idx) => (
               <span
-                key={tag}
+                key={idx}
                 className="flex items-center gap-1 text-xs bg-orange-50 text-[#A84010] px-3 py-1 rounded-full"
               >
                 <MapPin size={12} />

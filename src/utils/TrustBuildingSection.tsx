@@ -46,13 +46,11 @@ const trustCards = [
 export default function TrustBuildingSection() {
   return (
     <section className="relative py-28 bg-gradient-to-b from-orange-50 via-white to-orange-50 overflow-hidden">
-
       {/* Soft Background Glow */}
       <div className="absolute -top-40 -left-40 w-96 h-96 bg-orange-200/30 blur-3xl rounded-full" />
       <div className="absolute bottom-0 right-0 w-96 h-96 bg-orange-300/20 blur-3xl rounded-full" />
 
       <div className="relative max-w-7xl mx-auto px-6">
-
         {/* HEADER */}
         <div className="text-center max-w-3xl mx-auto mb-20">
           <h2 className="text-4xl md:text-5xl font-bold text-gray-900 leading-tight">
@@ -60,16 +58,24 @@ export default function TrustBuildingSection() {
           </h2>
 
           <p className="mt-6 text-gray-600 text-lg leading-relaxed">
-            We don’t just plan trips — we guide sacred journeys across
-            Mathura & Vrindavan with integrity and devotion.
+            We don’t just plan trips — we guide sacred journeys across Mathura &
+            Vrindavan with integrity and devotion.
           </p>
 
           <div className="mt-6 h-1 w-32 mx-auto bg-gradient-to-r from-[#7A2E00] to-[#E8821A] rounded-full" />
         </div>
 
         {/* TRUST CARDS */}
-        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-8">
-
+        <div
+          className="
+            flex sm:grid sm:grid-cols-2 lg:grid-cols-3 
+            gap-4 sm:gap-8 
+            overflow-x-auto sm:overflow-visible no-scrollbar 
+            snap-x snap-mandatory sm:snap-none 
+            pb-6 sm:pb-0
+            /* Optional: Add 'scrollbar-hide' here if you have a plugin to hide the scrollbar */
+          "
+        >
           {trustCards.map((card, index) => {
             const Icon = card.icon;
 
@@ -77,6 +83,8 @@ export default function TrustBuildingSection() {
               <div
                 key={index}
                 className="
+                  flex-none w-[80vw] max-w-[320px] sm:w-auto sm:max-w-none 
+                  snap-center sm:snap-align-none
                   group relative p-8 rounded-3xl
                   bg-white/70 backdrop-blur-md
                   border border-orange-100
@@ -88,15 +96,18 @@ export default function TrustBuildingSection() {
                 "
               >
                 {/* Glow Effect on Hover */}
-                <div className="
-                  absolute inset-0 rounded-3xl
-                  bg-gradient-to-br from-orange-200/20 to-transparent
-                  opacity-0 group-hover:opacity-100
-                  transition duration-300
-                " />
+                <div
+                  className="
+                    absolute inset-0 rounded-3xl
+                    bg-gradient-to-br from-orange-200/20 to-transparent
+                    opacity-0 group-hover:opacity-100
+                    transition duration-300
+                  "
+                />
 
                 {/* Icon */}
-                <div className="
+                <div
+                  className="
                   relative z-10
                   h-14 w-14 mb-6
                   flex items-center justify-center
@@ -106,7 +117,8 @@ export default function TrustBuildingSection() {
                   shadow-md
                   transition-transform duration-300
                   group-hover:scale-110
-                ">
+                "
+                >
                   <Icon size={24} />
                 </div>
 
@@ -122,7 +134,6 @@ export default function TrustBuildingSection() {
               </div>
             );
           })}
-
         </div>
       </div>
     </section>
