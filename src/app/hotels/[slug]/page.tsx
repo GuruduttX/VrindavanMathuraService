@@ -2,10 +2,6 @@ import HotelCTA from '@/components/Home/HotelCTA'
 import GuestReviewSection from '@/components/HotelPackage/GuestReviewSection'
 import HotelFAQ from '@/components/HotelPackage/HotelFAQ'
 import HotelHero from '@/components/HotelPackage/HotelHero'
-<<<<<<< HEAD
-import HotelDetailsSection from '@/components/HotelsArchive/HotelsDetailSection'
-=======
->>>>>>> 20a9ccd9318d943aa8f7a20e9694c2663cc88b7c
 import InclusionsExclusions from '@/components/HotelPackage/InclusionExclusion'
 import LuxuryFooter from '@/utils/Footer'
 import Navbar from '@/utils/Navbar'
