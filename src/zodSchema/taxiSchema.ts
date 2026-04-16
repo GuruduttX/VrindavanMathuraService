@@ -8,7 +8,7 @@ const inclusionSchema = z.object({
 
 const exclusionSchema = z.object({
   id : z.string().optional(),
-  exclusion: z.string().optional(),
+  description: z.string().optional(),
 });
 
 // enums

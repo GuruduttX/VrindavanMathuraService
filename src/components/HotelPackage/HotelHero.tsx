@@ -18,7 +18,7 @@ export default function HotelDetailsHero({ HotelData }: { HotelData: any }) {
   return (
     <>
 
-      <section className="relative pt-30 pb-15 bg-gradient-to-br from-amber-50 via-yellow-50 to-orange-100 px-30">
+      <section className="relative pt-30 pb-15 bg-gradient-to-br from-amber-50 via-yellow-50 to-orange-100 px-2 sm:px-px-12 md:px-30">
 
         <div className="absolute bottom-0 left-0 w-full overflow-hidden leading-none pointer-events-none">
           <svg
@@ -38,16 +38,18 @@ export default function HotelDetailsHero({ HotelData }: { HotelData: any }) {
         <div className="absolute top-0 left-0 w-96 h-96 bg-orange-200 rounded-full blur-[120px] opacity-40"></div>
         <div className="absolute right-0 bottom-0 w-96 h-96 bg-yellow-200 rounded-full blur-[120px] opacity-40"></div>
 
-        <div className="max-w-[1400px] mx-auto px-4">
+        <div className=" mx-auto px-4 w-max-7xl">
 
           {/* breadcrumb */}
-          <p className="text-sm text-gray-400 mb-6">
+          <nav> 
+            <p className="text-sm text-gray-400 mb-6">
             Home / Hotels /
             <span className="text-amber-600 font-semibold ml-1">
               {HotelData.title}
             </span>
           </p>
-
+          </nav>
+          
           {/* HERO IMAGE */}
           <motion.div
             initial={{ opacity: 0, y: 60 }}
@@ -60,7 +62,7 @@ export default function HotelDetailsHero({ HotelData }: { HotelData: any }) {
               alt={HotelData.alt}
               width={1400}
               height={600}
-              className="w-full h-[460px] object-cover transition-transform duration-700 group-hover:scale-105"
+              className="w-full h-[250px] sm:h-[320px] md:h-[420px] lg:h-[460px] object-cover transition-transform duration-700 group-hover:scale-105"
             />
 
             {/* overlay */}
@@ -93,7 +95,7 @@ export default function HotelDetailsHero({ HotelData }: { HotelData: any }) {
                 {HotelData.title}
               </h1>
 
-              <p className="text-gray-500 mt-3 max-w-[700px] text-lg">
+              <p className="text-gray-500 mt-3 text-lg">
                 {HotelData.subcontent}
               </p>
 

@@ -2,11 +2,11 @@ import HotelCTA from '@/components/Home/HotelCTA'
 import GuestReviewSection from '@/components/HotelPackage/GuestReviewSection'
 import HotelFAQ from '@/components/HotelPackage/HotelFAQ'
 import HotelHero from '@/components/HotelPackage/HotelHero'
-import HotelDetailsSection from '@/components/HotelPackage/HotelsDetailSection'
 import InclusionsExclusions from '@/components/HotelPackage/InclusionExclusion'
 import LuxuryFooter from '@/utils/Footer'
 import Navbar from '@/utils/Navbar'
 import { notFound } from 'next/navigation'
+import HotelDetailsSection from '@/components/HotelsArchive/HotelsDetailSection'
 
 
 const getHotelData = async (slug: string) => {
