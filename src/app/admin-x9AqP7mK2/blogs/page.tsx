@@ -196,9 +196,9 @@ export default function BlogsPage() {
           onChange={(e) => setStatusFilter(e.target.value)}
           className="px-3 py-2 bg-pink-950/40 border border-pink-900/40 rounded-lg text-pink-200 cursor-pointer"
         >
-          <option value="all">All</option>
-          <option value="published">Published</option>
-          <option value="draft">Draft</option>
+          <option value="all" className="bg-pink-950 text-white cursor-pointer">All</option>
+          <option value="published" className="bg-pink-950 text-white cursor-pointer">Published</option>
+          <option value="draft" className="bg-pink-950 text-white cursor-pointer">Draft</option>
         </select>
 
         {/* Category Filter */}
@@ -207,10 +207,10 @@ export default function BlogsPage() {
           onChange={(e) => setCategoryFilter(e.target.value)}
           className="px-3 py-2 bg-pink-950/40 border border-pink-900/40 rounded-lg text-pink-200 cursor-pointer"
         >
-          <option value="all">All Categories</option>
+          <option className="bg-pink-950 text-white cursor-pointer" value="all">All Categories</option>
 
           {BLOG_CATEGORIES.map((cat) => (
-            <option key={cat} value={cat}>
+            <option className="bg-pink-950 text-white cursor-pointer py-2"  key={cat} value={cat}>
               {cat}
             </option>
           ))}
@@ -222,10 +222,10 @@ export default function BlogsPage() {
           onChange={(e) => setSort(e.target.value)}
           className="px-3 py-2 bg-pink-950/40 border border-pink-900/40 rounded-lg text-pink-200 cursor-pointer"
         >
-          <option value="latest" className="cursor-pointer">
+          <option value="latest" className="bg-pink-950 text-white cursor-pointer">
             Latest
           </option>
-          <option value="oldest" className="cursor-pointer">
+          <option value="oldest" className="bg-pink-950 text-white cursor-pointer">
             Oldest
           </option>
         </select>
