@@ -31,6 +31,8 @@ export default function TaxiPage() {
   const [open, setOpen] = useState(false);
   const [selectedId, setSelectedId] = useState<string | null>(null);
 
+  const [taxiStatus, setTaxiStatus] = useState("All Status");
+
 
 
   const getTaxis = async () => {
@@ -92,7 +94,12 @@ export default function TaxiPage() {
     const matchFuel =
       fuelFilter === "all" || taxi.fuelType === fuelFilter;
 
-    return matchSearch && matchType && matchFuel;
+    const status  =
+         taxiStatus ==='All Status' || taxi.status === taxiStatus;
+
+
+
+    return matchSearch && matchType && matchFuel &&  status;
   });
 
   /* ------------------ Stats ------------------ */
@@ -142,11 +149,11 @@ export default function TaxiPage() {
           onChange={(e) => setTypeFilter(e.target.value)}
           className="px-3 py-2 bg-pink-950/40 border border-pink-900/40 rounded-lg text-pink-200"
         >
-          <option value="all">All Types</option>
-          <option value="SUV">SUV</option>
-          <option value="Sedan">Sedan</option>
-          <option value="Hatchback">Hatchback</option>
-          <option value="TempoTraveller">Tempo Traveller</option>
+          <option value="all" className="bg-pink-950 text-white cursor-pointer">All Types</option>
+          <option value="SUV" className="bg-pink-950 text-white cursor-pointer">SUV</option>
+          <option value="Sedan" className="bg-pink-950 text-white cursor-pointer">Sedan</option>
+          <option value="Hatchback" className="bg-pink-950 text-white cursor-pointer">Hatchback</option>
+          <option value="TempoTraveller" className="bg-pink-950 text-white cursor-pointer">Tempo Traveller</option>
         </select>
 
         {/* Fuel */}
@@ -155,18 +162,29 @@ export default function TaxiPage() {
           onChange={(e) => setFuelFilter(e.target.value)}
           className="px-3 py-2 bg-pink-950/40 border border-pink-900/40 rounded-lg text-pink-200"
         >
-          <option value="all">All Fuel</option>
-          <option value="Petrol">Petrol</option>
-          <option value="Diesel">Diesel</option>
-          <option value="Electric">Electric</option>
+          <option value="all" className="bg-pink-950 text-white cursor-pointer">All Fuel</option>
+          <option value="Petrol" className="bg-pink-950 text-white cursor-pointer">Petrol</option>
+          <option value="Diesel" className="bg-pink-950 text-white cursor-pointer">Diesel</option>
+          <option value="Electric" className="bg-pink-950 text-white cursor-pointer">Electric</option>
+        </select>
+
+           {/* Cab Type */}
+        <select
+          value={taxiStatus}
+          onChange={(e) => setTaxiStatus(e.target.value)}
+          className="px-3 py-2 bg-pink-950/40 border border-pink-900/40 rounded-lg text-pink-200"
+        >
+          <option value="All Status" className="bg-pink-950 text-white cursor-pointer">All Status</option>
+          <option value="published" className="bg-pink-950 text-white cursor-pointer">Published</option>
+          <option value="draft" className="bg-pink-950 text-white cursor-pointer">Draft</option>
         </select>
 
         {/* View Toggle */}
         <div className="flex bg-pink-950/40 rounded-lg border border-pink-900/40">
-          <button onClick={() => setView("card")} className="px-3 py-2">
+          <button onClick={() => setView("card")} className="px-3 py-2 cursor-pointer">
             <LayoutGrid size={16} />
           </button>
-          <button onClick={() => setView("table")} className="px-3 py-2">
+          <button onClick={() => setView("table")} className="px-3 py-2 cursor-pointer">
             <Table size={16} />
           </button>
         </div>
@@ -312,7 +330,10 @@ function TaxiTable({
                   Edit
                 </Link>
 
-                <button className="px-3 py-1 bg-red-900/20 rounded text-red-400">
+                <button  onClick={() => {
+                  setSelectedId(taxi._id);
+                  setOpen(true);
+                }} className="px-3 py-1 bg-red-900/20 rounded text-red-400">
                   Delete
                 </button>
               </td>

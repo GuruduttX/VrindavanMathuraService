@@ -23,6 +23,6 @@ export default function TourArchiveLayout({
           <div className="w-full">{children}</div>
         </div>
       </section>
-      </TourFilterProvider>
+    </TourFilterProvider>
   );
 }

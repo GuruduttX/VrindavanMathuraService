@@ -1,4 +1,4 @@
-import { deleteAdminPoojaService, getAdminPoojasService , updateAdminPoojaService,getAdminPoojaByIdService, createAdminPoojaService } from "@/services/admin/poojaServices";
+import { deleteAdminPoojaService, getAdminPoojasService , updateAdminPoojaService,getAdminPoojaByIdService, createAdminPoojaService, getAdminPoojaBySlugService } from "@/services/admin/poojaServices";
 import { poojaSchema } from "@/zodSchema/poojaSchema";
 import { NextResponse } from "next/server";
 import { success } from "zod";
@@ -21,7 +21,8 @@ export async function createAdminPoojaController(req: Request) {
     const result = poojaSchema.safeParse(body);
 
     if(!result.success){
-       return Response.json({success: false, error : result.error.flatten()}, {status : 400});
+       console.log(result)
+       return Response.json({success: false, errors : result.error.flatten()}, {status : 400});
     }
 
     const poojaData = result.data;
@@ -117,3 +118,21 @@ export async function deleteAdminPoojaController(params: { id: string }) {
     );
   }
 }
+
+export async function getAdminPoojaBySlugController(slug : string){
+    try {
+
+      const pooja = await getAdminPoojaBySlugService(slug);
+      
+      if(!pooja){
+         return NextResponse.json({exists : false}, {status : 404});
+      }
+
+      return NextResponse.json({exists : true, data : pooja}, {status : 200});
+      
+    } catch (error) {
+       console.log("This is the error ", error);
+       return NextResponse.json({message : "Something went Wrong!"},{status:500})
+    }
+}
+

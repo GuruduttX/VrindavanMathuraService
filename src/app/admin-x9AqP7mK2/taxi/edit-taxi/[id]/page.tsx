@@ -117,11 +117,12 @@ export default function EditTaxi() {
       seats: form.seat,
       cabType: form.cabtype,
       fuelType: form.fueltype,
-      baseprice: form.price,
+      basePrice: form.price,
       image: form.image,
       alt: form.alt,
       inclusions: inclusions,
-      exclusions: exclusions
+      exclusions: exclusions,
+      status : 'published'
     }
 
     try {
@@ -152,7 +153,46 @@ export default function EditTaxi() {
 
   }
 
-  const SaveDraft = () => {
+  const SaveDraft = async() => {
+
+    const payload = {
+      title: form.name,
+      seats: form.seat,
+      cabType: form.cabtype,
+      fuelType: form.fueltype,
+      basePrice: form.price,
+      image: form.image,
+      alt: form.alt,
+      inclusions: inclusions,
+      exclusions: exclusions,
+      status : 'draft'
+    }
+
+    try {
+
+      const res = await fetch(`${process.env.NEXT_PUBLIC_URL}/api/admin/taxi/${id}`, {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify(payload)
+      })
+
+      const data = await res.json()
+
+      if (!data.success) {
+        toast.error("Failed to update Taxi")
+        return
+      }
+
+      toast.success("Taxi Updated Successfully")
+
+
+    } catch (error) {
+
+      toast.error("Server Error")
+
+    }
 
   }
 

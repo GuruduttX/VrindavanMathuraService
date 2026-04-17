@@ -18,7 +18,6 @@ export const CabCategories: string[] = [
   "Sedan",
   "SUV",
   "Hatchback",
-  "Luxury",
   "Tempo Traveller",
   
 ]

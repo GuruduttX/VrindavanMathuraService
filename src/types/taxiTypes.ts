@@ -1,11 +1,13 @@
 import { Document } from "mongoose";
 
 export interface ITaxiInclusion {
-  inclusion?: string;
+  id? : string;
+  description?: string;
 }
 
 export interface ITaxiExclusion {
-  exclusion?: string;
+  id? : string;
+  description?: string;
 }
 
 export type CabType = "SUV" | "Sedan" | "Hatchback" | "TempoTraveller";

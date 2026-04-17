@@ -9,7 +9,7 @@ export async function GET() {
 
         await connectDB();
 
-        return getAllAdminBlogController();
+        return await getAllAdminBlogController();
 
     } catch (error) {
 

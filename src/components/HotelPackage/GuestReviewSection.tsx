@@ -8,53 +8,81 @@ import {
   CheckCircle2,
   Key,
   Sparkle,
-  Hotel,
 } from "lucide-react";
 
-export default function GuestReviewSection({HotelData}:any) {
+export default function GuestReviewSection({ HotelData }: any) {
+  const highlightLabels: Record<string, string> = {
+    comfortStay: "Comfort Stay",
+    greatLocation: "Great Location",
+    hospitality: "Hospitality",
+    amazingView: "Amazing View",
+    cleanliness: "Cleanliness",
+    greatValue: "Great Value",
+  };
 
-   const highlightLabels: Record<string, string> = {
-     comfortStay: "Comfort Stay",
-     greatLocation: "Great Location",
-     hospitality: "Hospitality",
-     amazingView: "Amazing View",
-     cleanliness: "Cleanliness",
-     greatValue: "Great Value",
-   };
   return (
-    <section className="py-28 bg-gradient-to-b from-amber-100 via-amber-50 to-white">
-      <div className="max-w-7xl mx-auto px-6">
-        {/* TOP RATING */}
+    <section className="relative py-20 bg-gradient-to-br from-yellow-50 via-amber-50/40 to-orange-50/40 overflow-hidden">
+
+      {/* ambient glow */}
+      <div className="absolute -top-20 -left-20 w-96 h-96 bg-orange-200/30 blur-[140px] rounded-full"></div>
+      <div className="absolute -bottom-20 -right-20 w-96 h-96 bg-amber-200/30 blur-[140px] rounded-full"></div>
+
+      <div className="max-w-[1300px] mx-auto px-6">
+
+        {/* HERO RATING */}
 
         <motion.div
-          initial={{ opacity: 0, y: 40 }}
+          initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.7 }}
+          transition={{ duration: 0.6 }}
           className="text-center"
         >
-          <div className="flex items-center justify-center gap-6">
-            <span className="text-5xl">🏆</span>
 
-            <h2 className="text-7xl font-bold bg-gradient-to-r from-amber-500 via-amber-500 to-orange-600 bg-clip-text text-transparent">
-              {HotelData.rating}
-            </h2>
+          <div className="inline-flex items-center gap-5 px-8 py-5 rounded-2xl 
+            bg-white/60 backdrop-blur-xl border border-white/40 
+            shadow-[0_10px_40px_rgba(0,0,0,0.08)]">
 
-            <span className="text-5xl">🏆</span>
+            {/* Left Icon */}
+            <div className="flex items-center justify-center w-10 h-10 rounded-full 
+              bg-gradient-to-br from-amber-400 to-orange-500 text-white shadow-md">
+              ⭐
+            </div>
+
+            {/* Rating */}
+            <div className="flex flex-col items-center leading-none">
+              <span className="text-5xl md:text-6xl font-extrabold 
+                bg-gradient-to-r from-amber-500 via-orange-500 to-orange-600 
+                bg-clip-text text-transparent">
+                {HotelData.rating}
+              </span>
+              <span className="text-[11px] uppercase tracking-widest text-gray-400 mt-1">
+                Guest Rating
+              </span>
+            </div>
+
+            {/* Right Icon */}
+            <div className="flex items-center justify-center w-10 h-10 rounded-full 
+              bg-gradient-to-br from-amber-400 to-orange-500 text-white shadow-md">
+              ⭐
+            </div>
+
           </div>
 
-          <h3 className="mt-4 text-2xl font-semibold text-gray-800">
+          <h3 className="mt-6 text-2xl font-semibold text-gray-900">
             Guest Favourite
           </h3>
 
-          <p className="text-gray-500 mt-2 max-w-xl mx-auto">
-            This hotel is in the top 10% of Vrindavan stays based on guest
-            ratings, comfort, hospitality and location experience.
+          <p className="text-gray-500 mt-3 max-w-xl mx-auto text-[15px]">
+            This hotel ranks among the top stays in Vrindavan based on guest
+            comfort, hospitality, and location experience.
           </p>
+
         </motion.div>
 
         {/* RATING BREAKDOWN */}
 
-        <div className="mt-20 grid md:grid-cols-2 lg:grid-cols-6 gap-6">
+        <div className="mt-10 grid md:grid-cols-2 lg:grid-cols-6 gap-6">
+
           <RatingCard
             title="Cleanliness"
             rating={HotelData.ratingSummary.scores.cleanliness}
@@ -90,13 +118,15 @@ export default function GuestReviewSection({HotelData}:any) {
             rating={HotelData.ratingSummary.scores.value}
             icon={<Sparkle />}
           />
+
         </div>
 
-        {/* OVERALL GRAPH */}
+        {/* OVERALL RATING BARS */}
 
-        <div className="mt-20 max-w-xl mx-auto">
-          <h3 className="text-lg font-semibold mb-6 text-gray-800">
-            Overall Rating
+        <div className="mt-10 max-w-2xl mx-auto">
+
+          <h3 className="text-xl font-semibold text-center text-gray-900 mb-10">
+            Overall Rating Distribution
           </h3>
 
           <RatingBar stars={5} width="100%" />
@@ -104,99 +134,100 @@ export default function GuestReviewSection({HotelData}:any) {
           <RatingBar stars={3} width="40%" />
           <RatingBar stars={2} width="15%" />
           <RatingBar stars={1} width="5%" />
+
         </div>
 
         {/* REVIEW TAGS */}
 
-        <div className="mt-20 flex flex-wrap justify-center gap-4">
+        <div className="mt-10 flex flex-wrap justify-center gap-4">
+
           {Object.entries(HotelData.ratingSummary.highlights).map(
             ([key, count]) => {
-              // Skip if the count is 0, or if the backend sends an unknown key
               if (!count || !highlightLabels[key]) return null;
 
-              // 3. Render the tag combining the readable label and the count
               return (
-                <Tag key={key} label={`${highlightLabels[key]} (${count})`} />
+                <Tag
+                  key={key}
+                  label={`${highlightLabels[key]} (${count})`}
+                />
               );
-            },
+            }
           )}
-          {/* <Tag label="Amazing View (18)" />
-          <Tag label="Hospitality (15)" />
-          <Tag label="Great Location (10)" />
-          <Tag label="Cleanliness (5)" />
-          <Tag label="Great Value (3)" />
-          <Tag label="Comfort Stay (7)" /> */}
+
         </div>
+
       </div>
     </section>
   );
 }
 
 
+/* RATING CARD */
 
 function RatingCard({ title, rating, icon }: any) {
   return (
-
     <motion.div
-      whileHover={{ y: -6 }}
-      className="bg-white border border-amber-100 rounded-2xl p-6 text-center shadow-sm hover:shadow-xl transition"
+      whileHover={{ y: -8 }}
+      transition={{ duration: 0.25 }}
+      className="group relative bg-white/80 backdrop-blur-xl border border-white/40 rounded-2xl p-6 text-center shadow-lg hover:shadow-2xl transition"
     >
 
-      <div className="flex justify-center mb-3 text-amber-500">
-        {icon}
+      <div className="flex justify-center mb-4">
+
+        <div className="p-3 rounded-xl bg-gradient-to-br from-amber-100 to-orange-100 text-amber-600 group-hover:from-amber-500 group-hover:to-orange-600 group-hover:text-white transition">
+          {icon}
+        </div>
+
       </div>
 
       <p className="text-sm text-gray-500">
         {title}
       </p>
 
-      <p className="text-xl font-semibold text-gray-800">
+      <p className="text-2xl font-semibold text-gray-900 mt-1">
         {rating}
       </p>
 
     </motion.div>
-
   );
 }
 
 
+/* RATING BAR */
 
 function RatingBar({ stars, width }: any) {
   return (
-
-    <div className="flex items-center gap-4 mb-4">
+    <div className="flex items-center gap-4 mb-6">
 
       <span className="text-sm text-gray-600 w-6">
         {stars}
       </span>
 
-      <div className="flex-1 h-2 bg-gray-200 rounded-full overflow-hidden">
+      <div className="flex-1 h-3 bg-gray-200 rounded-full overflow-hidden">
 
         <motion.div
           initial={{ width: 0 }}
           whileInView={{ width }}
-          transition={{ duration: 1 }}
-          className="h-full bg-gradient-to-r from-amber-500 via-amber-500 to-orange-600"
+          transition={{ duration: 1.2 }}
+          className="h-full bg-gradient-to-r from-amber-500 via-orange-500 to-orange-600"
         />
 
       </div>
 
     </div>
-
   );
 }
 
 
+/* TAG */
 
 function Tag({ label }: any) {
   return (
-
     <motion.div
-      whileHover={{ scale: 1.05 }}
-      className="px-5 py-2 bg-white border border-amber-200 rounded-full shadow-sm text-sm text-gray-700 hover:shadow-md cursor-pointer"
+      whileHover={{ scale: 1.06 }}
+      className="px-6 py-3 bg-white/80 backdrop-blur-md border border-white/50 rounded-full shadow-md text-sm text-gray-700 hover:shadow-lg transition cursor-pointer"
     >
       {label}
     </motion.div>
-
   );
 }

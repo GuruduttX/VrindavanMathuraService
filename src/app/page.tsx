@@ -5,7 +5,6 @@ const ProductShowCase = dynamic(() => import("@/components/Home/ProductShowCase"
 const TaxiCTA = dynamic(() => import("@/components/Home/TaxiCTA"));
 const TravelCTA = dynamic(() => import("@/components/Home/TravelCTA"));
 const HotelCTA = dynamic(() => import("@/components/Home/HotelCTA"));
-const HomeFinalCTA = dynamic(() => import("@/components/Home/HomeFinalCTA"));
 const SpiritualJourney = dynamic(() => import("@/components/Taxi/SpirtualJourney"));
 const Navbar = dynamic(() => import("@/utils/Navbar"));
 const Footer = dynamic(() => import("@/utils/Footer"));
@@ -13,8 +12,7 @@ const HomeTrustBuildingSection = dynamic(() => import("@/utils/HomeTrustBuilding
 const PopularHotels = dynamic(() => import("@/utils/PopularHotels"));
 const PopularTours = dynamic(() => import("@/utils/PopularTours"));
 const ServicesSection = dynamic(() => import("@/utils/ServicesSection"));
-const TaxiShowcase = dynamic(() => import("@/utils/TaxiShowCase"));
-const FAQPage = dynamic(()=>import("@/components/Home/FAQPage")) 
+const FAQPage = dynamic(()=>import("@/components/Home/FAQPage"));
 
 
 export const metadata: Metadata = {
@@ -268,9 +266,7 @@ const page = () => {
       <PopularHotels />
       <HotelCTA />
       <TaxiCTA />
-      {/* <TaxiShowcase /> */}
       <FAQPage/>
-      <HomeFinalCTA />
       <Footer />
     </div>
   )

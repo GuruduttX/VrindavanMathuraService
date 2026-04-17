@@ -1,8 +1,9 @@
 "use client";
 
 import { useState } from "react";
+import { IFAQ } from "@/types/hotelTypes";
 
-export default function FAQSection({faqs} : {faqs : any}) {
+export default function FAQSection({faqs} : {faqs : IFAQ[]}) {
   const [activeIndex, setActiveIndex] = useState<number | null>(null);
 
   const toggleFAQ = (index: number) => {

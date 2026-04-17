@@ -2,37 +2,45 @@ import { z } from "zod";
 
 // reusable (make optional-friendly)
 const textItem = z.object({
+
+  id : z.string().optional(),
   description: z.string().optional(),
 });
 
 const itinerary = z.object({
+  id : z.string().optional(),
   day: z.number().optional(),
   title: z.string().optional(),
   description: z.string().optional(),
 });
 
 const faq = z.object({
+  id : z.string().optional(),
   question: z.string().optional(),
   answer: z.string().optional(),
 });
 
 const duration = z.object({
-  days: z.number().optional(),
+  id : z.string().optional(),
+  days: z.coerce.number().optional(),
   place: z.string().optional(),
 });
 
 const testimonial = z.object({
+  id : z.string().optional(),
   name: z.string().optional(),
   description: z.string().optional(),
-  rating: z.coerce.number().min(1).max(5).optional(),
+  rating: z.preprocess((val)=>( val === "" ? undefined :  val ) , z.coerce.number().min(1).max(5).optional()),
 });
 
 const childImage = z.object({
-  image: z.string().url().optional(),
+  id : z.string().optional(),
+  image: z.string().optional(),
   alt: z.string().optional(),
 });
 
 const routeSegment = z.object({
+  id : z.string().optional(),
   from: z.string().optional(),
   to: z.string().optional(),
 });
@@ -51,8 +59,8 @@ export const tourPackageSchema = z
     category: z.string().optional(),
 
     price: z.coerce.number().min(0).optional(),
-    rating: z.coerce.number().min(0).max(5).optional(),
-    reviews: z.coerce.number().optional(),
+    rating: z.number().min(0).max(5).optional(),
+    reviews: z.number().optional(),
 
     duration: z.string().optional(),
     status: z.enum(["draft", "published"]),
@@ -88,7 +96,7 @@ export const tourPackageSchema = z
 
     heroImage: z
       .object({
-        image: z.string().url(),
+        image: z.string(),
         alt: z.string(),
       })
       .optional(),
@@ -97,7 +105,6 @@ export const tourPackageSchema = z
 
     testimonials: z.array(testimonial).optional(),
 
-    documents: z.array(textItem).optional(),
 
     routes: route.optional(),
 
@@ -110,7 +117,14 @@ export const tourPackageSchema = z
   })
   
   .superRefine((data, ctx) => {
-    if (data.status === "published") {
+  
+// Always required
+  if (!data.title) {
+    ctx.addIssue({ path: ["title"], message: "Title is required", code: z.ZodIssueCode.custom });
+  }
+  if (!data.heroImage) {
+    ctx.addIssue({ path: ["heroImage"], message: "Hero image is required", code: z.ZodIssueCode.custom });
+  }    if (data.status === "published") {
       // Required fields for publish
 
 

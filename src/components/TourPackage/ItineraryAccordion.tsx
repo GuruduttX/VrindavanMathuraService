@@ -61,7 +61,7 @@ export default function ItineraryAccordion({ PackageData }: any) {
                 isOpen ? "max-h-[1000px]" : "max-h-0"
               }`}
             >
-              <div className="px-16 pb-6 text-gray-700 space-y-4">
+              <div className="px-10 md:px-16 pb-6 text-gray-700 space-y-4">
 
                 {/* Meta */}
                 <div className="flex items-center gap-6 text-sm text-gray-500">

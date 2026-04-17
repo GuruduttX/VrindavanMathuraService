@@ -5,17 +5,14 @@ const taxiSchema = new Schema<ITaxi>(
   {
     title: {
       type: String,
-      required: true,
     },
 
     basePrice: {
       type: Number,
-      required: true,
     },
 
     seats: {
       type: Number,
-      required: true,
     },
 
     cabType: {
@@ -28,29 +25,24 @@ const taxiSchema = new Schema<ITaxi>(
         "Luxury",
         "Electric",
       ],
-      required: true,
     },
 
     status: {
       type: String,
       enum: ["published", "draft"],
-      required: true,
     },
     fuelType: {
       type: String,
       enum: ["Petrol", "Diesel", "Electric", "CNG"],
-      required: true,
     },
 
     inclusions: [
       {
         id: {
           type: String,
-          required: true,
         },
         description: {
           type: String,
-          required: true,
         },
       },
     ],
@@ -59,23 +51,19 @@ const taxiSchema = new Schema<ITaxi>(
       {
         id: {
           type: String,
-          required: true,
         },
         description: {
           type: String,
-          required: true,
         },
       },
     ],
 
     image: {
       type: String,
-      required: true,
     },
 
     alt: {
       type: String,
-      required: true,
     },
   },
   { timestamps: true },

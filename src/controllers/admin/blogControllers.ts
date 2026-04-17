@@ -1,5 +1,6 @@
 import { createAdminBlogService, deleteAdminBlogService, getAllAdminBlogsService, getAdminBlogByIdService , updateAdminBlogService} from "@/services/admin/blogServices";
 import { blogSchema } from "@/zodSchema/blogSchema";
+import { getBlogBySlugServices } from "@/services/admin/blogServices";
 
 import { NextResponse } from "next/server";
 import { success } from "zod";
@@ -159,3 +160,20 @@ export const deleteAdminBlogController = async (id: string) => {
     }
 
 };
+
+export async function getBlogBySlugController(slug : string){
+    try {
+
+      const blog = await getBlogBySlugServices(slug);
+      
+      if(!blog){
+         return NextResponse.json({exists : false}, {status : 404});
+      }
+
+      return NextResponse.json({exists : true, data : blog}, {status : 200});
+      
+    } catch (error) {
+       console.log("This is the error ", error);
+       return NextResponse.json({message : "Something went Wrong!"},{status:500})
+    }
+}

@@ -3,11 +3,11 @@ import { z } from "zod";
 
 const reviewValidationSchema = z.object({
   id: z.string().uuid("Invalid review ID format"), // Ensures crypto.randomUUID() format
-  name: z.string().min(2, "Reviewer name must be at least 2 characters"),
+  name: z.string().optional(),
   description: z
     .string()
-    .min(5, "Review description must be at least 5 characters"),
-  rating: z.string().min(1, "Rating is required"),
+     .optional(),
+  rating: z.string().optional(),
 });
 
 const imageSchema = z.object({
@@ -16,24 +16,19 @@ const imageSchema = z.object({
 });
 
 const faqSchema = z.object({
-  id: z.string(),
-  question: z.string(),
-  answer: z.string()
+  id: z.string().optional(),
+  question: z.string().optional(),
+  answer: z.string().optional()
 })
 
 const metaDataSchema = z.object({
-  title: z.string(),
-  description :z.string(),
+  title: z.string().optional(),
+  description :z.string().optional(),
 })
 
 const schemaDataSchema = z.object({
-  title: z.string(),
-  description : z.string()
-})
-
-const benefitsSchema = z.object({
-  id: z.string().optional(),
-  description: z.string().optional()
+  title: z.string().optional(),
+  description : z.string().optional()
 })
 
 export const poojaSchema = z
@@ -55,7 +50,6 @@ export const poojaSchema = z
 
     duration: z.string().optional(),
 
-    benefits: z.array(benefitsSchema).optional(),
     availableDays: z.array(z.string()).optional(),
 
     heroImage: imageSchema,
@@ -113,12 +107,5 @@ export const poojaSchema = z
         });
       }
 
-      if (!data.benefits || data.benefits.length === 0) {
-        ctx.addIssue({
-          path: ["benefits"],
-          message: "Benefits are required",
-          code: z.ZodIssueCode.custom,
-        });
-      }
     }
   });

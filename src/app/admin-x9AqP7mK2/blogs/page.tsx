@@ -102,7 +102,7 @@ export default function BlogsPage() {
 
   const filteredBlogs = blogs
     .filter((blog) => {
-      const matchesSearch = blog.title 
+      const matchesSearch = blog?.title || "" 
         .toLowerCase()
         .includes(search.toLowerCase());
 
@@ -196,9 +196,9 @@ export default function BlogsPage() {
           onChange={(e) => setStatusFilter(e.target.value)}
           className="px-3 py-2 bg-pink-950/40 border border-pink-900/40 rounded-lg text-pink-200 cursor-pointer"
         >
-          <option value="all">All</option>
-          <option value="published">Published</option>
-          <option value="draft">Draft</option>
+          <option value="all" className="bg-pink-950 text-white cursor-pointer">All</option>
+          <option value="published" className="bg-pink-950 text-white cursor-pointer">Published</option>
+          <option value="draft" className="bg-pink-950 text-white cursor-pointer">Draft</option>
         </select>
 
         {/* Category Filter */}
@@ -207,10 +207,10 @@ export default function BlogsPage() {
           onChange={(e) => setCategoryFilter(e.target.value)}
           className="px-3 py-2 bg-pink-950/40 border border-pink-900/40 rounded-lg text-pink-200 cursor-pointer"
         >
-          <option value="all">All Categories</option>
+          <option className="bg-pink-950 text-white cursor-pointer" value="all">All Categories</option>
 
           {BLOG_CATEGORIES.map((cat) => (
-            <option key={cat} value={cat}>
+            <option className="bg-pink-950 text-white cursor-pointer py-2"  key={cat} value={cat}>
               {cat}
             </option>
           ))}
@@ -222,10 +222,10 @@ export default function BlogsPage() {
           onChange={(e) => setSort(e.target.value)}
           className="px-3 py-2 bg-pink-950/40 border border-pink-900/40 rounded-lg text-pink-200 cursor-pointer"
         >
-          <option value="latest" className="cursor-pointer">
+          <option value="latest" className="bg-pink-950 text-white cursor-pointer">
             Latest
           </option>
-          <option value="oldest" className="cursor-pointer">
+          <option value="oldest" className="bg-pink-950 text-white cursor-pointer">
             Oldest
           </option>
         </select>
@@ -265,7 +265,11 @@ export default function BlogsPage() {
           setOpen={setOpen}
         />
       ) : (
-        <BlogTable blogs={filteredBlogs} />
+        <BlogTable
+          blogs={filteredBlogs}
+          setSelectedId={setSelectedId}
+          setOpen={setOpen}
+        />
       )}
     </section>
   );
@@ -350,11 +354,18 @@ function BlogCards({ blogs, setSelectedId, setOpen }: { blogs: IBlog[], setSelec
 
 /* ------------------ Table View ------------------ */
 
-function BlogTable({ blogs }: { blogs: IBlog[] }) {
+function BlogTable({
+  blogs,
+  setSelectedId,
+  setOpen,
+}: {
+  blogs: IBlog[];
+  setSelectedId: React.Dispatch<React.SetStateAction<string>>;
+  setOpen: React.Dispatch<React.SetStateAction<boolean>>;
+}) {
   return (
     <div className="overflow-x-auto border border-pink-900/40 rounded-xl">
       <table className="w-full text-sm text-pink-200">
-
         <thead className="bg-pink-950/40 text-pink-300 text-xs uppercase">
           <tr>
             <th className="px-4 py-3">Title</th>
@@ -366,7 +377,6 @@ function BlogTable({ blogs }: { blogs: IBlog[] }) {
         </thead>
 
         <tbody>
-
           {blogs.map((blog) => (
             <tr
               key={blog._id.toString()}
@@ -392,25 +402,26 @@ function BlogTable({ blogs }: { blogs: IBlog[] }) {
               </td>
 
               <td className="px-4 py-3 flex gap-2 justify-center">
-
                 <Link
-                  href={`/admin-x9AqP7mK2/blogs/edit-blog/${blog.slug}`}
+                  href={`/admin-x9AqP7mK2/blogs/edit-blog/${blog._id}`}
                   className="px-3 py-1 rounded text-xs bg-pink-600/20 text-pink-300"
                 >
                   Edit
                 </Link>
 
-                <button className="px-3 py-1 rounded text-xs bg-red-900/20 text-red-400">
+                <button
+                  className="px-3 py-1 rounded text-xs bg-red-900/20 text-red-400"
+                  onClick={() => {
+                    setSelectedId(blog._id.toString());
+                    setOpen(true);
+                  }}
+                >
                   Delete
                 </button>
-
               </td>
-
             </tr>
           ))}
-
         </tbody>
-
       </table>
     </div>
   );

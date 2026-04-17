@@ -16,6 +16,7 @@ const locations = [
   "Gokul",
   "Govardhan",
   "Nandgaon",
+  
 ];
 
 type Props = {
@@ -69,9 +70,9 @@ export default function PoojaMeta({
           onChange={(e) => updateForm("location", e.target.value)}
           className={`${inputClass} cursor-pointer`}
         >
-          <option value="">Select Location</option>
+          <option className="bg-pink-950 text-white cursor-pointer" value="">Select Location</option>
           {locations.map((loc, i) => (
-            <option key={i} value={loc}>
+            <option className="bg-pink-950 text-white cursor-pointer" key={i} value={loc}>
               {loc}
             </option>
           ))}

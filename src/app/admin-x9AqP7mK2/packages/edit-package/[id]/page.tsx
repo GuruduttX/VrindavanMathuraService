@@ -98,6 +98,22 @@ export default function page() {
 
   //Fill data
 
+   const handleZodErrors = (errors : any)=>{
+      const fieldErrors = errors.fieldErrors;
+
+
+      for(const [field , messages] of Object.entries(fieldErrors) as [string, string[]][]){
+          if (messages && messages?.length > 0) {
+            toast.error(`${field}: ${messages[0]}`); 
+            return;
+          }
+      }
+
+      if (errors.formErrors?.length) {
+    toast.error(errors.formErrors[0]);
+  }
+  }
+
   const getPackages = async () => {
     try {
       const res = await fetch(`${process.env.NEXT_PUBLIC_URL}/api/admin/tour-packages/${id}`);
@@ -181,6 +197,23 @@ export default function page() {
     setForm((prev) => ({ ...prev, [field]: value }));
   };
 
+  const findPackages = async (slug: string) => {
+  try {
+    const res = await fetch(
+      `${process.env.NEXT_PUBLIC_URL}/api/admin/tour-packages/check-slug?slug=${form.slug}`
+    );
+
+    const data = await res.json();
+
+    
+
+    return data; 
+  } catch (err) {
+    toast.error("Error checking slug");
+    return null;
+  }
+};
+
   const buildPayload = (status: "published" | "draft") => ({
     title: form.title,
     category: form.category,
@@ -243,29 +276,60 @@ export default function page() {
     const data = await res.json();
     if (!res.ok || !data.success){
        console.log(data.errors.fieldErrors)
+       handleZodErrors(data.errors);
        throw new Error(data.errors || "Something went wrong");
     }
     return data;
   };
 
-  const validateForPublish = (formEl: HTMLFormElement): boolean => {
-    if (!formEl.checkValidity()) {
-      formEl.reportValidity();
-      return false;
-    }
+ const validateForPublish = async (formEl: HTMLFormElement): Promise<boolean> => {
+  if (!formEl.checkValidity()) {
+    formEl.reportValidity();
+    return false;
+  }
 
-    if (!form.category) {
-      toast.error("Package category is missing");
-      return false;
-    }
+  if (!form.image) {
+    toast.error("Package image is missing");
+    return false;
+  }
 
-    return true;
+  if (!form.category) {
+    toast.error("Package category is missing");
+    return false;
+  }
 
-  };
+  if (!form.slug) {
+    toast.error("Package slug is required");
+    return false;
+  }
+
+ 
+  const result = await findPackages(form.slug);
+
+
+  if (result?.exists &&   result?.data?._id !== id) {
+  toast.error("Slug already exists");
+  return false;
+}
+  const validImages = childImage.filter((img) => img?.image);
+
+  if (validImages.length < 4) {
+    toast.error(`Only ${validImages.length} child image(s) added — need 4`);
+    return false;
+  }
+
+  return true;
+};
+
 
   const handleSave = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    if (!validateForPublish(e.currentTarget)) return;
+
+    const valid = await validateForPublish(e.currentTarget);
+
+    if(!valid){
+        return;
+    }
 
 
     setLoading(true);
@@ -279,11 +343,41 @@ export default function page() {
     }
   };
 
+   const validateForDraft = async (): Promise<boolean> => {
+   
+    if (!form.image) {
+      toast.error("Package image is missing");
+      return false;
+    }
+  
+    
+    if (form.slug) {
+       
+   
+    const result = await findPackages(form.slug);
+
+
+    if (result?.exists && result?.data?._id !== id) {
+      toast.error("Slug already exists");
+      return false;
+  }
+   }  
+  
+    return true;
+  };
+
   // Save Draft
   const handleSaveDraft = async () => {
     if (!form.title.trim()) {
       toast.error("Please add a title before saving as draft");
       return;
+    }
+    
+
+      const valid = await validateForDraft();
+
+    if(!valid){
+        return;
     }
 
     setLoading(true);
@@ -291,7 +385,7 @@ export default function page() {
       await postPayload(buildPayload("draft"));
       toast.success("Draft saved successfully!");
     } catch (err: any) {
-      toast.error(err.message || "Failed to save draft");
+      toast.error("Failed to save draft");
     } finally {
       setLoading(false);
     }

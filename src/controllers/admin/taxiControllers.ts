@@ -5,6 +5,7 @@ import {
   getAdminTaxiByIdService,
   updateAdminTaxiService,
   getUserTaxiBySlugService,
+  getAdminPoojaBySlugService
 } from "@/services/admin/taxiServices";
 import { taxiSchema } from "@/zodSchema/taxiSchema";
 
@@ -17,9 +18,12 @@ export const createAdminTaxiController = async (req: Request) => {
     try {
         const body =  await req.json();
 
+        console.log(body);
+
         const result = taxiSchema.safeParse(body);
         
         if(!result.success){
+            console.log("Result", result);
             return Response.json({success : false, error : result.error.flatten()}
         ,{status : 400})
         }
@@ -125,9 +129,11 @@ export const updateAdminTaxiController = async (req: Request, id: string) => {
 
         const body =  await req.json();
 
+        console.log("body", body);
         const result = taxiSchema.safeParse(body);
         
         if(!result.success){
+            console.log("Result", result)
             return Response.json({success : false, error : result.error.flatten()}
         ,{status : 400})
         }
@@ -141,6 +147,7 @@ export const updateAdminTaxiController = async (req: Request, id: string) => {
             data: taxi,
         });
     } catch (error: any) {
+        console.log(error);
         return NextResponse.json(
             {
                 success: false,
@@ -170,3 +177,20 @@ export const deleteAdminTaxiController = async (id: string) => {
         );
     }
 };
+
+export async function getAdminTaxiBySlugController(slug : string){
+    try {
+
+      const taxi = await getAdminPoojaBySlugService(slug);
+      
+      if(!taxi){
+         return NextResponse.json({exists : false}, {status : 404});
+      }
+
+      return NextResponse.json({exists : true, data : taxi}, {status : 200});
+      
+    } catch (error) {
+       console.log("This is the error ", error);
+       return NextResponse.json({message : "Something went Wrong!"},{status:500})
+    }
+}

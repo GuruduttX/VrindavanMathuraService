@@ -63,17 +63,13 @@ const PoojaSchema: Schema<PoojaDocument> = new Schema(
 
     slug: { type: String, required: true, unique: true },
 
-    temple: { type: String, required: true },
+    temple: { type: String, },
 
-    location: { type: String, required: true },
+    location: { type: String },
 
-    category: { type: String, required: true },
+    category: { type: String },
 
-    benefits: [{
-      id: String,
-      description: String
-    }],
-
+   
     reviews: [
       {
         id: { type: String },
@@ -91,7 +87,6 @@ const PoojaSchema: Schema<PoojaDocument> = new Schema(
 
     price: {
       type: Number,
-      required: true,
       min: 0,
     },
 

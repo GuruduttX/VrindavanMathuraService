@@ -17,7 +17,7 @@ export interface IPooja extends Document {
 
   duration?: string;
 
-  benefits?: string[];
+ 
 
   availableDays?: string[];
 

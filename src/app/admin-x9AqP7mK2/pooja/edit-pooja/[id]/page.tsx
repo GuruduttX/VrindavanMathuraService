@@ -15,7 +15,6 @@ import Testimonials from "@/components/Admin/PackageEditor/Testimonials";
 import { BenefitType, TestimonialType } from "../../create-pooja/page";
 
 import { useParams } from "next/navigation";
-import BenefitsHandler from "@/components/Admin/PoojaEditor/BenefitsHandler";
 
 const inputClass = `
   mt-2 w-full px-5 py-3 rounded-xl
@@ -266,7 +265,6 @@ export default function CreatePoojaPage() {
           editorType="Pooja"
         />
 
-        <BenefitsHandler benefits={benefits} setBenefits={setBenefits}/>
 
         {/* FAQ */}
         <FaqHandler faqs={faqs} setFaqs={setFaqs} editorType="Pooja" />

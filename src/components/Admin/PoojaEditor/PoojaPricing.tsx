@@ -42,7 +42,7 @@ export default function PoojaPricing({
         >
           <option value="">Select Category</option>
           {poojaCategories.map((cat, i) => (
-            <option key={i} value={cat}>
+            <option className="bg-pink-950 text-white cursor-pointer" key={i} value={cat}>
               {cat}
             </option>
           ))}
