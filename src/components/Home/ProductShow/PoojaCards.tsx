@@ -3,6 +3,7 @@ import { Star, MapPin, Clock, Users } from "lucide-react";
 import Link from "next/link";
 
 export default function PoojaCard({ product }: any) {
+  console.log(product);
   const discount = product.discountPrice && product.price > product.discountPrice
     ? Math.round(((product.price - product.discountPrice) / product.price) * 100)
     : null;
@@ -73,7 +74,7 @@ export default function PoojaCard({ product }: any) {
             </div>
             <span className="text-xs font-medium">{product.rating}</span>
             {product.reviews && (
-              <span className="text-xs text-stone-400">· {product.reviews} reviews</span>
+              <span className="text-xs text-stone-400">· {product.reviews.length} reviews</span>
             )}
           </div>
         )}

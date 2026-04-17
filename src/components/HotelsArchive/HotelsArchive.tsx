@@ -111,7 +111,7 @@ export default function HotelsArchive() {
 console.log(filteredHotels, "filtered hotels");
 
   return (
-    <section className="py-24">
+    <section className="py-24" id="hotel-browse">
       <div className="max-w-7xl mx-auto px-6">
         {/* INTRO */}
 
@@ -145,7 +145,7 @@ console.log(filteredHotels, "filtered hotels");
             className="
                         sticky
                         top-28
-                        z-40
+                        z-35
                         bg-white
                         rounded-3xl
                         shadow-xl
@@ -179,7 +179,7 @@ console.log(filteredHotels, "filtered hotels");
               className={`mt-8 space-y-8 lg:block ${isFilterOpen ? "block" : "hidden"}`}
             >
               {/* PRICE */}
-              <div>
+              {/* <div>
                 <p className="text-sm text-gray-500 mb-3">Price Range</p>
                 <input
                   type="range"
@@ -190,7 +190,7 @@ console.log(filteredHotels, "filtered hotels");
                   className="w-full accent-amber-500"
                 />
                 <p className="text-sm mt-2 text-gray-600">Up to ₹{price}</p>
-              </div>
+              </div> */}
 
               {/* RATING */}
               <div>

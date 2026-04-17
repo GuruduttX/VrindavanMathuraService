@@ -25,6 +25,7 @@ export default function DashboardPage() {
             packages: 18,
             blogs: 32,
         });
+        
     }, []);
 
     return (

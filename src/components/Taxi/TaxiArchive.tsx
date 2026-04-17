@@ -125,10 +125,13 @@ export default function TaxiArchive({ taxis }: { taxis: any }) {
 
             {/* Trust banner */}
 
-            <div className="flex gap-6 text-white px-6 py-3 rounded-full bg-gradient-to-r from-amber-500 via-amber-500 to-orange-600 shadow-lg">
-              <span>Trusted Drivers</span>
-              <span>Clean Cabs</span>
-              <span>On-Time Pickup</span>
+            <div className="flex flex-wrap justify-center gap-3 sm:gap-6 text-white px-6 py-4 rounded-2xl md:rounded-full bg-gradient-to-r from-amber-500 via-amber-500 to-orange-600 shadow-lg text-sm sm:text-base font-medium">
+              <span className="whitespace-nowrap">Trusted Drivers</span>
+              <span className="hidden sm:inline text-amber-200/50">•</span>{" "}
+              {/* Visual divider on desktop */}
+              <span className="whitespace-nowrap">Clean Cabs</span>
+              <span className="hidden sm:inline text-amber-200/50">•</span>
+              <span className="whitespace-nowrap">On-Time Pickup</span>
             </div>
           </div>
 

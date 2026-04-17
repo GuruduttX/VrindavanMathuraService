@@ -22,7 +22,7 @@ export default function HotelsHero() {
         <div className="absolute -top-40 -left-40 w-[500px] h-[500px] bg-amber-200/40 rounded-full blur-[90px]" />
         <div className="absolute bottom-0 right-0 w-[500px] h-[500px] bg-orange-200/40 rounded-full blur-[100px] -z-10" />
 
-        <div className="max-w-[1300px] mx-auto px-6 lg:px-20 py-20 grid lg:grid-cols-2 gap-16 items-center">
+        <div className="max-w-[1300px] mx-auto px-6 lg:px-20 lg:pr-5 py-20 grid lg:grid-cols-2 gap-16 items-center">
           {/* LEFT CONTENT */}
           <motion.div
             initial={{ opacity: 0, y: 40 }}
