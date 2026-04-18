@@ -48,44 +48,32 @@ export default function PackageInclusionsStrip({
 
   return (
     <section>
-      <div className="max-w-7xl mx-auto px-6">
-
+      <div className="max-w-7xl mx-auto px-4 sm:px-6">
         {/* TOP BORDER */}
-        <div className="border-t border-orange-100 pt-6">
-
-          <div className="flex flex-wrap gap-x-10 gap-y-4 items-center">
-
+        <div className="border-t border-orange-100 pt-4 sm:pt-6">
+          <div className="grid grid-cols-2 sm:flex sm:flex-wrap gap-x-6 sm:gap-x-10 gap-y-3 sm:gap-y-4 items-center">
             {inclusions.map((item, index) => (
               <div
                 key={index}
                 className={`flex items-center gap-2 text-sm ${
-                  item.checked
-                    ? "text-gray-800"
-                    : "text-gray-300"
+                  item.checked ? "text-amber-900" : "text-orange-200"
                 }`}
               >
                 <span
-                  className={`${
-                    item.checked
-                      ? "text-[#A84010]"
-                      : "text-gray-300"
+                  className={`text-base shrink-0 ${
+                    item.checked ? "text-orange-500" : "text-orange-200"
                   }`}
                 >
                   {item.icon}
                 </span>
-                <span className="font-medium">
-                  {item.label}
-                </span>
+                <span className="font-medium leading-tight">{item.label}</span>
               </div>
             ))}
-
           </div>
-
         </div>
 
         {/* BOTTOM BORDER */}
-        <div className="border-b border-orange-100 mt-6" />
-
+        <div className="border-b border-orange-100 mt-4 sm:mt-6" />
       </div>
     </section>
   );

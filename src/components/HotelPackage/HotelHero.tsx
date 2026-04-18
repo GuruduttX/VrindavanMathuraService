@@ -3,6 +3,7 @@ import Image from "next/image";
 import { motion } from "framer-motion";
 import { Star, Wifi, Coffee, Car, MapPin, LucideIcon } from "lucide-react";
 import { useState } from "react";
+import Link from "next/link";
 import CommonEnquiryForm from "@/utils/CommanEnquiryForm";
 import QuickEnquiry from "@/utils/QuickQuery";
 
@@ -17,9 +18,7 @@ export default function HotelDetailsHero({ HotelData }: { HotelData: any }) {
 
   return (
     <>
-
       <section className="relative pt-30 pb-15 bg-gradient-to-br from-amber-50 via-yellow-50 to-orange-100 px-2 sm:px-px-12 md:px-30">
-
         <div className="absolute bottom-0 left-0 w-full overflow-hidden leading-none pointer-events-none">
           <svg
             viewBox="0 0 1440 80"
@@ -35,21 +34,30 @@ export default function HotelDetailsHero({ HotelData }: { HotelData: any }) {
         </div>
 
         {/* decorative glow */}
-        <div className="absolute top-0 left-0 w-96 h-96 bg-orange-200 rounded-full blur-[120px] opacity-40"></div>
+        <div className="absolute top-0 left-0 w-96 h-96 z-1 bg-orange-200 rounded-full blur-[120px] opacity-40"></div>
         <div className="absolute right-0 bottom-0 w-96 h-96 bg-yellow-200 rounded-full blur-[120px] opacity-40"></div>
 
         <div className=" mx-auto px-4 w-max-7xl">
-
           {/* breadcrumb */}
-          <nav> 
-            <p className="text-sm text-gray-400 mb-6">
-            Home / Hotels /
-            <span className="text-amber-600 font-semibold ml-1">
-              {HotelData.title}
-            </span>
-          </p>
+          <nav>
+            <div className="flex items-center text-sm text-gray-400 mb-6">
+              <Link href="/" className="hover:text-amber-500 transition-colors z-20">
+                Home
+              </Link>
+              <span className="mx-1">/</span>
+              <Link
+                href="/hotels"
+                className="hover:text-amber-500 transition-colors z-20"
+              >
+                Hotels
+              </Link>
+              <span className="mx-1">/</span>
+              <span className="text-amber-600 font-semibold">
+                {HotelData.title}
+              </span>
+            </div>
           </nav>
-          
+
           {/* HERO IMAGE */}
           <motion.div
             initial={{ opacity: 0, y: 60 }}
@@ -90,7 +98,6 @@ export default function HotelDetailsHero({ HotelData }: { HotelData: any }) {
           >
             {/* LEFT CONTENT */}
             <div>
-
               <h1 className="text-3xl md:text-4xl lg:text-5xl font-extrabold text-gray-900 leading-tight">
                 {HotelData.title}
               </h1>
@@ -101,7 +108,6 @@ export default function HotelDetailsHero({ HotelData }: { HotelData: any }) {
 
               {/* rating row */}
               <div className="flex items-center gap-3 mt-5">
-
                 <span className="flex items-center text-amber-600 text-lg font-bold">
                   ⭐ {HotelData.rating}
                 </span>
@@ -113,12 +119,10 @@ export default function HotelDetailsHero({ HotelData }: { HotelData: any }) {
                 <span className="bg-green-100 text-green-600 px-3 py-1 text-xs rounded-full font-semibold">
                   Top Rated
                 </span>
-
               </div>
 
               {/* amenities */}
               <div className="flex flex-wrap gap-4 mt-8">
-
                 {Object.entries(HotelData.quickInclusions).map(
                   ([key, isIncluded]) => {
                     if (!isIncluded || !inclusionConfig[key]) return null;
@@ -134,7 +138,7 @@ export default function HotelDetailsHero({ HotelData }: { HotelData: any }) {
                         <span className="text-sm font-medium">{label}</span>
                       </div>
                     );
-                  }
+                  },
                 )}
               </div>
             </div>
@@ -142,10 +146,8 @@ export default function HotelDetailsHero({ HotelData }: { HotelData: any }) {
             {/* BOOKING CARD */}
             <div className="hidden lg:block">
               <div className="bg-white/70 backdrop-blur-xl border border-orange-100 shadow-[0_20px_60px_rgba(0,0,0,0.08)] rounded-3xl px-10 py-7 flex items-center justify-between gap-10">
-
                 {/* LEFT CONTENT */}
                 <div className="flex flex-col">
-
                   <p className="text-xs uppercase tracking-wider text-gray-500">
                     Flexible Pricing
                   </p>
@@ -157,7 +159,6 @@ export default function HotelDetailsHero({ HotelData }: { HotelData: any }) {
                   <span className="mt-3 w-fit text-xs bg-orange-50 text-orange-600 px-4 py-1.5 rounded-full font-medium">
                     No Hidden Charges
                   </span>
-
                 </div>
 
                 {/* BUTTON */}
@@ -167,7 +168,6 @@ export default function HotelDetailsHero({ HotelData }: { HotelData: any }) {
                 >
                   Check Availability →
                 </button>
-
               </div>
             </div>
 
@@ -175,9 +175,7 @@ export default function HotelDetailsHero({ HotelData }: { HotelData: any }) {
             <div className="md:hidden">
               <QuickEnquiry />
             </div>
-
           </motion.div>
-
         </div>
       </section>
 

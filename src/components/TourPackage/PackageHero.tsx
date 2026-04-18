@@ -12,15 +12,15 @@ export default function PackageHero({ PackageData }: any) {
 
   return (
     <>
-    <CommonEnquiryForm
-            open={isFrormOpen}
-            onClose={() => setIsFrormOpen(false)}
-            defaultService="Taxi Booking"
-          />
+      <CommonEnquiryForm
+        open={isFrormOpen}
+        onClose={() => setIsFrormOpen(false)}
+        defaultService="Taxi Booking"
+      />
       {/* <TourEnquiryPopup open={isOpen} onClose={() => setIsOpen(false)} /> */}
       <section className="relative w-full  mt-6">
         <nav className="pt-24 pb-4 px-4 sm:px-8 lg:px-20">
-          <ol className="flex items-center gap-1 text-sm flex-wrap">
+          <ol className="flex items-center gap-1 text-sm flex-wrap md:ml-29">
             <li>
               <Link
                 href="/"
@@ -165,41 +165,48 @@ export default function PackageHero({ PackageData }: any) {
             </div>
 
             {/* Price */}
-            <div className="p-5 sm:p-7 bg-gradient-to-r from-[#7A2E00] to-[#E8821A] text-white">
-              <div className="flex flex-col sm:flex-row items-center justify-between gap-4">
-                <div className="text-center sm:text-left">
-                  <p className="text-orange-100 text-xs uppercase tracking-wide">
+            <div className="p-4 sm:p-7 bg-gradient-to-r from-orange-600 via-orange-500 to-amber-500 text-white relative overflow-hidden">
+              {/* Subtle grid overlay */}
+              <div
+                className="absolute inset-0 pointer-events-none opacity-10"
+                style={{
+                  backgroundImage:
+                    "linear-gradient(rgba(255,255,255,0.3) 1px, transparent 1px), linear-gradient(to right, rgba(255,255,255,0.3) 1px, transparent 1px)",
+                  backgroundSize: "32px 32px",
+                }}
+              />
+
+              {/* Orbs */}
+              <div className="absolute -top-8 -left-8 w-32 h-32 bg-amber-400/30 rounded-full blur-2xl pointer-events-none" />
+              <div className="absolute -bottom-8 -right-8 w-32 h-32 bg-orange-400/30 rounded-full blur-2xl pointer-events-none" />
+
+              <div className="relative z-10 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 sm:gap-4">
+                <div className="w-full sm:w-auto">
+                  <p className="text-orange-100/80 text-[10px] sm:text-xs uppercase tracking-widest font-semibold">
                     Special Offer
                   </p>
 
-                  <div className="flex items-center justify-center sm:justify-start gap-2 mt-1">
-                    {/* <span className="text-3xl font-bold flex items-center">
-                    <IndianRupee className="w-6 h-6" />
-                    {PackageData.discountPrice ?? PackageData.price}
-                  </span>
-
-                  {PackageData.discountPrice && (
-                    <span className="text-orange-200 line-through text-lg">
-                      ₹{PackageData.price}
-                    </span>
-                  )} */}
-                    <span className="text-xl md:text-2xl font-bold flex items-center">
+                  <div className="flex flex-wrap items-baseline gap-x-2 gap-y-0 mt-1">
+                    <span className="text-lg sm:text-xl md:text-2xl font-bold text-white leading-tight">
                       Get Special Custom Pricing
                     </span>
-
-                    <span className="text-orange-100 text-sm">/person</span>
+                    <span className="text-white/70 text-xs sm:text-sm">
+                      /person
+                    </span>
                   </div>
 
-                  <p className="text-xs text-orange-100 mt-1">
+                  <p className="text-[10px] sm:text-xs text-white/70 mt-1 font-medium">
                     Limited time offer • No hidden charges
                   </p>
                 </div>
-                  <div className="w-full md:hidden">
-                    <QuickEnquiry />
-                  </div>
+
+                <div className="w-full md:hidden mt-1">
+                  <QuickEnquiry />
+                </div>
+
                 <button
                   onClick={() => setIsFrormOpen(true)}
-                  className="w-full sm:w-auto px-8 py-3.5 rounded-xl bg-white text-[#A84010] font-bold shadow-lg hover:scale-105 transition-all duration-300 hover:shadow-xl cursor-pointer hidden md:block"
+                  className="hidden md:block w-full sm:w-auto shrink-0 px-8 py-3.5 rounded-xl bg-white text-orange-600 font-bold shadow-lg hover:scale-105 hover:shadow-xl transition-all duration-300 cursor-pointer"
                 >
                   Enquire Now →
                 </button>

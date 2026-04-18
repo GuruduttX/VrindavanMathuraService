@@ -14,7 +14,7 @@ import {
   ChevronDown,
   Coffee,
 } from "lucide-react";
-import { boolean } from "zod";
+import Link from "next/link";
 
 
 interface TaxiFeature {
@@ -158,6 +158,27 @@ const LeftReviewSection = ({ taxi }: LeftReviewSectionProps) => {
   }
   return (
     <div className="lg:col-span-2 space-y-8">
+      <nav>
+        <div className="flex items-center text-sm text-gray-400 mb-6">
+          <Link
+            href="/"
+            className="hover:text-amber-500 transition-colors z-20"
+          >
+            Home
+          </Link>
+          <span className="mx-1">/</span>
+          <Link
+            href="/hotels"
+            className="hover:text-amber-500 transition-colors z-20"
+          >
+            Taxi
+          </Link>
+          <span className="mx-1">/</span>
+          <span className="text-amber-600 font-semibold">
+            {taxi.title}
+          </span>
+        </div>
+      </nav>
       {/* JOURNEY ROUTE CARD */}
       <div className="bg-gradient-to-r from-amber-500 to-orange-600 text-white rounded-3xl p-6 shadow-xl">
         <h2 className="text-xl font-semibold mb-4 flex items-center gap-2">

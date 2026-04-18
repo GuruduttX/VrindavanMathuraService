@@ -32,7 +32,6 @@ export default function PackageDurationStrip({
   return (
     <section className="px-4 md:px-6 py-0 sm:py-4">
       <div className="max-w-7xl mx-auto">
-
         {/* ── DESKTOP ── */}
         <motion.div
           initial={{ opacity: 0, y: 16 }}
@@ -63,21 +62,21 @@ export default function PackageDurationStrip({
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ delay: Math.min(index * 0.05, 0.35) }}
                 className="flex items-center shrink-0 gap-3 px-5 py-4
-                  border-r border-orange-100 last:border-r-0
-                  hover:bg-orange-50/60 transition-colors duration-150 group cursor-pointer"
+        border-r border-orange-100 last:border-r-0
+        hover:bg-orange-50/60 transition-colors duration-150 group cursor-pointer"
               >
                 <span
-                  className="text-3xl font-extrabold text-[#E8821A]
-                    group-hover:text-[#A84010] transition-colors leading-none tabular-nums"
+                  className="text-3xl font-extrabold text-orange-500
+          group-hover:text-amber-600 transition-colors leading-none tabular-nums"
                 >
                   {num}
                   <sup className="text-sm font-bold">{suffix}</sup>
                 </span>
                 <div className="flex flex-col leading-tight min-w-0">
-                  <span className="text-[10px] uppercase tracking-widest text-gray-400 font-medium">
+                  <span className="text-[10px] uppercase tracking-widest text-amber-400 font-medium">
                     Day in
                   </span>
-                  <span className="text-sm font-semibold text-gray-800 whitespace-nowrap">
+                  <span className="text-sm font-semibold text-amber-900 whitespace-nowrap">
                     {item.place}
                   </span>
                 </div>
@@ -97,13 +96,13 @@ export default function PackageDurationStrip({
           <div className="flex items-center justify-between px-3.5 py-2.5 bg-orange-50 border-b border-orange-100">
             <span
               className="inline-flex items-center rounded-full text-white
-                px-3.5 py-1 text-xs font-bold tracking-wide
-                bg-[linear-gradient(145deg,#7A2E00_0%,#A84010_40%,#E8821A_100%)]
-                shadow-sm shadow-orange-200"
+      px-3.5 py-1 text-xs font-bold tracking-wide
+      bg-gradient-to-r from-orange-500 via-amber-500 to-yellow-400
+      shadow-sm shadow-orange-200"
             >
               {duration}
             </span>
-            <span className="text-[11px] text-orange-700 font-medium">
+            <span className="text-[11px] text-amber-600 font-medium">
               {breakdown.length} stops &nbsp;→ swipe
             </span>
           </div>
@@ -151,8 +150,10 @@ export default function PackageDurationStrip({
             </div>
 
             {/* Right fade scroll hint */}
-            <div className="pointer-events-none absolute right-0 top-0 bottom-0 w-8
-              bg-gradient-to-l from-white to-transparent" />
+            <div
+              className="pointer-events-none absolute right-0 top-0 bottom-0 w-8
+              bg-gradient-to-l from-white to-transparent"
+            />
           </div>
 
           {/* Swipe footer */}
@@ -173,7 +174,6 @@ export default function PackageDurationStrip({
             </span>
           </div>
         </motion.div>
-
       </div>
     </section>
   );

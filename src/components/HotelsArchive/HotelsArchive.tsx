@@ -191,7 +191,7 @@ export default function HotelsArchive() {
                 />
                 <p className="text-sm mt-2 text-gray-600">Up to ₹{price}</p>
               </div> */}
-
+ 
               {/* RATING */}
               <div>
                 <p className="text-sm text-gray-500 mb-3">Rating</p>
