@@ -1,10 +1,10 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
 import { useEffect, useRef, useState } from "react";
 import CommonEnquiryForm from "@/utils/CommanEnquiryForm";
 import QuickEnquiry from "@/utils/QuickQuery";
-
 
 const STATS = [
   { icon: "🪔", value: "50+", label: "Pooja Types" },
@@ -14,7 +14,7 @@ const STATS = [
 
 export default function PoojaHero() {
   const ref = useRef<HTMLDivElement>(null);
-  const[isFormOpen, setIsFromOpen] = useState(false)
+  const [isFormOpen, setIsFormOpen] = useState(false);
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -34,182 +34,210 @@ export default function PoojaHero() {
 
   return (
     <>
-    <section
+      <section
         ref={ref}
-        className="relative w-full min-h-[95vh] flex items-center justify-center overflow-hidden  md:pt-20"
-        style={{ fontFamily: "'Nunito', sans-serif" }}
+        className="relative w-full min-h-[95vh] flex items-center overflow-hidden"
+        style={{
+          background:
+            "linear-gradient(135deg, #c94a00 0%, #e86d00 30%, #f9a825 70%, #ffd54f 100%)",
+        }}
       >
-        {/* Background */}
+        {/* Blob accents */}
         <div
-          className="absolute inset-0 "
+          className="absolute -top-20 -left-20 w-80 h-80 rounded-full pointer-events-none"
+          style={{ background: "rgba(255,255,255,0.08)" }}
+        />
+        <div
+          className="absolute bottom-[-60px] left-[35%] w-64 h-64 rounded-full pointer-events-none"
+          style={{ background: "rgba(180,60,0,0.15)" }}
+        />
+
+        {/* Dot grid */}
+        <div
+          className="absolute inset-0 opacity-[0.12] pointer-events-none"
           style={{
-            background:
-              "linear-gradient(145deg, #FFFAEB 0%, #FDF2E2 40%, #FFF8E9 70%, #FFE1C3 100%)",
+            backgroundImage:
+              "radial-gradient(circle at 1px 1px, rgba(255,255,255,0.6) 1px, transparent 0)",
+            backgroundSize: "28px 28px",
           }}
         />
 
-          {/* Soft circle accents */}
-          <div
-            className="absolute rounded-full pointer-events-none"
-            style={{
-              width: 500,
-              height: 500,
-              background:
-                "radial-gradient(circle, rgba(236, 141, 27, 0.08) 0%, transparent 70%)",
-              top: "-80px",
-              left: "-80px",
-            }}
-          />
-          <div
-            className="absolute rounded-full pointer-events-none"
-            style={{
-              width: 400,
-              height: 400,
-              background:
-                "radial-gradient(circle, rgba(236, 141, 27, 0.08) 0%, transparent 70%)",
-              bottom: "0px",
-              right: "-60px",
-            }}
-          />
-
-          {/* Dot pattern */}
-          <div
-            className="absolute inset-0 opacity-30 pointer-events-none"
-            style={{
-              backgroundImage:
-                "radial-gradient(circle at 1px 1px, rgba(236, 141, 27, 0.08) 1px, transparent 0)",
-              backgroundSize: "32px 32px",
-            }}
-          />
-
-          {/* Bottom wave */}
-          <div className="absolute bottom-0 left-0 w-full overflow-hidden leading-none pointer-events-none">
-            <svg
-              viewBox="0 0 1440 100"
-              className="w-full h-20"
-              preserveAspectRatio="none"
-            >
-              <path
-                d="M0,50 C360,100 900,0 1440,60 L1440,100 L0,100 Z"
-                fill="white"
-                opacity="0.9"
-              />
-            </svg>
-          </div>
-
-          {/* Content */}
-          <div className="relative z-10 text-center px-6 max-w-3xl mt-30 md:mt-0">
-          {/* Diya icons */}
-          <div className="ph-anim ph-d1 flex justify-center gap-3 mb-6 text-2xl">
-            <span className="diya-icon">🪔</span>
-            <span className="diya-icon">🌸</span>
-            <span className="diya-icon">🪔</span>
-          </div>
-
-          {/* Badge */}
-          <div
-            className="ph-anim ph-d2 inline-flex items-center gap-2 px-4 py-1.5 rounded-full text-sm font-medium mb-5"
-            style={{
-              background: "rgba(236, 141, 27, 0.08)",
-              border: "1px solid #BB4D00",
-              color: "#BB4D00",
-            }}
+        {/* Bottom curvy wave */}
+        <div className="absolute bottom-[-2px] left-0 w-full pointer-events-none">
+          <svg
+            viewBox="0 0 1440 80"
+            className="w-full h-16 md:h-20"
+            preserveAspectRatio="none"
           >
-            Authentic Vedic Pooja Packages
-          </div>
+            <path
+              d="M0,0 C480,80 960,80 1440,0 L1440,80 L0,80 Z"
+              fill="white"
+            />
+          </svg>
+        </div>
 
-          {/* Title */}
-          <h1
-            className="ph-anim ph-d3"
-            style={{
-              fontFamily: "roboto, serif",
-              fontSize: "clamp(2.4rem, 6.5vw, 4.8rem)",
-              lineHeight: 1.15,
-              color: "#1a0a12",
-              fontWeight: 600,
-            }}
-          >
-            Book Sacred{" "}
-            <em style={{ color: "#E17100", fontStyle: "italic" }}>Poojas</em>
-            <span
-              className="block mt-1"
+        {/* Inner layout */}
+        <div className="relative z-10 w-full max-w-7xl mx-auto px-6 md:px-12 py-16 md:py-20 pb-24 md:pb-28 flex flex-col md:flex-row items-center gap-10 md:gap-16">
+
+          {/* ── LEFT: All content ── */}
+          <div className="flex-1 min-w-0 flex flex-col items-start">
+            {/* Diya row */}
+            <div className="ph-anim ph-d1 flex gap-2 mb-4 text-xl">
+              <span>🪔</span>
+              <span>🌸</span>
+              <span>🪔</span>
+            </div>
+
+            {/* Badge */}
+            <div
+              className="ph-anim ph-d2 inline-flex items-center px-5 py-1.5 rounded-full text-[10px] font-bold uppercase tracking-widest text-white mb-5"
               style={{
-                fontSize: "0.5em",
-                color: "#E17100",
-                fontWeight: 400,
-                letterSpacing: "0.04em",
+                background: "rgba(255,255,255,0.18)",
+                border: "1px solid rgba(255,255,255,0.42)",
+              }}
+            >
+              Authentic Vedic Pooja Packages
+            </div>
+
+            {/* Title */}
+            <h1
+              className="ph-anim ph-d3 text-white font-black leading-[1.08] tracking-tight drop-shadow-sm mb-2"
+              style={{ fontSize: "clamp(2.4rem, 5.5vw, 4.2rem)" }}
+            >
+              Book Sacred{" "}
+              <em className="italic" style={{ opacity: 0.9 }}>
+                Poojas
+              </em>
+            </h1>
+            <p
+              className="ph-anim ph-d3 font-normal tracking-widest mb-4"
+              style={{
+                fontSize: "clamp(1rem, 2vw, 1.3rem)",
+                color: "rgba(255,255,255,0.82)",
               }}
             >
               in Mathura &amp; Vrindavan
-            </span>
-          </h1>
+            </p>
 
-          {/* Body */}
-          <p
-            className="ph-anim ph-d4 mt-5 text-base md:text-lg leading-relaxed mx-auto"
-            style={{ color: "#000000", maxWidth: "30rem" }}
-          >
-            Performed by learned pandits — Rukmini Vivah, Govardhan Pooja,
-            Janmashtami Abhishek &amp; many more sacred rituals.
-          </p>
+            {/* Divider */}
+            <div className="flex items-center gap-2 mb-5">
+              <div className="h-px w-6 bg-white/40" />
+              <div
+                className="h-1 w-20 rounded-full bg-white"
+                style={{ boxShadow: "0 0 10px rgba(255,255,255,0.45)" }}
+              />
+              <div className="h-px w-6 bg-white/40" />
+            </div>
 
-          {/* CTAs */}
-          <div className="ph-anim ph-d5 mt-8 flex flex-wrap justify-center gap-4">
-            <button
-              className="btn-book px-9 py-3.5 rounded-full text-white font-semibold cursor-pointer"
-              style={{
-                background: "linear-gradient(135deg, #FF8824, #EA8D19)",
-                boxShadow: "0 8px 28px rgba(235, 141, 27, 0.8)",
-              }}
-              onClick={()=> setIsFromOpen(true)}
+            {/* Description */}
+            <p
+              className="ph-anim ph-d4 text-sm md:text-base leading-relaxed mb-7 max-w-md"
+              style={{ color: "rgba(255,255,255,0.84)" }}
             >
-              🙏 Book a Pooja
-            </button>
+              Performed by learned pandits — Rukmini Vivah, Govardhan Pooja,
+              Janmashtami Abhishek &amp; many more sacred rituals.
+            </p>
 
-            <Link href="/pooja-packages">
+            {/* Stats */}
+            <div className="ph-anim ph-d5 flex flex-wrap gap-7 mb-7">
+              {STATS.map((s) => (
+                <div key={s.label} className="flex flex-col">
+                  <span className="text-xl font-black text-white leading-none">
+                    {s.icon} {s.value}
+                  </span>
+                  <span
+                    className="text-[11px] mt-1"
+                    style={{ color: "rgba(255,255,255,0.62)" }}
+                  >
+                    {s.label}
+                  </span>
+                </div>
+              ))}
+            </div>
+
+            {/* CTAs */}
+            <div className="ph-anim ph-d5 flex flex-wrap gap-3 mb-7">
               <button
-                className="btn-outline px-9 py-3.5 rounded-full font-semibold cursor-pointer"
+                onClick={() => setIsFormOpen(true)}
+                className="inline-flex items-center gap-2 px-8 py-3.5 rounded-full font-extrabold text-sm cursor-pointer transition-all duration-200 hover:scale-[1.03] active:scale-95"
                 style={{
-                  border: "1.5px solid #E17101",
-                  color: "#E17101",
-                  background: "transparent",
+                  background: "#fff",
+                  color: "#c94a00",
+                  boxShadow: "0 6px 22px rgba(0,0,0,0.15)",
                 }}
               >
-                View All Poojas
+                🙏 Book a Pooja
               </button>
-            </Link>
-          </div>
 
-          {/* Stats */}
-          <div className="ph-anim ph-d5 mt-10 flex flex-wrap justify-center gap-6">
-            {STATS.map((s) => (
-              <div key={s.label} className="flex flex-col items-center">
-                <span className="text-xl mb-0.5">{s.icon}</span>
-                <span
-                  className="text-xl font-semibold"
+              <Link href="/pooja-packages">
+                <button
+                  className="inline-flex items-center gap-2 px-8 py-3.5 rounded-full font-bold text-sm text-white cursor-pointer transition-all duration-200 hover:bg-white/20 hover:scale-[1.03] active:scale-95"
                   style={{
-                    fontFamily: "'Cormorant Garamond', serif",
-                    color: "#E17101",
+                    border: "1.5px solid rgba(255,255,255,0.5)",
+                    background: "rgba(255,255,255,0.12)",
                   }}
                 >
-                  {s.value}
+                  View All Poojas →
+                </button>
+              </Link>
+            </div>
+
+            {/* Trust strip */}
+            <div className="flex flex-wrap items-center gap-x-5 gap-y-2">
+              {[
+                "100% Vedic Rituals",
+                "Certified Pandits",
+                "Doorstep Service",
+                "Secure Booking",
+              ].map((t) => (
+                <span
+                  key={t}
+                  className="flex items-center gap-1.5 text-xs"
+                  style={{ color: "rgba(255,255,255,0.52)" }}
+                >
+                  <span style={{ color: "rgba(255,228,70,0.85)" }}>✦</span>
+                  {t}
                 </span>
-                <span className="text-xs" style={{ color: "#BB4D00" }}>
-                  {s.label}
-                </span>
+              ))}
+            </div>
+
+            <div className="md:hidden w-full mt-6">
+              <QuickEnquiry />
+            </div>
+          </div>
+
+          {/* ── RIGHT: Image ── */}
+          <div className="flex-shrink-0 w-full md:w-[340px] lg:w-[380px] self-stretch flex items-center justify-end">
+            <div className="relative w-full max-w-[360px] h-[420px] md:h-full min-h-[380px]">
+              <div className="w-full h-full rounded-2xl overflow-hidden border-[3px] border-white/28 shadow-[0_20px_56px_rgba(0,0,0,0.25)]">
+                <Image
+                  src="/images/pooja-image.webp" 
+                  alt="Sacred Pooja"
+                  fill
+                  className="object-cover object-center"
+                  priority
+                />
               </div>
-            ))}
+
+              {/* Floating counter badge */}
+              <div className="absolute bottom-4 right-4 bg-white rounded-2xl px-4 py-2.5 shadow-xl">
+                <p className="text-xl font-black leading-none" style={{ color: "#c94a00" }}>
+                  10K+
+                </p>
+                <p className="text-[10px] text-gray-500 font-semibold tracking-wide uppercase mt-0.5">
+                  Devotees Served
+                </p>
+              </div>
             </div>
-            <div className="md:hidden">
-            <QuickEnquiry />
-            </div>
+          </div>
         </div>
-    </section>
-        <CommonEnquiryForm
-          open={isFormOpen}
-          onClose={() => setIsFromOpen(false)}
-          defaultService="Pooja"
-        />
+      </section>
+
+      <CommonEnquiryForm
+        open={isFormOpen}
+        onClose={() => setIsFormOpen(false)}
+        defaultService="Pooja"
+      />
     </>
   );
 }
