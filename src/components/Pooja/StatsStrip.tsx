@@ -41,7 +41,7 @@ export default function StatsStrip() {
   return (
     <section className="absolute left-1/2 -translate-x-1/2 max-w-6xl w-full 
 bg-gradient-to-r from-[#FB8C00]/90 via-[#FFA726]/90 to-[#FFD54F]/90 
-backdrop-blur-md rounded-2xl px-6 py-3 -mt-20 z-50 hidden md:block 
+backdrop-blur-md rounded-2xl px-6 py-3 -mt-20 z-35 hidden md:block 
 shadow-[0_10px_40px_rgba(255,140,0,0.35)]">
 
   <div className="grid grid-cols-2 md:grid-cols-4 gap-3">

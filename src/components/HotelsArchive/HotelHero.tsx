@@ -5,28 +5,43 @@ import { motion } from "framer-motion";
 import { Phone } from "lucide-react";
 import CommonEnquiryForm from "@/utils/CommanEnquiryForm";
 import QuickEnquiry from "@/utils/QuickQuery";
+import Link from "next/link";
 export default function HotelsHero() {
 
   const [isFormOpen, setIsFormOpen] = useState(false);
 
   return (
-    
     <>
-
       <section className="relative overflow-hidden bg-gradient-to-br from-orange-50 via-amber-50 to-amber-100 pt-20">
-
         <div className="absolute -top-40 -left-40 w-[500px] h-[500px] bg-amber-200/40 rounded-full blur-[90px]" />
 
         <div className="absolute bottom-0 right-0 w-[500px] h-[500px] bg-orange-200/40 rounded-full blur-[100px] -z-10" />
 
         <div className="max-w-[1300px] mx-auto px-6 lg:px-20 py-20 grid lg:grid-cols-2 gap-16 items-center">
-          
           <motion.div
             initial={{ opacity: 0, y: 40 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
           >
-          
+            <nav>
+              <div className="flex items-center text-sm text-gray-400 mb-6">
+                <Link
+                  href="/"
+                  className="hover:text-amber-500 transition-colors z-20"
+                >
+                  Home
+                </Link>
+                <span className="mx-1">/</span>
+                <Link
+                  href="/hotels"
+                  className="text-amber-500 transition-colors z-20"
+                >
+                  Hotels
+                </Link>
+              
+              </div>
+            </nav>
+
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
@@ -36,7 +51,6 @@ export default function HotelsHero() {
               🏨 Explore Luxury Stays
             </motion.div>
 
-          
             <motion.h1
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
@@ -68,9 +82,9 @@ export default function HotelsHero() {
               className="flex gap-4 mt-10 flex-col md:flex-row"
             >
               <div className="flex gap-8 justify-center">
-              <Stat number="200+" label="Hotels" />
-              <Stat number="5K+" label="Guests" />
-              <Stat number="₹999" label="Starting From" />
+                <Stat number="200+" label="Hotels" />
+                <Stat number="5K+" label="Guests" />
+                <Stat number="₹999" label="Starting From" />
               </div>
 
               <button
@@ -146,14 +160,13 @@ export default function HotelsHero() {
             ></path>
           </svg>
         </div>
-
       </section>
-        {/* 3. The Form Component */}
-        <CommonEnquiryForm
-          open={isFormOpen}
-          onClose={() => setIsFormOpen(false)}
-          defaultService="Hotel Booking"
-        />
+      {/* 3. The Form Component */}
+      <CommonEnquiryForm
+        open={isFormOpen}
+        onClose={() => setIsFormOpen(false)}
+        defaultService="Hotel Booking"
+      />
     </>
   );
 }

@@ -11,26 +11,25 @@ import { useRouter } from "next/navigation";
 export default function TaxiArchive({ taxis }: { taxis: any }) {
   const [search, setSearch] = useState("");
   const [filter, setFilter] = useState("all");
+  const [fuelFilter, setFuelFilter] = useState("all");
   const [isOpen, setIsOpen] = useState(false);
 
   const router = useRouter();
-
 
   const filteredTaxis = taxis.filter((taxi: any) => {
     const matchesSearch = taxi.title
       .toLowerCase()
       .includes(search.toLowerCase());
     const matchesFilter = filter === "all" || taxi.cabType === filter;
-    return matchesSearch && matchesFilter;
+    const matchesFuel = fuelFilter === "all" || taxi.fuelType === fuelFilter;
+    return matchesSearch && matchesFilter && matchesFuel;
   });
-
-  
 
   return (
     <section className="max-w-7xl mx-auto min-h-screen py-10">
 
-       <div className="relative inline-block px-100 mb-14">
-            <h2 className="text-3xl md:text-5xl font-bold bg-gradient-to-r from-orange-600 via-amber-500 to-yellow-400 bg-clip-text text-transparent leading-tight tracking-tight">
+       <div className="relative inline-block px-16 sm:px-20 md:px-90 mb-14">
+            <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold bg-gradient-to-r from-orange-600 via-amber-500 to-yellow-400 bg-clip-text text-transparent leading-tight tracking-tight">
               Premium Taxi Services
             </h2>
 
@@ -62,53 +61,105 @@ export default function TaxiArchive({ taxis }: { taxis: any }) {
       <div className="max-w-7xl mx-auto px-6 grid lg:grid-cols-4 gap-10">
         
         {/* Sidebar Filters */}
-        <div className="bg-white rounded-3xl shadow-xl p-6 h-fit transition-all duration-300">
-          {/* Header - Clickable on Mobile */}
+        <div className="bg-white/80 backdrop-blur-sm border border-orange-100 rounded-2xl p-5 h-fit shadow-sm">
+          {/* Header */}
           <div
             className="flex items-center justify-between cursor-pointer md:cursor-default"
             onClick={() => setIsOpen(!isOpen)}
           >
-            <h3 className="text-xl font-bold text-gray-800">Filters</h3>
-
-            {/* Arrow Icon - Only visible on mobile, rotates when open */}
+            <div className="flex items-center gap-2">
+              <div className="w-1 h-5 rounded-full bg-gradient-to-b from-amber-500 to-orange-500" />
+              <h3 className="text-lg font-semibold text-gray-800">Filters</h3>
+            </div>
             <div
               className={`md:hidden transition-transform duration-300 ${isOpen ? "rotate-180" : ""}`}
             >
-              <ChevronDown size={24} className="text-amber-600" />
+              <ChevronDown size={20} className="text-amber-500" />
             </div>
           </div>
 
-          {/* Filter List - Responsive visibility */}
           <div
-            className={`
-      space-y-3 mt-6 
-      ${isOpen ? "block" : "hidden"} 
-      md:block
-    `}
+            className={`mt-6 space-y-7 ${isOpen ? "block" : "hidden"} md:block`}
           >
-            {[
-              "all",
-              "Sedan",
-              "SUV",
-              "Hatchback",
-              "MiniBus",
-              "Tempo Traveller",
-            ].map((type) => (
+            {/* CAB TYPE */}
+            <div>
+              <p className="text-xs font-bold uppercase tracking-widest text-amber-500 mb-3">
+                Cab Type
+              </p>
+              <div className="flex flex-wrap gap-2">
+                {[
+                  "all",
+                  "Sedan",
+                  "SUV",
+                  "Hatchback",
+                  "MiniBus",
+                  "Tempo Traveller",
+                ].map((type) => (
+                  <button
+                    key={type}
+                    onClick={() => {
+                      setFilter(type);
+                      setIsOpen(false);
+                    }}
+                    className={`px-4 py-2 rounded-full text-sm font-semibold border transition-all duration-200 cursor-pointer ${
+                      filter === type
+                        ? "bg-gradient-to-r from-amber-500 to-orange-500 text-white border-transparent shadow-sm"
+                        : "bg-white text-gray-600 border-gray-200 hover:border-amber-300 hover:text-amber-600"
+                    }`}
+                  >
+                    {type === "all" ? "All" : type}
+                  </button>
+                ))}
+              </div>
+            </div>
+
+            {/* DIVIDER */}
+            <div className="border-t border-gray-100" />
+
+            {/* FUEL TYPE */}
+            <div>
+              <p className="text-xs font-bold uppercase tracking-widest text-amber-500 mb-3">
+                Fuel Type
+              </p>
+              <div className="grid grid-cols-2 gap-2">
+                {[
+                  { value: "all", label: "All", icon: "⛽" },
+                  { value: "Petrol", label: "Petrol", icon: "🔴" },
+                  { value: "Diesel", label: "Diesel", icon: "🟤" },
+                  { value: "Electric", label: "Electric", icon: "⚡" },
+                  { value: "CNG", label: "CNG", icon: "🟢" },
+                ].map(({ value, label, icon }) => (
+                  <button
+                    key={value}
+                    onClick={() => {
+                      setFuelFilter(value);
+                      setIsOpen(false);
+                    }}
+                    className={`flex items-center gap-2 px-4 py-2.5 rounded-xl text-sm font-semibold border transition-all duration-200 cursor-pointer ${
+                      fuelFilter === value
+                        ? "bg-gradient-to-r from-amber-500 to-orange-500 text-white border-transparent shadow-sm"
+                        : "bg-white text-gray-600 border-gray-200 hover:border-amber-300 hover:text-amber-600"
+                    }`}
+                  >
+                    <span className="text-base">{icon}</span>
+                    {label}
+                  </button>
+                ))}
+              </div>
+            </div>
+
+            {/* RESET */}
+            {(filter !== "all" || fuelFilter !== "all") && (
               <button
-                key={type}
                 onClick={() => {
-                  setFilter(type);
-                  setIsOpen(false); // Optional: Close accordion after selection on mobile
+                  setFilter("all");
+                  setFuelFilter("all");
                 }}
-                className={`w-full text-left px-4 py-3 rounded-xl transition font-medium cursor-pointer ${
-                  filter === type
-                    ? "bg-gradient-to-r from-amber-500 to-orange-600 text-white shadow-md"
-                    : "bg-gray-100 hover:bg-amber-50 text-gray-700"
-                }`}
+                className="w-full flex items-center justify-center gap-1.5 py-2.5 rounded-xl text-sm font-semibold text-orange-500 border border-dashed border-orange-300 hover:bg-orange-50 transition-all duration-200"
               >
-                {type === "all" ? "All Cabs" : type}
+                ✕ Reset Filters
               </button>
-            ))}
+            )}
           </div>
         </div>
 

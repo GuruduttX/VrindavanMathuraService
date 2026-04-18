@@ -93,25 +93,15 @@ export default function SideForm() {
 
   return (
     <div className="w-full max-w-sm">
-      <div
-        className="
-        relative
-        bg-white/90 backdrop-blur-md
-        rounded-3xl
-        border border-orange-100
-        shadow-xl
-        p-8
-      "
-      >
+      <div className="relative bg-white/90 backdrop-blur-md rounded-3xl border border-orange-100 shadow-xl p-8">
         {/* Glow */}
         <div className="absolute -top-10 -right-10 w-32 h-32 bg-orange-200/30 blur-2xl rounded-full pointer-events-none" />
 
-        <h3 className="text-xl font-semibold text-gray-900 mb-6">
+        <h3 className="text-xl font-semibold text-amber-900 mb-6">
           Enquire About This Package
         </h3>
 
         <form onSubmit={handleSubmit} className="space-y-5">
-
           <FloatingInput
             label="Full Name"
             name="name"
@@ -130,18 +120,9 @@ export default function SideForm() {
 
           {/* Phone */}
           <div className="flex gap-3">
-            <div
-              className="
-              w-20 rounded-xl
-              border border-orange-200
-              flex items-center justify-center
-              text-sm text-[#A84010] font-medium
-              bg-orange-50
-            "
-            >
+            <div className="w-20 rounded-xl border border-orange-200 flex items-center justify-center text-sm text-orange-500 font-medium bg-orange-50">
               +91
             </div>
-
             <div className="flex-1">
               <FloatingInput
                 label="Phone Number"
@@ -161,24 +142,9 @@ export default function SideForm() {
               value={form.travelDate}
               onChange={handleChange}
               required
-              className="
-                peer w-full rounded-xl
-                border border-orange-200
-                px-4 pt-5 pb-2
-                text-sm outline-none
-                focus:border-[#A84010]
-                focus:ring-2 focus:ring-orange-100
-                transition
-              "
+              className="peer w-full rounded-xl border border-orange-200 px-4 pt-5 pb-2 text-sm outline-none focus:border-orange-500 focus:ring-2 focus:ring-orange-100 transition"
             />
-            <label
-              className="
-                absolute left-4 top-2 text-xs
-                text-gray-500
-                peer-focus:text-[#A84010]
-                transition
-              "
-            >
+            <label className="absolute left-4 top-2 text-xs text-amber-500 peer-focus:text-orange-500 transition">
               Travel Date *
             </label>
           </div>
@@ -202,26 +168,15 @@ export default function SideForm() {
           <button
             type="submit"
             disabled={loading}
-            className="
-              w-full
-              bg-[linear-gradient(145deg,#7A2E00,#A84010,#E8821A)]
-              hover:opacity-90
-              text-white font-semibold
-              py-3 rounded-xl
-              shadow-md hover:shadow-lg
-              transition
-              disabled:opacity-60
-              cursor-pointer
-            "
+            className="w-full bg-orange-500 hover:bg-orange-600 text-white font-semibold py-3 rounded-xl shadow-md hover:shadow-lg transition disabled:opacity-60 cursor-pointer"
           >
             {loading ? "Sending..." : "Send Enquiry"}
           </button>
-
         </form>
 
         {/* Success */}
         {success && (
-          <p className="mt-4 text-xs text-[#A84010] text-center">
+          <p className="mt-4 text-xs text-orange-500 text-center">
             Enquiry sent successfully ✔
           </p>
         )}
