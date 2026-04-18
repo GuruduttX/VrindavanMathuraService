@@ -29,12 +29,9 @@ export default function ProductRatings() {
   return (
     <section className="w-full py-20 bg-gradient-to-b from-orange-50 to-white">
       <div className="max-w-7xl mx-auto px-6">
-
         <div className="rounded-3xl border border-orange-100 bg-white shadow-sm overflow-hidden">
-
-          {/* 🔥 MOBILE: horizontal scroll */}
-          <div className="flex md:grid md:grid-cols-2 lg:grid-cols-4 overflow-x-auto no-scrollbar">
-
+          {/* Added snap-x and snap-mandatory to the flex container */}
+          <div className="flex md:grid md:grid-cols-2 lg:grid-cols-4 overflow-x-auto snap-x snap-mandatory no-scrollbar">
             {features.map((item, i) => {
               const Icon = item.icon;
 
@@ -42,12 +39,14 @@ export default function ProductRatings() {
                 <div
                   key={i}
                   className={`
-                    p-8 text-center shrink-0 w-[220px] sm:w-[240px] md:w-auto
-                    ${i !== features.length - 1
-                      ? "border-r md:border-r-0 md:border-b lg:border-b-0 lg:border-r border-orange-100"
-                      : ""
-                    }
-                  `}
+                /* Changed to w-full and added snap-center */
+                p-8 text-center shrink-0 w-full snap-center md:w-auto
+                ${
+                  i !== features.length - 1
+                    ? "border-r md:border-r-0 md:border-b lg:border-b-0 lg:border-r border-orange-100"
+                    : ""
+                }
+              `}
                 >
                   {/* Icon */}
                   <div className="mx-auto mb-6 flex h-12 w-12 items-center justify-center rounded-full bg-orange-100 text-[#A84010]">
@@ -66,10 +65,8 @@ export default function ProductRatings() {
                 </div>
               );
             })}
-
           </div>
         </div>
-
       </div>
     </section>
   );

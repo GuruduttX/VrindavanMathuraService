@@ -15,7 +15,6 @@ import Testimonials from "@/components/Admin/PackageEditor/Testimonials";
 import { BenefitType, TestimonialType } from "../../create-pooja/page";
 
 import { useParams } from "next/navigation";
-import BenefitsHandler from "@/components/Admin/PoojaEditor/BenefitsHandler";
 
 const inputClass = `
   mt-2 w-full px-5 py-3 rounded-xl
@@ -183,29 +182,6 @@ export default function CreatePoojaPage() {
     status,
   });
 
-  const getPoojaBySlug = async (slug: string) => {
-      try {
-        const res = await fetch(
-          `${process.env.NEXT_PUBLIC_URL}/api/admin/pooja/check-slug?slug=${slug}`
-        );
-
-        if (res.status === 404) {
-          return { exists: false };
-        }
-
-        const data = await res.json();
-
-        return {
-          exists: true,
-          data: data.data || data, // handle both formats
-        };
-
-      } catch (error) {
-        console.error("Slug check error:", error);
-        return { exists: false };
-      }
-};
-
   /* ---------------- API ---------------- */
   const updateData = async (payload: any) => {
 
@@ -228,25 +204,6 @@ export default function CreatePoojaPage() {
       return;
     }
 
-    if (form.subContent && form.subContent.length > 200) {
-    toast.error("SubContent should be less than 200 characters");
-    return;
-  }
-
-    if (!form.slug) {
-        toast.error("Package slug is required");
-        return ;
-      }
-    
-     
-      const result = await getPoojaBySlug(form.slug);
-    
-    
-      if (result?.exists &&   result?.data?._id !== id) {
-      toast.error("Slug already exists");
-      return ;
-    }
-
     setLoading(true);
     try {
       await updateData(buildPayload("published"));
@@ -262,18 +219,6 @@ export default function CreatePoojaPage() {
     if (!form.title) {
       toast.error("Title required");
       return;
-    }
-
-    if(form.slug){
-      const result = await getPoojaBySlug(form.slug);
-
-      console.log("Result", result);
-    
-    
-      if (result?.exists &&   result?.data?._id !== id) {
-      toast.error("Slug already exists");
-      return ;
-    }
     }
 
     setLoading(true);
@@ -320,7 +265,6 @@ export default function CreatePoojaPage() {
           editorType="Pooja"
         />
 
-        {/* <BenefitsHandler benefits={benefits} setBenefits={setBenefits}/> */}
 
         {/* FAQ */}
         <FaqHandler faqs={faqs} setFaqs={setFaqs} editorType="Pooja" />
@@ -357,11 +301,10 @@ export default function CreatePoojaPage() {
 
         {/* ACTIONS */}
         <CMSActions
-          actionType="update"
+          actionType="create"
           editorType="Pooja"
           onSaveDraft={handleDraft}
           loading={loading}
-          
         />
       </form>
     </div>

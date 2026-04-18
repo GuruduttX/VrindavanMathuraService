@@ -130,7 +130,7 @@ export default function PackageHero({ PackageData }: any) {
           </div>
 
           {/* Info Card */}
-          <div className="mt-6 bg-white rounded-3xl shadow-xl border border-orange-100 overflow-hidden">
+          <div className="mt-6 bg-white rounded-3xl md:shadow-xl border border-orange-100 overflow-hidden">
             {/* Title */}
             <div className="p-5 sm:p-7 bg-gradient-to-br from-orange-50/50 to-white">
               <h1 className="text-xl sm:text-3xl lg:text-4xl font-bold text-gray-900 leading-tight text-center lg:text-left">

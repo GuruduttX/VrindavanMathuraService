@@ -25,14 +25,17 @@ export default function TourArchiveCTA() {
           />
           <defs>
             <linearGradient id="zigzagGradient" x1="0" y1="0" x2="1440" y2="0">
-              <stop offset="0%" stopColor="#7A2E00" />
-              <stop offset="100%" stopColor="#E8821A" />
+              <stop offset="0%" stopColor="#FB8C00" />
+<stop offset="100%" stopColor="#FFD54F" />
             </linearGradient>
           </defs>
         </svg>
 
         {/* MAIN CTA */}
-        <div className="bg-gradient-to-br from-[#FFF7ED] to-white py-12 px-4 sm:py-16 sm:px-6 md:py-20 md:px-10 lg:py-28 lg:px-20">
+        <div className="bg-gradient-to-br 
+      from-[#FFF3E0] 
+      via-[#FFF8E1] 
+      to-[#FFFFFF] py-12 px-4 sm:py-16 sm:px-6 md:py-20 md:px-10 lg:py-28 lg:px-20">
           <div className="max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-2 items-center gap-12 lg:gap-20">
             {/* LEFT TEXT */}
             <div className="space-y-6 text-center lg:text-left">
@@ -44,7 +47,7 @@ export default function TourArchiveCTA() {
                 className="text-2xl sm:text-3xl md:text-4xl font-serif text-gray-900 leading-snug"
               >
                 Let Us Design Your
-                <span className="block italic text-[#A84010]">
+                <span className="block italic text-[#f9631d]">
                   Personalized Spiritual Journey
                 </span>
               </motion.h2>
@@ -63,7 +66,7 @@ export default function TourArchiveCTA() {
 
               <button
                 className="px-6 py-3 sm:px-8 sm:py-3.5 lg:px-10 lg:py-4 text-sm sm:text-base rounded-full 
-            bg-[linear-gradient(145deg,#7A2E00,#A84010,#E8821A)] 
+            bg-gradient-to-r from-[#d17300] to-[#FFB300]
             text-white font-medium tracking-wide hover:opacity-90 transition duration-300 shadow-md cursor-pointer"
                 onClick={() => setIsFromOpen(true)}
               >
@@ -73,8 +76,8 @@ export default function TourArchiveCTA() {
 
             {/* RIGHT IMAGE */}
             <motion.div
-              initial={{ opacity: 0, x: 40 }}
-              whileInView={{ opacity: 1, x: 0 }}
+              initial={{ opacity: 0, y: 40 }}
+              whileInView={{ opacity: 1, y: 10 }}
               transition={{ duration: 0.8 }}
               viewport={{ once: true }}
               className="relative flex justify-center"
@@ -120,8 +123,8 @@ export default function TourArchiveCTA() {
           />
           <defs>
             <linearGradient id="zigzagGradient2" x1="0" y1="0" x2="1440" y2="0">
-              <stop offset="0%" stopColor="#7A2E00" />
-              <stop offset="100%" stopColor="#E8821A" />
+              <stop offset="0%" stopColor="#FB8C00" />
+<stop offset="100%" stopColor="#FFD54F" />
             </linearGradient>
           </defs>
         </svg>

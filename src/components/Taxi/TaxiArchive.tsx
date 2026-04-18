@@ -27,8 +27,40 @@ export default function TaxiArchive({ taxis }: { taxis: any }) {
   
 
   return (
-    <section className="bg-gradient-to-br from-amber-50 via-white to-orange-50 min-h-screen py-20">
+    <section className="max-w-7xl mx-auto min-h-screen py-10">
+
+       <div className="relative inline-block px-100 mb-14">
+            <h2 className="text-3xl md:text-5xl font-bold bg-gradient-to-r from-orange-600 via-amber-500 to-yellow-400 bg-clip-text text-transparent leading-tight tracking-tight">
+              Premium Taxi Services
+            </h2>
+
+            {/* SVG decorative underline */}
+            <svg
+              viewBox="0 0 320 12"
+              className="w-full mt-1"
+              preserveAspectRatio="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <defs>
+                <linearGradient id="uline" x1="0%" y1="0%" x2="100%" y2="0%">
+                  <stop offset="0%"   stopColor="#ea580c" />
+                  <stop offset="50%"  stopColor="#f59e0b" />
+                  <stop offset="100%" stopColor="#facc15" />
+                </linearGradient>
+              </defs>
+              {/* wavy underline path */}
+              <path
+                d="M0,6 Q40,0 80,6 T160,6 T240,6 T320,6"
+                fill="none"
+                stroke="url(#uline)"
+                strokeWidth="3"
+                strokeLinecap="round"
+              />
+            </svg>
+       </div>
+
       <div className="max-w-7xl mx-auto px-6 grid lg:grid-cols-4 gap-10">
+        
         {/* Sidebar Filters */}
         <div className="bg-white rounded-3xl shadow-xl p-6 h-fit transition-all duration-300">
           {/* Header - Clickable on Mobile */}
@@ -125,10 +157,13 @@ export default function TaxiArchive({ taxis }: { taxis: any }) {
 
             {/* Trust banner */}
 
-            <div className="flex gap-6 text-white px-6 py-3 rounded-full bg-gradient-to-r from-amber-500 via-amber-500 to-orange-600 shadow-lg">
-              <span>Trusted Drivers</span>
-              <span>Clean Cabs</span>
-              <span>On-Time Pickup</span>
+            <div className="flex flex-wrap justify-center gap-3 sm:gap-6 text-white px-6 py-4 rounded-2xl md:rounded-full bg-gradient-to-r from-amber-500 via-amber-500 to-orange-600 shadow-lg text-sm sm:text-base font-medium">
+              <span className="whitespace-nowrap">Trusted Drivers</span>
+              <span className="hidden sm:inline text-amber-200/50">•</span>{" "}
+              {/* Visual divider on desktop */}
+              <span className="whitespace-nowrap">Clean Cabs</span>
+              <span className="hidden sm:inline text-amber-200/50">•</span>
+              <span className="whitespace-nowrap">On-Time Pickup</span>
             </div>
           </div>
 

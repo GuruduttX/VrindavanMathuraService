@@ -72,8 +72,8 @@ export default function PoojaCard({ product }: any) {
               ))}
             </div>
             <span className="text-xs font-medium">{product.rating}</span>
-            {product?.reviews && (
-              <span className="text-xs text-stone-400">· {product.reviews} reviews</span>
+            {product.reviews && (
+              <span className="text-xs text-stone-400">· {product.reviews.length} reviews</span>
             )}
           </div>
         )}
@@ -85,7 +85,7 @@ export default function PoojaCard({ product }: any) {
           <p className="text-[10px] uppercase tracking-wide text-stone-400">Booking price</p>
           <div className="flex items-baseline gap-1.5">
             <span className="text-lg font-medium text-amber-700">
-              ₹{displayPrice.toLocaleString()}
+                ₹{displayPrice ? displayPrice.toLocaleString() : "0"}
             </span>
             {discount && (
               <>

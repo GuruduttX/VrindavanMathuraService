@@ -4,8 +4,7 @@ import PoojaCTASection from "@/components/Pooja/PoojaCTASection";
 import PoojaSection from "@/components/Pooja/PoojaSection";
 import LuxuryFooter from "@/utils/Footer";
 import Navbar from "@/utils/Navbar";
-
-
+import PoojaFAQ from "@/components/Pooja/PoojaFAQS";
 const getPoojaData = async () => {
     try {
 
@@ -38,7 +37,7 @@ export default async function page() {
             <PoojaArchiveHero />
             <PoojaSection poojaData={poojaData}/>
             <PoojaCTASection />
-            {/* <FAQSection /> */}
+            <PoojaFAQ/>
             <LuxuryFooter />
 
         </>

@@ -265,7 +265,11 @@ export default function BlogsPage() {
           setOpen={setOpen}
         />
       ) : (
-        <BlogTable blogs={filteredBlogs} />
+        <BlogTable
+          blogs={filteredBlogs}
+          setSelectedId={setSelectedId}
+          setOpen={setOpen}
+        />
       )}
     </section>
   );
@@ -350,11 +354,18 @@ function BlogCards({ blogs, setSelectedId, setOpen }: { blogs: IBlog[], setSelec
 
 /* ------------------ Table View ------------------ */
 
-function BlogTable({ blogs }: { blogs: IBlog[] }) {
+function BlogTable({
+  blogs,
+  setSelectedId,
+  setOpen,
+}: {
+  blogs: IBlog[];
+  setSelectedId: React.Dispatch<React.SetStateAction<string>>;
+  setOpen: React.Dispatch<React.SetStateAction<boolean>>;
+}) {
   return (
     <div className="overflow-x-auto border border-pink-900/40 rounded-xl">
       <table className="w-full text-sm text-pink-200">
-
         <thead className="bg-pink-950/40 text-pink-300 text-xs uppercase">
           <tr>
             <th className="px-4 py-3">Title</th>
@@ -366,7 +377,6 @@ function BlogTable({ blogs }: { blogs: IBlog[] }) {
         </thead>
 
         <tbody>
-
           {blogs.map((blog) => (
             <tr
               key={blog._id.toString()}
@@ -392,25 +402,26 @@ function BlogTable({ blogs }: { blogs: IBlog[] }) {
               </td>
 
               <td className="px-4 py-3 flex gap-2 justify-center">
-
                 <Link
-                  href={`/admin-x9AqP7mK2/blogs/edit-blog/${blog.slug}`}
+                  href={`/admin-x9AqP7mK2/blogs/edit-blog/${blog._id}`}
                   className="px-3 py-1 rounded text-xs bg-pink-600/20 text-pink-300"
                 >
                   Edit
                 </Link>
 
-                <button className="px-3 py-1 rounded text-xs bg-red-900/20 text-red-400">
+                <button
+                  className="px-3 py-1 rounded text-xs bg-red-900/20 text-red-400"
+                  onClick={() => {
+                    setSelectedId(blog._id.toString());
+                    setOpen(true);
+                  }}
+                >
                   Delete
                 </button>
-
               </td>
-
             </tr>
           ))}
-
         </tbody>
-
       </table>
     </div>
   );

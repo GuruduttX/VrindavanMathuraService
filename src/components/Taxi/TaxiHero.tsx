@@ -121,7 +121,7 @@ export default function TaxiHero() {
             </p>
 
             {/* Buttons */}
-            <div className="mt-8 flex flex-wrap gap-4">
+            <div className="mt-8 flex flex-wrap gap-4 justify-center md:justify-start">
               <button
                 className="flex items-center gap-2 px-6 py-3 bg-amber-600 hover:bg-amber-700 text-white rounded-xl shadow-lg shadow-amber-400/40 transition cursor-pointer"
                 onClick={() => setIsFormOpen(true)}

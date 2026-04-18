@@ -14,6 +14,7 @@ import {
   ChevronUp,
   CheckCircle
 } from "lucide-react";
+import { IFAQ } from "@/types/hotelTypes";
 import Link from "next/link";
 
 
@@ -52,8 +53,6 @@ interface Hotel {
 }
 
 export default function HotelsArchive() {
-
-
   const [rating, setRating] = useState(0);
   const [price, setPrice] = useState(20000);
   const [wifi, setWifi] = useState(false);
@@ -62,19 +61,19 @@ export default function HotelsArchive() {
   const [hotels, setHotels] = useState<Hotel[]>([]);
   const [isFilterOpen, setIsFilterOpen] = useState(false);
 
-
   useEffect(() => {
     const fetchHotels = async () => {
       try {
-        const res = await fetch(`${process.env.NEXT_PUBLIC_URL}/api/users/hotels`);
+        const res = await fetch(
+          `${process.env.NEXT_PUBLIC_URL}/api/users/hotels`,
+        );
 
         if (!res.ok) {
           throw new Error(`HTTP error! status: ${res.status}`);
         }
         const data = await res.json();
-      
+
         setHotels(data.data);
-      
       } catch (error) {
         console.error("Failed to fetch hotels:", error);
       }
@@ -82,36 +81,37 @@ export default function HotelsArchive() {
     fetchHotels();
   }, []);
 
- const filteredHotels = hotels.filter((hotel) => {
-   // 1. Basic Number Comparisons
-   const matchesRating = hotel.rating >= rating;
-   const matchesPrice = hotel.price <= price;
+  const filteredHotels = hotels.filter((hotel) => {
+    // 1. Basic Number Comparisons
+    const matchesRating = hotel.rating >= rating;
+    const matchesPrice = hotel.price <= price;
 
-   // 2. Boolean Inclusion Checks (Replacing the old .includes() array method)
-   // If the user hasn't toggled 'wifi' (!wifi), it passes. If they have, the hotel MUST have freeWifi.
-   const matchesWifi = !wifi || hotel.quickInclusions?.freeWifi === true;
-   const matchesParking = !parking || hotel.quickInclusions?.parking === true;
+    // 2. Boolean Inclusion Checks (Replacing the old .includes() array method)
+    // If the user hasn't toggled 'wifi' (!wifi), it passes. If they have, the hotel MUST have freeWifi.
+    const matchesWifi = !wifi || hotel.quickInclusions?.freeWifi === true;
+    const matchesParking = !parking || hotel.quickInclusions?.parking === true;
 
-   // Note: Your dummy data checked for "restaurant", but the real data has "breakfast".
-   // I have mapped your restaurant state to check the breakfast boolean here.
+    // Note: Your dummy data checked for "restaurant", but the real data has "breakfast".
+    // I have mapped your restaurant state to check the breakfast boolean here.
 
-   const matchesRestaurant = !restaurant || hotel.quickInclusions?.breakfast === true;
+    const matchesRestaurant =
+      !restaurant || hotel.quickInclusions?.breakfast === true;
 
-   // 3. Final Evaluation
+    // 3. Final Evaluation
 
-   return (
-     matchesRating &&
-     matchesPrice &&
-     matchesWifi &&
-     matchesParking &&
-     matchesRestaurant
-   );
- });
+    return (
+      matchesRating &&
+      matchesPrice &&
+      matchesWifi &&
+      matchesParking &&
+      matchesRestaurant
+    );
+  });
 
-console.log(filteredHotels, "filtered hotels");
+  console.log(filteredHotels, "filtered hotels");
 
   return (
-    <section className="py-24">
+    <section className="py-24" id="hotel-browse">
       <div className="max-w-7xl mx-auto px-6">
         {/* INTRO */}
 
@@ -145,7 +145,7 @@ console.log(filteredHotels, "filtered hotels");
             className="
                         sticky
                         top-28
-                        z-40
+                        z-35
                         bg-white
                         rounded-3xl
                         shadow-xl
@@ -173,13 +173,13 @@ console.log(filteredHotels, "filtered hotels");
 
             {/* FILTER CONTENT */}
             {/* lg:block ensures it's ALWAYS visible on desktop.
-        On mobile, it toggles between 'block' and 'hidden' based on state. 
-    */}
+                  On mobile, it toggles between 'block' and 'hidden' based on state. 
+              */}
             <div
               className={`mt-8 space-y-8 lg:block ${isFilterOpen ? "block" : "hidden"}`}
             >
               {/* PRICE */}
-              <div>
+              {/* <div>
                 <p className="text-sm text-gray-500 mb-3">Price Range</p>
                 <input
                   type="range"
@@ -190,7 +190,7 @@ console.log(filteredHotels, "filtered hotels");
                   className="w-full accent-amber-500"
                 />
                 <p className="text-sm mt-2 text-gray-600">Up to ₹{price}</p>
-              </div>
+              </div> */}
 
               {/* RATING */}
               <div>
@@ -300,7 +300,6 @@ console.log(filteredHotels, "filtered hotels");
                     <MapPin size={14} className="mr-1" />
                     {hotel.category} {/* Changed from location to category */}
                   </div>
-
                   <div className="grid grid-cols-2 gap-2 text-sm text-gray-700">
                     <span className="flex items-center gap-1">
                       <CheckCircle className="w-4 h-4 text-green-500" />
@@ -342,7 +341,6 @@ console.log(filteredHotels, "filtered hotels");
                   </div>
                   {/* PRICE */}
                   <div className="flex items-center gap-3 justify-around mt-6 text-lg font-bold">
-
                     <Link
                       href={`/hotels/${hotel.slug}`}
                       className="

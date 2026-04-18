@@ -5,11 +5,27 @@ import Image from "next/image";
 import { useEffect, useRef, useState } from "react";
 import CommonEnquiryForm from "@/utils/CommanEnquiryForm";
 import QuickEnquiry from "@/utils/QuickQuery";
+import StatsStrip from "./StatsStrip";
+
+
+import { Flame, Users, Star } from "lucide-react";
 
 const STATS = [
-  { icon: "🪔", value: "50+", label: "Pooja Types" },
-  { icon: "🙏", value: "10k+", label: "Devotees Served" },
-  { icon: "⭐", value: "4.9", label: "Rating" },
+  {
+    icon: Flame,
+    value: "50+",
+    label: "Pooja Types",
+  },
+  {
+    icon: Users,
+    value: "10k+",
+    label: "Devotees Served",
+  },
+  {
+    icon: Star,
+    value: "4.9",
+    label: "Rating",
+  },
 ];
 
 export default function PoojaHero() {
@@ -36,7 +52,7 @@ export default function PoojaHero() {
     <>
       <section
         ref={ref}
-        className="relative w-full min-h-[95vh] flex items-center overflow-hidden"
+        className="relative w-full min-h-[85vh] flex items-center overflow-hidden py-10 sm:py-3"
         style={{
           background:
             "linear-gradient(135deg, #c94a00 0%, #e86d00 30%, #f9a825 70%, #ffd54f 100%)",
@@ -77,16 +93,16 @@ export default function PoojaHero() {
         </div>
 
         {/* Inner layout */}
-        <div className="relative z-10 w-full max-w-7xl mx-auto px-6 md:px-12 py-16 md:py-20 pb-24 md:pb-28 flex flex-col md:flex-row items-center gap-10 md:gap-16">
+        <div className="relative  w-full max-w-7xl mx-auto px-6 md:px-12 py-8 md:py-14 pb-12 flex flex-col md:flex-row items-center gap-10 md:gap-16">
 
           {/* ── LEFT: All content ── */}
-          <div className="flex-1 min-w-0 flex flex-col items-start">
+          <div className="flex-1 min-w-0 flex flex-col items-start py-12">
             {/* Diya row */}
-            <div className="ph-anim ph-d1 flex gap-2 mb-4 text-xl">
+            {/* <div className="ph-anim ph-d1 flex gap-2 mb-4 text-xl">
               <span>🪔</span>
               <span>🌸</span>
               <span>🪔</span>
-            </div>
+            </div> */}
 
             {/* Badge */}
             <div
@@ -102,7 +118,7 @@ export default function PoojaHero() {
             {/* Title */}
             <h1
               className="ph-anim ph-d3 text-white font-black leading-[1.08] tracking-tight drop-shadow-sm mb-2"
-              style={{ fontSize: "clamp(2.4rem, 5.5vw, 4.2rem)" }}
+              style={{ fontSize: "clamp(2.4rem, 5.5vw, 3.3rem)" }}
             >
               Book Sacred{" "}
               <em className="italic" style={{ opacity: 0.9 }}>
@@ -140,19 +156,29 @@ export default function PoojaHero() {
 
             {/* Stats */}
             <div className="ph-anim ph-d5 flex flex-wrap gap-7 mb-7">
-              {STATS.map((s) => (
-                <div key={s.label} className="flex flex-col">
-                  <span className="text-xl font-black text-white leading-none">
-                    {s.icon} {s.value}
-                  </span>
-                  <span
-                    className="text-[11px] mt-1"
-                    style={{ color: "rgba(255,255,255,0.62)" }}
-                  >
-                    {s.label}
-                  </span>
-                </div>
-              ))}
+              {STATS.map((s: any) => {
+                const Icon = s.icon;
+
+                return (
+                  <div key={s.label} className="flex flex-col">
+                    <span className="text-xl font-black text-white leading-none flex items-center gap-2">
+                      
+                      {/* ICON */}
+                      <Icon className="w-5 h-5 text-white/90" />
+
+                      {/* VALUE */}
+                      {s.value}
+                    </span>
+
+                    <span
+                      className="text-[11px] mt-1"
+                      style={{ color: "rgba(255,255,255,0.62)" }}
+                    >
+                      {s.label}
+                    </span>
+                  </div>
+                );
+              })}
             </div>
 
             {/* CTAs */}
@@ -207,31 +233,58 @@ export default function PoojaHero() {
           </div>
 
           {/* ── RIGHT: Image ── */}
-          <div className="flex-shrink-0 w-full md:w-[340px] lg:w-[380px] self-stretch flex items-center justify-end">
-            <div className="relative w-full max-w-[360px] h-[420px] md:h-full min-h-[380px]">
-              <div className="w-full h-full rounded-2xl overflow-hidden border-[3px] border-white/28 shadow-[0_20px_56px_rgba(0,0,0,0.25)]">
-                <Image
-                  src="/images/pooja-image.webp" 
-                  alt="Sacred Pooja"
-                  fill
-                  className="object-cover object-center"
-                  priority
-                />
-              </div>
+ <div className="hidden md:block flex-shrink-0 w-full md:w-[300px] lg:w-[380px] self-stretch flex items-center justify-end">
+  <div className="relative w-full max-w-[380px] h-[100px] md:h-full">
+    <svg
+      width="100%"
+      height="100%"
+      viewBox="0 0 460 380"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <defs>
+        <clipPath id="cardClip">
+          <rect x="0" y="0" width="460" height="380" rx="16" />
+        </clipPath>
+      </defs>
 
-              {/* Floating counter badge */}
-              <div className="absolute bottom-4 right-4 bg-white rounded-2xl px-4 py-2.5 shadow-xl">
-                <p className="text-xl font-black leading-none" style={{ color: "#c94a00" }}>
-                  10K+
-                </p>
-                <p className="text-[10px] text-gray-500 font-semibold tracking-wide uppercase mt-0.5">
-                  Devotees Served
-                </p>
-              </div>
-            </div>
-          </div>
+      <image
+        href="/images/pooja/mainheropooja.webp"
+        x="0"
+        y="0"
+        width="460"
+        height="380"
+        preserveAspectRatio="xMidYMid slice"
+        clipPath="url(#cardClip)"
+      />
+
+      {/* Orange overlay tint on top of image */}
+      <rect
+        x="0" y="0" width="460" height="380" rx="16"
+        fill="#c2410c"
+        fillOpacity="0.15"
+        clipPath="url(#cardClip)"
+      />
+
+      {/* Card border */}
+      <rect x="0" y="0" width="460" height="380" rx="16"
+        fill="none" stroke="#f97316" strokeWidth="2.5" strokeOpacity="0.6" />
+      <rect x="0" y="0" width="460" height="380" rx="16"
+        fill="none" stroke="rgba(255,255,255,0.2)" strokeWidth="3" />
+
+      {/* Floating badge */}
+      <rect x="296" y="300" width="152" height="68" rx="14" fill="white" />
+      <text x="312" y="333" fontFamily="Georgia, serif" fontSize="24" fontWeight="700" fill="#c2410c">10K+</text>
+      <text x="312" y="354" fontFamily="sans-serif" fontSize="9" fontWeight="600" fill="#9ca3af" letterSpacing="1">DEVOTEES SERVED</text>
+    </svg>
+  </div>
+</div>
         </div>
+
+
+       
       </section>
+
+       <StatsStrip/>
 
       <CommonEnquiryForm
         open={isFormOpen}

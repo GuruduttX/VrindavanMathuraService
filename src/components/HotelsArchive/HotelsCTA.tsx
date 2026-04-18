@@ -5,6 +5,7 @@ import { useState } from "react";
 import { motion } from "framer-motion";
 import { ArrowRight, Phone, Star } from "lucide-react";
 import CommonEnquiryForm from "@/utils/CommanEnquiryForm";
+import Link from "next/link";
 
 export default function HotelsCTA() {
   const [isFormOpen, setIsFormOpen] = useState(false);
@@ -62,6 +63,7 @@ export default function HotelsCTA() {
               {/* buttons */}
 
               <div className="flex flex-wrap gap-4 mt-8">
+                <Link href="#hotel-browse">
                 <motion.button
                   whileHover={{ scale: 1.05 }}
                   className="
@@ -81,6 +83,7 @@ export default function HotelsCTA() {
                   Browse Hotels
                   <ArrowRight size={18} />
                 </motion.button>
+                </Link>
 
                 <motion.button
                   whileHover={{ scale: 1.05 }}
