@@ -110,6 +110,13 @@ export default function HotelsArchive() {
 
   console.log(filteredHotels, "filtered hotels");
 
+  function clearFilters() {
+    setRating(0); // or whatever your default is
+    setWifi(false);
+    setParking(false);
+    setRestaurant(false);
+  }
+
   return (
     <section className="py-24" id="hotel-browse">
       <div className="max-w-7xl mx-auto px-6">
@@ -176,82 +183,141 @@ export default function HotelsArchive() {
                   On mobile, it toggles between 'block' and 'hidden' based on state. 
               */}
             <div
-              className={`mt-8 space-y-8 lg:block ${isFilterOpen ? "block" : "hidden"}`}
+              className={`mt-8 space-y-6 lg:block ${isFilterOpen ? "block" : "hidden"}`}
             >
-              {/* PRICE */}
-              {/* <div>
-                <p className="text-sm text-gray-500 mb-3">Price Range</p>
-                <input
-                  type="range"
-                  min={500}
-                  max={20000}
-                  value={price}
-                  onChange={(e) => setPrice(Number(e.target.value))}
-                  className="w-full accent-amber-500"
-                />
-                <p className="text-sm mt-2 text-gray-600">Up to ₹{price}</p>
-              </div> */}
- 
               {/* RATING */}
               <div>
-                <p className="text-sm text-gray-500 mb-3">Rating</p>
+                <p className="text-[10px] font-medium text-gray-400 uppercase tracking-widest mb-3">
+                  Rating
+                </p>
                 {[4, 4.5].map((value) => (
                   <button
                     key={value}
                     onClick={() => setRating(value)}
-                    className="
-              flex items-center gap-2
-              w-full
-              px-3 py-2
-              rounded-lg
-              hover:bg-amber-50
-              transition
-              text-sm
-            "
+                    className={`
+                      inline-flex items-center gap-2
+                      w-full px-3 py-2 mb-2
+                      rounded-full border text-xs
+                      transition-all duration-150
+                      ${
+                        rating === value
+                          ? "bg-amber-50 border-amber-400 text-amber-800"
+                          : "bg-gray-50 border-gray-200 text-gray-500 hover:border-gray-300 hover:text-gray-700"
+                      }
+                    `}
                   >
-                    <Star size={16} className="text-yellow-500" />
+                    <Star
+                      size={11}
+                      className={
+                        rating === value ? "text-amber-500" : "text-gray-300"
+                      }
+                      fill={rating === value ? "#f59e0b" : "none"}
+                    />
                     {value}+ Rating
                   </button>
                 ))}
               </div>
 
+              <div className="h-px bg-gray-100" />
+
               {/* AMENITIES */}
               <div>
-                <p className="text-sm text-gray-500 mb-3">Amenities</p>
+                <p className="text-[10px] font-medium text-gray-400 uppercase tracking-widest mb-3">
+                  Amenities
+                </p>
 
-                <label className="flex items-center gap-2 text-sm mb-2 cursor-pointer">
-                  <input
-                    type="checkbox"
-                    checked={wifi}
-                    onChange={() => setWifi(!wifi)}
-                    className="accent-amber-500 w-4 h-4"
-                  />
-                  <Wifi size={16} className="text-amber-500" />
-                  Free WiFi
-                </label>
+                <div className="grid grid-cols-2 gap-2">
+                  {/* WIFI */}
+                  <button
+                    onClick={() => setWifi(!wifi)}
+                    aria-pressed={wifi}
+                    className={`
+                      flex items-center gap-2 px-3 py-2.5
+                      rounded-lg border text-left
+                      transition-all duration-150
+                      ${
+                        wifi
+                          ? "bg-amber-50 border-amber-400"
+                          : "bg-gray-50 border-gray-200 hover:border-gray-300"
+                      }
+                    `}
+                  >
+                    <div className="w-7 h-7 rounded-md bg-white flex items-center justify-center flex-shrink-0">
+                      <Wifi size={14} className="text-amber-500" />
+                    </div>
+                    <span
+                      className={`text-xs font-medium ${wifi ? "text-amber-800" : "text-gray-500"}`}
+                    >
+                      Free WiFi
+                    </span>
+                    {wifi && (
+                      <div className="w-1.5 h-1.5 rounded-full bg-amber-500 ml-auto" />
+                    )}
+                  </button>
 
-                <label className="flex items-center gap-2 text-sm mb-2 cursor-pointer">
-                  <input
-                    type="checkbox"
-                    checked={parking}
-                    onChange={() => setParking(!parking)}
-                    className="accent-amber-500 w-4 h-4"
-                  />
-                  <Car size={16} className="text-amber-500" />
-                  Parking
-                </label>
+                  {/* PARKING */}
+                  <button
+                    onClick={() => setParking(!parking)}
+                    aria-pressed={parking}
+                    className={`
+                        flex items-center gap-2 px-3 py-2.5
+                        rounded-lg border text-left
+                        transition-all duration-150
+                        ${
+                          parking
+                            ? "bg-amber-50 border-amber-400"
+                            : "bg-gray-50 border-gray-200 hover:border-gray-300"
+                        }
+                      `}
+                  >
+                    <div className="w-7 h-7 rounded-md bg-white flex items-center justify-center flex-shrink-0">
+                      <Car size={14} className="text-amber-500" />
+                    </div>
+                    <span
+                      className={`text-xs font-medium ${parking ? "text-amber-800" : "text-gray-500"}`}
+                    >
+                      Parking
+                    </span>
+                    {parking && (
+                      <div className="w-1.5 h-1.5 rounded-full bg-amber-500 ml-auto" />
+                    )}
+                  </button>
 
-                <label className="flex items-center gap-2 text-sm cursor-pointer">
-                  <input
-                    type="checkbox"
-                    checked={restaurant}
-                    onChange={() => setRestaurant(!restaurant)}
-                    className="accent-amber-500 w-4 h-4"
-                  />
-                  <Utensils size={16} className="text-amber-500" />
-                  Restaurant
-                </label>
+                  {/* RESTAURANT */}
+                  <button
+                    onClick={() => setRestaurant(!restaurant)}
+                    aria-pressed={restaurant}
+                    className={`
+                      flex items-center gap-2 px-2.5 py-2.5
+                      rounded-lg border text-left
+                      transition-all duration-150 min-w-0
+                      ${
+                        restaurant
+                          ? "bg-amber-50 border-amber-400"
+                          : "bg-gray-50 border-gray-200 hover:border-gray-300"
+                      }
+                    `}
+                  >
+                    <div className="w-7 h-7 rounded-md bg-white flex items-center justify-center flex-shrink-0">
+                      <Utensils size={14} className="text-amber-500" />
+                    </div>
+                    <span
+                      className={`text-xs font-medium truncate min-w-0 ${restaurant ? "text-amber-800" : "text-gray-500"}`}
+                    >
+                      Dining
+                    </span>
+                    {restaurant && (
+                      <div className="w-1.5 h-1.5 rounded-full bg-amber-500 ml-auto flex-shrink-0" />
+                    )}
+                  </button>
+                </div>
               </div>
+              <button
+                onClick={clearFilters}
+                className="w-full py-2 rounded-lg border border-gray-200 text-xs text-gray-500 hover:bg-gray-50 transition-all"
+              >
+                Clear filters
+              </button>
             </div>
           </div>
           {/* HOTEL LIST */}
