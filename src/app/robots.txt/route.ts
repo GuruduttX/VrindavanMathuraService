@@ -1,13 +1,7 @@
 export async function GET() {
-  const BASE_URL =
-    process.env.NEXT_PUBLIC_URL ||
-    "https://vrindavanmathuraguide.com";
   return new Response(
 `User-agent: *
- Allow: /
- Disallow: /admin-x9AqP7mK2/
- Sitemap: ${BASE_URL}/sitemap.xml
-`,
+Disallow: /`,
     {
       headers: {
         "Content-Type": "text/plain",
