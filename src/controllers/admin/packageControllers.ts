@@ -1,11 +1,8 @@
 import { NextResponse } from "next/server";
 import { getAdminPackagesService, createAdminPackageService, updateAdminPackagesService, getAdminPackageByIdService , deleteAdminPackageService} from "@/services/admin/packageService";
-<<<<<<< HEAD
-=======
 import { connectDB } from "@/lib/mongodb";
 import { tourPackageSchema } from "@/zodSchema/packageSchema";
 import { success } from "zod";
->>>>>>> cf103d5679dd905d5174e2a3c6320cb6c17df463
 
 
 // Get All
