@@ -1,6 +1,7 @@
 import { NextResponse } from "next/server";
 import { getUserAllPackageService, getUserTourBySlugAndDurationService} from "@/services/users/packageService";
 import { connectDB } from "@/lib/mongodb";
+import { getTourBySlugServices } from "@/services/users/packageService";
 
 export async function getUserAllToursController() {
 
@@ -21,6 +22,31 @@ export async function getUserAllToursController() {
     );
   }
 
+}
+
+export async function getTourBySlugController(slug:string) {
+   try {
+      await connectDB();
+
+      const tour = await getTourBySlugServices(slug);
+
+       if (!tour) {
+      return NextResponse.json(
+         {exists : false} , {status : 404}    
+      );
+    }
+
+      return NextResponse.json({exists : true, data : tour}, { status: 200 });
+
+    
+   } catch (error) {
+      console.error("Error fetching user tour:", error);
+
+    return NextResponse.json(
+      { message: "Internal Server Error" },
+      { status: 500 }
+    );
+   }
 }
 
 
@@ -50,6 +76,8 @@ export async function getTourBySlugAndDuration( slug: string, duration: string) 
   }
 
 }
+
+
 
 
 

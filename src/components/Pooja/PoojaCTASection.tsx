@@ -1,6 +1,15 @@
+"use client"
+
+import { useState } from "react";
+import CommonEnquiryForm from "@/utils/CommanEnquiryForm";
+
+
 export default function PoojaCTASection() {
+  const  [open, setOpen] = useState(false);
   return (
-    <section className="relative py-14 bg-gradient-to-r from-amber-600 to-orange-500 overflow-hidden">
+    <>
+      <CommonEnquiryForm open={open} onClose={()=>setOpen(true)}/>
+      <section className="relative py-14 bg-gradient-to-r from-amber-600 to-orange-500 overflow-hidden">
 
       {/* Top Wave */}
       <svg
@@ -30,7 +39,7 @@ export default function PoojaCTASection() {
               devotion and tradition. Revisit divine blessings anytime.
             </p>
 
-            <button className="bg-white text-amber-600 px-8 py-3 rounded-full font-medium hover:bg-amber-100 transition ml-14 md:ml-0">
+            <button onClick={()=>setOpen(true)} className="bg-white cursor-pointer  text-amber-600 px-8 py-3 rounded-full font-medium hover:bg-amber-100 transition ml-24 md:ml-0">
               Browse All Poojas
             </button>
           </div>
@@ -72,5 +81,7 @@ export default function PoojaCTASection() {
       </svg>
 
     </section>
+    </>
+    
   );
 }

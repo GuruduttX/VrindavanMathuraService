@@ -1,17 +1,14 @@
 import Image from "next/image";
 import QuickQuery from "@/utils/QuickQuery";
+
 export default function HomeHero() {
 
     return (
         <>
-            <section className="relative overflow-hidden bg-gradient-to-br from-orange-200 via-orange-100 to-orange-50">
+            <section className="relative overflow-hidden bg-gradient-to-br from-amber-200 via-amber-100 to-yellow-50">
 
-                {/* background decorative blur */}
-                <div className="absolute top-[-100px] right-[-100px] w-[400px] h-[400px] bg-orange-400/30 rounded-full blur-[120px]" />
-                <div className="absolute bottom-[-120px] left-[-120px] w-[350px] h-[350px] bg-amber-400/30 rounded-full blur-[120px]" />
-
-                {/* bottom wave */}
                 <div className="absolute bottom-0 left-0 w-full overflow-hidden leading-none pointer-events-none">
+
                     <svg
                         viewBox="0 0 1440 80"
                         xmlns="http://www.w3.org/2000/svg"
@@ -23,6 +20,7 @@ export default function HomeHero() {
                             fill="white"
                         />
                     </svg>
+
                 </div>
 
                 <div className="max-w-7xl mx-auto px-6 py-20 grid lg:grid-cols-2 gap-12 items-center mt-15">

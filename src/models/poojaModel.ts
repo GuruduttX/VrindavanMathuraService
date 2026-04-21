@@ -1,4 +1,5 @@
 import mongoose, { Schema, Document, Model } from "mongoose";
+import { required } from "zod/mini";
 
 /* ---------------- TYPES ---------------- */
 interface FAQI {
@@ -7,19 +8,30 @@ interface FAQI {
   answer: string;
 }
 
+interface IReview {
+  id: string;
+  name: string;
+  description: string;
+  rating: string;
+}
 interface PoojaDocument extends Document {
   title: string;
   slug: string;
   temple: string;
   location: string;
+  category: string;
 
   price: number;
   discountPrice?: number;
   rating?: string;
-  reviews : string;
+  reviews?: IReview[];
 
   description?: string;
   aboutContent?: string;
+
+  benefits?: string[];
+  availableDays?: string[];
+  images?: string[];
 
   duration?: string;
 
@@ -28,15 +40,14 @@ interface PoojaDocument extends Document {
     alt: string;
   };
 
-  metaData : {
-     title : string;
-     description : string;
-  }
-  , 
-  schemaData : {
-    title : string;
-    description : string;
-  }
+  metaData: {
+    title: string;
+    description: string;
+  };
+  schemaData: {
+    title: string;
+    description: string;
+  };
 
   status: string;
   faqs: FAQI[];
@@ -52,11 +63,21 @@ const PoojaSchema: Schema<PoojaDocument> = new Schema(
 
     slug: { type: String, required: true, unique: true },
 
-    temple: { type: String, required: true },
+    temple: { type: String, },
 
-    location: { type: String, required: true },
+    location: { type: String },
 
-    reviews : {type : String, required : true},
+    category: { type: String },
+
+   
+    reviews: [
+      {
+        id: { type: String },
+        name: { type: String },
+        description: { type: String },
+        rating: { type: String },
+      },
+    ],
 
     status: {
       type: String,
@@ -66,7 +87,6 @@ const PoojaSchema: Schema<PoojaDocument> = new Schema(
 
     price: {
       type: Number,
-      required: true,
       min: 0,
     },
 
@@ -76,7 +96,7 @@ const PoojaSchema: Schema<PoojaDocument> = new Schema(
     },
 
     rating: {
-      type: String,
+      type: Number,
     },
 
     description: { type: String },
@@ -85,20 +105,17 @@ const PoojaSchema: Schema<PoojaDocument> = new Schema(
 
     duration: { type: String },
 
-    metaData : {
-       title : { type : String},
-       description : {type : String}
+    metaData: {
+      title: { type: String },
+      description: { type: String },
     },
 
-    schemaData : {
-        title : {type : String},
-        description  : {type : String},
-    }
-    ,
-
+    schemaData: {
+      title: { type: String },
+      description: { type: String },
+    },
     faqs: [
       {
-
         id: { type: String },
         question: { type: String },
         answer: { type: String },
@@ -110,7 +127,7 @@ const PoojaSchema: Schema<PoojaDocument> = new Schema(
       alt: { type: String },
     },
   },
-  { timestamps: true }
+  { timestamps: true },
 );
 
 const PoojaModel: Model<PoojaDocument> =

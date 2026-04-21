@@ -295,7 +295,7 @@ const TourPackageSchema: Schema<ITourPackage> = new Schema(
       },
     ],
 
-    documents: [
+    knowBeforeYouGo : [
       {
         id: { type: String,  required : function () : boolean {
             return this.status === "published";

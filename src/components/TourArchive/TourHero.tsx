@@ -9,10 +9,10 @@ export default function TourHero() {
     <section className="relative w-full min-h-[90vh] md:min-h-[80vh] xl:min-h-[95vh] flex items-center justify-center overflow-hidden pt-2 md:pt-10">
       
       {/* THEME CHANGED ONLY */}
-      <div className="absolute inset-0 bg-gradient-to-br 
-      from-[#7A2E00] 
-      via-[#A84010] 
-      to-[#E8821A]" />
+     <div className="absolute inset-0 bg-gradient-to-br 
+      from-[#f47d06] 
+      via-[#c37705] 
+      to-[#ac8401]" />
 
       {/* Premium Gradient Background */}
       <div className="absolute inset-0 
@@ -33,7 +33,6 @@ export default function TourHero() {
       <div className="absoulte left-2 w-2.5 h-full shadow-2xl"/>
 
       {/* Softer Overlay */}
-      <div className="absolute inset-0 bg-black/25" />
 
       {/* Bottom Curve */}
       <div className="absolute bottom-0 left-0 w-full overflow-hidden leading-none">
@@ -106,7 +105,7 @@ export default function TourHero() {
           className="text-3xl sm:text-4xl md:text-6xl lg:text-7xl font-serif leading-tight"
         >
           Discover the Divine Land of{" "}
-          <span className="block text-orange-200 italic font-medium">
+          <span className="block text-[#b84b07] italic font-medium">
             Krishna
           </span>
         </motion.h1>
@@ -129,7 +128,7 @@ export default function TourHero() {
         >
           <Link href="#tours" className="w-full sm:w-auto">
             <button className="w-full sm:w-auto px-6 py-3.5 sm:px-10 sm:py-4 text-sm sm:text-base rounded-full 
-            bg-gradient-to-r from-[#7A2E00] to-[#E8821A] text-white cursor-pointer font-semibold shadow-xl hover:scale-105 transition duration-300">
+            bg-gradient-to-r from-[#b84b07] to-[#E8821A] text-white cursor-pointer font-semibold shadow-xl hover:scale-105 transition duration-300">
               Explore Packages
             </button>
           </Link>

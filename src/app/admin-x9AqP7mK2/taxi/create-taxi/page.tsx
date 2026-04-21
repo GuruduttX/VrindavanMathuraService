@@ -7,6 +7,7 @@ import CMSMediaSection from "@/components/Admin/CMS/CMSMediaSection"
 import TaxiDetailsSection from "@/components/Admin/TaxiEditor/TaxiDetails"
 import CMSActions from "@/components/Admin/CMS/CMSActions"
 import toast from "react-hot-toast"
+import { useEffect } from "react"
 
 type TaxiForm = {
   name: string
@@ -44,6 +45,9 @@ export default function CreateNewTaxi() {
     fueltype: "",
   })
 
+  const [isLoaded, setIsLoaded] = useState(false);
+
+
   const [inclusions, setInclusions] = useState<Inclusions[]>([
     { id: crypto.randomUUID(), description: "" }
   ])
@@ -51,6 +55,77 @@ export default function CreateNewTaxi() {
   const [exclusions, setExclusions] = useState<Exclusions[]>([
     { id: crypto.randomUUID(), description: "" }
   ])
+
+    useEffect(() => {
+      if (typeof window !== "undefined") {
+        const savedTaxi = localStorage.getItem("taxi");
+
+        if (!savedTaxi) {
+          localStorage.setItem(
+            "taxi",
+            JSON.stringify({
+              title: "",
+              seats: "",
+              cabType: "",
+              fuelType: "",
+              basePrice: "",
+              image: "",
+              alt: "",
+              inclusions: [],
+              exclusions: [],
+            }),
+          );
+        } else {
+          // 1. Parse safely (fallback to empty object to prevent crashes)
+          const parsedData = JSON.parse(savedTaxi || "{}");
+          console.log(parsedData, "local storage data")
+
+          // 2. Map the parsed data to your specific form keys
+          setForm((prev) => ({
+            ...prev, // Keeps your category and duration untouched
+            name: parsedData.title || "",
+            seat: parsedData.seats || "",
+            cabtype: parsedData.cabType || "",
+            fueltype: parsedData.fuelType || "",
+            price: parsedData.basePrice || "",
+            image: parsedData.image || "",
+            alt: parsedData.alt || "",
+          }));
+
+          // 3. Set Inclusions (only if it has data, otherwise keep your default UUID object)
+          if (parsedData.inclusions && parsedData.inclusions.length > 0) {
+            setInclusions(parsedData.inclusions);
+          }
+
+          // 4. Set Exclusions
+          if (parsedData.exclusions && parsedData.exclusions.length > 0) {
+            setExclusions(parsedData.exclusions);
+          }
+
+        }
+        setIsLoaded(true);
+      }
+    }, []);
+
+    useEffect(() => {
+      if (typeof window !== "undefined") {
+        if (!isLoaded) return;
+        // 1. Build the exact payload format you need
+        const currentDraft = {
+          title: form.name,
+          seats: form.seat,
+          cabType: form.cabtype,
+          fuelType: form.fueltype,
+          basePrice: form.price,
+          image: form.image,
+          alt: form.alt,
+          inclusions: inclusions, // Grabs the latest array
+          exclusions: exclusions, // Grabs the latest array
+        };
+        // 2. Save it to local storage
+        localStorage.setItem("taxi", JSON.stringify(currentDraft));
+      }
+    }, [form, inclusions, exclusions, isLoaded]);
 
   const updateForm = (field: keyof TaxiForm, value: string) => {
     setForm((prev) => ({
@@ -79,10 +154,10 @@ export default function CreateNewTaxi() {
 
     const payload = {
       title: form.name,
-      seats: form.seat,
+      seats: Number(form.seat),
       cabType: form.cabtype,
       fuelType: form.fueltype,
-      basePrice: form.price,
+      basePrice: Number(form.price),
       image: form.image,
       alt: form.alt,
       inclusions: inclusions,
@@ -103,7 +178,7 @@ export default function CreateNewTaxi() {
       const data = await res.json();
 
       if (!data.success) {
-        toast.error(data.error || "Failed to publish Taxi");
+        toast.error( "Failed to publish Taxi");
         return;
       }
 
@@ -119,7 +194,6 @@ export default function CreateNewTaxi() {
         seat: "",
         cabtype: "",
         fueltype: ""
-
       });
 
     } catch (error) {
@@ -127,10 +201,6 @@ export default function CreateNewTaxi() {
       toast.error("Server Error");
 
     }
-
-   
-
-   
   }
 
 
@@ -138,10 +208,10 @@ export default function CreateNewTaxi() {
 
      const payload = {
       title: form.name,
-      seats: form.seat,
+      seats: Number(form.seat),
       cabType: form.cabtype,
       fuelType: form.fueltype,
-      basePrice: form.price,
+      basePrice: Number(form.price),
       image: form.image,
       alt: form.alt,
       inclusions: inclusions,
@@ -163,7 +233,7 @@ export default function CreateNewTaxi() {
 
       if (!data.success) {
         console.log(data.error);
-        toast.error(data.error || "Failed to Draft Taxi");
+        toast.error( "Failed to Draft Taxi");
         return;
       }
       

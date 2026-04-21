@@ -1,8 +1,6 @@
 import { NextResponse } from "next/server";
-import { getAdminPackagesService, createAdminPackageService, updateAdminPackagesService, getAdminPackageByIdService , deleteAdminPackageService} from "@/services/admin/packageService";
-import { connectDB } from "@/lib/mongodb";
+import { getAdminPackagesService, createAdminPackageService, updateAdminPackagesService, getAdminPackageByIdService , getPackageBySlugServices, deleteAdminPackageService} from "@/services/admin/packageService";
 import { tourPackageSchema } from "@/zodSchema/packageSchema";
-import { success } from "zod";
 
 
 // Get All
@@ -152,4 +150,21 @@ export async function getAdminTourByIdController(params: { id: string }) {
       { status: 500 }
     );
   }
+}
+
+export async function getPackageBySlugController(slug : string){
+    try {
+
+      const tour = await getPackageBySlugServices(slug);
+      
+      if(!tour){
+         return NextResponse.json({exists : false}, {status : 404});
+      }
+
+      return NextResponse.json({exists : true, data : tour}, {status : 200});
+      
+    } catch (error) {
+       console.log("This is the error ", error);
+       return NextResponse.json({message : "Something went Wrong!"},{status:500})
+    }
 }

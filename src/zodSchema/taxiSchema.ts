@@ -2,11 +2,13 @@ import { z } from "zod";
 
 // sub schemas
 const inclusionSchema = z.object({
-  inclusion: z.string().optional(),
+  id : z.string().optional(),
+  description: z.string().optional(),
 });
 
 const exclusionSchema = z.object({
-  exclusion: z.string().optional(),
+  id : z.string().optional(),
+  description: z.string().optional(),
 });
 
 // enums
@@ -41,8 +43,7 @@ export const taxiSchema = z
 
     image: z.string().url().optional(),
     alt: z.string().optional(),
-  })
-  .superRefine((data, ctx) => {
+  }) .superRefine((data, ctx) => {
     if (data.status === "published") {
       // Required fields for publish
 

@@ -18,3 +18,10 @@ export  async function getUserTourBySlugAndDurationService(slug : string, durati
 
    return tour;
 }
+
+export async function getTourBySlugServices(slug:string) {
+    await connectDB();
+    const tour = await TourPackageModel.find({slug : slug, draft : 'published'});
+
+    return tour;
+}

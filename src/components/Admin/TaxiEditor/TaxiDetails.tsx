@@ -18,15 +18,11 @@ export const CabCategories: string[] = [
   "Sedan",
   "SUV",
   "Hatchback",
-  "Luxury",
-  "Tempo Traveller"
+  "Tempo Traveller",
+  
 ]
 
-export const FuelCategories: string[] = [
-  "Petrol",
-  "Diesel",
-  "CNG",
-]
+export const FuelCategories: string[] = ["Petrol", "Diesel", "CNG", "Electric"];
 
 /* ================== TYPES ================== */
 

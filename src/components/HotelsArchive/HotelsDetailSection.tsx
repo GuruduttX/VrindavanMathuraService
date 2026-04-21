@@ -123,9 +123,9 @@ export default function HotelDetailsSection({ HotelData }: { HotelData: any }) {
 
           {/* TITLE */}
 
-          <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold leading-tight bg-gradient-to-r from-gray-900 to-gray-700 bg-clip-text text-transparent">
+          {/* <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold leading-tight bg-gradient-to-r from-gray-900 to-gray-700 bg-clip-text text-transparent">
             {HotelData.title}
-          </h1>
+          </h1> */}
 
 
           {/* PREMIUM RATING AREA */}

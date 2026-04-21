@@ -8,13 +8,16 @@ export async function getAdminPoojasService(){
 
 export async function createAdminPoojaService(data:any) {
     await connectDB();
+    console.log(data , "from create pooja service")
     const pooja = await PoojaModel.create(data);
     return pooja;
 }
 
 export async function updateAdminPoojaService(data:any, id : string) {
     await connectDB();
+    console.log(data, "pooja data to be updated");
     const pooja = await PoojaModel.findByIdAndUpdate(id,data, {new : true});
+    console.log(pooja , "from mongoDB after update");
     return pooja;
 }
 
@@ -38,4 +41,14 @@ export async function deleteAdminPoojaService(id : string) {
     }
     return pooja;
 }
+
+export async function getAdminPoojaBySlugService(slug : string){
+     await connectDB();
+     console.log("slug",slug)
+     const poojas = await PoojaModel.findOne({slug : slug});
+    
+     return poojas;
+}
+
+
 

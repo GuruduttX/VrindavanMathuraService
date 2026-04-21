@@ -11,7 +11,6 @@ export default function Page(){
         <div>
             <Navbar/>
             <BlogHero/>
-            <BlogSearch/>
             <BlogCategories/>
             <BlogArchive/>
             <BlogCTA/>

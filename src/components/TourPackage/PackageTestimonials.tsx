@@ -27,7 +27,7 @@ export default function PackageTestimonials({ PackageData }: any) {
               </span>
               <div>
                 <div className="flex gap-1">
-                  {Array.from({ length: 5 }).map((_, i) => (
+                  {Array.from({ length: PackageData.rating }).map((_, i) => (
                     <Star
                       key={i}
                       className="w-5 h-5 text-[#E8821A] fill-[#E8821A]"

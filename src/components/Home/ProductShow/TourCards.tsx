@@ -94,7 +94,7 @@ export default function TourCard({
           <div className="flex flex-wrap gap-1.5">
             {product.durationbreakdown.slice(0, 3).map((d: any) => (
               <span
-                key={d.id}
+                key={d._id}
                 className="flex items-center gap-1 text-[11px] text-stone-500
                 border border-stone-200 rounded-full px-2.5 py-0.5
                 group-hover:border-orange-200 group-hover:text-orange-600 transition"

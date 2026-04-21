@@ -7,7 +7,7 @@ export default function PoojaCard({ product }: any) {
     ? Math.round(((product.price - product.discountPrice) / product.price) * 100)
     : null;
 
-  const displayPrice = product.discountPrice ?? product.price;
+  const displayPrice = product?.discountPrice ?? product?.price;
 
   return (
     <div className="flex flex-col rounded-xl border border-stone-200 overflow-hidden bg-white">
@@ -15,7 +15,7 @@ export default function PoojaCard({ product }: any) {
       {/* Image */}
       <div className="relative h-[175px] bg-amber-100 flex-shrink-0">
         {product.heroImage?.image ? (
-          <Image src={product.heroImage.image} alt={product.heroImage?.alt || product.title}
+          <Image src={product.heroImage?.image} alt={product.heroImage?.alt || product.title}
             fill className="object-cover" />
         ) : (
           <div className="w-full h-full flex items-center justify-center text-5xl">🪔</div>
@@ -52,7 +52,7 @@ export default function PoojaCard({ product }: any) {
         </div>
 
         {/* Duration */}
-        {product.duration && (
+        {product?.duration && (
           <div className="flex items-center gap-3">
             <span className="flex items-center gap-1.5 text-xs text-stone-500">
               <Clock size={11} /> {product.duration}
@@ -61,7 +61,7 @@ export default function PoojaCard({ product }: any) {
         )}
 
         {/* Star rating row */}
-        {product.rating && (
+        {product?.rating && (
           <div className="flex items-center gap-1.5">
             <div className="flex gap-0.5">
               {[1,2,3,4,5].map(i => (
@@ -73,7 +73,7 @@ export default function PoojaCard({ product }: any) {
             </div>
             <span className="text-xs font-medium">{product.rating}</span>
             {product.reviews && (
-              <span className="text-xs text-stone-400">· {product.reviews} reviews</span>
+              <span className="text-xs text-stone-400">· {product.reviews.length} reviews</span>
             )}
           </div>
         )}
@@ -85,7 +85,7 @@ export default function PoojaCard({ product }: any) {
           <p className="text-[10px] uppercase tracking-wide text-stone-400">Booking price</p>
           <div className="flex items-baseline gap-1.5">
             <span className="text-lg font-medium text-amber-700">
-              ₹{displayPrice.toLocaleString()}
+                ₹{displayPrice ? displayPrice.toLocaleString() : "0"}
             </span>
             {discount && (
               <>

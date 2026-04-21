@@ -2,6 +2,9 @@
 
 import { motion } from "framer-motion";
 import { ShieldCheck, Users, CarTaxiFront, Sparkles } from "lucide-react";
+import CommonEnquiryForm from "./CommanEnquiryForm";
+import { useState } from "react";
+
 
 const trustItems = [
   {
@@ -43,8 +46,12 @@ const trustItems = [
 ];
 
 export default function HomeTrustBuildingSection() {
+  const [open, setOpen] = useState(false);
+  
   return (
-    <section className="relative py-16 md:py-24 overflow-hidden bg-gradient-to-b from-white via-amber-50/40 to-white">
+    <>
+     <CommonEnquiryForm open={open} onClose={()=>setOpen(false)} />
+       <section className="relative py-16 md:py-24 overflow-hidden bg-gradient-to-b from-white via-amber-50/40 to-white">
 
       <div className="absolute top-0 left-0 w-80 h-80 bg-orange-200/20 blur-3xl rounded-full pointer-events-none" />
       <div className="absolute bottom-0 right-0 w-80 h-80 bg-amber-200/20 blur-3xl rounded-full pointer-events-none" />
@@ -149,7 +156,8 @@ export default function HomeTrustBuildingSection() {
                   whileInView={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.5, delay: 0.55 + index * 0.1 }}
                   viewport={{ once: true }}
-                  className="group relative"
+                  className="group relative cursor-pointer"
+                  onClick={()=>setOpen(true)}
                 >
                   {/* Mobile: vertical connector above card */}
                   <div className="md:hidden flex justify-center mb-3 cursor-pointer">
@@ -187,5 +195,7 @@ export default function HomeTrustBuildingSection() {
         </div>
       </div>
     </section>
+    </>
+   
   );
 }

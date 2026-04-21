@@ -1,4 +1,3 @@
-
 import LeftReviewSection from "@/components/TaxiReview/LeftReviewSection";
 import RightReviewSection from "@/components/TaxiReview/RightReviewSection";
 import LuxuryFooter from "@/utils/Footer";
@@ -40,13 +39,14 @@ export default async function TaxiReviewPage({ params,}: {params: Promise<{ id: 
 
   const taxi:Taxiinterface = await fetchTaxi(id);
 
+
+
   return (
     <>
       <Navbar />
       <div className="min-h-screen bg-gradient-to-br from-amber-50 via-white to-orange-50 pt-30 px-6">
         <div className="max-w-7xl mx-auto grid lg:grid-cols-3 gap-8">
           <LeftReviewSection taxi = {taxi} />
-
           <RightReviewSection taxi = {taxi}/>
         </div>
       </div>

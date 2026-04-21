@@ -468,3 +468,7 @@ border-radius: 99px;
 .BlogContent h2 { font-size: 19px; }
 .BlogContent h3 { font-size: 16px; }
 }
+
+.scrollbar-duration  ::-webkit-scrollbar {
+   display:  none;
+}

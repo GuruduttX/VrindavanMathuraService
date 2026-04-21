@@ -1,4 +1,5 @@
-import { createAdminHotelService, deleteAdminHotelService, getAllAdminHotelsService, getAdminHotelByIdService, updateAdminHotelService } from "@/services/admin/hotelServices";
+import { createAdminHotelService, deleteAdminHotelService, getAllAdminHotelsService, getAdminHotelByIdService, 
+    updateAdminHotelService, getAdminHotelBySlugService} from "@/services/admin/hotelServices";
 import { hotelSchema } from "@/zodSchema/hotelSchema";
 import { NextResponse } from "next/server";
 
@@ -11,9 +12,10 @@ export const createAdminHotelController = async (req: Request) => {
         const result = hotelSchema.safeParse(body);
 
         if(!result.success){
+            
             return Response.json({
                 success : false,
-                error : result.error.flatten()
+                errors : result.error.flatten()
             }, {status : 400})
         }
 
@@ -102,7 +104,7 @@ export const updateAdminHotelController = async (req: Request, id: string) => {
         if(!result.success){
             return Response.json({
                 success : false,
-                error : result.error.flatten()
+                errors : result.error.flatten()
             }, {status : 400})
         }
 
@@ -145,5 +147,22 @@ export const deleteAdminHotelController = async (id: string) => {
             error: error.message
         })
 
+    }
+}
+
+export async function getAdminHotelBySlugController(slug : string){
+    try {
+
+      const blog = await getAdminHotelBySlugService(slug);
+      
+      if(!blog){
+         return NextResponse.json({exists : false}, {status : 404});
+      }
+
+      return NextResponse.json({exists : true, data : blog}, {status : 200});
+      
+    } catch (error) {
+       console.log("This is the error ", error);
+       return NextResponse.json({message : "Something went Wrong!"},{status:500})
     }
 }

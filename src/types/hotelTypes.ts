@@ -1,6 +1,7 @@
 import { Document } from "mongoose";
 
 export interface IFAQ {
+  id : string;
   question?: string;
   answer?: string;
 }
@@ -56,6 +57,7 @@ export interface IHotel extends Document {
 
   rating?: number;
   reviews?: number;
+
 
   image?: string;
   alt?: string;

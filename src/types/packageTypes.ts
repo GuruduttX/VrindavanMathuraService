@@ -35,6 +35,11 @@ interface RouteType {
   segments?: RouteSegment[];
 }
 
+interface KnowBeforeYouGoType {
+    id : string;
+    description : string;
+}
+
 export interface ITourPackage extends Document {
   title?: string;
   slug?: string;
@@ -84,7 +89,7 @@ export interface ITourPackage extends Document {
 
   testimonials?: Testimonial[];
 
-  documents?: string[];
+  KnowBeforeYouGo?: KnowBeforeYouGoType[];
 
   routes?: RouteType[];
 

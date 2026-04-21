@@ -54,7 +54,7 @@ export default function TourFAQSection() {
           {faqs.map((faq, index) => (
             <div
               key={index}
-              className="border-l-4 border-[#A84010] pl-4 sm:pl-6"
+              className="border-l-4 border-[#de5e23] pl-4 sm:pl-6"
             >
               <button
                 onClick={() => toggle(index)}

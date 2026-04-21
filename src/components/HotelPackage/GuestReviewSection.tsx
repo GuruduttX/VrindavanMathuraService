@@ -38,15 +38,33 @@ export default function GuestReviewSection({ HotelData }: any) {
           className="text-center"
         >
 
-          <div className="inline-flex items-center gap-6 bg-white/70 backdrop-blur-xl border border-white/50 shadow-xl rounded-full px-10 py-6">
+          <div className="inline-flex items-center gap-5 px-8 py-5 rounded-2xl 
+            bg-white/60 backdrop-blur-xl border border-white/40 
+            shadow-[0_10px_40px_rgba(0,0,0,0.08)]">
 
-            <span className="text-4xl">🏆</span>
+            {/* Left Icon */}
+            <div className="flex items-center justify-center w-10 h-10 rounded-full 
+              bg-gradient-to-br from-amber-400 to-orange-500 text-white shadow-md">
+              ⭐
+            </div>
 
-            <h2 className="text-7xl md:text-8xl font-bold bg-gradient-to-r from-amber-500 via-orange-500 to-orange-600 bg-clip-text text-transparent">
-              {HotelData.rating}
-            </h2>
+            {/* Rating */}
+            <div className="flex flex-col items-center leading-none">
+              <span className="text-5xl md:text-6xl font-extrabold 
+                bg-gradient-to-r from-amber-500 via-orange-500 to-orange-600 
+                bg-clip-text text-transparent">
+                {HotelData.rating}
+              </span>
+              <span className="text-[11px] uppercase tracking-widest text-gray-400 mt-1">
+                Guest Rating
+              </span>
+            </div>
 
-            <span className="text-4xl">🏆</span>
+            {/* Right Icon */}
+            <div className="flex items-center justify-center w-10 h-10 rounded-full 
+              bg-gradient-to-br from-amber-400 to-orange-500 text-white shadow-md">
+              ⭐
+            </div>
 
           </div>
 

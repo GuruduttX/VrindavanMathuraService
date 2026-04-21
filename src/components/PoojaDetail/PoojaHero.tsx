@@ -26,7 +26,7 @@ export default function PoojaHero({ pooja }: PoojaHeroProps) {
         defaultService="Pooja Booking"
       />
 
-      <section className="relative w-full min-h-[92vh] flex items-center overflow-hidden">
+      <section className="relative w-full min-h-[80vh] md:min-h-[92vh] flex items-center overflow-hidden">
       {/* Background Image */}
       <div className="absolute inset-0">
         <Image
@@ -107,7 +107,7 @@ export default function PoojaHero({ pooja }: PoojaHeroProps) {
         </div>
 
         {/* Main Content */}
-        <div className="relative z-10 w-full max-w-7xl mx-auto px-6 md:px-12 py-20">
+        <div className="relative z-10 w-full max-w-7xl mx-auto px-6 md:px-12 py-8 sm:py-14 md:py-20">
           <div className="max-w-2xl xl:max-w-3xl">
             {/* Location Badge */}
             <div
@@ -121,7 +121,7 @@ export default function PoojaHero({ pooja }: PoojaHeroProps) {
             </div>
 
             {/* Title */}
-            <h1 className="text-5xl md:text-6xl xl:text-7xl font-extrabold text-white leading-[1.1] tracking-tight drop-shadow-lg">
+            <h1 className="text-4xl sm:5xl md:text-6xl xl:text-7xl font-extrabold text-white leading-[1.1] tracking-tight drop-shadow-lg">
               {pooja.title}
             </h1>
 
@@ -133,12 +133,12 @@ export default function PoojaHero({ pooja }: PoojaHeroProps) {
             </div>
 
             {/* Description */}
-            <p className="mt-6 text-base md:text-lg text-white/80 leading-relaxed max-w-xl">
+            <p className="mt-16 sm:mt-14 md:mt-9 text-base md:text-lg text-white/80 leading-relaxed max-w-xl">
               {pooja.shortDesc}
             </p>
 
             {/* Stats Row */}
-            <div className="mt-9 flex flex-wrap gap-3">
+            <div className="mt-16 sm:mt-14 md:mt-9 flex flex-wrap gap-3">
               {[
                 {
                   icon: "⏱",
@@ -188,41 +188,45 @@ export default function PoojaHero({ pooja }: PoojaHeroProps) {
               ))}
             </div>
             {/* CTA Buttons */}
-            <div className="mt-9 flex flex-wrap gap-4">
-              <Link href="#enquiry" className="cursor-pointer">
+           <div className="mt-16 sm:mt-14 md:mt-9 flex flex-col sm:flex-row gap-3 sm:gap-4 w-full">
+  
+              <Link href="#enquiry" className="w-full sm:w-auto">
                 <button
-                  className="inline-flex items-center gap-2.5 px-9 py-4 rounded-full
-                bg-white text-amber-700 font-bold text-sm tracking-wide
-                shadow-[0_4px_24px_#ffb600]
-                hover:shadow-[0_6px_32px_#F86400]
-                hover:bg-amber-50 hover:scale-[1.03]
-                active:scale-95 transition-all duration-200 cursor-pointer"
+                  className="w-full sm:w-auto inline-flex items-center justify-center gap-2.5 
+                  px-5 py-3 sm:px-9 sm:py-4 rounded-full
+                  bg-white text-amber-700 font-bold text-sm sm:text-base tracking-wide
+                  shadow-[0_4px_24px_#ffb600]
+                  hover:shadow-[0_6px_32px_#F86400]
+                  hover:bg-amber-50 hover:scale-[1.03]
+                  active:scale-95 transition-all duration-200"
                   onClick={() => setIsFromOpen(true)}
                 >
                   Book This Pooja
-                  <span className="w-6 h-6 rounded-full bg-amber-600 text-white text-xs flex items-center justify-center">
+                  <span className="w-5 h-5 sm:w-6 sm:h-6 rounded-full bg-amber-600 text-white text-xs flex items-center justify-center">
                     →
                   </span>
                 </button>
               </Link>
 
-              <button 
-                 onClick={()=>setIsFromOpen(true)}
-                className="inline-flex items-center gap-2.5 px-9 py-4 rounded-full
-                text-white font-semibold text-sm tracking-wide
+              <button
+                onClick={() => setIsFromOpen(true)}
+                className="w-full sm:w-auto inline-flex items-center justify-center gap-2.5 
+                px-5 py-3 sm:px-9 sm:py-4 rounded-full
+                text-white font-semibold text-sm sm:text-base tracking-wide
                 border border-white/40 bg-white/10 backdrop-blur-sm
                 hover:bg-white hover:text-amber-700 hover:border-white
                 hover:scale-[1.03] active:scale-95
-                transition-all duration-200 cursor-pointer"
+                transition-all duration-200"
               >
                 Talk to Priest
                 <span className="text-base">🙏</span>
               </button>
-=          </div>
+
+            </div>
           
 
             {/* Trust strip */}
-            <div className="mt-8 flex flex-wrap items-center gap-x-5 gap-y-2 text-white/45 text-xs">
+            <div className="mt-16 sm:mt-14 md:mt-9 flex flex-wrap items-center gap-x-5 gap-y-2 text-white/45 text-xs">
               {[
                 "100% Vedic Rituals",
                 "Certified Pandits",

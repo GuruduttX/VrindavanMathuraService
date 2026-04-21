@@ -3,66 +3,147 @@
 import { motion } from "framer-motion";
 import CommonEnquiryForm from "@/utils/CommanEnquiryForm";
 import { useState } from "react";
+import {
+  MapPin,
+  Star,
+  Users,
+  Clock,
+  Phone,
+  ArrowRight,
+  CheckCircle,
+} from "lucide-react";
+import Link from "next/link";
+
+const stats = [
+  { icon: Users, value: "10,000+", label: "Happy Pilgrims" },
+  { icon: Star, value: "4.9★", label: "Avg Rating" },
+  { icon: MapPin, value: "50+", label: "Sacred Spots" },
+  { icon: Clock, value: "24/7", label: "Support" },
+];
+
+const highlights = [
+  "Handpicked hotels & stays",
+  "Expert local guides",
+  "Custom pooja arrangements",
+  "Reliable taxi service",
+  "Flexible tour packages",
+  "Hassle-free booking",
+];
+
 export default function CTASection() {
   const [isFormOpen, setIsFormOpen] = useState(false);
+
   return (
     <>
-      <section className="relative overflow-hidden bg-gradient-to-br from-amber-900 to-orange-500 py-24 px-6 lg:px-20 text-white -my-5">
-        {/* Decorative Background Blur */}
-        <div className="absolute -top-20 -left-20 h-72 w-72 rounded-full bg-amber-400/30 blur-3xl"></div>
-        <div className="absolute bottom-0 right-0 h-80 w-80 rounded-full bg-orange-300/30 blur-3xl"></div>
+      <section className="relative overflow-hidden bg-gradient-to-br from-orange-600 via-orange-500 to-amber-600 py-16 px-6 lg:px-20 -my-5">
+        {/* Background orbs */}
+        <div className="absolute -top-20 -left-20 h-72 w-72 rounded-full bg-orange-400/30 blur-3xl pointer-events-none" />
+        <div className="absolute -bottom-20 -right-20 h-72 w-72 rounded-full bg-amber-500/30 blur-3xl pointer-events-none" />
 
-        <div className="relative mx-auto max-w-5xl text-center">
-          {/* Heading */}
-          <motion.h2
-            initial={{ opacity: 0, y: 40 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, ease: "easeOut" }}
-            viewport={{ once: true }}
-            className="text-3xl md:text-5xl font-bold leading-tight"
-          >
-            Plan Your Divine Journey Today
-          </motion.h2>
+        {/* Diagonal shimmer */}
+        <div
+          className="absolute inset-0 opacity-10 pointer-events-none"
+          style={{
+            backgroundImage:
+              "repeating-linear-gradient(105deg, transparent, transparent 80px, rgba(255,255,255,0.3) 80px, rgba(255,255,255,0.3) 81px)",
+          }}
+        />
 
-          {/* Subtext */}
-          <motion.p
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.9, delay: 0.2 }}
-            viewport={{ once: true }}
-            className="mt-6 text-lg md:text-xl text-amber-100"
-          >
-            Experience spiritual peace, comfortable stays, reliable taxi
-            services, and divine pooja arrangements — all in one place.
-          </motion.p>
+        <div className="relative z-10 mx-auto max-w-6xl">
+          {/* HEADING ROW */}
+          <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-6 mb-10">
+            <motion.div
+              initial={{ opacity: 0, x: -30 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.7 }}
+              viewport={{ once: true }}
+            >
+              <span className="inline-flex items-center gap-2 bg-white/20 border border-white/30 text-white text-xs font-semibold uppercase tracking-widest px-3 py-1 rounded-full mb-3">
+                ✦ Trusted Spiritual Travel Partner
+              </span>
+              <h2 className="text-3xl md:text-4xl font-bold text-white leading-tight">
+                Plan Your Divine Journey
+                <span className="block text-orange-100">
+                  to Mathura &amp; Vrindavan
+                </span>
+              </h2>
+            </motion.div>
 
-          {/* Button */}
+            <motion.div
+              initial={{ opacity: 0, x: 30 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.7, delay: 0.15 }}
+              viewport={{ once: true }}
+              className="flex flex-col sm:flex-row gap-3 lg:shrink-0"
+            >
+              <button
+                onClick={() => setIsFormOpen(true)}
+                className="flex items-center justify-center gap-2 rounded-full bg-white px-6 py-3 text-sm font-semibold text-orange-600 shadow-lg hover:shadow-xl hover:scale-105 transition-all duration-300 group"
+              >
+                Book Your Journey
+                <ArrowRight
+                  size={16}
+                  className="group-hover:translate-x-1 transition-transform"
+                />
+              </button>
+
+              <Link
+                href="tel:+919876543210"
+                className="flex items-center justify-center gap-2 rounded-full border border-white/40 bg-white/15 px-6 py-3 text-sm font-medium text-white hover:bg-white/25 transition-all duration-300"
+              >
+                <Phone size={15} />
+                Call Us Now
+              </Link>
+            </motion.div>
+          </div>
+
+          {/* BOTTOM ROW — stats + highlights */}
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 1, delay: 0.4 }}
+            transition={{ duration: 0.8, delay: 0.25 }}
             viewport={{ once: true }}
-            className="mt-10"
+            className="grid md:grid-cols-2 gap-4"
           >
-            <button className="group relative inline-flex items-center justify-center rounded-full bg-white px-8 py-4 text-lg font-semibold text-amber-600 shadow-lg transition-all duration-300 hover:shadow-2xl hover:scale-105 ">
-              <span
-                onClick={() => setIsFormOpen(true)}
-                className="relative z-10"
-              >
-                Book Your Journey
-              </span>
+            {/* Stats */}
+            <div className="grid grid-cols-4 gap-3">
+              {stats.map(({ icon: Icon, value, label }) => (
+                <div
+                  key={label}
+                  className="flex flex-col items-center gap-1.5 bg-white/15 border border-white/20 rounded-2xl py-4 px-2 text-center"
+                >
+                  <Icon size={16} className="text-orange-100" />
+                  <span className="text-lg font-bold text-white leading-none">
+                    {value}
+                  </span>
+                  <span className="text-xs text-white/70 leading-tight">
+                    {label}
+                  </span>
+                </div>
+              ))}
+            </div>
 
-              {/* Hover Glow Effect */}
-              <span className="absolute inset-0 rounded-full bg-gradient-to-r from-amber-500 to-orange-400 opacity-0 transition-opacity duration-300 group-hover:opacity-20"></span>
-            </button>
+            {/* Highlights */}
+            <div className="bg-white/15 border border-white/20 rounded-2xl px-6 py-4 grid grid-cols-2 gap-x-4 gap-y-2">
+              {highlights.map((item) => (
+                <div
+                  key={item}
+                  className="flex items-center gap-2 text-white/90 text-sm"
+                >
+                  <CheckCircle size={13} className="text-orange-200 shrink-0" />
+                  {item}
+                </div>
+              ))}
+            </div>
           </motion.div>
         </div>
       </section>
-        <CommonEnquiryForm
-          open={isFormOpen}
-          onClose={() => setIsFormOpen(false)}
-          defaultService="Tour Package"
-        />
+
+      <CommonEnquiryForm
+        open={isFormOpen}
+        onClose={() => setIsFormOpen(false)}
+        defaultService="Tour Package"
+      />
     </>
   );
 }

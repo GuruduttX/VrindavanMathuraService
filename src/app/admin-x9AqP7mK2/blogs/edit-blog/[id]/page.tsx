@@ -118,6 +118,30 @@ export default function EditBlog() {
   }, []);
 
 
+    const getBlogBySlug = async (slug: string) => {
+  try {
+    const res = await fetch(
+      `${process.env.NEXT_PUBLIC_URL}/api/admin/blog/check-slug?slug=${slug}`
+    );
+
+    if (res.status === 404) {
+      return { exists: false };
+    }
+
+    const data = await res.json();
+
+    return {
+      exists: true,
+      data: data.data || data, // handle both formats
+    };
+
+  } catch (error) {
+    console.error("Slug check error:", error);
+    return { exists: false };
+  }
+};
+
+
   /* ---------------- UPDATE BLOG ---------------- */
 
   const handleUpdate = async (
@@ -125,6 +149,15 @@ export default function EditBlog() {
   ) => {
 
     e.preventDefault();
+
+     if(form.slug){
+    const result = await getBlogBySlug(form.slug);
+
+    if (result?.exists &&   result?.data?._id !== id) {
+       toast.error("Slug already exists");
+      return false;
+    }
+  }
 
     const payload = {
       title: form.title,
@@ -174,6 +207,15 @@ export default function EditBlog() {
 
   const handlePublish = async() => {
 
+    if(form.slug){
+    const result = await getBlogBySlug(form.slug);
+
+    if (result?.exists &&   result?.data?._id !== id) {
+       toast.error("Slug already exists");
+      return false;
+    }
+  }
+
     const payload = {
       title: form.title,
       category: form.category,
@@ -194,6 +236,8 @@ export default function EditBlog() {
       status : "draft",
       faqs
     };
+      
+    
 
     try {
 
@@ -208,15 +252,30 @@ export default function EditBlog() {
       const data = await res.json();
 
       if (!data.success) {
-        toast.error(data.error || "Failed to update blog");
+        
+        let errorMessage = "Failed to update blog";
+
+        if (data.error) {
+          if (typeof data.error === "string") {
+            // Handle simple string errors
+            errorMessage = data.error;
+          } else if (data.error.fieldErrors) {
+            // Extract the first validation error from the object to show in the toast
+            const firstField = Object.keys(data.error.fieldErrors)[0];
+            const firstErrorMsg = data.error.fieldErrors[firstField][0];
+            errorMessage = `Validation Error: ${firstField} - ${firstErrorMsg}`;
+          }
+        }
+        toast.error(errorMessage);
         return;
       }
+
 
       toast.success("Blog Updated Successfully");
 
     } catch (error) {
-      toast.error("Server Error");
-    }
+      console.error("Publish Error:", error);
+      toast.error("Server Error. Please try again later.");    }
   }
 
 
@@ -293,7 +352,7 @@ export default function EditBlog() {
           />
 
           <CMSActions
-            actionType="update"
+            actionType="create"
             editorType="Blog"
             onSaveDraft={handlePublish}
           />

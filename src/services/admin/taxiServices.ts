@@ -44,6 +44,7 @@ export const getAdminTaxiByIdService = async (id: string) => {
   }
 };
 
+
 export const getUserTaxiBySlugService = async (id: string) => {
   try {
     await connectDB();
@@ -52,6 +53,7 @@ export const getUserTaxiBySlugService = async (id: string) => {
     throw new Error("Error User Fetching taxi by ID")
   }
 }
+
 
 export const updateAdminTaxiService = async (taxiData : Partial<ITaxi>, id: string) => {
   try {
@@ -74,3 +76,13 @@ export const deleteAdminTaxiService = async (id: string) => {
     throw new Error("Error deleting taxi");
   }
 };
+
+
+export async function getAdminPoojaBySlugService(slug : string){
+     await connectDB();
+     const taxis = await Taxi.findOne({slug : slug});
+      if (!taxis) {
+        throw new Error("Taxi not found");
+      }
+     return taxis;
+}

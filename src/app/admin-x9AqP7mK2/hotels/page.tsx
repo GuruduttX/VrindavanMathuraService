@@ -127,9 +127,9 @@ export default function HotelsPage() {
           onChange={(e) => setStatusFilter(e.target.value)}
           className="px-3 py-2 bg-pink-950/40 border border-pink-900/40 rounded-lg text-pink-200"
         >
-          <option value="all">All</option>
-          <option value="published">Published</option>
-          <option value="draft">Draft</option>
+          <option value="all" className="bg-pink-950 text-white cursor-pointer">All</option>
+          <option value="published" className="bg-pink-950 text-white cursor-pointer">Published</option>
+          <option value="draft" className="bg-pink-950 text-white cursor-pointer">Draft</option>
         </select>
 
         <select
@@ -137,18 +137,25 @@ export default function HotelsPage() {
           onChange={(e) => setSort(e.target.value)}
           className="px-3 py-2 bg-pink-950/40 border border-pink-900/40 rounded-lg text-pink-200"
         >
-          <option value="latest">Latest</option>
-          <option value="oldest">Oldest</option>
+          <option value="latest" className="bg-pink-950 text-white cursor-pointer">Latest</option>
+          <option value="oldest" className="bg-pink-950 text-white cursor-pointer">Oldest</option>
         </select>
 
-        <div className="flex bg-pink-950/40 rounded-lg border border-pink-900/40">
-          <button onClick={() => setView("card")} className="px-3 py-2">
+        <div className="flex bg-pink-950/40 rounded-lg border border-pink-900/40 cursor-pointer">
+          <button
+            onClick={() => setView("card")}
+            className="px-3 py-2 hover:bg-pink-800 cursor-pointer"
+          >
             <LayoutGrid size={16} />
           </button>
-          <button onClick={() => setView("table")} className="px-3 py-2">
+          <button
+            onClick={() => setView("table")}
+            className="px-3 py-2 hover:bg-pink-800 cursor-pointer"
+          >
             <Table size={16} />
           </button>
         </div>
+
 
         <Link
           href="/admin-x9AqP7mK2/hotels/create-hotel"

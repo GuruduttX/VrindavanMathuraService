@@ -11,6 +11,9 @@ import FaqHandler from "@/components/Admin/CMS/FaqHandler";
 import CMSContentSection from "@/components/Admin/CMS/CMSContentSection";
 import PoojaMeta from "@/components/Admin/PoojaEditor/PoojaMeta";
 import PoojaPricing from "@/components/Admin/PoojaEditor/PoojaPricing";
+import Testimonials from "@/components/Admin/PackageEditor/Testimonials";
+import { BenefitType, TestimonialType } from "../../create-pooja/page";
+
 import { useParams } from "next/navigation";
 
 const inputClass = `
@@ -56,7 +59,6 @@ export default function CreatePoojaPage() {
     schemaTitle: "",
     schemaDescription: "",
     status: "",
-    reviews : "",
     category : ""
     
   });
@@ -66,16 +68,19 @@ export default function CreatePoojaPage() {
   ]);
 
   const [loading, setLoading] = useState(false);
+  const [testimonials, setTestimonials] = useState<TestimonialType[]>([{ id: crypto.randomUUID(), name: "", description: "", rating: "" }]);
+  const [benefits, setBenefits] = useState<BenefitType[]>([{id: crypto.randomUUID(),  description: ""}])
+  
 
   const updateForm = (field: string, value: string) => {
     setForm((prev) => ({ ...prev, [field]: value }));
   };
 
+
   async function getPooja(){
     try {
       const res = await fetch(`${process.env.NEXT_PUBLIC_URL}/api/admin/pooja/${id}`);
       const parseData = await res.json();
-      
 
       if(!res.ok) {
         toast.error("Failed to fetch pooja content");
@@ -85,7 +90,6 @@ export default function CreatePoojaPage() {
 
       console.log("data", data);
 
-     
 
       setForm({
         title: data.title ?? "",
@@ -112,13 +116,22 @@ export default function CreatePoojaPage() {
         schemaDescription: data.schemaData?.description ?? "",
 
         status: data.status ?? "",
-        reviews: data.reviews ?? "",
+
         category: data.category ?? "",
       });
 
-      setFaqs(data.faqs || [
-    { id: crypto.randomUUID(), question: "", answer: "" },
-  ]);
+      setFaqs(data.faqs || [{ id: crypto.randomUUID(), question: "", answer: "" }]);
+
+      setTestimonials(
+        data.reviews || [
+          {
+            id: crypto.randomUUID(),
+            name: "",
+            description: "",
+            rating: null,
+          },
+        ],
+      );
 
       
     } catch (error) {
@@ -143,7 +156,7 @@ export default function CreatePoojaPage() {
     discountPrice: Number(form.discountPrice),
 
     rating: form.rating,
-    reviews : form.reviews,
+    reviews : testimonials,
 
     metaData : {
         title : form.metaTitle,
@@ -153,8 +166,7 @@ export default function CreatePoojaPage() {
     schemaData : {
         title : form.schemaTitle,
         description : form.schemaDescription
-    }
-     ,
+    },
 
     description: form.subContent,
     aboutContent: form.content,
@@ -172,6 +184,7 @@ export default function CreatePoojaPage() {
 
   /* ---------------- API ---------------- */
   const updateData = async (payload: any) => {
+
     const res = await fetch(`${process.env.NEXT_PUBLIC_URL}/api/admin/pooja/${id}`, {
       method: "PUT",
       headers: { "Content-Type": "application/json" },
@@ -226,27 +239,24 @@ export default function CreatePoojaPage() {
       style={{ background: "#1a0b11" }}
     >
       <form onSubmit={handlePublish} className="space-y-6">
-
         <CMSHeader editorType="Pooja" />
-         <PoojaMeta
+        <PoojaMeta
           title={form.title}
           temple={form.temple}
           location={form.location}
           slug={form.slug}
+          rating={form.rating}
+          duration={form.duration}
           updateForm={updateForm}
         />
-        
-        
 
-       <PoojaPricing
+        <PoojaPricing
           category={form.category}
           price={form.price}
           discountPrice={form.discountPrice}
           updateForm={updateForm}
         />
 
-        
-      
         {/* MEDIA */}
         <CMSMediaSection
           image={form.image}
@@ -255,8 +265,16 @@ export default function CreatePoojaPage() {
           editorType="Pooja"
         />
 
+
         {/* FAQ */}
         <FaqHandler faqs={faqs} setFaqs={setFaqs} editorType="Pooja" />
+
+        {/* Testimotionals */}
+        <Testimonials
+          testimonials={testimonials}
+          setTestimonials={setTestimonials}
+          editorType="Package"
+        />
 
         {/* SEO */}
         <CMSSeoSection
@@ -266,10 +284,12 @@ export default function CreatePoojaPage() {
           editorType="Pooja"
         />
 
-        <CMSContentSection subContent={form.subContent} content={form.content} onChange={updateForm} editorType="Blog" />
-
-        
-        
+        <CMSContentSection
+          subContent={form.subContent}
+          content={form.content}
+          onChange={updateForm}
+          editorType="Blog"
+        />
 
         {/* SCHEMA */}
         <CMSSchema
@@ -281,12 +301,11 @@ export default function CreatePoojaPage() {
 
         {/* ACTIONS */}
         <CMSActions
-          actionType="update"
+          actionType="create"
           editorType="Pooja"
           onSaveDraft={handleDraft}
           loading={loading}
         />
-
       </form>
     </div>
   );

@@ -43,3 +43,10 @@ export async function getAdminPackageByIdService(id : string) {
   return tour;
 }
 
+export async function getPackageBySlugServices(slug : string){
+     await connectDB();
+     const tour = await TourPackageModel.findOne({slug : slug});
+     
+     return tour;
+}
+

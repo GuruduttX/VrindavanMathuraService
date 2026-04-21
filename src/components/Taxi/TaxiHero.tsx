@@ -1,6 +1,7 @@
 "use client"
 import CommonEnquiryForm from "@/utils/CommanEnquiryForm"
 import { MapPin, Phone, CarTaxiFront } from "lucide-react"
+import Link from "next/link";
 import { useState } from "react"
 
 export default function TaxiHero() {
@@ -103,6 +104,23 @@ export default function TaxiHero() {
         <div className="relative max-w-7xl mx-auto px-6 py-24 grid lg:grid-cols-2 gap-12 items-center">
           {/* LEFT CONTENT */}
           <div>
+            <nav>
+              <div className="flex items-center text-sm text-gray-400 mb-6">
+                <Link
+                  href="/"
+                  className="hover:text-amber-500 transition-colors z-20"
+                >
+                  Home
+                </Link>
+                <span className="mx-1">/</span>
+                <Link
+                  href="/taxi"
+                  className="text-amber-500 transition-colors z-20"
+                >
+                  Taxi
+                </Link>
+              </div>
+            </nav>
             <p className="text-amber-600 font-medium tracking-widest uppercase mb-4 text-xs md:text-sm text-center md:text-left">
               Vrindavan • Mathura Taxi Service
             </p>
@@ -121,7 +139,7 @@ export default function TaxiHero() {
             </p>
 
             {/* Buttons */}
-            <div className="mt-8 flex flex-wrap gap-4">
+            <div className="mt-8 flex flex-wrap gap-4 justify-center md:justify-start">
               <button
                 className="flex items-center gap-2 px-6 py-3 bg-amber-600 hover:bg-amber-700 text-white rounded-xl shadow-lg shadow-amber-400/40 transition cursor-pointer"
                 onClick={() => setIsFormOpen(true)}
