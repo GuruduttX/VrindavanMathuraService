@@ -37,7 +37,7 @@ export default async function page() {
         <>
             <Navbar />
             <PoojaArchiveHero />
-            <PoojaSection poojaData={poojaData}/>
+            <PoojaSection poojaData={poojaData ?? []}/>
             <PoojaCTASection />
             <PoojaFAQ/>
             <CTASection/>

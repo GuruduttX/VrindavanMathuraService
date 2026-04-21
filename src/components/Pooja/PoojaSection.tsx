@@ -17,7 +17,7 @@ export default function PoojaSection({ poojaData }: { poojaData: any }) {
   const filteredPoojas =
     activeCategory === "All"
       ? poojaData
-      : poojaData.filter((item: any) => item.category === activeCategory);
+      : poojaData?.filter((item: any) => item.category === activeCategory);
 
   return (
     <>

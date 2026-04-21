@@ -230,7 +230,7 @@ const page = async () => {
             />
             <Navbar />
             <TaxiHero />
-            <TaxiArchive taxis={taxis}/>
+            <TaxiArchive taxis={taxis ?? []}/>
             <TaxiReadMore />
             <TaxiNewCTA />
             <BrajExplorer />
