@@ -3,7 +3,6 @@ import PoojaOverview from "@/components/PoojaDetail/PoojaOverview";
 import PoojaBenefits from "@/components/PoojaDetail/PoojaBenefits";
 import PoojaIncludesStrip from "@/components/PoojaDetail/PoojaIncludesStrip";
 import PoojaProcessTimeline from "@/components/PoojaDetail/PoojaProcessTimeline";
-import PoojaPricingCard from "@/components/PoojaDetail/PoojaPricingCard";
 import PoojaGallery from "@/components/PoojaDetail/PoojaGallery";
 import DevoteeTestimonials from "@/components/PoojaDetail/DevoteeTestimonials";
 import PoojaFAQ from "@/components/PoojaDetail/PoojaFAQ";
